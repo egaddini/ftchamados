@@ -1,9 +1,10 @@
-import 'package:chamados/working/api_service.dart';
-import 'package:chamados/working/user_list.dart';
+import 'package:chamados/models/user_info_model.dart';
+import 'package:chamados/repositories/user_repository.dart';
+import 'package:chamados/repositories/user_repository_impl.dart';
 import 'package:flutter/material.dart';
 
 class SearchUser extends SearchDelegate {
-  FetchUserList _userList = FetchUserList();
+  UserRepository _userList = UserRepositoryImpl();
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -28,7 +29,7 @@ class SearchUser extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return FutureBuilder<List<Userlist>>(
+    return FutureBuilder<List<UserInfoModel>>(
         future: _userList.getuserList(query: query),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
@@ -36,7 +37,7 @@ class SearchUser extends SearchDelegate {
               child: CircularProgressIndicator(),
             );
           }
-          List<Userlist>? data = snapshot.data;
+          List<UserInfoModel>? data = snapshot.data;
           return ListView.builder(
               itemCount: data?.length,
               itemBuilder: (context, index) {
@@ -66,14 +67,14 @@ class SearchUser extends SearchDelegate {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${data?[index].name}',
-                              style: TextStyle(
+                              '${data?[index].firstname}',
+                              style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w600),
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Text(
                               '${data?[index].email}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.black,
                                 fontSize: 14,
                                 fontWeight: FontWeight.w400,
@@ -89,7 +90,7 @@ class SearchUser extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Search User'),
     );
   }

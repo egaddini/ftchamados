@@ -3,9 +3,9 @@ import 'package:chamados/pallete.dart';
 import 'package:chamados/repositories/user_repository.dart';
 import 'package:chamados/repositories/user_repository_impl.dart';
 import 'package:chamados/validators/validators.dart';
-import 'package:chamados/widgets/customTextFormField.dart';
-import 'package:chamados/widgets/passwordField.dart';
-import 'package:chamados/widgets/passwordTextFormField.dart';
+import 'package:chamados/widgets/c_text_form_field.dart';
+import 'package:chamados/widgets/c_password_field.dart';
+import 'package:chamados/widgets/c_password_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -145,7 +145,6 @@ class _SingupPageState extends State<SingupPage> {
                               ElevatedButton(
                                 onPressed: () async {
                                   var formValid = _formKey.currentState?.validate() ?? false;
-
                                   if (formValid) {
                                     setState(() {
                                       userModel = UserModel(
@@ -155,8 +154,8 @@ class _SingupPageState extends State<SingupPage> {
                                         password: _passwordEC.text
                                       );
                                     });                      
-                                    //var response = await userRepository.saveUser(userModel!);
-                                    //if (response.isNotEmpty) {
+                                    var response = await userRepository.saveUser(userModel!);
+                                    if (response.isNotEmpty) {
                                       ScaffoldMessenger.of(context).showSnackBar(
                                         const SnackBar(
                                           content: Text('Seja bem vindo'),
@@ -165,7 +164,7 @@ class _SingupPageState extends State<SingupPage> {
                                       );
                                       Navigator.pushNamed(context, 'home');
                                     }
-                                 // }
+                                  }
                                 }, 
                                 child: const Text('Avançar'),
                                 style: ButtonStyle(

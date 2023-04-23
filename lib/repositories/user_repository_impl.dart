@@ -1,27 +1,32 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:chamados/models/token_model.dart';
+import 'package:chamados/models/user_info_model.dart';
 import 'package:chamados/models/user_model.dart';
+import 'package:chamados/repositories/local_repository.dart';
+import 'package:chamados/repositories/local_repository_impl.dart';
 import 'package:dio/dio.dart';
 import './user_repository.dart';
+import 'package:http/http.dart' as http;
 
 class UserRepositoryImpl implements UserRepository {
 
-    var data = [];
-    List<UserModel> results = [];
-    String urlList = 'https://jsonplaceholder.typicode.com/users/';
+  var data = [];
+  String? token;
+  List<UserInfoModel> results = [];
+  static const String BASE_PATH = "http://localhost:9090/api/v1/user";
+  LocalRepository localRepo = LocalRepositoryImpl();
+  
 
   @override
   Future<UserModel> findByEmail(String email) async {
+    
     UserModel user;
     try {
-      final headers = {
-        'Content-Type': 'application/json',
-      };
       final uri = Uri.http('localhost:9092', '/api/v1/user/email', {'email': email});
       final result = await Dio().get(
         uri.toString(),
-        options: Options(headers: headers),
+        options: Options(headers: getAuthHeader(true)),
       );
       if (result.statusCode == 200) {
         user = UserModel.fromMap(result.data);
@@ -47,7 +52,6 @@ class UserRepositoryImpl implements UserRepository {
     try {
       final headers = {
         'Content-Type': 'application/json'
-        //'Authorization': 'Bearer <seu token>'
       };
       final result = await Dio().post(
       'http://localhost:9092/api/v1/auth/register',
@@ -67,25 +71,42 @@ class UserRepositoryImpl implements UserRepository {
     }
     return tokenReponse;  
   }
-  /*Future<List<UserModel>> getuserList({String? query}) async {
-    var url = Uri.parse(urlList);
+
+  @override
+  Future<List<UserInfoModel>> getuserList({String? query}) async {
     try {
-      var response = await http.get(url);
+      final response = await Dio().get(
+        BASE_PATH, 
+        options: Options(headers: getAuthHeader(true)),
+      );
       if (response.statusCode == 200) {
-      
-        data = json.decode(response.body);
-        results = data.map((e) => UserModel.fromJson(e)).toList();
-        if (query!= null){
-          results = results.where((element) => element.name!.toLowerCase().contains((query.toLowerCase()))).toList();
+        final data = jsonDecode(response.data);
+        var results = data.map((e) => UserInfoModel.fromJson(e)).toList();
+        if (query != null) {
+          results = results.where((element) => element.firstname!.toLowerCase().contains((query.toLowerCase()))).toList();
         }
+        return results;
       } else {
         print("fetch error");
       }
-    } on Exception catch (e) {
+    } catch (e) {
       print('error: $e');
     }
-    return results;
-  }*/
+    return [];
+  }
 
+  Map<String, String> getAuthHeader(bool auth) {
+    if (auth) {
+      token ??= localRepo.getToken();
+      return {
+        'content-type': 'application/json;',
+        'authorization': 'Bearer $token'
+      };      
+    } else {
+      return {
+        'content-type': 'application/json;',
+      };
+    }
+  }
 
 }

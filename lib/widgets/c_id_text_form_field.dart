@@ -1,24 +1,27 @@
+// ignore_for_file: file_names
+
 import 'package:chamados/pallete.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextFormField extends StatelessWidget {
+class CustomIDTextFormField extends StatelessWidget {
   final TextEditingController controller;
   final String labelText;
-  final List<FormFieldValidator<String>> validator;
 
-  const CustomTextFormField({
+  const CustomIDTextFormField({
     Key? key,
     required this.controller,
     required this.labelText,
-    required this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      enabled: false,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(23),
+        fillColor: Colors.grey[300],
+        filled: true, 
+        contentPadding: const EdgeInsets.all(23),
         labelText: labelText,
         labelStyle: const TextStyle(
           color: Pallete.backgroundColor,
@@ -29,17 +32,8 @@ class CustomTextFormField extends StatelessWidget {
             color: Pallete.gradient3,
             width: 2,
           ),
-        ),
+        ),        
       ),
-      validator: (value) {
-        for (final validate in validator) {
-          final error = validate(value ?? '');
-          if (error != null) {
-            return error;
-          }
-        }
-        return null;
-      },
     );
   }
 }

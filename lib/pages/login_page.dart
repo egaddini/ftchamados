@@ -4,11 +4,9 @@ import 'package:chamados/repositories/auth_repository.dart';
 import 'package:chamados/repositories/auth_repository_impl.dart';
 import 'package:chamados/repositories/local_repository.dart';
 import 'package:chamados/repositories/local_repository_impl.dart';
-import 'package:chamados/widgets/customTextFormField.dart';
-import 'package:chamados/widgets/passwordField.dart';
-import 'package:chamados/widgets/passwordTextFormField.dart';
+import 'package:chamados/widgets/c_text_form_field.dart';
+import 'package:chamados/widgets/c_password_field.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:validatorless/validatorless.dart';
 
 class LoginPage extends StatefulWidget {
@@ -30,7 +28,6 @@ class _LoginPage extends State<LoginPage> {
   final LocalRepository tokenRepo = LocalRepositoryImpl();
 
   LoginModel? loginModel;
-  bool _obscureText = true;
 
   @override
   void dispose() {
@@ -102,8 +99,8 @@ class _LoginPage extends State<LoginPage> {
                                         password: _passwordEC.text
                                       );
                                     });                      
-                                    String response = await authRepository.authenticate(loginModel!);
-                                    /*if (response.isNotEmpty) {
+                                    String? response = await authRepository.authenticate(loginModel!);
+                                    if (response != null) {
                                       Navigator.pushNamed(context, 'home');
                                     } else {
                                       ScaffoldMessenger.of(context).showSnackBar(
@@ -112,7 +109,7 @@ class _LoginPage extends State<LoginPage> {
                                           backgroundColor: Pallete.gradient3,
                                         ),
                                       );
-                                    }*/
+                                    }
                                     Navigator.pushNamed(context, 'home');
                                   } 
                                 }, 

@@ -1,7 +1,8 @@
 import 'package:chamados/pages/home_page.dart';
 import 'package:chamados/pages/login_page.dart';
+import 'package:chamados/pages/user/user_page.dart';
 import 'package:chamados/pages/singup_page.dart';
-import 'package:chamados/pages/user_page.dart';
+import 'package:chamados/pages/user/user_dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 
@@ -23,11 +24,11 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       routes: {
-        '/':(_) => HomePage(),
+        '/':(_) => UserDashboardpage(),
         'login':(_) => const LoginPage(),
         'singup':(_) => const SingupPage(),
         'home':(_) => HomePage(),
-        'users':(_) => UserPage(),
+        'users':(_) => UserDashboardpage(),
         //'/page3':(_) => const Page3(),
       },
     );
