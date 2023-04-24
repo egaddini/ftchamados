@@ -53,7 +53,7 @@ class _SingupPageState extends State<SingupPage> {
                 child: Form(
                   key: _formKey,
                   child: Center(
-                    child: Container(
+                    child: SizedBox(
                       width: 400,
                       child: Column(
                         children: [

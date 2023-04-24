@@ -1,5 +1,6 @@
 import 'package:chamados/pallete.dart';
-import 'package:chamados/services/drawerService.dart';
+import 'package:chamados/services/drawer_service.dart';
+import 'package:chamados/services/user_service.dart';
 import 'package:chamados/widgets/c_menu_drawer.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ import '../models/user_model.dart';
 class HomePage extends StatelessWidget {
 
   DrawerService drawer = DrawerServiceImpl();
+  UserService userSvc = UserServiceImpl();
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +27,14 @@ class HomePage extends StatelessWidget {
         currentAccountPicture: const CircleAvatar(
           child: Text("ed"),
         ),
-        drawerItems: drawer.getDrawerItems(context),
+        drawerItems: drawer.getDrawerItems(context, userSvc.getLogedUserInfo(context)),
       ),
 
       body: SingleChildScrollView(
           padding: const EdgeInsets.all(8.0),
           child: Form(
             child: Center(
-              child: Container(
+              child: SizedBox(
                 width: 400,
                 child: Column(
                   children: [

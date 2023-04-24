@@ -1,11 +1,14 @@
 // ignore_for_file: file_names
 
+import 'package:chamados/models/user_info_model.dart';
+import 'package:chamados/pages/user/edit_user_page.dart';
+import 'package:chamados/pages/user/message_response.dart';
 import 'package:chamados/repositories/auth_repository.dart';
 import 'package:chamados/repositories/auth_repository_impl.dart';
 import 'package:flutter/material.dart';
 
 abstract class DrawerService {
-  List<ListTile> getDrawerItems(BuildContext context);
+  List<ListTile> getDrawerItems(BuildContext context, UserInfoModel user);
 }
 
 class DrawerServiceImpl implements DrawerService {
@@ -14,21 +17,29 @@ class DrawerServiceImpl implements DrawerService {
   List<ListTile> drawerItems = [];
 
   @override
-  List<ListTile> getDrawerItems(BuildContext context) {
-    _getBasicDrawerItems(context);
+  List<ListTile> getDrawerItems(BuildContext context, UserInfoModel user) {
+    _getBasicDrawerItems(context, user);
     _getAdminDrawerItems(context);
     _getLogoutDrawerItem(context);
     return drawerItems;
   }
 
-  void _getBasicDrawerItems(BuildContext context) {
+  void _getBasicDrawerItems(BuildContext context, UserInfoModel user) {
 
     drawerItems.add(ListTile(
       leading: const Icon(Icons.person_outline),
       title: const Text("Minha conta"),
       onTap: () {
-        Navigator.pop(context);
-        //Navegar para outra página
+        Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) => EditUserPage(user)))
+            .then((newContact) {
+          if (newContact != null) {
+            messageResponse(context, newContact.name + " a sido modificado...!");
+            //Logica para alterar usuario logado :D
+          }
+        });
       },
     ));
 

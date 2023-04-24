@@ -100,17 +100,17 @@ class _EditUserPage extends State<EditUserPage> {
                     style: ButtonStyle(
                         minimumSize: MaterialStateProperty.all<Size>(
                         const Size(410, 65),
-                      ),
+                    ),
                     backgroundColor: MaterialStateProperty.all<Color>(Pallete.gradient3),                                    
                     ),
                     child: const Text(
-                      'Continuar',
+                      'Alterar Usuário',
                       style: TextStyle(
                         fontSize: 16,
                       ),
                     ),
-                    onPressed: () async {
-                      Navigator.pushNamed(context, 'home');
+                    onPressed: () {
+                      Navigator.pop(context, UserInfoModel());
                       /*var formValid = _formKey.currentState?.validate() ?? false;
                       if (formValid) {
                         setState(() {
