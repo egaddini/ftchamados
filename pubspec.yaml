@@ -22,6 +22,7 @@ dependencies:
   async: ^2.10.0
   test_api: ^0.4.16
   js: ^0.6.5
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:
@@ -30,3 +31,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+assets:
+  - assets/images/raster/.
