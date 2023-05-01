@@ -1,7 +1,7 @@
-import 'package:chamados/app/pages/home_page.dart';
-import 'package:chamados/app/pages/login_page.dart';
-import 'package:chamados/app/pages/singup_page.dart';
-import 'package:chamados/app/pages/user/user_dashboard_page.dart';
+import 'package:chamados/app/features/pages/login_singup/login_page.dart';
+import 'package:chamados/app/features/pages/login_singup/singup_page.dart';
+import 'package:chamados/app/features/pages/menu/home_page.dart';
+import 'package:chamados/app/features/pages/user/user_dashboard_page.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';

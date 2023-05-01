@@ -1,11 +1,6 @@
 import 'dart:ui';
 
 import 'package:chamados/app/config/routes/app_pages.dart';
-import 'package:chamados/app/pages/home_page.dart';
-import 'package:chamados/app/pages/login_page.dart';
-import 'package:chamados/app/pages/user/user_page.dart';
-import 'package:chamados/app/pages/singup_page.dart';
-import 'package:chamados/app/pages/user/user_dashboard_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get.dart';

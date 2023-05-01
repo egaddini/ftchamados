@@ -4,7 +4,7 @@ import 'package:chamados/app/utils/repositories/user_repository.dart';
 import 'package:chamados/app/utils/repositories/user_repository_impl.dart';
 import 'package:chamados/app/shared_components/c_password_field.dart';
 import 'package:chamados/app/shared_components/c_text_form_field.dart';
-import 'package:chamados/app/validators/validators.dart';
+import 'package:chamados/app/utils/validators/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
