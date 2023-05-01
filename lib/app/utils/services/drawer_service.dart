@@ -3,8 +3,8 @@
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/pages/user/edit_user_page.dart';
 import 'package:chamados/app/pages/user/message_response.dart';
-import 'package:chamados/app/repositories/auth_repository.dart';
-import 'package:chamados/app/repositories/auth_repository_impl.dart';
+import 'package:chamados/app/utils/repositories/auth_repository.dart';
+import 'package:chamados/app/utils/repositories/auth_repository_impl.dart';
 import 'package:flutter/material.dart';
 
 abstract class DrawerService {

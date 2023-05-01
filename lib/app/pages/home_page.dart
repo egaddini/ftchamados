@@ -1,6 +1,6 @@
 import 'package:chamados/app/constans/pallete.dart';
-import 'package:chamados/app/services/drawer_service.dart';
-import 'package:chamados/app/services/user_service.dart';
+import 'package:chamados/app/utils/services/drawer_service.dart';
+import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:chamados/app/shared_components/c_menu_drawer.dart';
 import 'package:flutter/material.dart';
 

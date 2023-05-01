@@ -2,9 +2,9 @@ import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/pages/user/edit_user_page.dart';
 import 'package:chamados/app/pages/user/register_user.dart';
 import 'package:chamados/app/constans/pallete.dart';
-import 'package:chamados/app/repositories/user_repository.dart';
-import 'package:chamados/app/repositories/user_repository_impl.dart';
-import 'package:chamados/app/services/user_service.dart';
+import 'package:chamados/app/utils/repositories/user_repository.dart';
+import 'package:chamados/app/utils/repositories/user_repository_impl.dart';
+import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:chamados/app/pages/user/message_response.dart';
 

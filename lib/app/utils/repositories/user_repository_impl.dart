@@ -3,9 +3,8 @@ import 'dart:developer';
 import 'package:chamados/app/models/token_model.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/models/user_model.dart';
-import 'package:chamados/app/repositories/local_repository.dart';
-import 'package:chamados/app/repositories/local_repository_impl.dart';
-import 'package:chamados/app/repositories/user_repository.dart';
+import 'package:chamados/app/utils/repositories/user_repository.dart';
+import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 
@@ -15,8 +14,7 @@ class UserRepositoryImpl implements UserRepository {
   String? token;
   List<UserInfoModel> results = [];
   static const String BASE_PATH = "http://localhost:9090/api/v1/user";
-  LocalRepository localRepo = LocalRepositoryImpl();
-  
+  LocalStorageServices localStorage = LocalStorageServices();  
 
   @override
   Future<UserModel> findByEmail(String email) async {
@@ -26,7 +24,7 @@ class UserRepositoryImpl implements UserRepository {
       final uri = Uri.http('localhost:9092', '/api/v1/user/email', {'email': email});
       final result = await Dio().get(
         uri.toString(),
-        options: Options(headers: getAuthHeader(true)),
+        options: Options(headers: await getAuthHeader(true)),
       );
       if (result.statusCode == 200) {
         user = UserModel.fromMap(result.data);
@@ -77,7 +75,7 @@ class UserRepositoryImpl implements UserRepository {
     try {
       final response = await Dio().get(
         BASE_PATH, 
-        options: Options(headers: getAuthHeader(true)),
+        options: Options(headers: await getAuthHeader(true)),
       );
       if (response.statusCode == 200) {
         final data = jsonDecode(response.data);
@@ -95,9 +93,9 @@ class UserRepositoryImpl implements UserRepository {
     return [];
   }
 
-  Map<String, String> getAuthHeader(bool auth) {
+  Future<Map<String, String>> getAuthHeader(bool auth) async {
     if (auth) {
-      token ??= localRepo.getToken();
+      token = await localStorage.getToken();
       return {
         'content-type': 'application/json;',
         'authorization': 'Bearer $token'

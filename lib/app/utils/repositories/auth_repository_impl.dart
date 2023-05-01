@@ -3,16 +3,15 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:chamados/app/models/user_info_model.dart';
-import 'package:chamados/app/repositories/local_repository.dart';
-import 'package:chamados/app/repositories/local_repository_impl.dart';
-import 'package:chamados/app/repositories/user_repository_impl.dart';
+import 'package:chamados/app/utils/repositories/user_repository_impl.dart';
+import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:dio/dio.dart';
 import 'package:chamados/app/models/login_model.dart';
 import './auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
 
-  final LocalRepository localRepo = LocalRepositoryImpl();
+  LocalStorageServices localStorage = LocalStorageServices();
   final UserRepositoryImpl userRepo = UserRepositoryImpl();
   final String BASE_PATH = "http://localhost:9090/api/v1/auth";
   final String AUTH_PATH = "/authenticate";
@@ -33,8 +32,8 @@ class AuthRepositoryImpl implements AuthRepository {
     if (result.statusCode == 200) {
 
       final UserInfoModel userInfo = UserInfoModel.fromMap(result.data);
-      token = localRepo.saveToken(userInfo.token);
-      localRepo.saveUser(userInfo);
+      localStorage.saveToken(userInfo.token!);
+      //localStorage.saveUser(userInfo);
 
     } else {
       log("Erro ao autenticar usuário: código de status ${result.statusCode}");
@@ -47,12 +46,12 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
  @override
-  void logout() { 
+  void logout() async { 
     try {
       final uri = Uri.http('localhost:9090', '/api/v1/authentication/logout');
       final result = Dio().get(
         uri.toString(),
-        options: Options(headers: getAuthHeader(true)),
+        options: Options(headers: await getAuthHeader(true)),
       );
       
     } catch (e) {
@@ -61,9 +60,9 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-    Map<String, String> getAuthHeader(bool auth) {
+    Future<Map<String, String>> getAuthHeader(bool auth) async {
     if (auth) {
-      token ??= localRepo.getToken();
+      token ??= await localStorage.getToken();
       return {
         'content-type': 'application/json;',
         'authorization': 'Bearer $token'

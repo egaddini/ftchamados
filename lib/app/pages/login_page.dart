@@ -1,9 +1,7 @@
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/login_model.dart';
-import 'package:chamados/app/repositories/auth_repository.dart';
-import 'package:chamados/app/repositories/auth_repository_impl.dart';
-import 'package:chamados/app/repositories/local_repository.dart';
-import 'package:chamados/app/repositories/local_repository_impl.dart';
+import 'package:chamados/app/utils/repositories/auth_repository.dart';
+import 'package:chamados/app/utils/repositories/auth_repository_impl.dart';
 import 'package:chamados/app/shared_components/c_password_field.dart';
 import 'package:chamados/app/shared_components/c_text_form_field.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +23,6 @@ class _LoginPage extends State<LoginPage> {
   final _passwordEC = TextEditingController();
 
   final AuthRepository authRepository = AuthRepositoryImpl();
-  final LocalRepository tokenRepo = LocalRepositoryImpl();
 
   LoginModel? loginModel;
 
