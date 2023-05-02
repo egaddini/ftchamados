@@ -3,7 +3,7 @@ import 'dart:convert';
 
 
 
-class TipoChamadoModel {
+class CallType {
 
   int id;
   String sigla;
@@ -11,7 +11,7 @@ class TipoChamadoModel {
   String titulo;
   String descricao;
 
-  TipoChamadoModel({
+  CallType({
     required this.id,
     required this.sigla,
     required this.prioridade,
@@ -20,14 +20,14 @@ class TipoChamadoModel {
   });
 
 
-  TipoChamadoModel copyWith({
+  CallType copyWith({
     int? id,
     String? sigla,
     String? prioridade,
     String? titulo,
     String? descricao,
   }) {
-    return TipoChamadoModel(
+    return CallType(
       id: id ?? this.id,
       sigla: sigla ?? this.sigla,
       prioridade: prioridade ?? this.prioridade,
@@ -46,8 +46,8 @@ class TipoChamadoModel {
     };
   }
 
-  factory TipoChamadoModel.fromMap(Map<String, dynamic> map) {
-    return TipoChamadoModel(
+  factory CallType.fromMap(Map<String, dynamic> map) {
+    return CallType(
       id: map['id'] as int,
       sigla: map['sigla'] as String,
       prioridade: map['prioridade'] as String,
@@ -58,15 +58,15 @@ class TipoChamadoModel {
 
   String toJson() => json.encode(toMap());
 
-  factory TipoChamadoModel.fromJson(String source) => TipoChamadoModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CallType.fromJson(String source) => CallType.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'TipoChamadoModel(id: $id, sigla: $sigla, prioridade: $prioridade, titulo: $titulo, descricao: $descricao)';
+    return 'CallType(id: $id, sigla: $sigla, prioridade: $prioridade, titulo: $titulo, descricao: $descricao)';
   }
 
   @override
-  bool operator ==(covariant TipoChamadoModel other) {
+  bool operator ==(covariant CallType other) {
     if (identical(this, other)) return true;
   
     return 

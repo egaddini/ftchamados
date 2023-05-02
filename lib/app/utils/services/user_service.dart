@@ -1,12 +1,13 @@
 
 
+import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:flutter/material.dart';
 
 abstract class UserService {
   UserInfoModel getLogedUserInfo(BuildContext context);
-  
   List<UserInfoModel> getAllUsersInfo(BuildContext context);
+  List<CallType> getAllCallTypes();
 }
 
 class UserServiceImpl implements UserService {
@@ -110,6 +111,46 @@ class UserServiceImpl implements UserService {
       ];
   }
 
+  @override
+  List<CallType> getAllCallTypes() {
+    return [
+        CallType(
+          id: 1,
+          descricao: 'Formatar Computador',
+          prioridade: 'Urgente',
+          sigla: 'TEC',
+          titulo: 'Formatar Computador',
+        ),
+        CallType(
+          id: 2,
+          descricao: 'Formatar Calculadora',
+          prioridade: 'Urgente',
+          sigla: 'TEC',
+          titulo: 'Formatar Calculadora',
+        ),
+        CallType(
+          id: 3,
+          descricao: 'Abrir qualquer chamado',
+          prioridade: 'Urgente',
+          sigla: 'TEC',
+          titulo: 'Chamado Genérico',
+        ),
+        CallType(
+          id: 4,
+          descricao: 'Titulo teste',
+          prioridade: 'Urgente',
+          sigla: 'TEC',
+          titulo: 'Teste',
+        ),
+      ];
+  }
+
+  List<CallType> getSuggestions(String query) {
+    List<CallType> matches = [];
+    matches.addAll(getAllCallTypes());
+    matches.retainWhere((s) => s.descricao.toLowerCase().contains(query.toLowerCase()));
+    return matches;
+  } 
   
 }
 

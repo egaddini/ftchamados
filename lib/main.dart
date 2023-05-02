@@ -1,9 +1,10 @@
 import 'dart:ui';
 
-import 'package:chamados/app/config/routes/app_pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get.dart';
+
+import 'app/config/routes/app_pages.dart';
 
 void main() {
   setUrlStrategy(PathUrlStrategy());

@@ -12,6 +12,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_typeahead: ^4.3.8
   cupertino_icons: ^1.0.3
   dio: ^5.0.3
   http: ^0.13.5
@@ -24,6 +25,7 @@ dependencies:
   js: ^0.6.5
   get: ^4.6.5
   shared_preferences: ^2.0.6
+  faker: ^2.1.0
 
 dev_dependencies:
   flutter_test:

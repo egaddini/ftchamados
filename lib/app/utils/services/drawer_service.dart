@@ -59,7 +59,7 @@ class DrawerServiceImpl implements DrawerService {
 
       onTap: () {
         Navigator.pop(context);
-        //Navegar para outra página
+        Navigator.pushNamed(context, 'call');
       },
     ));
   }
@@ -81,6 +81,7 @@ class DrawerServiceImpl implements DrawerService {
       title: const Text("Logout"),
       onTap: () {
         _authRepo.logout();
+        Navigator.pop(context);
         Navigator.pushNamed(context, 'login');
       },
     ));
