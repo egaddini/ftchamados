@@ -65,41 +65,43 @@ class _HomeScreenState extends State<HomeScreen>  {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: TypeAheadField<CallType>(
-                        textFieldConfiguration: TextFieldConfiguration(
-                          controller: _aheadController,
-                          textInputAction: TextInputAction.search,
-                          textCapitalization: TextCapitalization.words,
-                          decoration: const InputDecoration(
-                            labelText: 'Digite um texto',
-                            border: OutlineInputBorder(),
-                          ),
-                        ),
-                        suggestionsCallback: (pattern) {
-                          return _items.where((call) =>
-                              call.descricao.toLowerCase().contains(pattern.toLowerCase())).toList();
-                        },
-                        itemBuilder: (context, CallType call) {
-                          return ListTile(
-                            title: Text(call.descricao),
-                            subtitle: Text(call.id.toString()),
-                          );
-                        },
-                        onSuggestionSelected: (CallType call) async {
-                          var updatedItem = await Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => CreateCallPage(call),
+                    SizedBox(
+                      width: 900,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: TypeAheadField<CallType>(
+                          textFieldConfiguration: TextFieldConfiguration(
+                            controller: _aheadController,
+                            textInputAction: TextInputAction.search,
+                            textCapitalization: TextCapitalization.words,
+                            decoration: const InputDecoration(
+                              labelText: 'Digite um texto',
+                              border: OutlineInputBorder(),
                             ),
-                          );
-                          if (updatedItem != null) {
-                            setState(() {
-                              _items[_items.indexWhere((i) => i.id == updatedItem.id)] = updatedItem;
-                            });
-                          }
-                        },
+                          ),
+                          suggestionsCallback: (pattern) {
+                            return _items.where((call) =>
+                                call.descricao.toLowerCase().contains(pattern.toLowerCase())).toList();
+                          },
+                          itemBuilder: (context, CallType call) {
+                            return ListTile(
+                              title: Text('${call.sigla} - ${call.descricao}'),
+                            );
+                          },
+                          onSuggestionSelected: (CallType call) async {
+                            var updatedItem = await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => CreateCallPage(call),
+                              ),
+                            );
+                            if (updatedItem != null) {
+                              setState(() {
+                                _items[_items.indexWhere((i) => i.id == updatedItem.id)] = updatedItem;
+                              });
+                            }
+                          },
+                        ),
                       ),
                     ),
                   ]
