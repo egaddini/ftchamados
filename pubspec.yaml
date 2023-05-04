@@ -26,6 +26,7 @@ dependencies:
   get: ^4.6.5
   shared_preferences: ^2.0.6
   faker: ^2.1.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

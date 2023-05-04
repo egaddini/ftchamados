@@ -1,5 +1,6 @@
 
 
+import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:flutter/material.dart';
@@ -116,31 +117,51 @@ class UserServiceImpl implements UserService {
     return [
         CallType(
           id: 1,
-          descricao: 'Formatar Computador',
-          prioridade: 'Urgente',
           sigla: 'TEC',
-          titulo: 'Formatar Computador',
+          setor: 'Tecnologia',
+          titulo: 'Formatar computador',
+          prioridade: 'URGENTE',
+          descricao: 'Para caso seu computador tenha problemas ou esteja com virus.',
         ),
         CallType(
           id: 2,
-          descricao: 'Formatar Calculadora',
-          prioridade: 'Urgente',
           sigla: 'TEC',
-          titulo: 'Formatar Calculadora',
+          setor: 'Tecnologia',
+          titulo: 'Formatar calculadora',
+          prioridade: 'SEM PRIORIDADE',
+          descricao: 'Para caso sua calculadora apresente problemas.',
         ),
         CallType(
           id: 3,
-          descricao: 'Abrir qualquer chamado',
-          prioridade: 'Urgente',
           sigla: 'TEC',
-          titulo: 'Chamado Genérico',
+          setor: 'Tecnologia',
+          titulo: 'Erro visual na aplicação X.',
+          prioridade: 'LEVE',
+          descricao: 'Para caso seja identificado erro visual em algum componente da aplicação X.',
         ),
         CallType(
           id: 4,
-          descricao: 'Titulo teste',
-          prioridade: 'Urgente',
-          sigla: 'TEC',
-          titulo: 'Teste',
+          sigla: 'INF',
+          setor: 'Infraestrutura',
+          titulo: 'Teclado Novo',
+          prioridade: 'MÉDIA',
+          descricao: 'Solicitação de periférico.',
+        ),                
+        CallType(
+          id: 5,
+          sigla: 'INF',
+          setor: 'Infraestrutura',
+          titulo: 'Problema na catraca de acesso a empresa',
+          prioridade: 'URGENTE',
+          descricao: 'Problema relacionado ao acesso a empresa.',
+        ),
+        CallType(
+          id: 6,
+          sigla: 'GEN',
+          setor: 'Todos',
+          titulo: 'Chamado',
+          prioridade: 'A VERIFICAR',
+          descricao: 'Para criar chamado de problemas\necessidades que não tenham sido cadastradas.',
         ),
       ];
   }
@@ -151,6 +172,14 @@ class UserServiceImpl implements UserService {
     matches.retainWhere((s) => s.descricao.toLowerCase().contains(query.toLowerCase()));
     return matches;
   } 
+  
+
+    @override
+  List<Call> getCalls() {
+    return [
+      Call(id: '1', usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+    ];
+  }
   
 }
 

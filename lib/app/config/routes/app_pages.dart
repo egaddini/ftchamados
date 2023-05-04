@@ -1,4 +1,4 @@
-import 'package:chamados/app/features/pages/call/call_page.dart';
+import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/login_singup/login_page.dart';
 import 'package:chamados/app/features/pages/login_singup/singup_page.dart';
 import 'package:chamados/app/features/pages/menu/screens/home_screen.dart';

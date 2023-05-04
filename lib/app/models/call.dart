@@ -1,103 +1,99 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 
-class ChamadoModel {
+class Call {
 
   String id;
-  String categoria;
   String usuario;
   String descricao;
   DateTime dataCriacao;
   DateTime dataUltAtualizacao;
-  bool finalizado;
-  ChamadoModel({
+  List<String> participantes;
+
+  Call({
     required this.id,
-    required this.categoria,
     required this.usuario,
     required this.descricao,
     required this.dataCriacao,
     required this.dataUltAtualizacao,
-    required this.finalizado,
+    required this.participantes,
   });
+  
 
-
-  ChamadoModel copyWith({
+  Call copyWith({
     String? id,
-    String? categoria,
     String? usuario,
     String? descricao,
     DateTime? dataCriacao,
     DateTime? dataUltAtualizacao,
-    bool? finalizado,
+    List<String>? participantes,
   }) {
-    return ChamadoModel(
+    return Call(
       id: id ?? this.id,
-      categoria: categoria ?? this.categoria,
       usuario: usuario ?? this.usuario,
       descricao: descricao ?? this.descricao,
       dataCriacao: dataCriacao ?? this.dataCriacao,
       dataUltAtualizacao: dataUltAtualizacao ?? this.dataUltAtualizacao,
-      finalizado: finalizado ?? this.finalizado,
+      participantes: participantes ?? this.participantes,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'categoria': categoria,
       'usuario': usuario,
       'descricao': descricao,
       'dataCriacao': dataCriacao.millisecondsSinceEpoch,
       'dataUltAtualizacao': dataUltAtualizacao.millisecondsSinceEpoch,
-      'finalizado': finalizado,
+      'participantes': participantes,
     };
   }
 
-  factory ChamadoModel.fromMap(Map<String, dynamic> map) {
-    return ChamadoModel(
+  factory Call.fromMap(Map<String, dynamic> map) {
+    return Call(
       id: map['id'] as String,
-      categoria: map['categoria'] as String,
       usuario: map['usuario'] as String,
       descricao: map['descricao'] as String,
       dataCriacao: DateTime.fromMillisecondsSinceEpoch(map['dataCriacao'] as int),
       dataUltAtualizacao: DateTime.fromMillisecondsSinceEpoch(map['dataUltAtualizacao'] as int),
-      finalizado: map['finalizado'] as bool,
+      participantes: List<String>.from((map['participantes'] as List<String>),
+      )
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory ChamadoModel.fromJson(String source) => ChamadoModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory Call.fromJson(String source) => Call.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'ChamadoModel(id: $id, categoria: $categoria, usuario: $usuario, descricao: $descricao, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, finalizado: $finalizado)';
+    return 'Call(id: $id, usuario: $usuario, descricao: $descricao, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, participantes: $participantes)';
   }
 
   @override
-  bool operator ==(covariant ChamadoModel other) {
+  bool operator ==(covariant Call other) {
     if (identical(this, other)) return true;
   
     return 
       other.id == id &&
-      other.categoria == categoria &&
       other.usuario == usuario &&
       other.descricao == descricao &&
       other.dataCriacao == dataCriacao &&
       other.dataUltAtualizacao == dataUltAtualizacao &&
-      other.finalizado == finalizado;
+      listEquals(other.participantes, participantes);
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
-      categoria.hashCode ^
       usuario.hashCode ^
       descricao.hashCode ^
       dataCriacao.hashCode ^
       dataUltAtualizacao.hashCode ^
-      finalizado.hashCode;
+      participantes.hashCode;
   }
 }

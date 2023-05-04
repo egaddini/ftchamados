@@ -85,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                           },
                           itemBuilder: (context, CallType call) {
                             return ListTile(
-                              title: Text('${call.sigla} - ${call.descricao}'),
+                              title: Text('${call.sigla} - ${call.titulo}'),
                             );
                           },
                           onSuggestionSelected: (CallType call) async {

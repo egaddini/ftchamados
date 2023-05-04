@@ -1,37 +1,38 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-
-
 class CallType {
 
   int id;
   String sigla;
-  String prioridade;
+  String setor;
   String titulo;
+  String prioridade;
   String descricao;
 
   CallType({
     required this.id,
     required this.sigla,
-    required this.prioridade,
+    required this.setor,
     required this.titulo,
+    required this.prioridade,
     required this.descricao,
   });
-
 
   CallType copyWith({
     int? id,
     String? sigla,
-    String? prioridade,
+    String? setor,
     String? titulo,
+    String? prioridade,
     String? descricao,
   }) {
     return CallType(
       id: id ?? this.id,
       sigla: sigla ?? this.sigla,
-      prioridade: prioridade ?? this.prioridade,
+      setor: setor ?? this.setor,
       titulo: titulo ?? this.titulo,
+      prioridade: prioridade ?? this.prioridade,
       descricao: descricao ?? this.descricao,
     );
   }
@@ -40,8 +41,9 @@ class CallType {
     return <String, dynamic>{
       'id': id,
       'sigla': sigla,
-      'prioridade': prioridade,
+      'setor': setor,
       'titulo': titulo,
+      'prioridade': prioridade,
       'descricao': descricao,
     };
   }
@@ -50,8 +52,9 @@ class CallType {
     return CallType(
       id: map['id'] as int,
       sigla: map['sigla'] as String,
-      prioridade: map['prioridade'] as String,
+      setor: map['setor'] as String,
       titulo: map['titulo'] as String,
+      prioridade: map['prioridade'] as String,
       descricao: map['descricao'] as String,
     );
   }
@@ -62,7 +65,7 @@ class CallType {
 
   @override
   String toString() {
-    return 'CallType(id: $id, sigla: $sigla, prioridade: $prioridade, titulo: $titulo, descricao: $descricao)';
+    return 'CallType(id: $id, sigla: $sigla, setor: $setor, titulo: $titulo, prioridade: $prioridade, descricao: $descricao)';
   }
 
   @override
@@ -72,8 +75,9 @@ class CallType {
     return 
       other.id == id &&
       other.sigla == sigla &&
-      other.prioridade == prioridade &&
+      other.setor == setor &&
       other.titulo == titulo &&
+      other.prioridade == prioridade &&
       other.descricao == descricao;
   }
 
@@ -81,9 +85,9 @@ class CallType {
   int get hashCode {
     return id.hashCode ^
       sigla.hashCode ^
-      prioridade.hashCode ^
+      setor.hashCode ^
       titulo.hashCode ^
+      prioridade.hashCode ^
       descricao.hashCode;
   }
-  
 }

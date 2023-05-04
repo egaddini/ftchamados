@@ -1,5 +1,6 @@
 import 'package:chamados/app/models/call_type.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 
 class CreateCallPage extends StatefulWidget {
@@ -12,28 +13,31 @@ class CreateCallPage extends StatefulWidget {
 }
 
 class _CreateCallPageState extends State<CreateCallPage> {
-  late TextEditingController _nameC;
+  late TextEditingController _tituloC;
   late TextEditingController _siglaC;
+  late TextEditingController _setorC;
   late TextEditingController _prioridadeC;
   late TextEditingController _descricaoC;
-  late TextEditingController _dataAberturaC;
-  late TextEditingController _usuarioSolicitanteC;
-  late TextEditingController _descreverProblemaC;
+  final TextEditingController _dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now()));
+  //late TextEditingController _usuarioSolicitanteC;
+  //late TextEditingController _descreverProblemaC;
 
   @override
   void initState() {
     super.initState();
-    _nameC = TextEditingController(text: widget.call.descricao);
+    _tituloC = TextEditingController(text: widget.call.titulo);
     _siglaC = TextEditingController(text: widget.call.sigla);
+    _setorC = TextEditingController(text: widget.call.setor);
     _prioridadeC = TextEditingController(text: widget.call.prioridade);
     _descricaoC = TextEditingController(text: widget.call.descricao);
+
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Novo chamado - ${_siglaC.text} ${_nameC.text}'),
+        title: Text('Novo chamado - ${_siglaC.text} ${_tituloC.text}'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(18),
@@ -44,7 +48,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
               children: [
                 Expanded(
                   child: TextField(
-                    controller: _siglaC,
+                    controller: _setorC,
                     enabled: false,
                     decoration: const InputDecoration(
                       labelText: 'Setor',
@@ -55,7 +59,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
                 const SizedBox(width: 10),
                 Expanded(
                   child: TextField(
-                    controller: _nameC,
+                    controller: _tituloC,
                     enabled: false,
                     decoration: const InputDecoration(
                       labelText: 'Titulo',
@@ -114,7 +118,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
                 Expanded(
                   child: TextField(
                     enabled: false,
-                    controller: _usuarioSolicitanteC,
+                    //controller: _usuarioSolicitanteC,
                     decoration: const InputDecoration(
                       labelText: 'Usuário solicitante',
                       border: OutlineInputBorder(),
@@ -128,7 +132,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
               children: [
                 Expanded(
                   child: TextField(
-                    controller: _descreverProblemaC,
+                    //controller: _descreverProblemaC,
                     maxLines: 10,
                     decoration: const InputDecoration(
                       labelText: 'Descreva o problema ',
@@ -141,7 +145,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
             const SizedBox(height: 10),
             ElevatedButton(
               onPressed: () {
-                widget.call.descricao = _nameC.text;
+                widget.call.descricao = _tituloC.text;
                 Navigator.pop(context, widget.call);
               },
               child: const Text('Criar chamado'),
