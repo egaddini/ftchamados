@@ -9,6 +9,7 @@ abstract class UserService {
   UserInfoModel getLogedUserInfo(BuildContext context);
   List<UserInfoModel> getAllUsersInfo(BuildContext context);
   List<CallType> getAllCallTypes();
+  List<Call> getCalls();
 }
 
 class UserServiceImpl implements UserService {
@@ -113,59 +114,28 @@ class UserServiceImpl implements UserService {
   }
 
   @override
-  List<CallType> getAllCallTypes() {
-    return [
-        CallType(
-          id: 1,
-          sigla: 'TEC',
-          setor: 'Tecnologia',
-          titulo: 'Formatar computador',
-          prioridade: 'URGENTE',
-          descricao: 'Para caso seu computador tenha problemas ou esteja com virus.',
-        ),
-        CallType(
-          id: 2,
-          sigla: 'TEC',
-          setor: 'Tecnologia',
-          titulo: 'Formatar calculadora',
-          prioridade: 'SEM PRIORIDADE',
-          descricao: 'Para caso sua calculadora apresente problemas.',
-        ),
-        CallType(
-          id: 3,
-          sigla: 'TEC',
-          setor: 'Tecnologia',
-          titulo: 'Erro visual na aplicação X.',
-          prioridade: 'LEVE',
-          descricao: 'Para caso seja identificado erro visual em algum componente da aplicação X.',
-        ),
-        CallType(
-          id: 4,
-          sigla: 'INF',
-          setor: 'Infraestrutura',
-          titulo: 'Teclado Novo',
-          prioridade: 'MÉDIA',
-          descricao: 'Solicitação de periférico.',
-        ),                
-        CallType(
-          id: 5,
-          sigla: 'INF',
-          setor: 'Infraestrutura',
-          titulo: 'Problema na catraca de acesso a empresa',
-          prioridade: 'URGENTE',
-          descricao: 'Problema relacionado ao acesso a empresa.',
-        ),
-        CallType(
-          id: 6,
-          sigla: 'GEN',
-          setor: 'Todos',
-          titulo: 'Chamado',
-          prioridade: 'A VERIFICAR',
-          descricao: 'Para criar chamado de problemas\necessidades que não tenham sido cadastradas.',
-        ),
-      ];
+  List<CallType> getAllCallTypes() { return [getCallType1(), getCallType2(), getCallType3(), getCallType4(), getCallType5(), getCallType6(), ]; }
+
+  CallType getCallType1() {
+    return CallType(id: 1, sigla: 'TEC', setor: 'Tecnologia', titulo: 'Formatar computador', prioridade: 'URGENTE', descricao: 'Para caso seu computador tenha problemas ou esteja com virus.');
+  }
+  CallType getCallType2() {
+    return CallType(id: 2, sigla: 'TEC', setor: 'Tecnologia', titulo: 'Formatar calculadora', prioridade: 'SEM PRIORIDADE', descricao: 'Para caso sua calculadora apresente problemas.');
+  }
+  CallType getCallType3() {
+    return CallType(id: 3, sigla: 'TEC', setor: 'Tecnologia', titulo: 'Erro visual na aplicação X.', prioridade: 'LEVE', descricao: 'Para caso seja identificado erro visual em algum componente da aplicação X.');
+  }
+  CallType getCallType4() {
+    return CallType(id: 4, sigla: 'INF', setor: 'Infraestrutura', titulo: 'Teclado Novo', prioridade: 'MÉDIA', descricao: 'Solicitação de periférico.');
+  }
+  CallType getCallType5() {
+    return CallType(id: 5, sigla: 'INF', setor: 'Infraestrutura', titulo: 'Problema na catraca de acesso a empresa', prioridade: 'URGENTE', descricao: 'Problema relacionado ao acesso a empresa.');
+  }
+  CallType getCallType6() {
+    return CallType(id: 6, sigla: 'GEN', setor: 'Todos', titulo: 'Chamado', prioridade: 'A VERIFICAR', descricao: 'Para criar chamado de problemas\necessidades que não tenham sido cadastradas.');
   }
 
+  @override
   List<CallType> getSuggestions(String query) {
     List<CallType> matches = [];
     matches.addAll(getAllCallTypes());
@@ -174,10 +144,20 @@ class UserServiceImpl implements UserService {
   } 
   
 
-    @override
+  @override
   List<Call> getCalls() {
     return [
-      Call(id: '1', usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType1(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType6(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType6(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType3(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType3(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType6(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType4(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType2(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType5(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType1(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+       
     ];
   }
   

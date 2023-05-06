@@ -2,27 +2,31 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import 'call_type.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 
 class Call {
 
   String id;
+  CallType callType;
   String usuario;
   String descricao;
   DateTime dataCriacao;
   DateTime dataUltAtualizacao;
   List<String> participantes;
-
+  
   Call({
     required this.id,
+    required this.callType,
     required this.usuario,
     required this.descricao,
     required this.dataCriacao,
     required this.dataUltAtualizacao,
     required this.participantes,
   });
-  
+
 
   Call copyWith({
     String? id,
@@ -34,6 +38,7 @@ class Call {
   }) {
     return Call(
       id: id ?? this.id,
+      callType: callType,
       usuario: usuario ?? this.usuario,
       descricao: descricao ?? this.descricao,
       dataCriacao: dataCriacao ?? this.dataCriacao,
@@ -45,6 +50,7 @@ class Call {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
+      'callType': callType,
       'usuario': usuario,
       'descricao': descricao,
       'dataCriacao': dataCriacao.millisecondsSinceEpoch,
@@ -56,12 +62,12 @@ class Call {
   factory Call.fromMap(Map<String, dynamic> map) {
     return Call(
       id: map['id'] as String,
+      callType: map['callType'] as CallType,
       usuario: map['usuario'] as String,
       descricao: map['descricao'] as String,
       dataCriacao: DateTime.fromMillisecondsSinceEpoch(map['dataCriacao'] as int),
       dataUltAtualizacao: DateTime.fromMillisecondsSinceEpoch(map['dataUltAtualizacao'] as int),
-      participantes: List<String>.from((map['participantes'] as List<String>),
-      )
+      participantes: List<String>.from((map['participantes'] as List<String>),),
     );
   }
 
@@ -71,7 +77,7 @@ class Call {
 
   @override
   String toString() {
-    return 'Call(id: $id, usuario: $usuario, descricao: $descricao, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, participantes: $participantes)';
+    return 'Call(id: $id, callType: $callType, usuario: $usuario, descricao: $descricao, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, participantes: $participantes)';
   }
 
   @override
@@ -80,6 +86,7 @@ class Call {
   
     return 
       other.id == id &&
+      other.callType == callType &&
       other.usuario == usuario &&
       other.descricao == descricao &&
       other.dataCriacao == dataCriacao &&
@@ -90,6 +97,7 @@ class Call {
   @override
   int get hashCode {
     return id.hashCode ^
+      callType.hashCode ^
       usuario.hashCode ^
       descricao.hashCode ^
       dataCriacao.hashCode ^
