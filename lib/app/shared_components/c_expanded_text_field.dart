@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class CustomExpandedTextField extends StatelessWidget {
   final TextEditingController controller;
   final String? labelText;
+  final int maxLines;
 
   const CustomExpandedTextField({
     Key? key,
     required this.controller,
     required this.labelText,
+    this.maxLines = 1,
   }) : super(key: key);
 
   @override
@@ -16,6 +18,7 @@ class CustomExpandedTextField extends StatelessWidget {
       child: TextField(
         controller: controller,
         enabled: false,
+        maxLines: maxLines,
         decoration: InputDecoration(
           labelText: labelText,
           border: OutlineInputBorder(),

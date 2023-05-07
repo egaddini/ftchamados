@@ -72,25 +72,64 @@ class _CallDetailPageState extends State<CallDetailPage> {
             const SizedBox(height: 10),
             Row(
               children: [
-                Expanded(
-                  child: TextField(
-                    //controller: _descreverProblemaC,
-                    maxLines: 10,
-                    decoration: const InputDecoration(
-                      labelText: 'Descrição do solicitante',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                ),
+                CustomExpandedTextField(controller: _tituloC, labelText: 'Descrição do solicitante', maxLines: 4),
               ],
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
-              onPressed: () {
-                widget.call.descricao = _tituloC.text;
-                Navigator.pop(context, widget.call);
-              },
-              child: const Text('Criar chamado'),
+            Row(
+              children: [
+                CustomExpandedTextField(controller: _tituloC, labelText: 'Histórico', maxLines: 6),
+              ],
+            ),            
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                CustomExpandedTextField(controller: _tituloC, labelText: 'Participantes'),
+              ],
+            ),
+            const SizedBox(height: 10),
+            const SizedBox(child: Expanded(child: Divider())),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                CustomExpandedTextField(controller: _tituloC, labelText: 'Comentar algo', maxLines: 6),
+              ],
+            ),            
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    widget.call.descricao = _tituloC.text;
+                    Navigator.pop(context, widget.call);
+                  },
+                  child: const Text('Iniciar Chamado'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    widget.call.descricao = _tituloC.text;
+                    Navigator.pop(context, widget.call);
+                  },
+                  child: const Text('Comentar'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    widget.call.descricao = _tituloC.text;
+                    Navigator.pop(context, widget.call);
+                  },
+                  child: const Text('Encaminhar'),
+                ),
+                const SizedBox(width: 10),
+                ElevatedButton(
+                  onPressed: () {
+                    widget.call.descricao = _tituloC.text;
+                    Navigator.pop(context, widget.call);
+                  },
+                  child: const Text('Finalizar'),
+                ),                                                
+              ],
             ),
           ],
         ),

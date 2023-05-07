@@ -2,6 +2,7 @@ import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.da
 import 'package:chamados/app/features/pages/login_singup/login_page.dart';
 import 'package:chamados/app/features/pages/login_singup/singup_page.dart';
 import 'package:chamados/app/features/pages/menu/screens/home_screen.dart';
+import 'package:chamados/app/features/pages/user/screen/user_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/user/user_dashboard_page.dart';
 import 'package:get/get.dart';
 
@@ -26,14 +27,19 @@ class AppPages {
       page: () => const SingupPage(),
       //binding: DashboardBinding(),
     ),
-      GetPage(
-      name: Routes.users,
-      page: () => UserDashboardPage(),
-      //binding: DashboardBinding(),
-    ),
+    ///   GetPage(
+    ///   name: Routes.users,
+    ///   page: () => UserDashboardPage(),
+    ///   //binding: DashboardBinding(),
+    /// ),
     GetPage(
       name: Routes.call,
       page: () => const CallDashboardScreen(),
+      //binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: Routes.users,
+      page: () => const UserDashboardScreen(),
       //binding: DashboardBinding(),
     ),
 
