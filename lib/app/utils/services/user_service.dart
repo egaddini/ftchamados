@@ -147,16 +147,16 @@ class UserServiceImpl implements UserService {
   @override
   List<Call> getCalls() {
     return [
-      Call(id: '1', callType: getCallType1(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
-      Call(id: '1', callType: getCallType6(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
-      Call(id: '1', callType: getCallType6(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
-      Call(id: '1', callType: getCallType3(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
-      Call(id: '1', callType: getCallType3(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
-      Call(id: '1', callType: getCallType6(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
-      Call(id: '1', callType: getCallType4(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
-      Call(id: '1', callType: getCallType2(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
-      Call(id: '1', callType: getCallType5(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
-      Call(id: '1', callType: getCallType1(), usuario: 'Agenor', descricao: 'descricao', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType1(), usuario: 'Agenor', descricao: 'descricao', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType6(), usuario: 'Agenor', descricao: 'descricao', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType6(), usuario: 'Agenor', descricao: 'descricao', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType3(), usuario: 'Agenor', descricao: 'descricao', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType3(), usuario: 'Agenor', descricao: 'descricao', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType6(), usuario: 'Agenor', descricao: 'descricao', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType4(), usuario: 'Agenor', descricao: 'descricao', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType2(), usuario: 'Agenor', descricao: 'descricao', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType5(), usuario: 'Agenor', descricao: 'descricao', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
+      Call(id: '1', callType: getCallType1(), usuario: 'Agenor', descricao: 'descricao', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edder', 'Agenor']),
        
     ];
   }

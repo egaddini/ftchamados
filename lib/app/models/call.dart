@@ -13,6 +13,7 @@ class Call {
   CallType callType;
   String usuario;
   String descricao;
+  String status;
   DateTime dataCriacao;
   DateTime dataUltAtualizacao;
   List<String> participantes;
@@ -22,6 +23,7 @@ class Call {
     required this.callType,
     required this.usuario,
     required this.descricao,
+    required this.status,
     required this.dataCriacao,
     required this.dataUltAtualizacao,
     required this.participantes,
@@ -32,6 +34,7 @@ class Call {
     String? id,
     String? usuario,
     String? descricao,
+    String? status,
     DateTime? dataCriacao,
     DateTime? dataUltAtualizacao,
     List<String>? participantes,
@@ -41,6 +44,7 @@ class Call {
       callType: callType,
       usuario: usuario ?? this.usuario,
       descricao: descricao ?? this.descricao,
+      status: status ?? this.status,
       dataCriacao: dataCriacao ?? this.dataCriacao,
       dataUltAtualizacao: dataUltAtualizacao ?? this.dataUltAtualizacao,
       participantes: participantes ?? this.participantes,
@@ -53,6 +57,7 @@ class Call {
       'callType': callType,
       'usuario': usuario,
       'descricao': descricao,
+      'status': status,
       'dataCriacao': dataCriacao.millisecondsSinceEpoch,
       'dataUltAtualizacao': dataUltAtualizacao.millisecondsSinceEpoch,
       'participantes': participantes,
@@ -65,6 +70,7 @@ class Call {
       callType: map['callType'] as CallType,
       usuario: map['usuario'] as String,
       descricao: map['descricao'] as String,
+      status: map['status'] as String,
       dataCriacao: DateTime.fromMillisecondsSinceEpoch(map['dataCriacao'] as int),
       dataUltAtualizacao: DateTime.fromMillisecondsSinceEpoch(map['dataUltAtualizacao'] as int),
       participantes: List<String>.from((map['participantes'] as List<String>),),
@@ -77,7 +83,7 @@ class Call {
 
   @override
   String toString() {
-    return 'Call(id: $id, callType: $callType, usuario: $usuario, descricao: $descricao, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, participantes: $participantes)';
+    return 'Call(id: $id, callType: $callType, usuario: $usuario, descricao: $descricao, status: $status, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, participantes: $participantes)';
   }
 
   @override
@@ -89,6 +95,7 @@ class Call {
       other.callType == callType &&
       other.usuario == usuario &&
       other.descricao == descricao &&
+      other.status == status &&
       other.dataCriacao == dataCriacao &&
       other.dataUltAtualizacao == dataUltAtualizacao &&
       listEquals(other.participantes, participantes);
@@ -100,6 +107,7 @@ class Call {
       callType.hashCode ^
       usuario.hashCode ^
       descricao.hashCode ^
+      status.hashCode ^
       dataCriacao.hashCode ^
       dataUltAtualizacao.hashCode ^
       participantes.hashCode;
