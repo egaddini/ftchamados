@@ -1,5 +1,5 @@
 import 'package:chamados/app/constans/pallete.dart';
-import 'package:chamados/app/features/pages/menu/components/create_call_page.dart';
+import 'package:chamados/app/features/pages/call/components/create_call_page.dart';
 import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/utils/services/drawer_service.dart';
 import 'package:chamados/app/utils/services/user_service.dart';

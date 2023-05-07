@@ -3,16 +3,18 @@ part of call_dashboard;
 class RowSource extends DataTableSource {
   var myData;
   final count;
+  final context;
 
 
   RowSource({
+    required this.context,
     required this.myData,
     required this.count,
   });
 
   @override
   DataRow? getRow(int index) {
-    return (index < rowCount) ? recentFileDataRow(myData![index]) : null;
+    return (index < rowCount) ? recentFileDataRow(myData![index], context) : null;
   }
 
   @override
@@ -25,17 +27,17 @@ class RowSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-DataRow recentFileDataRow(Call data) {
+DataRow recentFileDataRow(Call call, BuildContext context) {
   return DataRow(
-    onSelectChanged: (value) => print('object'),
+    onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => CallDetailPage(call),),),
     cells: [
-      DataCell(Text(data.dataCriacao.toString())),
-      DataCell(Text(data.callType.setor.toString())),
-      DataCell(Text(data.callType.prioridade.toString())),
-      DataCell(Text(data.usuario)),
-      DataCell(Text(data.status.toString())),
-      DataCell(Text(data.dataUltAtualizacao.toString())),
+      DataCell(Text('${call.callType.sigla} ${call.id}')),
+      DataCell(Text(call.dataCriacao.toString())),
+      DataCell(Text(call.callType.setor.toString())),
+      DataCell(Text(call.callType.prioridade.toString())),
+      DataCell(Text(call.usuario)),
+      DataCell(Text(call.status.toString())),
+      DataCell(Text(call.dataUltAtualizacao.toString())),
     ],
   );
-  
 }

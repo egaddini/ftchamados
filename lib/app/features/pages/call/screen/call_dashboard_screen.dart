@@ -1,12 +1,13 @@
 library call_dashboard;
 
 import 'package:chamados/app/constans/pallete.dart';
+import 'package:chamados/app/features/pages/call/components/call_detail_page.dart';
 import 'package:chamados/app/models/call.dart';
+import 'package:chamados/app/shared_components/c_appbar.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 
 part '../components/row_source.dart';
-
 
 class CallDashboardScreen extends StatefulWidget {
   const CallDashboardScreen({super.key});
@@ -43,9 +44,7 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Chamados'),
-        ),
+        appBar: const CustomAppBar(text: 'Chamados'),
         body: Container(
           padding: const EdgeInsets.all(8.0),
           decoration: BoxDecoration(
@@ -62,10 +61,7 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                 header: TextField(
                   controller: controller,
                   decoration: const InputDecoration(
-                    hintText: 'Buscar por nome',
-                    labelStyle: TextStyle(
-                      color: Pallete.backgroundColor,
-                    ),                      
+                    labelText: 'Buscar por nome',                     
                     border: OutlineInputBorder(),
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(
@@ -80,6 +76,7 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                   },
                 ),
                 source: RowSource(
+                  context: context,
                   myData: myData,
                   count: myData?.length,
                 ),
@@ -89,6 +86,13 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                 columnSpacing: 6,
                 showCheckboxColumn: false,
                 columns: [
+                  const DataColumn(
+                    label: Text(
+                      "ID",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 14),
+                    ),
+                  ),
                   const DataColumn(
                     label: Text(
                       "Criado em",
