@@ -1,6 +1,6 @@
-import 'package:chamados/app/features/pages/user/edit_user_page.dart';
+import 'package:chamados/app/features/pages/user/components/edit_user_page.dart';
 import 'package:chamados/app/features/pages/user/message_response.dart';
-import 'package:chamados/app/features/pages/user/register_user.dart';
+import 'package:chamados/app/features/pages/user/screens/register_user_screen.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/shared_components/c_appbar.dart';
 import 'package:chamados/app/utils/repositories/user_repository.dart';
@@ -61,7 +61,7 @@ class _UserPage extends State<UserPage> {
                 onLongPress: () {
                   removeClient(context, clients[index]);
                 },
-                title: Text((clients[index].firstname ?? "não definido") + (clients[index].lastname ?? "não definido")),
+                title: Text((clients[index].nome ?? "não definido") + (clients[index].sobrenome ?? "não definido")),
                 subtitle: Text(clients[index].email ?? 'Email não disponível'),
                 leading: CircleAvatar(
                   child: Text("clients[index].name.substring(0, 1)"),
@@ -78,7 +78,7 @@ class _UserPage extends State<UserPage> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => RegisterUser()))
+                  context, MaterialPageRoute(builder: (_) => RegisterUserScreen()))
               .then((newContact) {
             if (newContact != null) {
               setState(() {
@@ -100,7 +100,7 @@ class _UserPage extends State<UserPage> {
         context: context,
         builder: (_) => AlertDialog(
               title: Text("Eliminar Cliente"),
-              content: Text("Esta seguro de eliminar a " + (client.firstname ?? "?")),
+              content: Text("Esta seguro de eliminar a " + (client.nome ?? "?")),
               actions: [
                 TextButton(
                   onPressed: () {

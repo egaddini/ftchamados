@@ -7,14 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
 
-class RegisterUser extends StatefulWidget {
-  const RegisterUser({super.key});
+class RegisterUserScreen extends StatefulWidget {
+  const RegisterUserScreen({super.key});
 
   @override
-  State<StatefulWidget> createState() => _RegisterUser();
+  State<StatefulWidget> createState() => _RegisterUserScreen();
 }
 
-class _RegisterUser extends State<RegisterUser> {
+class _RegisterUserScreen extends State<RegisterUserScreen> {
   final _formKey = GlobalKey<FormState>();
   final _nameEC = TextEditingController();
   final _surnameEC = TextEditingController();

@@ -1,11 +1,16 @@
+library home_screen;
+
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/features/pages/call/components/create_call_page.dart';
+import 'package:chamados/app/features/pages/user/components/edit_user_page.dart';
+import 'package:chamados/app/features/pages/user/message_response.dart';
 import 'package:chamados/app/models/call_type.dart';
-import 'package:chamados/app/utils/services/drawer_service.dart';
+import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
-import 'package:chamados/app/shared_components/c_menu_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
+
+part '../components/menu_drawer.dart';
 
 
 class HomeScreen extends StatefulWidget {
@@ -17,7 +22,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen>  {
-  DrawerService drawer = DrawerServiceImpl();
   String? userSelected;
   UserService userSvc = UserServiceImpl();
   final TextEditingController _aheadController = TextEditingController();
@@ -40,15 +44,7 @@ class _HomeScreenState extends State<HomeScreen>  {
         ),
         backgroundColor: Pallete.gradient3,
       ),
-      endDrawer: MenuDrawer(
-        accountEmail: "Edder@mail.com",
-        accountName: "Edder",
-        currentAccountPicture: const CircleAvatar(
-          child: Text("ed"),
-        ),
-        drawerItems: drawer.getDrawerItems(context, userSvc.getLogedUserInfo(context)),
-      ),
-
+      endDrawer: const MenuDrawer(),
       body: SingleChildScrollView(
           padding: const EdgeInsets.all(8.0),
           child: Form(
@@ -66,9 +62,8 @@ class _HomeScreenState extends State<HomeScreen>  {
                     ),
                     const SizedBox(height: 20),
                     SizedBox(
-                      width: 900,
                       child: Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: TypeAheadField<CallType>(
                           textFieldConfiguration: TextFieldConfiguration(
                             controller: _aheadController,
@@ -76,7 +71,16 @@ class _HomeScreenState extends State<HomeScreen>  {
                             textCapitalization: TextCapitalization.words,
                             decoration: const InputDecoration(
                               labelText: 'Digite um texto',
+                              contentPadding: EdgeInsets.all(23),
                               border: OutlineInputBorder(),
+                              labelStyle: TextStyle(
+                                color: Pallete.backgroundColor
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: Pallete.gradient3,
+                                ),
+                              ),                                                            
                             ),
                           ),
                           suggestionsCallback: (pattern) {

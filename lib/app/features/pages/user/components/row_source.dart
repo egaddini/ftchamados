@@ -27,18 +27,24 @@ class RowSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-DataRow recentFileDataRow(UserInfoModel call, BuildContext context) {
+DataRow recentFileDataRow(UserInfoModel user, BuildContext context) {
   return DataRow(
-    //onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => CallDetailPage(call),),),
+    onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => EditUserPage(user),),),
     cells: [
-      //DataCell(Text('${call.callType.sigla} ${call.id}')),
-      DataCell(Text('call.dataUltAtualizacao.toString()')),
-      DataCell(Text('call.dataUltAtualizacao.toString()')),
-      DataCell(Text('call.dataUltAtualizacao.toString()')),
-      DataCell(Text('call.dataUltAtualizacao.toString()')),
-      DataCell(Text('call.dataUltAtualizacao.toString()')),
-      DataCell(Text('call.dataUltAtualizacao.toString()')),
-      DataCell(Text('call.dataUltAtualizacao.toString()')),
+      //DataCell(Text('${user.userType.sigla} ${user.id}')),
+      DataCell(Text(user.id.toString())),
+      DataCell(Text(user.email.toString())),
+      DataCell(Text(user.nome.toString())),
+      DataCell(Text(user.sobrenome.toString())),
+      DataCell(Text(user.role.toString())),
+      DataCell(
+          Checkbox(
+            value: user.habilitado,
+            onChanged: (value) {
+            },
+          ),
+        ),
+      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(user.dataCriacao!).toString())),
     ],
   );
 }

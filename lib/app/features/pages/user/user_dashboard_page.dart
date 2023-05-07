@@ -1,6 +1,6 @@
-import 'package:chamados/app/features/pages/user/edit_user_page.dart';
+import 'package:chamados/app/features/pages/user/components/edit_user_page.dart';
 import 'package:chamados/app/features/pages/user/message_response.dart';
-import 'package:chamados/app/features/pages/user/register_user.dart';
+import 'package:chamados/app/features/pages/user/screens/register_user_screen.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/utils/repositories/user_repository.dart';
@@ -65,12 +65,12 @@ class _UserDashboardPage extends State<UserDashboardPage> {
                     }
                   });
                 },
-                title: Text('${clients[index].firstname ?? "não definido"} ${clients[index].lastname ?? "não definido"} - ${clients[index].role ?? "não definido"}'),
+                title: Text('${clients[index].nome ?? "não definido"} ${clients[index].sobrenome ?? "não definido"} - ${clients[index].role ?? "não definido"}'),
                 subtitle: Text(clients[index].email ?? 'Email não disponível'),
                 leading: CircleAvatar(
                   backgroundColor: Pallete.gradient3,
                   foregroundColor: Colors.white,
-                  child: Text(clients[index].firstname!.substring(0, 1)),
+                  child: Text(clients[index].nome!.substring(0, 1)),
                 ),
                 trailing: InkWell(
                   borderRadius: BorderRadius.circular(50),
@@ -92,7 +92,7 @@ class _UserDashboardPage extends State<UserDashboardPage> {
         backgroundColor: Pallete.gradient3,
         onPressed: () {
           Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => RegisterUser()))
+                  context, MaterialPageRoute(builder: (_) => RegisterUserScreen()))
               .then((newContact) {
             if (newContact != null) {
               setState(() {
@@ -114,7 +114,7 @@ class _UserDashboardPage extends State<UserDashboardPage> {
         context: context,
         builder: (_) => AlertDialog(
               title: const Text("Deletar Cliente"),
-              content: Text("O usuário: ${client.firstname ?? "?"} será deletado para sempre, deseja realmente continuar?"),
+              content: Text("O usuário: ${client.nome ?? "?"} será deletado para sempre, deseja realmente continuar?"),
               actions: [
                 TextButton(
                   onPressed: () {

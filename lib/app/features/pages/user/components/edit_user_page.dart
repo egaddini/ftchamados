@@ -26,8 +26,8 @@ class _EditUserPage extends State<EditUserPage> {
 
     UserInfoModel c = widget._client;
     _idEC = TextEditingController(text: c.id.toString());
-    _firstNameEC = TextEditingController(text: c.firstname);
-    _lastNameEC = TextEditingController(text: c.lastname);
+    _firstNameEC = TextEditingController(text: c.nome);
+    _lastNameEC = TextEditingController(text: c.sobrenome);
     _emailEC = TextEditingController(text: c.email);
     _roleEC = TextEditingController(text: c.role);
     super.initState();

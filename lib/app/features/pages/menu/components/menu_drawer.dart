@@ -1,0 +1,102 @@
+part of home_screen;
+
+class MenuDrawer extends StatefulWidget {
+  
+  const MenuDrawer({super.key});
+
+  @override
+  State<MenuDrawer> createState() => _MenuDrawerState();
+}
+
+class _MenuDrawerState extends State<MenuDrawer> {
+
+  UserService userSvc = UserServiceImpl();
+  late UserInfoModel logedUser;
+  bool _isAdmin = false;
+
+  @override
+  void initState() {
+    super.initState();
+    logedUser = userSvc.getLogedUserInfo(context);
+    _isAdmin = 'admin' == logedUser.role!;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          UserAccountsDrawerHeader(
+            decoration: const BoxDecoration(
+              color: Pallete.gradient3
+            ),
+            accountEmail: Text(logedUser.email.toString()),
+            accountName: Text(logedUser.nome.toString()),
+            currentAccountPicture: CircleAvatar(
+              child: Text(logedUser.email.toString().substring(0,2)),
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.person_outline),
+            title: const Text("Minha conta"),
+            onTap: () {
+              Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => EditUserPage(logedUser)))
+                  .then((newContact) {
+                if (newContact != null) {
+                  messageResponse(context, newContact.name + " a sido modificado...!");
+                  //Logica para alterar usuario logado :D
+                }
+              });
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.message_outlined),
+            title: const Text("Chat"),
+            onTap: () {
+              Navigator.pop(context);
+              //Navegar para outra página
+            },
+          ),
+          Visibility(
+            visible: _isAdmin,
+            child: ExpansionTile(
+              title: const Text('Painel do Administrador'),
+              leading: const Icon(Icons.admin_panel_settings_outlined),
+              children: [
+                ListTile(
+                  leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
+                  title: const Text("Chamados"),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, 'call');
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.safety_divider),
+                  title: const Text("Usuarios"),
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.pushNamed(context, 'users');
+                  },
+                ),              
+              ],
+            ),
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text("Logout"),
+            onTap: () {
+              //_authRepo.logout();
+              Navigator.pop(context);
+              Navigator.pushNamed(context, 'login');
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}

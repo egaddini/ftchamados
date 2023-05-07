@@ -1,43 +1,49 @@
-library call_dashboard;
+library user_dashboard;
 
 import 'package:chamados/app/constans/pallete.dart';
-import 'package:chamados/app/features/pages/call/components/call_detail_page.dart';
-import 'package:chamados/app/models/call.dart';
-import 'package:chamados/app/shared_components/c_appbar.dart';
+import 'package:chamados/app/features/pages/user/components/edit_user_page.dart';
+import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import '../../../../shared_components/c_appbar.dart';
 
 part '../components/row_source.dart';
 
-class CallDashboardScreen extends StatefulWidget {
-  const CallDashboardScreen({super.key});
+class UserDashboardScreen extends StatefulWidget {
+  const UserDashboardScreen({super.key});
 
   @override
-  State<CallDashboardScreen> createState() => _CallDashboardScreenState();
+  State<UserDashboardScreen> createState() => _UserDashboardScreenState();
 }
 
-class _CallDashboardScreenState extends State<CallDashboardScreen> {
+class _UserDashboardScreenState extends State<UserDashboardScreen> {
   bool sort = true;
-  List<Call>? filterData, myData;
+  List<UserInfoModel>? filterData, myData;
   UserService userSvc = UserServiceImpl();
 
 
   onsortColum(int columnIndex, bool ascending) {
     if (columnIndex == 0) {
       if (ascending) {
-        filterData!.sort((a, b) => a.usuario.compareTo(b.usuario));
+        filterData!.sort((a, b) => a.email!.compareTo(b.email!));
       } else {
-        filterData!.sort((a, b) => b.usuario.compareTo(a.usuario));
+        filterData!.sort((a, b) => b.email!.compareTo(a.email!));
       }
     }
   }
 
   @override
   void initState() {
-    filterData = userSvc.getCalls();
-    myData = userSvc.getCalls();
+    filterData = userSvc.getAllUsersInfo(context);
+    myData = userSvc.getAllUsersInfo(context);
     super.initState();
   }
+
+  /// Future<void> _initializeData() async {
+  ///   filterData = await userSvc.getAllUsersInfo(context);
+  ///   myData = await userSvc.getAllUsersInfo(context);
+  /// }
 
   TextEditingController controller = TextEditingController();
 
@@ -63,21 +69,21 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                   header: TextField(
                     controller: controller,
                     decoration: const InputDecoration(
-                      labelText: 'Buscar por nome',
-                      contentPadding: EdgeInsets.all(23),                     
-                      border: OutlineInputBorder(),                      
+                      labelText: 'Buscar por email',  
+                      contentPadding: EdgeInsets.all(23),                                         
+                      border: OutlineInputBorder(),
                       focusedBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Pallete.gradient3,
                         ),
-                      ),
+                      ),                              
                       labelStyle: TextStyle(
                         color: Pallete.backgroundColor
-                      ),                                                    
+                      ),                      
                     ),
                     onChanged: (value) {
                       setState(() {
-                        myData = filterData!.where((element) => element.usuario.contains(value)).toList();
+                        myData = filterData!.where((element) => element.email!.contains(value)).toList();
                       });
                     },
                   ),
@@ -86,7 +92,6 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                     myData: myData,
                     count: myData?.length,
                   ),
-        
                   checkboxHorizontalMargin: 10,
                   rowsPerPage: 10,
                   columnSpacing: 6,
@@ -101,14 +106,14 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                     ),
                     const DataColumn(
                       label: Text(
-                        "Criado em",
+                        "Email",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                     ),                        
                     DataColumn(
                       label: const Text(
-                        "Setor",
+                        "Nome",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14
                         ),
@@ -122,28 +127,29 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                     ),
                     const DataColumn(
                       label: Text(
-                        "Prioridade",
+                        "Sobrenome",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 14),
+                      ),
+                      
+                    ),
+                    const DataColumn(
+                      label: Text(
+                        "Cargo",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                     ),
                     const DataColumn(
                       label: Text(
-                        "Solicitante",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),
-                    const DataColumn(
-                      label: Text(
-                        "Status",
+                        "Habilitado",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                     ),                        
                     const DataColumn(
                       label: Text(
-                        "Ultima atualizacao",
+                        "Data de Registro",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14),
                       ),
