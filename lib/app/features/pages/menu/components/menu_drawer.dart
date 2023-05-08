@@ -88,7 +88,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       },
                     ),
                     ListTile(
-                      title: const Text("Nova Categoria"),
+                      title: const Text("Categorias"),
                       leading: const Icon(Icons.note_add_outlined),
                       onTap: () {
                         Navigator.pop(context);

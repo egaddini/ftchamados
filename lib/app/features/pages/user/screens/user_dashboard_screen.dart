@@ -50,7 +50,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(text: 'Chamados'),
+        appBar: const CustomAppBar(text: 'Dashbord Usuários'),
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
@@ -153,7 +153,10 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> {
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14),
                       ),
-                    ),                        
+                    ),
+                    const DataColumn(
+                      label: Text(''),
+                    ),                                            
                   ],
                 ),
               )

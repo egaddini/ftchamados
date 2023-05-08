@@ -46,6 +46,52 @@ DataRow recentFileDataRow(UserInfoModel user, BuildContext context) {
         ),
       ),
       DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(user.dataCriacao!).toString())),
+      DataCell(
+        InkWell(
+          borderRadius: BorderRadius.circular(50),
+          onTap: () {
+            removeClient(context, user);
+          },
+          child:  const SizedBox(
+            width: 35,
+            height: 35,
+            child: Icon(Icons.close, color: Colors.red),
+          ),
+        ),
+      ),
     ],
   );
+}
+
+void removeClient(BuildContext context, UserInfoModel user) {
+      showDialog(
+      context: context,
+        builder: (_) => AlertDialog(
+              title: const Text("Deletar Cliente"),
+              content: Text("O usuário: ${user.email ?? "?"} será deletado para sempre, deseja realmente continuar?"),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "Voltar",
+                    style: TextStyle(color: Pallete.backgroundColor),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    /// setState(() {
+                    ///   users.remove(user);
+                    ///   Navigator.pop(context);
+                    /// });
+                    Navigator.pop(context);
+                  },
+                  child: const Text(
+                    "Deletar",
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
+              ],
+            ));
 }

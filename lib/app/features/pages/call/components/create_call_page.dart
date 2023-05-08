@@ -1,5 +1,7 @@
+import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/shared_components/c_appbar.dart';
+import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -14,11 +16,15 @@ class CreateCallPage extends StatefulWidget {
 }
 
 class _CreateCallPageState extends State<CreateCallPage> {
+
+  final UserService userService = UserServiceImpl();
   late TextEditingController _tituloC;
   late TextEditingController _siglaC;
   late TextEditingController _setorC;
   late TextEditingController _prioridadeC;
   late TextEditingController _descricaoC;
+  late TextEditingController _descreverProblemaC;
+  late TextEditingController _usuarioSolicitanteC;
   final TextEditingController _dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now()));
   //late TextEditingController _usuarioSolicitanteC;
   //late TextEditingController _descreverProblemaC;
@@ -31,7 +37,8 @@ class _CreateCallPageState extends State<CreateCallPage> {
     _setorC = TextEditingController(text: widget.call.setor);
     _prioridadeC = TextEditingController(text: widget.call.prioridade);
     _descricaoC = TextEditingController(text: widget.call.descricao);
-
+    _usuarioSolicitanteC = TextEditingController(text: userService.getLogedUserInfo().email.toString());
+    _descreverProblemaC = TextEditingController(text: '');
   }
 
   @override
@@ -96,7 +103,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
             ),
             const SizedBox(height: 10),
             Row(
-              children: [
+              children: const [
                 Expanded(child:Divider(),),
               ],
             ),
@@ -117,7 +124,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
                 Expanded(
                   child: TextField(
                     enabled: false,
-                    //controller: _usuarioSolicitanteC,
+                    controller: _usuarioSolicitanteC,
                     decoration: const InputDecoration(
                       labelText: 'Usuário solicitante',
                       border: OutlineInputBorder(),
@@ -131,11 +138,21 @@ class _CreateCallPageState extends State<CreateCallPage> {
               children: [
                 Expanded(
                   child: TextField(
-                    //controller: _descreverProblemaC,
+                    controller: _descreverProblemaC,
                     maxLines: 10,
-                    decoration: const InputDecoration(
-                      labelText: 'Descreva o problema ',
+                    decoration: const  InputDecoration(
+                      contentPadding: EdgeInsets.all(23),
+                      labelText: 'Descreva o problema',
+                      labelStyle: TextStyle(
+                        color: Pallete.backgroundColor
+                      ),
                       border: OutlineInputBorder(),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Pallete.gradient3,
+                          width: 2,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -143,11 +160,51 @@ class _CreateCallPageState extends State<CreateCallPage> {
             ),
             const SizedBox(height: 10),
             ElevatedButton(
+              style: ButtonStyle(
+                  minimumSize: MaterialStateProperty.all<Size>(
+                  const Size(410, 65),
+              ),
+              backgroundColor: MaterialStateProperty.all<Color>(Pallete.gradient3),                                    
+              ),
+              child: const Text(
+                'Registrar chamado',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
               onPressed: () {
-                widget.call.descricao = _tituloC.text;
-                Navigator.pop(context, widget.call);
-              },
-              child: const Text('Criar chamado'),
+                Navigator.pop(context);
+
+                ScaffoldMessenger.of(context).removeCurrentSnackBar();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Chamado Registrado!'),
+                    backgroundColor: Pallete.gradient3,
+                  ),
+                );
+
+                /*var formValid = _formKey.currentState?.validate() ?? false;
+                if (formValid) {
+                  setState(() {
+                    loginModel = LoginModel(
+                      email: _emailEC.text,
+                      password: _passwordEC.text
+                    );
+                  });                      
+                  String? response = await authRepository.authenticate(loginModel!);
+                  if (response != null) {
+                    Navigator.pushNamed(context, 'home');
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('As credenciais informadas não batem. Tente novamente.'),
+                        backgroundColor: Pallete.gradient3,
+                      ),
+                    );
+                  }
+                  Navigator.pushNamed(context, 'home');
+                }*/ 
+              }, 
             ),
           ],
         ),

@@ -210,6 +210,7 @@ class _EditUserPage extends State<EditUserPage> {
                   ),
                 ],
               ),
+              const SizedBox(height: 10),
             ],
           ),
         ),
