@@ -4,8 +4,8 @@ import 'package:chamados/app/models/user_info_model.dart';
 import 'package:flutter/material.dart';
 
 abstract class UserService {
-  UserInfoModel getLogedUserInfo(BuildContext context);
-  List<UserInfoModel> getAllUsersInfo(BuildContext context);
+  UserInfoModel getLogedUserInfo();
+  List<UserInfoModel> getAllUsersInfo();
   List<CallType> getAllCallTypes();
   List<Call> getCalls();
 }
@@ -13,14 +13,14 @@ abstract class UserService {
 class UserServiceImpl implements UserService {
 
   @override
-  UserInfoModel getLogedUserInfo(BuildContext context) {
+  UserInfoModel getLogedUserInfo() {
     return UserInfoModel(id: 1, email: 'eddergaddini@gmail.com', nome: 'Edder', sobrenome: 'Gaddini', role: 'admin', token: '289798897789', habilitado: true, dataCriacao: DateTime.now(),);
   }
 
   
 
   @override
-  List<UserInfoModel> getAllUsersInfo(BuildContext context) {
+  List<UserInfoModel> getAllUsersInfo() {
     return [
       UserInfoModel(id: 1, email: 'eddergaddini@gmail.com', nome: 'Edder', sobrenome: 'Gaddini', role: 'admin', token: '289798897789', habilitado: true, dataCriacao: DateTime.now()),
       UserInfoModel(id: 2, email: 'johndoe@gmail.com', nome: 'John', sobrenome: 'Doe', role: 'user', token: '389798897789', habilitado: true, dataCriacao: DateTime.now().subtract(Duration(days: 2))),
@@ -45,6 +45,10 @@ class UserServiceImpl implements UserService {
       UserInfoModel(id: 21, email: 'professor@gmail.com', nome: 'Professor', sobrenome: 'Exemplo', role: 'user', token: 'h89798897789', habilitado: true, dataCriacao: DateTime.now().subtract(Duration(days: 50)),)
 
     ];
+  }
+
+  UserInfoModel getUserInfoModelById(int id) {
+    return getAllUsersInfo().firstWhere((userInfo) => userInfo.id == id, orElse: () => UserInfoModel(id: 1, email: 'eddergaddini@gmail.com', nome: 'Edder', sobrenome: 'Gaddini', role: 'admin', token: '289798897789', habilitado: true, dataCriacao: DateTime.now()),);
   }
 
   @override
@@ -73,26 +77,26 @@ class UserServiceImpl implements UserService {
   @override
   List<Call> getCalls() {
     return [
-      Call(id: '2', callType: getCallType2(), usuario: 'Edson', descricao: 'reunião semanal', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['edson', 'julia', 'lucas']),
-      Call(id: '3', callType: getCallType4(), usuario: 'Julia', descricao: 'projeto xyz', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['julia', 'edson']),
-      Call(id: '4', callType: getCallType1(), usuario: 'Lucas', descricao: 'atualização de status', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['lucas', 'edson', 'julia']),
-      Call(id: '5', callType: getCallType3(), usuario: 'Pedro', descricao: 'apresentação de vendas', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['pedro', 'julia']),
-      Call(id: '6', callType: getCallType5(), usuario: 'Isabela', descricao: 'discussão de orçamento', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['isabela', 'lucas']),
-      Call(id: '7', callType: getCallType6(), usuario: 'Paulo', descricao: 'revisão de código', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['paulo', 'pedro']),
-      Call(id: '8', callType: getCallType2(), usuario: 'Fernanda', descricao: 'reunião de equipe', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['fernanda', 'paulo', 'isabela']),
-      Call(id: '9', callType: getCallType4(), usuario: 'Ricardo', descricao: 'projeto abc', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['ricardo', 'fernanda']),
-      Call(id: '10', callType: getCallType1(), usuario: 'Camila', descricao: 'atualização de progresso', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['camila', 'ricardo']),
-      Call(id: '11', callType: getCallType3(), usuario: 'Roberto', descricao: 'brainstorm de ideias', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['roberto', 'camila']),
-      Call(id: '16', callType: getCallType5(), usuario: 'Eduardo', descricao: 'reunião com a equipe de marketing', status: 'agendada', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Eduardo', 'André', 'Camila']),
-      Call(id: '17', callType: getCallType2(), usuario: 'Rafaela', descricao: 'chamada para discutir o projeto X', status: 'concluída', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Rafaela', 'Maria']),
-      Call(id: '18', callType: getCallType6(), usuario: 'Gabriel', descricao: 'apresentação para os investidores', status: 'pendente', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Gabriel', 'Roberto', 'João']),
-      Call(id: '19', callType: getCallType1(), usuario: 'Fernanda', descricao: 'reunião com o time de desenvolvimento', status: 'agendada', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Fernanda', 'Luís', 'Rodrigo']),
-      Call(id: '20', callType: getCallType4(), usuario: 'Bruna', descricao: 'reunião para discutir as metas do trimestre', status: 'cancelada', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Bruna', 'Felipe']),
-      Call(id: '21', callType: getCallType3(), usuario: 'Cássia', descricao: 'chamada de suporte para cliente X', status: 'concluída', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Cássia', 'Leonardo']),
-      Call(id: '22', callType: getCallType5(), usuario: 'Carlos', descricao: 'reunião de alinhamento com o time de vendas', status: 'agendada', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Carlos', 'Ana', 'Marcelo']),
-      Call(id: '23', callType: getCallType2(), usuario: 'Vinícius', descricao: 'chamada com o parceiro comercial', status: 'pendente', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Vinícius', 'Luisa']),
-      Call(id: '24', callType: getCallType6(), usuario: 'José', descricao: 'apresentação para o conselho', status: 'agendada', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['José', 'Amanda', 'Ricardo']),
-      Call(id: '25', callType: getCallType1(), usuario: 'Isabela', descricao: 'reunião com o time de marketing', status: 'concluída', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Isabela', 'Thiago', 'Luana']),
+      Call(id: '2', callType: getCallType2(), usuario: getUserInfoModelById(1), descricao: 'reunião semanal', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Jane', 'julia', 'lucas']),
+      Call(id: '3', callType: getCallType4(), usuario: getUserInfoModelById(2) , descricao: 'projeto xyz', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['julia', 'edson']),
+      Call(id: '4', callType: getCallType1(), usuario: getUserInfoModelById(5) , descricao: 'atualização de status', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['lucas', 'edson', 'julia']),
+      Call(id: '5', callType: getCallType3(), usuario: getUserInfoModelById(3) , descricao: 'apresentação de vendas', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['pedro', 'julia']),
+      Call(id: '6', callType: getCallType5(), usuario: getUserInfoModelById(6) , descricao: 'discussão de orçamento', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['isabela', 'lucas']),
+      Call(id: '7', callType: getCallType6(), usuario: getUserInfoModelById(5) , descricao: 'revisão de código', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['paulo', 'pedro']),
+      Call(id: '8', callType: getCallType2(), usuario: getUserInfoModelById(1) , descricao: 'reunião de equipe', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['fernanda', 'paulo', 'isabela']),
+      Call(id: '9', callType: getCallType4(), usuario: getUserInfoModelById(1) , descricao: 'projeto abc', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['ricardo', 'fernanda']),
+      Call(id: '10', callType: getCallType1(), usuario: getUserInfoModelById(10) , descricao: 'atualização de progresso', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['camila', 'ricardo']),
+      Call(id: '11', callType: getCallType3(), usuario: getUserInfoModelById(11) , descricao: 'brainstorm de ideias', status: 'null', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['roberto', 'camila']),
+      Call(id: '16', callType: getCallType5(), usuario: getUserInfoModelById(12) , descricao: 'reunião com a equipe de marketing', status: 'agendada', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Eduardo', 'André', 'Camila']),
+      Call(id: '17', callType: getCallType2(), usuario: getUserInfoModelById(16) , descricao: 'chamada para discutir o projeto X', status: 'concluída', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Rafaela', 'Maria']),
+      Call(id: '18', callType: getCallType6(), usuario: getUserInfoModelById(15) , descricao: 'apresentação para os investidores', status: 'pendente', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Gabriel', 'Roberto', 'João']),
+      Call(id: '19', callType: getCallType1(), usuario: getUserInfoModelById(14) , descricao: 'reunião com o time de desenvolvimento', status: 'agendada', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Fernanda', 'Luís', 'Rodrigo']),
+      Call(id: '20', callType: getCallType4(), usuario: getUserInfoModelById(11) , descricao: 'reunião para discutir as metas do trimestre', status: 'cancelada', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Bruna', 'Felipe']),
+      Call(id: '21', callType: getCallType3(), usuario: getUserInfoModelById(5) , descricao: 'chamada de suporte para cliente X', status: 'concluída', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Cássia', 'Leonardo']),
+      Call(id: '22', callType: getCallType5(), usuario: getUserInfoModelById(2) , descricao: 'reunião de alinhamento com o time de vendas', status: 'agendada', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Carlos', 'Ana', 'Marcelo']),
+      Call(id: '23', callType: getCallType2(), usuario: getUserInfoModelById(5) , descricao: 'chamada com o parceiro comercial', status: 'pendente', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Vinícius', 'Luisa']),
+      Call(id: '24', callType: getCallType6(), usuario: getUserInfoModelById(7) , descricao: 'apresentação para o conselho', status: 'agendada', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['José', 'Amanda', 'Ricardo']),
+      Call(id: '25', callType: getCallType1(), usuario: getUserInfoModelById(7) , descricao: 'reunião com o time de marketing', status: 'concluída', dataCriacao: DateTime.now(), dataUltAtualizacao: DateTime.now(), participantes: ['Isabela', 'Thiago', 'Luana']),
     ];
   }
   

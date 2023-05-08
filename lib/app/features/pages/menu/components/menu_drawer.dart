@@ -17,7 +17,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
   @override
   void initState() {
     super.initState();
-    logedUser = userSvc.getLogedUserInfo(context);
+    logedUser = userSvc.getLogedUserInfo();
     _isAdmin = 'admin' == logedUser.role!;
   }
 

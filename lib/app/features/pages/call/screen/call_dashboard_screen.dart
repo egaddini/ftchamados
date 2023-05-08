@@ -6,6 +6,7 @@ import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/shared_components/c_appbar.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 part '../components/row_source.dart';
 
@@ -25,9 +26,9 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
   onsortColum(int columnIndex, bool ascending) {
     if (columnIndex == 0) {
       if (ascending) {
-        filterData!.sort((a, b) => a.usuario.compareTo(b.usuario));
+        filterData!.sort((a, b) => a.usuario.email.toString().compareTo(b.usuario.email.toString()));
       } else {
-        filterData!.sort((a, b) => b.usuario.compareTo(a.usuario));
+        filterData!.sort((a, b) => b.usuario.email.toString().compareTo(a.usuario.email.toString()));
       }
     }
   }
@@ -77,7 +78,7 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                     ),
                     onChanged: (value) {
                       setState(() {
-                        myData = filterData!.where((element) => element.usuario.contains(value)).toList();
+                        myData = filterData!.where((element) => element.usuario.email.toString().contains(value)).toList();
                       });
                     },
                   ),

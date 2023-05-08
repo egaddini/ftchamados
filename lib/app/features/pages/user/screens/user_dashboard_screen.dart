@@ -35,8 +35,8 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> {
 
   @override
   void initState() {
-    filterData = userSvc.getAllUsersInfo(context);
-    myData = userSvc.getAllUsersInfo(context);
+    filterData = userSvc.getAllUsersInfo();
+    myData = userSvc.getAllUsersInfo();
     super.initState();
   }
 

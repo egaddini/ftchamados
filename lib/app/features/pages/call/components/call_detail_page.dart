@@ -15,22 +15,37 @@ class CallDetailPage extends StatefulWidget {
 
 class _CallDetailPageState extends State<CallDetailPage> {
 
-  late TextEditingController _tituloC;
-  late TextEditingController _siglaC;
+  late TextEditingController _dataAberturaC;
+  late TextEditingController _ultAtualizacaoC;
+  late TextEditingController _solicitanteC;
+  late TextEditingController _statusC;
   late TextEditingController _setorC;
   late TextEditingController _prioridadeC;
-  late TextEditingController _descricaoC;
-  final TextEditingController _dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now()));
+  late TextEditingController _idC;
+  late TextEditingController _tituloC;
+  late TextEditingController _descSolicitC;
+  late TextEditingController _historicoC;
+  late TextEditingController _participantesC;
+  late TextEditingController _comentarioC;
+  late TextEditingController _siglaC;
+  //final TextEditingController _dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now()));
 
   @override
   void initState() {
     super.initState();
-    _tituloC = TextEditingController(text: widget.call.callType.titulo);
-    _siglaC = TextEditingController(text: widget.call.callType.sigla);
+    _dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(widget.call.dataCriacao));
+    _ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(widget.call.dataUltAtualizacao));
+    _solicitanteC = TextEditingController(text: widget.call.usuario.email);
+    _statusC = TextEditingController(text: widget.call.status);
     _setorC = TextEditingController(text: widget.call.callType.setor);
     _prioridadeC = TextEditingController(text: widget.call.callType.prioridade);
-    _descricaoC = TextEditingController(text: widget.call.callType.descricao);
-
+    _idC = TextEditingController(text: widget.call.id);
+    _tituloC = TextEditingController(text: widget.call.callType.titulo);
+    _descSolicitC = TextEditingController(text: widget.call.descricao);
+    _historicoC = TextEditingController(text: 'Não implementei ainda');
+    _participantesC = TextEditingController(text: widget.call.participantes.toString());
+    _comentarioC = TextEditingController(text: 'Não implementei ainda');
+    _siglaC = TextEditingController(text: widget.call.callType.sigla);
   }
   
   @override
@@ -44,27 +59,27 @@ class _CallDetailPageState extends State<CallDetailPage> {
             const SizedBox(height: 10),
             Row(
               children: [
-                CustomExpandedTextField(controller: _tituloC, labelText: 'Abertura'),
+                CustomExpandedTextField(controller: _dataAberturaC, labelText: 'Abertura'),
                 const SizedBox(width: 10),
-                CustomExpandedTextField(controller: _tituloC, labelText: 'Ultima atualização'),
+                CustomExpandedTextField(controller: _ultAtualizacaoC, labelText: 'Ultima atualização'),
                 const SizedBox(width: 10),
-                CustomExpandedTextField(controller: _tituloC, labelText: 'Solicitante'),
+                CustomExpandedTextField(controller: _solicitanteC, labelText: 'Solicitante'),
                 const SizedBox(width: 10),
-                CustomExpandedTextField(controller: _tituloC, labelText: 'Status'),                
+                CustomExpandedTextField(controller: _statusC, labelText: 'Status'),                
               ],
             ),
             const SizedBox(height: 10),
             Row(
               children: [
-                CustomExpandedTextField(controller: _tituloC, labelText: 'Setor'),
+                CustomExpandedTextField(controller: _setorC, labelText: 'Setor'),
                 const SizedBox(width: 10),
-                CustomExpandedTextField(controller: _tituloC, labelText: 'Prioridade'),                
+                CustomExpandedTextField(controller: _prioridadeC, labelText: 'Prioridade'),                
               ],
             ),
             const SizedBox(height: 10),
             Row(
               children: [
-                CustomExpandedTextField(controller: _tituloC, labelText: 'ID'),                
+                CustomExpandedTextField(controller: _idC, labelText: 'ID'),                
                 const SizedBox(width: 10),
                 CustomExpandedTextField(controller: _tituloC, labelText: 'Titulo'),
               ],
@@ -72,19 +87,19 @@ class _CallDetailPageState extends State<CallDetailPage> {
             const SizedBox(height: 10),
             Row(
               children: [
-                CustomExpandedTextField(controller: _tituloC, labelText: 'Descrição do solicitante', maxLines: 4),
+                CustomExpandedTextField(controller: _descSolicitC, labelText: 'Descrição do solicitante', maxLines: 4),
               ],
             ),
             const SizedBox(height: 10),
             Row(
               children: [
-                CustomExpandedTextField(controller: _tituloC, labelText: 'Histórico', maxLines: 6),
+                CustomExpandedTextField(controller: _historicoC, labelText: 'Histórico', maxLines: 6),
               ],
             ),            
             const SizedBox(height: 10),
             Row(
               children: [
-                CustomExpandedTextField(controller: _tituloC, labelText: 'Participantes'),
+                CustomExpandedTextField(controller: _participantesC, labelText: 'Participantes'),
               ],
             ),
             const SizedBox(height: 10),
@@ -92,7 +107,7 @@ class _CallDetailPageState extends State<CallDetailPage> {
             const SizedBox(height: 10),
             Row(
               children: [
-                CustomExpandedTextField(controller: _tituloC, labelText: 'Comentar algo', maxLines: 6),
+                CustomExpandedTextField(controller: _comentarioC, labelText: 'Comentar algo', maxLines: 6),
               ],
             ),            
             const SizedBox(height: 10),

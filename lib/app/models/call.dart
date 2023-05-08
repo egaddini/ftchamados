@@ -2,6 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 
+import 'package:chamados/app/models/user_info_model.dart';
+
 import 'call_type.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
@@ -10,8 +12,8 @@ import 'call_type.dart';
 class Call {
 
   String id;
+  UserInfoModel usuario;
   CallType callType;
-  String usuario;
   String descricao;
   String status;
   DateTime dataCriacao;
@@ -28,11 +30,13 @@ class Call {
     required this.dataUltAtualizacao,
     required this.participantes,
   });
+  
 
 
   Call copyWith({
     String? id,
-    String? usuario,
+    CallType? callType,
+    UserInfoModel? usuario,
     String? descricao,
     String? status,
     DateTime? dataCriacao,
@@ -41,7 +45,7 @@ class Call {
   }) {
     return Call(
       id: id ?? this.id,
-      callType: callType,
+      callType: callType ?? this.callType,
       usuario: usuario ?? this.usuario,
       descricao: descricao ?? this.descricao,
       status: status ?? this.status,
@@ -54,8 +58,8 @@ class Call {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'callType': callType,
-      'usuario': usuario,
+      'callType': callType.toMap(),
+      'usuario': usuario.toMap(),
       'descricao': descricao,
       'status': status,
       'dataCriacao': dataCriacao.millisecondsSinceEpoch,
@@ -67,13 +71,13 @@ class Call {
   factory Call.fromMap(Map<String, dynamic> map) {
     return Call(
       id: map['id'] as String,
-      callType: map['callType'] as CallType,
-      usuario: map['usuario'] as String,
+      callType: CallType.fromMap(map['callType'] as Map<String,dynamic>),
+      usuario: UserInfoModel.fromMap(map['usuario'] as Map<String,dynamic>),
       descricao: map['descricao'] as String,
       status: map['status'] as String,
       dataCriacao: DateTime.fromMillisecondsSinceEpoch(map['dataCriacao'] as int),
       dataUltAtualizacao: DateTime.fromMillisecondsSinceEpoch(map['dataUltAtualizacao'] as int),
-      participantes: List<String>.from((map['participantes'] as List<String>),),
+      participantes: List<String>.from((map['participantes'] as List<String>)),
     );
   }
 
@@ -83,7 +87,7 @@ class Call {
 
   @override
   String toString() {
-    return 'Call(id: $id, callType: $callType, usuario: $usuario, descricao: $descricao, status: $status, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, participantes: $participantes)';
+    return 'Call(id: $id, usuario: $usuario, callType: $callType,  descricao: $descricao, status: $status, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, participantes: $participantes)';
   }
 
   @override
@@ -92,8 +96,8 @@ class Call {
   
     return 
       other.id == id &&
-      other.callType == callType &&
       other.usuario == usuario &&
+      other.callType == callType &&
       other.descricao == descricao &&
       other.status == status &&
       other.dataCriacao == dataCriacao &&
@@ -104,8 +108,8 @@ class Call {
   @override
   int get hashCode {
     return id.hashCode ^
-      callType.hashCode ^
       usuario.hashCode ^
+      callType.hashCode ^
       descricao.hashCode ^
       status.hashCode ^
       dataCriacao.hashCode ^

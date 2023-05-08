@@ -42,7 +42,7 @@ class _EditUserPage extends State<EditUserPage> {
     _emailEC = TextEditingController(text: usuarioLogado.email);
     _roleEC = TextEditingController(text: usuarioLogado.role);
     _habilitadoEC = TextEditingController(text: usuarioLogado.habilitado.toString());
-    logedUser = userSvc.getLogedUserInfo(context);
+    logedUser = userSvc.getLogedUserInfo();
     _isAdmin = logedUser.isAdmin();
     super.initState();
   }

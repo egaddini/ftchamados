@@ -22,7 +22,7 @@ class _UserDashboardPage extends State<UserDashboardPage> {
   List<UserInfoModel> clients = [];
 
   Future<void> _init() async {
-    clients = userSvc.getAllUsersInfo(context);
+    clients = userSvc.getAllUsersInfo();
   }
 
   @override
