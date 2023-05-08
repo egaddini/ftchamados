@@ -14,17 +14,10 @@ class UserServiceImpl implements UserService {
 
   @override
   UserInfoModel getLogedUserInfo(BuildContext context) {
-    return UserInfoModel(
-          id: 1,
-          email: 'eddergaddini@gmail.com',
-          nome: 'Edder',
-          sobrenome: 'Gaddini',
-          role: 'admin',
-          token: '289798897789',
-          habilitado: true,
-          dataCriacao: DateTime.now(),
-        );
+    return UserInfoModel(id: 1, email: 'eddergaddini@gmail.com', nome: 'Edder', sobrenome: 'Gaddini', role: 'admin', token: '289798897789', habilitado: true, dataCriacao: DateTime.now(),);
   }
+
+  
 
   @override
   List<UserInfoModel> getAllUsersInfo(BuildContext context) {

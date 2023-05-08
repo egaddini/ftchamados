@@ -31,19 +31,20 @@ DataRow recentFileDataRow(UserInfoModel user, BuildContext context) {
   return DataRow(
     onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => EditUserPage(user),),),
     cells: [
-      //DataCell(Text('${user.userType.sigla} ${user.id}')),
       DataCell(Text(user.id.toString())),
       DataCell(Text(user.email.toString())),
       DataCell(Text(user.nome.toString())),
       DataCell(Text(user.sobrenome.toString())),
       DataCell(Text(user.role.toString())),
       DataCell(
-          Checkbox(
+        IgnorePointer(
+          ignoring: true,
+          child: Checkbox(
             value: user.habilitado,
-            onChanged: (value) {
-            },
+            onChanged: null,
           ),
         ),
+      ),
       DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(user.dataCriacao!).toString())),
     ],
   );

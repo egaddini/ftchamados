@@ -61,19 +61,41 @@ class _MenuDrawerState extends State<MenuDrawer> {
               //Navegar para outra página
             },
           ),
+          ListTile(
+            title: const Text("Meus Chamados"),
+            leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, 'call');
+            },
+          ),          
           Visibility(
             visible: _isAdmin,
             child: ExpansionTile(
               title: const Text('Painel do Administrador'),
               leading: const Icon(Icons.admin_panel_settings_outlined),
               children: [
-                ListTile(
+                ExpansionTile(
+                  title: const Text('Chamados'),
                   leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
-                  title: const Text("Chamados"),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, 'call');
-                  },
+                  children: [                
+                    ListTile(
+                      title: const Text("Dashboard"),
+                      leading: const Icon(Icons.bar_chart_outlined),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, 'call');
+                      },
+                    ),
+                    ListTile(
+                      title: const Text("Nova Categoria"),
+                      leading: const Icon(Icons.note_add_outlined),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushNamed(context, 'call');
+                      },
+                    ),                    
+                  ],
                 ),
                 ListTile(
                   leading: const Icon(Icons.safety_divider),

@@ -107,6 +107,12 @@ class UserInfoModel {
       habilitado.hashCode ^
       dataCriacao.hashCode;
   }
+  
+  @override
+  bool isAdmin() {
+    return 'admin' == role;    
+  }
+
 }
 
 

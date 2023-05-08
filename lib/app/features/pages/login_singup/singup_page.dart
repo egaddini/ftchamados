@@ -104,7 +104,8 @@ class _SingupPageState extends State<SingupPage> {
                             validator: [
                               Validatorless.required('Confirmar senha obrigatória'),
                               Validatorless.min(6, 'Confirmar senha precisa ter no mínimo 6 caracteres'),
-                            ]),
+                            ]
+                          ),
                           const SizedBox(height: 10),
                           PasswordField(
                             labelText: 'Confirmar Senha',
@@ -113,7 +114,8 @@ class _SingupPageState extends State<SingupPage> {
                               Validatorless.required('Confirmar senha obrigatória'),
                               Validatorless.min(6, 'Confirmar senha precisa ter no mínimo 6 caracteres'),
                               Validators.compare(_passwordEC, 'Senhas não conferem'),
-                            ]),
+                            ]
+                          ),
                           const SizedBox(height: 15),
                           Row(
                             children: [

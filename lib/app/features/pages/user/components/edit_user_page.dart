@@ -1,13 +1,17 @@
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/shared_components/c_id_text_form_field.dart';
+import 'package:chamados/app/shared_components/c_password_field.dart';
 import 'package:chamados/app/shared_components/c_text_form_field.dart';
+import 'package:chamados/app/utils/services/user_service.dart';
+import 'package:chamados/app/utils/validators/validators.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
 
 class EditUserPage extends StatefulWidget {
   final UserInfoModel _client;
+  
   EditUserPage(this._client);
   @override
   State<StatefulWidget> createState() => _EditUserPage();
@@ -15,21 +19,31 @@ class EditUserPage extends StatefulWidget {
 
 class _EditUserPage extends State<EditUserPage> {
   
+  late UserInfoModel usuarioLogado;
   late TextEditingController _idEC;
   late TextEditingController _firstNameEC;
   late TextEditingController _lastNameEC;
   late TextEditingController _emailEC;
   late TextEditingController _roleEC;
+  late TextEditingController _habilitadoEC;
+  late UserInfoModel logedUser;
+  final _passwordEC = TextEditingController();
+  final _confirmPasswordEC = TextEditingController();
+
+  UserService userSvc = UserServiceImpl();
+  bool _isAdmin = false;
 
   @override
   void initState() {
-
-    UserInfoModel c = widget._client;
-    _idEC = TextEditingController(text: c.id.toString());
-    _firstNameEC = TextEditingController(text: c.nome);
-    _lastNameEC = TextEditingController(text: c.sobrenome);
-    _emailEC = TextEditingController(text: c.email);
-    _roleEC = TextEditingController(text: c.role);
+    usuarioLogado = widget._client;
+    _idEC = TextEditingController(text: usuarioLogado.id.toString());
+    _firstNameEC = TextEditingController(text: usuarioLogado.nome);
+    _lastNameEC = TextEditingController(text: usuarioLogado.sobrenome);
+    _emailEC = TextEditingController(text: usuarioLogado.email);
+    _roleEC = TextEditingController(text: usuarioLogado.role);
+    _habilitadoEC = TextEditingController(text: usuarioLogado.habilitado.toString());
+    logedUser = userSvc.getLogedUserInfo(context);
+    _isAdmin = logedUser.isAdmin();
     super.initState();
   }
 
@@ -48,10 +62,35 @@ class _EditUserPage extends State<EditUserPage> {
           child: ListView(
             children: [
               const SizedBox(height: 60),
-              CustomIDTextFormField(
-                controller: _idEC,
-                labelText: 'ID',
+              CircleAvatar(
+                backgroundColor: Pallete.gradient3,
+                maxRadius: 60,
+                child: Text(
+                  logedUser.email.toString().substring(0,2).toUpperCase(),
+                   style: const TextStyle(
+                      color: Pallete.whiteColor,
+                      fontSize: 35,
+                   ),
+                ),
               ),
+              const SizedBox(height: 15),
+              Visibility(
+                visible: _isAdmin,
+                child: CustomIDTextFormField(
+                  controller: _idEC,
+                  labelText: 'ID',
+                ),
+              ),
+              
+              const SizedBox(height: 10),
+              CustomTextFormField(
+                controller: _emailEC,
+                labelText: 'Email',
+                validator: [
+                  Validatorless.required('Email obrigatório'),
+                  Validatorless.email('Email invalido'),
+                ]
+              ),              
               const SizedBox(height: 10),
               CustomTextFormField(
                 controller: _firstNameEC,
@@ -69,29 +108,64 @@ class _EditUserPage extends State<EditUserPage> {
                 ]
               ),
               const SizedBox(height: 10),
-              CustomTextFormField(
-                controller: _emailEC,
-                labelText: 'Email',
-                validator: [
-                  Validatorless.required('Email obrigatório'),
-                  Validatorless.email('Email invalido'),
-                ]
+              Visibility(
+                visible: _isAdmin,
+                child: CustomTextFormField(
+                  controller: _roleEC,
+                  labelText: 'Cargo',
+                  validator: [
+                    Validatorless.required('Cargo obrigatório'),
+                  ]
+                ),
               ),
               const SizedBox(height: 10),
-              CustomTextFormField(
-                controller: _roleEC,
-                labelText: 'Cargo',
-                validator: [
-                  Validatorless.required('Cargo obrigatório'),
-                ]
+              Row(
+                children: [
+                  Checkbox(
+                    value: usuarioLogado.habilitado,
+                    onChanged: (value) {
+                      setState(() {
+                        usuarioLogado.habilitado = value;
+                      });
+                    },
+                  ),
+                  const Expanded(
+                    child: Text(
+                      'Usuário Habilitado',
+                      style: TextStyle(
+                        fontSize: 16
+                      ),
+                    )
+                  ),
+                ],
               ),
+
+              const SizedBox(height: 10),
+              ExpansionTile(
+                title: const Text('Alterar Senhas'),
+                textColor: Pallete.gradient3,
+                children: [
+                  PasswordField(
+                    labelText: "Senha",
+                    controller: _passwordEC,
+                    validator: [
+                      Validatorless.required('Confirmar senha obrigatória'),
+                      Validatorless.min(6, 'Confirmar senha precisa ter no mínimo 6 caracteres'),
+                    ]
+                  ),
+                  const SizedBox(height: 10),
+                  PasswordField(
+                    labelText: 'Confirmar Senha',
+                    controller: _confirmPasswordEC,
+                    validator: [
+                      Validatorless.required('Confirmar senha obrigatória'),
+                      Validatorless.min(6, 'Confirmar senha precisa ter no mínimo 6 caracteres'),
+                      Validators.compare(_passwordEC, 'Senhas não conferem'),
+                    ]
+                  ),
+                ],
+              ),            
               const SizedBox(height: 15),
-              /*ElevatedButton(
-                  onPressed: () {
-                    Navigator.pop(context, UserInfoModel());
-                  },
-                  child: const Text("Salvar Contato")
-              ),*/
               Column(                           
                 children: [
                   ElevatedButton(
