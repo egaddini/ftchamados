@@ -57,11 +57,12 @@ class _EditUserPage extends State<EditUserPage> {
         backgroundColor: Pallete.gradient3,
       ),
       body: Center(
-        child: SizedBox(
-          width: 400,
+        child: Container(
+          padding: const EdgeInsets.all(8.0),
+          //width: 400,
           child: ListView(
             children: [
-              const SizedBox(height: 60),
+              const SizedBox(height: 30),
               CircleAvatar(
                 backgroundColor: Pallete.gradient3,
                 maxRadius: 60,
@@ -145,6 +146,7 @@ class _EditUserPage extends State<EditUserPage> {
                 title: const Text('Alterar Senhas'),
                 textColor: Pallete.gradient3,
                 children: [
+                  const SizedBox(height: 4,),
                   PasswordField(
                     labelText: "Senha",
                     controller: _passwordEC,

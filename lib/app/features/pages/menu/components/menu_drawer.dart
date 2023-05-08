@@ -92,7 +92,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       leading: const Icon(Icons.note_add_outlined),
                       onTap: () {
                         Navigator.pop(context);
-                        Navigator.pushNamed(context, 'call');
+                        Navigator.pushNamed(context, 'call-type');
                       },
                     ),                    
                   ],
@@ -113,8 +113,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
             title: const Text("Logout"),
             onTap: () {
               //_authRepo.logout();
-              Navigator.pop(context);
-              Navigator.pushNamed(context, 'login');
+              Navigator.popAndPushNamed(context, 'login');
             },
           ),
         ],

@@ -12,8 +12,8 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        title: const Center(
-          child: Text("Usuários")
+        title: Center(
+          child: Text(text!),
         ),
         backgroundColor: Pallete.gradient3,
       );
