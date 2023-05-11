@@ -29,7 +29,7 @@ class _EditUserPage extends State<EditUserPage> {
   late UserInfoModel logedUser;
   final _passwordEC = TextEditingController();
   final _confirmPasswordEC = TextEditingController();
-
+  final _senhaAtualEC = TextEditingController();
   UserService userSvc = UserServiceImpl();
   bool _isAdmin = false;
 
@@ -146,23 +146,32 @@ class _EditUserPage extends State<EditUserPage> {
                 title: const Text('Alterar Senhas'),
                 textColor: Pallete.gradient3,
                 children: [
-                  const SizedBox(height: 4,),
+                  const SizedBox(height: 4),
                   PasswordField(
-                    labelText: "Senha",
+                    labelText: "Senha Atual",
+                    controller: _senhaAtualEC,
+                    validator: [
+                      Validatorless.required('É obrigatório inserir a Senha Atual'),
+                      Validatorless.min(6, 'Senha Atual precisa ter no mínimo 6 caracteres'),
+                    ]
+                  ),                  
+                  const SizedBox(height: 10),
+                  PasswordField(
+                    labelText: "Nova Senha",
                     controller: _passwordEC,
                     validator: [
-                      Validatorless.required('Confirmar senha obrigatória'),
-                      Validatorless.min(6, 'Confirmar senha precisa ter no mínimo 6 caracteres'),
+                      Validatorless.required('A Nova Senha é obrigatória'),
+                      Validatorless.min(6, 'A Nova Senha precisa ter no mínimo 6 caracteres'),
                     ]
                   ),
                   const SizedBox(height: 10),
                   PasswordField(
-                    labelText: 'Confirmar Senha',
+                    labelText: 'Confirmar Nova Senha',
                     controller: _confirmPasswordEC,
                     validator: [
-                      Validatorless.required('Confirmar senha obrigatória'),
-                      Validatorless.min(6, 'Confirmar senha precisa ter no mínimo 6 caracteres'),
-                      Validators.compare(_passwordEC, 'Senhas não conferem'),
+                      Validatorless.required('Confirmar nova Senha obrigatória'),
+                      Validatorless.min(6, 'Confirmar Senha precisa ter no mínimo 6 caracteres'),
+                      Validators.compare(_passwordEC, 'As Senhas não conferem'),
                     ]
                   ),
                 ],
