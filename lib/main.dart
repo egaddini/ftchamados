@@ -5,6 +5,7 @@ import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get.dart';
 
 import 'app/config/routes/app_pages.dart';
+import 'app/config/themes/theme_constants.dart';
 
 void main() {
   setUrlStrategy(PathUrlStrategy());
@@ -18,7 +19,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Chamados',
-      theme: ThemeData(primarySwatch: Colors.blue,),
+      theme: darkTheme,
+      darkTheme: lightTheme,
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
       debugShowCheckedModeBanner: false,
