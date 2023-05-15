@@ -50,7 +50,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(text: 'Dashbord Usuários'),
+        appBar: CustomAppBar(text: 'Usuários'),
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
