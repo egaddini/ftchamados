@@ -4,9 +4,12 @@ import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/shared_components/c_appbar.dart';
+import 'package:chamados/app/shared_components/c_text_form_field.dart';
+import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:validatorless/validatorless.dart';
 
 part '../components/row_source.dart';
 
@@ -54,97 +57,126 @@ class _CallTypeDashboardScreenState extends State<CallTypeDashboardScreen> {
               color: Theme.of(context).canvasColor,
               borderRadius: const BorderRadius.all(Radius.circular(10)),
             ),
-            child: SizedBox(
-              width: double.infinity,
-              child: Theme(
-                data: ThemeData.light().copyWith(cardColor: Theme.of(context).canvasColor, ),
-                child: PaginatedDataTable(
-                  sortColumnIndex: 0,
-                  sortAscending: sort,
-                  header: TextField(
-                    controller: controller,
-                    decoration: const InputDecoration(
-                      labelText: 'Buscar por Titulo',
-                      contentPadding: EdgeInsets.all(23),                     
-                      border: OutlineInputBorder(),                      
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Pallete.gradient3,
+            child: Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: Theme(
+                    data: ThemeData.light().copyWith(cardColor: Theme.of(context).canvasColor, ),
+                    child: PaginatedDataTable(
+                      sortColumnIndex: 0,
+                      sortAscending: sort,
+                      header: TextField(
+                        controller: controller,
+                        decoration: const InputDecoration(
+                          labelText: 'Buscar por Titulo',
+                          contentPadding: EdgeInsets.all(23),                     
+                          border: OutlineInputBorder(),                      
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(
+                              color: Pallete.gradient3,
+                            ),
+                          ),
+                          labelStyle: TextStyle(
+                            color: Pallete.backgroundColor
+                          ),                                                    
                         ),
+                        onChanged: (value) {
+                          setState(() {
+                            myData = filterData!.where((element) => element.titulo.toString().contains(value)).toList();
+                          });
+                        },
                       ),
-                      labelStyle: TextStyle(
-                        color: Pallete.backgroundColor
-                      ),                                                    
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        myData = filterData!.where((element) => element.titulo.toString().contains(value)).toList();
-                      });
-                    },
-                  ),
-                  source: RowSource(
-                    context: context,
-                    myData: myData,
-                    count: myData?.length,
-                  ),
+                      source: RowSource(
+                        context: context,
+                        myData: myData,
+                        count: myData?.length,
+                      ),
         
-                  checkboxHorizontalMargin: 10,
-                  rowsPerPage: 10,
-                  columnSpacing: 6,
-                  showCheckboxColumn: false,
-                  columns: [
-                    const DataColumn(
-                      label: Text(
-                        "ID",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
+                      checkboxHorizontalMargin: 10,
+                      rowsPerPage: 10,
+                      columnSpacing: 6,
+                      showCheckboxColumn: false,
+                      columns: [
+                        const DataColumn(
+                          label: Text(
+                            "ID",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14),
+                          ),
+                        ),
+                        const DataColumn(
+                          label: Text(
+                            "Sigla",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14),
+                          ),
+                        ),                        
+                        DataColumn(
+                          label: const Text(
+                            "Setor",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14
+                            ),
+                          ),
+                          onSort: (columnIndex, ascending) {
+                            setState(() {
+                              sort = !sort;
+                            });
+                            onsortColum(columnIndex, ascending);
+                          }
+                        ),
+                        const DataColumn(
+                          label: Text(
+                            "Titulo",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14),
+                          ),
+                        ),
+                        const DataColumn(
+                          label: Text(
+                            "Prioridade",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14),
+                          ),
+                        ),
+                        const DataColumn(
+                          label: Text(
+                            "Descrição",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14),
+                          ),
+                        ),
+                        const DataColumn(
+                          label: Text(
+                            "",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w600, fontSize: 14),
+                          ),
+                        ),                        
+                      ],
                     ),
-                    const DataColumn(
-                      label: Text(
-                        "Sigla",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),                        
-                    DataColumn(
-                      label: const Text(
-                        "Setor",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14
+                  )
+                ),
+                addVerticalSpace(10),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () {
+                            addCallType(context);
+                            // widget.call.descricao = _tituloC.text;
+                            // Navigator.pop(context, widget.call);
+                          },
+                          child: const Text('Cadastrar Tipo de Chamado'),
                         ),
                       ),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          sort = !sort;
-                        });
-                        onsortColum(columnIndex, ascending);
-                      }
-                    ),
-                    const DataColumn(
-                      label: Text(
-                        "Titulo",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),
-                    const DataColumn(
-                      label: Text(
-                        "Prioridade",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),
-                    const DataColumn(
-                      label: Text(
-                        "Descrição",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),                        
-                  ],
-                ),
-              )
+                    ],
+                  ),
+                )
+              ],
             ),
           ),
         ));

@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen>  {
               child: SizedBox(
                 child: Column(
                   children: [
-                    const SizedBox(height: 70),
+                    const SizedBox(height: 80),
                     const Text(
                         'Como podemos ajudar?',
                         style: TextStyle(
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                         fontSize: 45,
                       ),
                     ),
-                    const SizedBox(height: 20),
+                    const SizedBox(height: 40),
                     SizedBox(
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),

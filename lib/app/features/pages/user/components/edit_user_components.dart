@@ -1,11 +1,10 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of edit_user_page;
 
 class EditUserPageBody extends StatefulWidget {
   
   final UserInfoModel _client;
 
-  const EditUserPageBody(this._client);
+  const EditUserPageBody(this._client, {super.key});
 
   @override
   State<EditUserPageBody> createState() => _EditUserPageBodyState();
@@ -20,13 +19,12 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
   late TextEditingController _lastNameEC;
   late TextEditingController _emailEC;
   late TextEditingController _roleEC;
-  late TextEditingController _habilitadoEC;
   late UserInfoModel logedUser;
   final _passwordEC = TextEditingController();
   final _confirmPasswordEC = TextEditingController();
   final _senhaAtualEC = TextEditingController();
   UserService userSvc = UserServiceImpl();
-  bool _isAdmin = false;
+  bool _isAdmin = true;
 
     @override
     void initState() {
@@ -36,7 +34,6 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
       _lastNameEC = TextEditingController(text: usuarioLogado.sobrenome);
       _emailEC = TextEditingController(text: usuarioLogado.email);
       _roleEC = TextEditingController(text: usuarioLogado.role);
-      _habilitadoEC = TextEditingController(text: usuarioLogado.habilitado.toString());
       logedUser = userSvc.getLogedUserInfo();
       _isAdmin = logedUser.isAdmin();
       super.initState();
@@ -48,7 +45,7 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
     return ListView(
       padding: const EdgeInsets.all(8.0),
       children: [
-        addVerticalSpace(30),
+        addVerticalSpace(15),
         AvatarField(text: logedUser.email.toString().substring(0,2).toUpperCase(),),
         addVerticalSpace(15),
         Visibility(
@@ -132,7 +129,6 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
           ],
         ),            
         addVerticalSpace(15),
-
         SizedBox(
           child: ElevatedButton(
             child: const Text(
@@ -183,14 +179,23 @@ class IDField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-              child: TextFormField(
-                controller: text,
-                enabled: false,
-                decoration: const InputDecoration(
-                  labelText: 'ID',
-                ),
-              ),
+    return TextFormField(
+      controller: text,
+      enabled: false,
+      decoration: const InputDecoration(
+        labelText: 'ID',
+        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 23),
+        labelStyle: TextStyle(
+          color: Pallete.backgroundColor
+        ),
+        border: OutlineInputBorder(),
+        focusedBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: Pallete.gradient3,
+            width: 2,
+          ),
+        ),        
+      ),
     );
   }
 }
