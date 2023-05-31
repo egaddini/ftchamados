@@ -89,6 +89,7 @@ void removeCallType(BuildContext context, CallType call) {
 }
 
 void addCallType(BuildContext context) {
+
   TextEditingController _sigla = TextEditingController();
   TextEditingController _setor = TextEditingController();
   TextEditingController _titulo = TextEditingController();
@@ -108,7 +109,7 @@ void addCallType(BuildContext context) {
               controller: _sigla,
               labelText: 'Sigla',
               validator: [
-                Validatorless.required('Nome Obrigatório'),
+                Validatorless.required('Sigla Obrigatório'),
               ]
             ),          
             addVerticalSpace(10),
@@ -116,7 +117,7 @@ void addCallType(BuildContext context) {
               controller: _setor,
               labelText: 'Setor',
               validator: [
-                Validatorless.required('Nome Obrigatório'),
+                Validatorless.required('Setor Obrigatório'),
               ]
             ),          
             addVerticalSpace(10),         
@@ -124,7 +125,7 @@ void addCallType(BuildContext context) {
               controller: _titulo,
               labelText: 'Titulo',
               validator: [
-                Validatorless.required('Nome Obrigatório'),
+                Validatorless.required('Titulo Obrigatório'),
               ]
             ),          
             addVerticalSpace(10),
@@ -132,7 +133,7 @@ void addCallType(BuildContext context) {
               controller: _prioridade,
               labelText: 'Prioridade',
               validator: [
-                Validatorless.required('Nome Obrigatório'),
+                Validatorless.required('Prioridade Obrigatório'),
               ]
             ),          
             addVerticalSpace(10),        
@@ -140,7 +141,7 @@ void addCallType(BuildContext context) {
               controller: _descricao,
               labelText: 'Descrição',
               validator: [
-                Validatorless.required('Nome Obrigatório'),
+                Validatorless.required('Descrição Obrigatório'),
               ]
             ), 
           ],
@@ -150,7 +151,6 @@ void addCallType(BuildContext context) {
         Center(
           child: TextButton(
             onPressed: () {      
-              
               Navigator.pop(context);
             },
             child: const Icon(Icons.add, color: Colors.green), 

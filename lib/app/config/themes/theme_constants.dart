@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
   
-  brightness: Brightness.light,
+  useMaterial3: true,
+
+  /*brightness: Brightness.light,
   primaryColor: Pallete.gradient3,
 
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -27,14 +29,21 @@ ThemeData lightTheme = ThemeData(
     filled: true,
     fillColor: Colors.white,
   )
+*/
 
+  appBarTheme: AppBarTheme(
+    backgroundColor: Pallete.gradient3,
+    foregroundColor: Colors.white,
+  ),
   
 );
 
 ThemeData darkTheme = ThemeData(
 
-    brightness: Brightness.dark,
+    useMaterial3: true,
     
+    brightness: Brightness.dark,
+   /* 
     switchTheme: SwitchThemeData(
       trackColor: MaterialStateProperty.all<Color>(Colors.grey),
       thumbColor: MaterialStateProperty.all<Color>(Colors.white),
@@ -61,9 +70,9 @@ ThemeData darkTheme = ThemeData(
         overlayColor: MaterialStateProperty.all<Color>(Colors.black26)
       )
   ),
-
+  */
   appBarTheme: AppBarTheme(
-    backgroundColor: Colors.black, 
+    backgroundColor: Pallete.gradient3, 
   ),
 
 );

@@ -17,7 +17,7 @@ class CustomExpandedTextField extends StatelessWidget {
     return Expanded(
       child: TextField(
         controller: controller,
-        enabled: false,
+        readOnly: true,
         maxLines: maxLines,
         decoration: InputDecoration(
           labelText: labelText,

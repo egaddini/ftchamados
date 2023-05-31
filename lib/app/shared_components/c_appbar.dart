@@ -15,7 +15,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         title: Center(
           child: Text(text!),
         ),
-        backgroundColor: Pallete.gradient3,
+       // backgroundColor: Pallete.gradient3,
       );
   }
 
