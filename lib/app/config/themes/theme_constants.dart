@@ -6,6 +6,20 @@ ThemeData lightTheme = ThemeData(
   
   useMaterial3: true,
 
+  inputDecorationTheme: const InputDecorationTheme(
+    contentPadding:  EdgeInsets.all(23),
+    labelStyle:  TextStyle(
+      color: Pallete.backgroundColor
+    ),
+    border:  OutlineInputBorder(),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(
+        color: Pallete.gradient3,
+        width: 2,
+      ),
+    ),    
+  ),
+
   /*brightness: Brightness.light,
   primaryColor: Pallete.gradient3,
 
@@ -31,10 +45,11 @@ ThemeData lightTheme = ThemeData(
   )
 */
 
-  appBarTheme: AppBarTheme(
+  appBarTheme: const AppBarTheme(
     backgroundColor: Pallete.gradient3,
     foregroundColor: Colors.white,
   ),
+
   
 );
 
