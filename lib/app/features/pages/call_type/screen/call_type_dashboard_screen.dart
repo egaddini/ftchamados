@@ -164,11 +164,9 @@ class _CallTypeDashboardScreenState extends State<CallTypeDashboardScreen> {
                   child: Row(
                     children: [
                       Expanded(
-                        child: ElevatedButton(
+                        child: FilledButton(
                           onPressed: () {
                             addCallType(context);
-                            // widget.call.descricao = _tituloC.text;
-                            // Navigator.pop(context, widget.call);
                           },
                           child: const Text('Cadastrar Tipo de Chamado'),
                         ),

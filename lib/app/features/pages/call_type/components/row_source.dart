@@ -89,74 +89,132 @@ void removeCallType(BuildContext context, CallType call) {
 }
 
 void addCallType(BuildContext context) {
-
-  TextEditingController _sigla = TextEditingController();
-  TextEditingController _setor = TextEditingController();
-  TextEditingController _titulo = TextEditingController();
-  TextEditingController _prioridade = TextEditingController();
-  TextEditingController _descricao = TextEditingController();
-    // ProdutoService prodSvc = ProdutoServiceImpl();
   showDialog(
     context: context,
-    builder: (_) => AlertDialog(
-      title: const Center(child: Text("Novo Tipo de Chamado", style: TextStyle(fontWeight: FontWeight.bold),)),
+    builder: (_) => const AlertDialog(
+      title: Center(child: Text("Novo Tipo de Chamado", style: TextStyle(fontWeight: FontWeight.bold),)),
       content: SizedBox(
-        height: 350,
+        height: 390,
         width: 350,
+        child: SaveCallType(),
+      ),
+    )
+  );
+}
+
+
+class SaveCallType extends StatefulWidget {
+  const SaveCallType({super.key});
+
+  @override
+  State<SaveCallType> createState() => _SaveCallTypeState();
+}
+
+class _SaveCallTypeState extends State<SaveCallType> {
+
+  final _formKey = GlobalKey<FormState>();
+
+  TextEditingController _siglaController = TextEditingController();
+  TextEditingController _setorController = TextEditingController();
+  TextEditingController _tituloController = TextEditingController();
+  TextEditingController _prioridadeController = TextEditingController();
+  TextEditingController _descricaoController = TextEditingController();
+
+  @override
+  void dispose() {
+
+    super.dispose();
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Form(
+        key: _formKey,
         child: Column(
           children: [
-            CustomTextFormField(
-              controller: _sigla,
-              labelText: 'Sigla',
-              validator: [
-                Validatorless.required('Sigla Obrigatório'),
-              ]
-            ),          
+            addVerticalSpace(5),
+            TextFormField(
+              controller: _siglaController,
+              decoration: const InputDecoration(
+                labelText: 'Sigla',
+              ),
+              validator: Validatorless.required('Sigla Obrigatório'), 
+            ),         
             addVerticalSpace(10),
-            CustomTextFormField(
-              controller: _setor,
-              labelText: 'Setor',
-              validator: [
-                Validatorless.required('Setor Obrigatório'),
-              ]
-            ),          
-            addVerticalSpace(10),         
-            CustomTextFormField(
-              controller: _titulo,
-              labelText: 'Titulo',
-              validator: [
-                Validatorless.required('Titulo Obrigatório'),
-              ]
-            ),          
+            TextFormField(
+              controller: _setorController,
+              decoration: const InputDecoration(
+                labelText: 'Setor',
+              ),
+              validator: Validatorless.required('Setor Obrigatório'), 
+            ),         
             addVerticalSpace(10),
-            CustomTextFormField(
-              controller: _prioridade,
-              labelText: 'Prioridade',
-              validator: [
-                Validatorless.required('Prioridade Obrigatório'),
-              ]
-            ),          
-            addVerticalSpace(10),        
-            CustomTextFormField(
-              controller: _descricao,
-              labelText: 'Descrição',
-              validator: [
-                Validatorless.required('Descrição Obrigatório'),
-              ]
-            ), 
+            TextFormField(
+              controller: _tituloController,
+              decoration: const InputDecoration(
+                labelText: 'Titulo',
+              ),
+              validator: Validatorless.required('Titulo Obrigatório'), 
+            ),         
+            addVerticalSpace(10),
+            TextFormField(
+              controller: _prioridadeController,
+              decoration: const InputDecoration(
+                labelText: 'Prioridade',
+              ),
+              validator: Validatorless.required('Prioridade Obrigatório'), 
+            ),         
+            addVerticalSpace(10),
+            TextFormField(
+              controller: _descricaoController,
+              decoration: const InputDecoration(
+                labelText: 'Descrição',
+              ),
+              validator: Validatorless.required('Descrição Obrigatório'), 
+            ),         
+            addVerticalSpace(10),
+            Center(
+              child: TextButton(
+                child: const Icon(Icons.add, color: Colors.green), 
+                onPressed: () async {     
+                  var formValid = _formKey.currentState?.validate() ?? false;
+                  if (formValid) {
+                    setState(() {
+                    });
+                    CallType(id: null, 
+                      sigla: _siglaController.text,
+                      setor: _setorController.text, 
+                      titulo: _tituloController.text, 
+                      prioridade: _prioridadeController.text, 
+                      descricao: _descricaoController.text,
+                    );
+                    UserService userService = UserServiceImpl();
+                    userService.addCallType(                    CallType(id: null, 
+                      sigla: _siglaController.text,
+                      setor: _setorController.text, 
+                      titulo: _tituloController.text, 
+                      prioridade: _prioridadeController.text, 
+                      descricao: _descricaoController.text,
+                    ));                     
+                    String? response = 'asd'; //await authRepository.authenticate(loginModel!);
+                    if (response != null) {
+                      Navigator.pop(context);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('As credenciais informadas não batem. Tente novamente.'),
+                          backgroundColor: Pallete.gradient3,
+                        ),
+                      );
+                    }
+                  }
+                },
+              ),
+            ),                   
           ],
         ),
       ),
-      actions: [
-        Center(
-          child: TextButton(
-            onPressed: () {      
-              Navigator.pop(context);
-            },
-            child: const Icon(Icons.add, color: Colors.green), 
-          ),
-        ),
-      ],
-    )
-  );
+    );
+  }
 }

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/models/user_info_model.dart';
@@ -8,6 +10,7 @@ abstract class UserService {
   List<UserInfoModel> getAllUsersInfo();
   List<CallType> getAllCallTypes();
   List<Call> getCalls();
+  Future<void> addCallType(CallType newCall);
 }
 
 class UserServiceImpl implements UserService {
@@ -52,7 +55,20 @@ class UserServiceImpl implements UserService {
   }
 
   @override
-  List<CallType> getAllCallTypes() { return [getCallType1(), getCallType2(), getCallType3(), getCallType4(), getCallType5(), getCallType6(), ]; }
+  List<CallType> getAllCallTypes() {
+      if(call.isEmpty) {
+        call.addAll([getCallType1(), getCallType2(), getCallType3(), getCallType4(), getCallType5(), getCallType6(), ]);
+      }
+      return call;
+     }
+
+  List<CallType> call = [];
+
+  @override
+  Future<void> addCallType(CallType newCall) async {
+    call.add(newCall);
+    print(newCall.descricao);
+  }
 
   CallType getCallType1() {
     return CallType(id: 1, sigla: 'TEC', setor: 'Tecnologia', titulo: 'Formatar computador', prioridade: 'URGENTE', descricao: 'Para caso seu computador tenha problemas ou esteja com virus.');

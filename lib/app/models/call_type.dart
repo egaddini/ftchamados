@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class CallType {
 
-  int id;
+  int? id;
   String sigla;
   String setor;
   String titulo;
@@ -11,7 +11,7 @@ class CallType {
   String descricao;
 
   CallType({
-    required this.id,
+    this.id,
     required this.sigla,
     required this.setor,
     required this.titulo,
