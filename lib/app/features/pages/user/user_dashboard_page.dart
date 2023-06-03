@@ -111,33 +111,34 @@ class _UserDashboardPage extends State<UserDashboardPage> {
 
   removeClient(BuildContext context, UserInfoModel client) {
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              title: const Text("Deletar Cliente"),
-              content: Text("O usuário: ${client.nome ?? "?"} será deletado para sempre, deseja realmente continuar?"),
-              actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text(
-                    "Voltar",
-                    style: TextStyle(color: Colors.blue),
-                  ),
-                ),
-                TextButton(
-                  onPressed: () {
-                    setState(() {
-                      clients.remove(client);
-                      Navigator.pop(context);
-                    });
-                  },
-                  child: const Text(
-                    "Deletar",
-                    style: TextStyle(color: Colors.red),
-                  ),
-                ),
-              ],
-            ));
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text("Deletar Cliente"),
+        content: Text("O usuário: ${client.nome ?? "?"} será deletado para sempre, deseja realmente continuar?"),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text(
+              "Voltar",
+              style: TextStyle(color: Colors.blue),
+            ),
+          ),
+          TextButton(
+            onPressed: () {
+              setState(() {
+                clients.remove(client);
+                Navigator.pop(context);
+              });
+            },
+            child: const Text(
+              "Deletar",
+              style: TextStyle(color: Colors.red),
+            ),
+          ),
+        ],
+      )
+    );
   }
 }
