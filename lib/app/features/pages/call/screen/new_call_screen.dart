@@ -1,29 +1,26 @@
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/call_type.dart';
+import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 
-class CreateCallPage extends StatefulWidget {
+class NewCallScreen extends StatefulWidget {
   final CallType call;
 
-  CreateCallPage(this.call);
+  const NewCallScreen(this.call, {super.key});
 
   @override
-  _CreateCallPageState createState() => _CreateCallPageState();
+  State<NewCallScreen> createState() => _NewCallScreenState();
 }
 
-class _CreateCallPageState extends State<CreateCallPage> {
+class _NewCallScreenState extends State<NewCallScreen> {
 
   final UserService userService = UserServiceImpl();
-  late TextEditingController _tituloC;
-  late TextEditingController _siglaC;
-  late TextEditingController _setorC;
-  late TextEditingController _prioridadeC;
-  late TextEditingController _descricaoC;
+  late CallType _callType;
+  late String _emailUsuario;
   late TextEditingController _descreverProblemaC;
-  late TextEditingController _usuarioSolicitanteC;
   final TextEditingController _dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now()));
   //late TextEditingController _usuarioSolicitanteC;
   //late TextEditingController _descreverProblemaC;
@@ -31,82 +28,74 @@ class _CreateCallPageState extends State<CreateCallPage> {
   @override
   void initState() {
     super.initState();
-    _tituloC = TextEditingController(text: widget.call.titulo);
-    _siglaC = TextEditingController(text: widget.call.sigla);
-    _setorC = TextEditingController(text: widget.call.setor);
-    _prioridadeC = TextEditingController(text: widget.call.prioridade);
-    _descricaoC = TextEditingController(text: widget.call.descricao);
-    _usuarioSolicitanteC = TextEditingController(text: userService.getLogedUserInfo().email.toString());
+    _callType =  widget.call;
+    _emailUsuario = userService.getLogedUserInfo().email.toString();
     _descreverProblemaC = TextEditingController(text: '');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Novo chamado - ${_siglaC.text} ${_tituloC.text}')),
+      appBar: AppBar(title: Text('Novo chamado - ${_callType.sigla} ${_callType.titulo}')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(18),
         child: Column(
           children: [
-            const SizedBox(height: 10),
+            addVerticalSpace(10),
             Row(
               children: [
                 Expanded(
                   child: TextField(
-                    controller: _setorC,
                     readOnly: true,
+                    controller: TextEditingController(text: _callType.setor),
                     decoration: const InputDecoration(
                       labelText: 'Setor',
-                      border: OutlineInputBorder(),
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                addHorizontalSpace(10),
                 Expanded(
                   child: TextField(
-                    controller: _tituloC,
                     readOnly: true,
+                    controller: TextEditingController(text: _callType.titulo),
                     decoration: const InputDecoration(
                       labelText: 'Titulo',
-                      border: OutlineInputBorder(),
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                addHorizontalSpace(10),
                 Expanded(
                   child: TextField(
-                    controller: _prioridadeC,
                     readOnly: true,
+                    controller: TextEditingController(text: _callType.prioridade),
                     decoration: const InputDecoration(
                       labelText: 'Prioridade',
-                      border: OutlineInputBorder(),
                     ),
                   ),
                 ),                
               ],
             ),
-            const SizedBox(height: 10),
+            addVerticalSpace(10),
             Row(
               children: [
                 Expanded(
                   child: TextField(
-                    controller: _descricaoC,
                     readOnly: true,
-                    decoration: const InputDecoration(
+                    controller: TextEditingController(text: _callType.descricao),                    
+                    decoration:const InputDecoration(
                       labelText: 'Descrição do chamado',
-                      border: OutlineInputBorder(),
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            addHorizontalSpace(10),
             const Row(
               children: [
                 Expanded(child:Divider(),),
               ],
             ),
-            const SizedBox(height: 10),
+            addHorizontalSpace(10),
             Row(
               children: [ 
                 Expanded(
@@ -115,24 +104,22 @@ class _CreateCallPageState extends State<CreateCallPage> {
                     controller: _dataAberturaC,
                     decoration: const InputDecoration(
                       labelText: 'Data de abertura da solicitação',
-                      border: OutlineInputBorder(),
                     ),
                   ),
                 ),
-                const SizedBox(width: 10),
+                addHorizontalSpace(10),
                 Expanded(
                   child: TextField(
                     readOnly: true,
-                    controller: _usuarioSolicitanteC,
+                    controller: TextEditingController(text: _emailUsuario),                    
                     decoration: const InputDecoration(
                       labelText: 'Usuário solicitante',
-                      border: OutlineInputBorder(),
                     ),
                   ),
                 ),                
               ],
             ),
-            const SizedBox(height: 10),
+            addVerticalSpace(10),
             Row(
               children: [
                 Expanded(
@@ -140,24 +127,13 @@ class _CreateCallPageState extends State<CreateCallPage> {
                     controller: _descreverProblemaC,
                     maxLines: 10,
                     decoration: const  InputDecoration(
-                      contentPadding: EdgeInsets.all(23),
                       labelText: 'Descreva o problema',
-                      labelStyle: TextStyle(
-                        color: Pallete.backgroundColor
-                      ),
-                      border: OutlineInputBorder(),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Pallete.gradient3,
-                          width: 2,
-                        ),
-                      ),
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
+            addVerticalSpace(10),
             FilledButton(
               child: const Text(
                 'Registrar chamado',

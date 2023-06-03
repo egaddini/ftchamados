@@ -1,7 +1,7 @@
 library home_screen;
 
 import 'package:chamados/app/constans/pallete.dart';
-import 'package:chamados/app/features/pages/call/components/create_call_page.dart';
+import 'package:chamados/app/features/pages/call/screen/new_call_screen.dart';
 import 'package:chamados/app/features/pages/user/components/edit_user_page.dart';
 import 'package:chamados/app/features/pages/user/message_response.dart';
 import 'package:chamados/app/models/call_type.dart';
@@ -96,7 +96,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                             var updatedItem = await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => CreateCallPage(call),
+                                builder: (_) => NewCallScreen(call),
                               ),
                             );
                             if (updatedItem != null) {
