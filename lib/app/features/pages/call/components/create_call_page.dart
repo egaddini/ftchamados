@@ -54,7 +54,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
                 Expanded(
                   child: TextField(
                     controller: _setorC,
-                    enabled: false,
+                    readOnly: true,
                     decoration: const InputDecoration(
                       labelText: 'Setor',
                       border: OutlineInputBorder(),
@@ -65,7 +65,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
                 Expanded(
                   child: TextField(
                     controller: _tituloC,
-                    enabled: false,
+                    readOnly: true,
                     decoration: const InputDecoration(
                       labelText: 'Titulo',
                       border: OutlineInputBorder(),
@@ -76,7 +76,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
                 Expanded(
                   child: TextField(
                     controller: _prioridadeC,
-                    enabled: false,
+                    readOnly: true,
                     decoration: const InputDecoration(
                       labelText: 'Prioridade',
                       border: OutlineInputBorder(),
@@ -91,7 +91,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
                 Expanded(
                   child: TextField(
                     controller: _descricaoC,
-                    enabled: false,
+                    readOnly: true,
                     decoration: const InputDecoration(
                       labelText: 'Descrição do chamado',
                       border: OutlineInputBorder(),
@@ -101,8 +101,8 @@ class _CreateCallPageState extends State<CreateCallPage> {
               ],
             ),
             const SizedBox(height: 10),
-            Row(
-              children: const [
+            const Row(
+              children: [
                 Expanded(child:Divider(),),
               ],
             ),
@@ -111,7 +111,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
               children: [ 
                 Expanded(
                   child: TextField(
-                    enabled: false,
+                    readOnly: true,
                     controller: _dataAberturaC,
                     decoration: const InputDecoration(
                       labelText: 'Data de abertura da solicitação',
@@ -122,7 +122,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
                 const SizedBox(width: 10),
                 Expanded(
                   child: TextField(
-                    enabled: false,
+                    readOnly: true,
                     controller: _usuarioSolicitanteC,
                     decoration: const InputDecoration(
                       labelText: 'Usuário solicitante',
