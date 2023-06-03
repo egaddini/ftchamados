@@ -20,6 +20,29 @@ ThemeData lightTheme = ThemeData(
     ),    
   ),
 
+
+  filledButtonTheme: FilledButtonThemeData(
+    style: ButtonStyle(
+      padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(23)), 
+      backgroundColor: MaterialStateProperty.all<Color>(Pallete.gradient3), 
+      minimumSize: MaterialStateProperty.all<Size>(
+        const Size.fromHeight(65),
+      ),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+         borderRadius: BorderRadius.circular(4),
+        ),
+      ),
+      textStyle: MaterialStateProperty.all<TextStyle>(
+        const TextStyle(fontSize:16),
+      ),
+    ),
+  ),
+
+  checkboxTheme: CheckboxThemeData(
+    fillColor: MaterialStateProperty.all<Color>(Pallete.gradient3),  
+  ),
+
   /*brightness: Brightness.light,
   primaryColor: Pallete.gradient3,
 

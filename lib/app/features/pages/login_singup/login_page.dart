@@ -74,18 +74,9 @@ class _LoginPage extends State<LoginPage> {
                           const SizedBox(height: 20),
                           Column(                           
                             children: [
-                              ElevatedButton(
-                                style: ButtonStyle(
-                                    minimumSize: MaterialStateProperty.all<Size>(
-                                    const Size(410, 65),
-                                  ),
-                                backgroundColor: MaterialStateProperty.all<Color>(Pallete.gradient3),                                    
-                                ),
+                              FilledButton(                                  
                                 child: const Text(
                                   'Continuar',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  ),
                                 ),
                                 onPressed: () async {
                                 var formValid = _formKey.currentState?.validate() ?? false;

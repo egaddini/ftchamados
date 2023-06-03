@@ -42,159 +42,149 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(8.0),
-      children: [
-        addVerticalSpace(15),
-        AvatarField(text: logedUser.email.toString().substring(0,2).toUpperCase(),),
-        addVerticalSpace(15),
-        Visibility(
-          visible: _isAdmin,
-          child: IDField(text: _idEC),
-        ),
-        addVerticalSpace(10),
-        CustomTextFormField(
-          controller: _emailEC,
-          labelText: 'Email',
-          validator: [
-            Validatorless.required('Email obrigatório'),
-            Validatorless.email('Email invalido'),
-          ]
-        ),              
-        addVerticalSpace(10),
-        CustomTextFormField(
-          controller: _firstNameEC,
-          labelText: 'Nome',
-          validator: [
-            Validatorless.required('Nome Obrigatório'),
-          ]
-        ),
-        addVerticalSpace(10),
-        CustomTextFormField(
-          controller: _lastNameEC,
-          labelText: 'Sobrenome',
-          validator: [
-            Validatorless.required('Sobrenome Obrigatório'),
-          ]
-        ),
-        addVerticalSpace(10),
-        Visibility(
-          visible: _isAdmin,
-          child: CustomTextFormField(
-            controller: _roleEC,
-            labelText: 'Cargo',
-            validator: [
-              Validatorless.required('Cargo obrigatório'),
-            ]
-          ),
-        ),
-        addVerticalSpace(10),
-        Visibility(
-          visible: _isAdmin,
-          child: CheckBoxField(isActive: usuarioLogado.habilitado!)
-        ),
-        addVerticalSpace(10),
-        ExpansionTile(
-          title: const Text('Alterar Senhas'),
-          textColor: Pallete.gradient3,
-          children: [
-           addVerticalSpace(4),
-            PasswordField(
-              labelText: "Senha Atual",
-              controller: _senhaAtualEC,
-              validator: [
-                Validatorless.required('É obrigatório inserir a Senha Atual'),
-                Validatorless.min(6, 'Senha Atual precisa ter no mínimo 6 caracteres'),
-              ]
-            ),                  
-           addVerticalSpace(10),
-            PasswordField(
-              labelText: "Nova Senha",
-              controller: _passwordEC,
-              validator: [
-                Validatorless.required('A Nova Senha é obrigatória'),
-                Validatorless.min(6, 'A Nova Senha precisa ter no mínimo 6 caracteres'),
-              ]
-            ),
-           addVerticalSpace(10),
-            PasswordField(
-              labelText: 'Confirmar Nova Senha',
-              controller: _confirmPasswordEC,
-              validator: [
-                Validatorless.required('Confirmar nova Senha obrigatória'),
-                Validatorless.min(6, 'Confirmar Senha precisa ter no mínimo 6 caracteres'),
-                Validators.compare(_passwordEC, 'As Senhas não conferem'),
-              ]
-            ),
-          ],
-        ),            
-        addVerticalSpace(15),
-        SizedBox(
-          child: ElevatedButton(
-            child: const Text(
-              'Alterar Usuário',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            onPressed: () {
-              Navigator.pop(context, UserInfoModel());
-              /*var formValid = _formKey.currentState?.validate() ?? false;
-              if (formValid) {
-                setState(() {
-                  loginModel = LoginModel(
-                    email: _emailEC.text,
-                    password: _passwordEC.text
-                  );
-                });                      
-                String? response = await authRepository.authenticate(loginModel!);
-                if (response != null) {
-                  Navigator.pushNamed(context, 'home');
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('As credenciais informadas não batem. Tente novamente.'),
-                      backgroundColor: Pallete.gradient3,
+    return SingleChildScrollView(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          addVerticalSpace(7),
+          AvatarField(text: logedUser.email.toString().substring(0,2).toUpperCase(),),
+          addVerticalSpace(15),
+          Visibility(
+            visible: _isAdmin,
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextFormField(
+                    controller: _idEC,
+                    readOnly: true,
+                    decoration: const InputDecoration(
+                      labelText: 'ID',
                     ),
-                  );
-                }
-                Navigator.pushNamed(context, 'home');
-              }*/ 
-            }, 
+                  ),
+                ),
+                addHorizontalSpace(10),
+                Expanded(
+                  child: TextFormField(
+                    controller: _roleEC,
+                    decoration: const InputDecoration(
+                      labelText: 'Cargo',
+                    ),
+                    validator: Validatorless.required('Cargo Obrigatório'),
+                  ),
+                ),
+              ],
+            )
           ),
-        ),
-        addVerticalSpace(10),
-      ],
-    );
-  }
-}
-
-class IDField extends StatelessWidget {
-  final TextEditingController text;
-
-  const IDField({
-    required this.text,
-    Key? key,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return TextFormField(
-      controller: text,
-      enabled: false,
-      decoration: const InputDecoration(
-        labelText: 'ID',
-        contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 23),
-        labelStyle: TextStyle(
-          color: Pallete.backgroundColor
-        ),
-        border: OutlineInputBorder(),
-        focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Pallete.gradient3,
-            width: 2,
+          addVerticalSpace(10),
+          Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  controller: _firstNameEC,
+                  decoration: const InputDecoration(
+                    labelText: 'Nome',
+                  ),
+                  validator: Validatorless.required('Nome Obrigatório'),
+                ),
+              ),
+              addHorizontalSpace(10),
+              Expanded(
+                child: TextFormField(
+                  controller: _lastNameEC,
+                  decoration: const InputDecoration(
+                    labelText: 'Sobrenome',
+                  ),
+                  validator: Validatorless.required('Sobrenome Obrigatório'),
+                ),
+              ),
+            ],
           ),
-        ),        
+          addVerticalSpace(10),
+          CustomTextFormField(
+            controller: _emailEC,
+            labelText: 'Email',
+            validator: [
+              Validatorless.required('Email obrigatório'),
+              Validatorless.email('Email invalido'),
+            ]
+          ),              
+          addVerticalSpace(10),
+          Visibility(
+            visible: _isAdmin,
+            child: CheckBoxField(isActive: usuarioLogado.habilitado!)
+          ),
+          addVerticalSpace(10),
+          ExpansionTile(
+            title: const Text('Alterar Senhas'),
+            textColor: Pallete.gradient3,
+            children: [
+            addVerticalSpace(4),
+              PasswordField(
+                labelText: "Senha Atual",
+                controller: _senhaAtualEC,
+                validator: [
+                  Validatorless.required('É obrigatório inserir a Senha Atual'),
+                  Validatorless.min(6, 'Senha Atual precisa ter no mínimo 6 caracteres'),
+                ]
+              ),                  
+            addVerticalSpace(10),
+              PasswordField(
+                labelText: "Nova Senha",
+                controller: _passwordEC,
+                validator: [
+                  Validatorless.required('A Nova Senha é obrigatória'),
+                  Validatorless.min(6, 'A Nova Senha precisa ter no mínimo 6 caracteres'),
+                ]
+              ),
+            addVerticalSpace(10),
+              PasswordField(
+                labelText: 'Confirmar Nova Senha',
+                controller: _confirmPasswordEC,
+                validator: [
+                  Validatorless.required('Confirmar nova Senha obrigatória'),
+                  Validatorless.min(6, 'Confirmar Senha precisa ter no mínimo 6 caracteres'),
+                  Validators.compare(_passwordEC, 'As Senhas não conferem'),
+                ]
+              ),
+              addVerticalSpace(15),
+            ],
+          ),            
+          addVerticalSpace(15),
+          SizedBox(
+            child: FilledButton(
+              child: const Text(
+                'Alterar Usuário',
+                style: TextStyle(
+                  fontSize: 16,
+                ),
+              ),
+              onPressed: () {
+                Navigator.pop(context, UserInfoModel());
+                /*var formValid = _formKey.currentState?.validate() ?? false;
+                if (formValid) {
+                  setState(() {
+                    loginModel = LoginModel(
+                      email: _emailEC.text,
+                      password: _passwordEC.text
+                    );
+                  });                      
+                  String? response = await authRepository.authenticate(loginModel!);
+                  if (response != null) {
+                    Navigator.pushNamed(context, 'home');
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('As credenciais informadas não batem. Tente novamente.'),
+                        backgroundColor: Pallete.gradient3,
+                      ),
+                    );
+                  }
+                  Navigator.pushNamed(context, 'home');
+                }*/ 
+              }, 
+            ),
+          ),
+        ],
       ),
     );
   }

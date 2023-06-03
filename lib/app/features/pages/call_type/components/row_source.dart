@@ -190,7 +190,8 @@ class _SaveCallTypeState extends State<SaveCallType> {
                       descricao: _descricaoController.text,
                     );
                     UserService userService = UserServiceImpl();
-                    userService.addCallType(                    CallType(id: null, 
+                    userService.addCallType(                    
+                      CallType(id: null, 
                       sigla: _siglaController.text,
                       setor: _setorController.text, 
                       titulo: _tituloController.text, 

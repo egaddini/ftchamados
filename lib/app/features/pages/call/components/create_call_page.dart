@@ -159,13 +159,7 @@ class _CreateCallPageState extends State<CreateCallPage> {
               ],
             ),
             const SizedBox(height: 10),
-            ElevatedButton(
-              style: ButtonStyle(
-                  minimumSize: MaterialStateProperty.all<Size>(
-                  const Size(410, 65),
-              ),
-              backgroundColor: MaterialStateProperty.all<Color>(Pallete.gradient3),                                    
-              ),
+            FilledButton(
               child: const Text(
                 'Registrar chamado',
                 style: TextStyle(
