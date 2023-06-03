@@ -3,7 +3,6 @@ library call_dashboard;
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/features/pages/call/components/call_detail_page.dart';
 import 'package:chamados/app/models/call.dart';
-import 'package:chamados/app/shared_components/c_appbar.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -45,7 +44,7 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(text: 'Chamados'),
+        appBar: AppBar(title: const Text('Chamados')),
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(

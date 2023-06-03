@@ -1,5 +1,4 @@
 import 'package:chamados/app/models/call.dart';
-import 'package:chamados/app/shared_components/c_appbar.dart';
 import 'package:chamados/app/shared_components/c_expanded_text_field.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -51,7 +50,9 @@ class _CallDetailPageState extends State<CallDetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(text: 'Novo chamado - ${_siglaC.text} ${_tituloC.text}'),
+      appBar: AppBar(
+        title: Text('Novo chamado - ${_siglaC.text} ${_tituloC.text}'),
+      ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(18),
         child: Column(

@@ -3,7 +3,6 @@ library call_type_dashboard;
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/models/call_type.dart';
-import 'package:chamados/app/shared_components/c_appbar.dart';
 import 'package:chamados/app/shared_components/c_text_form_field.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
@@ -48,7 +47,7 @@ class _CallTypeDashboardScreenState extends State<CallTypeDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CustomAppBar(text: 'Tipo de chamados'),
+        appBar: AppBar(title: const Text('Tipo de chamados')),
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(

@@ -2,7 +2,6 @@ import 'package:chamados/app/features/pages/user/components/edit_user_page.dart'
 import 'package:chamados/app/features/pages/user/message_response.dart';
 import 'package:chamados/app/features/pages/user/screens/register_user_screen.dart';
 import 'package:chamados/app/models/user_info_model.dart';
-import 'package:chamados/app/shared_components/c_appbar.dart';
 import 'package:chamados/app/utils/repositories/user_repository.dart';
 import 'package:chamados/app/utils/repositories/user_repository_impl.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +31,7 @@ class _UserPage extends State<UserPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CustomAppBar(text: 'Usuários'),
+      appBar: AppBar(title: const Text('Usuários')),
       body: Center(
         child: Container(
           width: 400,

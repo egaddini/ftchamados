@@ -6,7 +6,6 @@ import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../../../shared_components/c_appbar.dart';
 
 part '../components/row_source.dart';
 
@@ -50,7 +49,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CustomAppBar(text: 'Usuários'),
+        appBar: AppBar(title: const Text('Usuários')),
         body: SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(

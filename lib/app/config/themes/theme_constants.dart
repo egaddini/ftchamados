@@ -71,6 +71,7 @@ ThemeData lightTheme = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: Pallete.gradient3,
     foregroundColor: Colors.white,
+    centerTitle: true,
   ),
 
   
