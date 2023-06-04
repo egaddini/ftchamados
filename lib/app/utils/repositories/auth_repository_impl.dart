@@ -2,7 +2,11 @@
 
 import 'dart:convert';
 import 'dart:developer';
+import 'package:chamados/app/models/error_dto.dart';
+import 'package:chamados/app/models/rest_exception.dart';
+import 'package:chamados/app/models/sucess_dto.dart';
 import 'package:chamados/app/models/user_info_model.dart';
+import 'package:chamados/app/models/user_model.dart';
 import 'package:chamados/app/utils/repositories/user_repository_impl.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:dio/dio.dart';
@@ -15,6 +19,7 @@ class AuthRepositoryImpl implements AuthRepository {
   final UserRepositoryImpl userRepo = UserRepositoryImpl();
   final String BASE_PATH = "http://localhost:9090/api/v1/auth";
   final String AUTH_PATH = "/authenticate";
+  final String REGISTER_PATH = "/register";
   String? token = "";
   
   @override
@@ -39,10 +44,28 @@ class AuthRepositoryImpl implements AuthRepository {
       log("Erro ao autenticar usuário: código de status ${result.statusCode}");
       throw Exception("Erro ao autenticar usuário: código de status ${result.statusCode}");
     }
-  } catch (e) {
-    log("Erro na requisição", error: e);
+    } catch (e) {
+      log("Erro na requisição", error: e);
+    }
+    return token;  
   }
-  return token;  
+
+  @override
+  Future<String> register(UserModel user) async {
+    String? message;
+    final result = await Dio().post(
+      BASE_PATH + REGISTER_PATH,
+      data: jsonEncode(user.toMap()),
+      options: Options(headers: await getAuthHeader(false)),
+    );
+    if (result.statusCode == 200) {
+      SucessDTO sucessDTO = SucessDTO.fromMap(result.data);
+      message = sucessDTO.message;
+    } else {
+      final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+    }
+    return message;  
   }
 
  @override
