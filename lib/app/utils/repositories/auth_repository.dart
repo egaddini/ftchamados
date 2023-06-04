@@ -3,7 +3,7 @@ import 'package:chamados/app/models/user_model.dart';
 
 abstract class AuthRepository {
 
-  Future<String?> authenticate(LoginModel login);
+  Future<void> authenticate(LoginModel login);
   
   Future<String> register(UserModel user);
 

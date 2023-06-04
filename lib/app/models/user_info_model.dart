@@ -2,43 +2,45 @@
 import 'dart:convert';
 
 class UserInfoModel {
+  
   int? id;
   String? email;
   String? nome;
   String? sobrenome;
+  int? telefone;
   String? role;
   String? token;
   bool? habilitado;
-  DateTime? dataCriacao;
-  
+  String? dataCriacao;
   UserInfoModel({
     this.id,
     this.email,
     this.nome,
     this.sobrenome,
+    this.telefone,
     this.role,
     this.token,
     this.habilitado,
     this.dataCriacao,
   });
-
-  
-
+ 
   UserInfoModel copyWith({
     int? id,
     String? email,
     String? nome,
     String? sobrenome,
+    int? telefone,
     String? role,
     String? token,
     bool? habilitado,
-    DateTime? dataCriacao,
+    String? dataCriacao,
   }) {
     return UserInfoModel(
       id: id ?? this.id,
       email: email ?? this.email,
       nome: nome ?? this.nome,
       sobrenome: sobrenome ?? this.sobrenome,
+      telefone: telefone ?? this.telefone,
       role: role ?? this.role,
       token: token ?? this.token,
       habilitado: habilitado ?? this.habilitado,
@@ -52,10 +54,11 @@ class UserInfoModel {
       'email': email,
       'nome': nome,
       'sobrenome': sobrenome,
+      'telefone': telefone,
       'role': role,
       'token': token,
       'habilitado': habilitado,
-      'dataCriacao': dataCriacao?.millisecondsSinceEpoch,
+      'dataCriacao': dataCriacao,
     };
   }
 
@@ -65,10 +68,11 @@ class UserInfoModel {
       email: map['email'] != null ? map['email'] as String : null,
       nome: map['nome'] != null ? map['nome'] as String : null,
       sobrenome: map['sobrenome'] != null ? map['sobrenome'] as String : null,
+      telefone: map['telefone'] != null ? map['telefone'] as int : null,
       role: map['role'] != null ? map['role'] as String : null,
       token: map['token'] != null ? map['token'] as String : null,
       habilitado: map['habilitado'] != null ? map['habilitado'] as bool : null,
-      dataCriacao: map['dataCriacao'] != null ? DateTime.fromMillisecondsSinceEpoch(map['dataCriacao'] as int) : null,
+      dataCriacao: map['dataCriacao'] != null ? map['dataCriacao'] as String : null,
     );
   }
 
@@ -78,7 +82,7 @@ class UserInfoModel {
 
   @override
   String toString() {
-    return 'UserInfoModel(id: $id, email: $email, nome: $nome, sobrenome: $sobrenome, role: $role, token: $token, habilitado: $habilitado, dataCriacao: $dataCriacao)';
+    return 'UserInfoModel(id: $id, email: $email, nome: $nome, sobrenome: $sobrenome, telefone: $telefone, role: $role, token: $token, habilitado: $habilitado, dataCriacao: $dataCriacao)';
   }
 
   @override
@@ -90,6 +94,7 @@ class UserInfoModel {
       other.email == email &&
       other.nome == nome &&
       other.sobrenome == sobrenome &&
+      other.telefone == telefone &&
       other.role == role &&
       other.token == token &&
       other.habilitado == habilitado &&
@@ -102,18 +107,10 @@ class UserInfoModel {
       email.hashCode ^
       nome.hashCode ^
       sobrenome.hashCode ^
+      telefone.hashCode ^
       role.hashCode ^
       token.hashCode ^
       habilitado.hashCode ^
       dataCriacao.hashCode;
   }
-  
-  @override
-  bool isAdmin() {
-    return 'admin' == role;    
-  }
-
 }
-
-
-

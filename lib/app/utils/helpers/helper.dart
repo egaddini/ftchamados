@@ -1,3 +1,4 @@
+import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:flutter/material.dart';
 
 
@@ -83,4 +84,20 @@ void registerSucess(BuildContext context, String titulo, String mensagem) {
       ],
     )
   );
+}
+
+Future<Map<String, String>> getAuthHeader(bool auth) async {
+  String? token = "";
+  if (auth) {
+    LocalStorageServices localStorage = LocalStorageServices();
+    token = await localStorage.getToken();
+    return {
+      'content-type': 'application/json;',
+      'authorization': 'Bearer $token'
+    };      
+  } else {
+    return {
+      'content-type': 'application/json;',
+    };
+  }
 }

@@ -45,7 +45,7 @@ DataRow recentFileDataRow(UserInfoModel user, BuildContext context) {
           ),
         ),
       ),
-      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(user.dataCriacao!).toString())),
+      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(user.dataCriacao!)).toString())),
       DataCell(
         InkWell(
           borderRadius: BorderRadius.circular(50),

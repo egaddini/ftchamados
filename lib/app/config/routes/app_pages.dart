@@ -1,6 +1,6 @@
 import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/call_type/screen/call_type_dashboard_screen.dart';
-import 'package:chamados/app/features/pages/login_singup/login_page.dart';
+import 'package:chamados/app/features/pages/login/screen/login_screen.dart';
 import 'package:chamados/app/features/pages/menu/screens/home_screen.dart';
 import 'package:chamados/app/features/pages/singup/screen/singup_screen.dart';
 import 'package:chamados/app/features/pages/user/screens/user_dashboard_screen.dart';
@@ -16,7 +16,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.login,
-      page: () => const LoginPage(),
+      page: () => const LoginScreen(),
       //binding: DashboardBinding(),
     ),
     GetPage(
