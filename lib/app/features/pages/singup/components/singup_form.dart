@@ -9,6 +9,7 @@ class SingupForm extends StatefulWidget {
 
 class _SingupFormState extends State<SingupForm> {
 
+  bool isLoading = false;
   AuthRepository authRepository = AuthRepositoryImpl();
 
   MaskTextInputFormatter maskFormatter = MaskTextInputFormatter(mask: '(##) #####-####', filter: { "#": RegExp(r'[0-9]') });
@@ -141,19 +142,39 @@ class _SingupFormState extends State<SingupForm> {
                             });
 
                             try {
+                              waitProgressBar(context); 
                               await authRepository.register(userModel!);
-                            } catch (e) {
-                              
+                              Navigator.of(context).pop();
+                              registerSucess(context, 'Registrado com sucesso', 'Agora aguarde algum administrador habilitar sua conta');
+                            } on DioError catch (e) {
+                              Navigator.of(context).pop();
+                              if (e.response != null && e.response!.data != null) {
+                                ErrorDTO erro = ErrorDTO.fromMap(e.response!.data);
+                                if (409.isEqual(erro.status)) {
+                                  final snackBar = SnackBar(
+                                    content: Text(erro.message),
+                                    action: SnackBarAction(
+                                      label: 'Ver Mais',
+                                      onPressed: () {
+                                        moreDetailsDialog(context, 'Já Registrado', erro.message);
+                                      },
+                                    ),
+                                  );
+                                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                                }
+                              } else {
+                                final snackBar = SnackBar(
+                                  content: const Text('Algum problema aconteceu!'),
+                                  action: SnackBarAction(
+                                    label: 'Ver Mais',
+                                    onPressed: () {
+                                      moreDetailsDialog(context, 'Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}');
+                                    },
+                                  ),
+                                );
+                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                              }
                             }                      
-                            // if (response.isNotEmpty) {
-                            //   ScaffoldMessenger.of(context).showSnackBar(
-                            //     const SnackBar(
-                            //       content: Text('Seja bem vindo'),
-                            //       backgroundColor: Pallete.gradient3,
-                            //     ),
-                            //   );
-                            //    Navigator.pop(context);
-                            // }
                           }
                         }, 
                       ),
@@ -168,3 +189,4 @@ class _SingupFormState extends State<SingupForm> {
     );
   }
 }
+

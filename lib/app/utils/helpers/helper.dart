@@ -27,3 +27,60 @@ String formatDate(DateTime dateTime) {
     Duration(inDays: var days) => '$days days from now',
   };
 }
+
+void waitProgressBar(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (BuildContext context) {
+      return const AlertDialog(
+        title: Center(child: Text('Aguarde')),
+        content: SizedBox(width: 4, height: 4 , child: CircularProgressIndicator()),
+        actions: [
+          Center(child: Text('Processando...')),
+        ],
+      );
+    },
+  );
+}
+
+void moreDetailsDialog(BuildContext context, String titulo, String mensagem) {
+  showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+      title: Center(child: Text(titulo, style: const TextStyle(fontWeight: FontWeight.bold),)),
+      content: Text(mensagem),
+      actions: [
+        Center(
+          child: TextButton(
+            child: const Icon(Icons.done), 
+            onPressed: () {     
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      ],
+    )
+  );
+}
+
+void registerSucess(BuildContext context, String titulo, String mensagem) {
+  showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+      title: Center(child: Text(titulo, style: const TextStyle(fontWeight: FontWeight.bold),)),
+      content: Text(mensagem),
+      actions: [
+        Center(
+          child: TextButton(
+            child: const Icon(Icons.done), 
+            onPressed: () {     
+              Navigator.pop(context);
+              Navigator.pop(context);
+            },
+          ),
+        ),
+      ],
+    )
+  );
+}

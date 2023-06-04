@@ -52,15 +52,14 @@ class AuthRepositoryImpl implements AuthRepository {
 
   @override
   Future<String> register(UserModel user) async {
-    String? message;
+    String message;
     final result = await Dio().post(
       BASE_PATH + REGISTER_PATH,
       data: jsonEncode(user.toMap()),
       options: Options(headers: await getAuthHeader(false)),
     );
     if (result.statusCode == 200) {
-      SucessDTO sucessDTO = SucessDTO.fromMap(result.data);
-      message = sucessDTO.message;
+      message = result.statusMessage!;
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
       throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
