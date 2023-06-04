@@ -55,7 +55,7 @@ DataRow recentFileDataRow(UserInfoModel user, BuildContext context) {
           child:  const SizedBox(
             width: 35,
             height: 35,
-            child: Icon(Icons.close, color: Colors.red),
+            child: Icon(Icons.delete_outline),
           ),
         ),
       ),
@@ -64,34 +64,49 @@ DataRow recentFileDataRow(UserInfoModel user, BuildContext context) {
 }
 
 void removeClient(BuildContext context, UserInfoModel user) {
-      showDialog(
-      context: context,
-        builder: (_) => AlertDialog(
-              title: const Text("Deletar Cliente"),
-              content: Text("O usuário: ${user.email ?? "?"} será deletado para sempre, deseja realmente continuar?"),
-              actions: [
-                TextButton(
+
+  UserRepository userRepo = UserRepositoryImpl();
+  
+  showDialog(
+    context: context,
+    builder: (_) => AlertDialog(
+      title: const Text("Deletar Cliente"),
+      content: Text("O usuário: ${user.email ?? "?"} será deletado para sempre, deseja realmente continuar?"),
+      actions: [
+        TextButton(
+          onPressed: () async {
+            try {
+              waitProgressBar(context); 
+              await userRepo.delete(user.id!);
+              Navigator.pop(context);
+              final snackBar = SnackBar(
+                content: const Text('Usuário removido com sucesso!'),
+                action: SnackBarAction(
+                  label: 'Ver Mais',
                   onPressed: () {
-                    Navigator.pop(context);
+                    moreDetailsDialog(context, 'Usuário removido com sucesso!', 'O usuário: ${user.email ?? "?"} foi deletado.');
                   },
-                  child: const Text(
-                    "Voltar",
-                    style: TextStyle(color: Pallete.backgroundColor),
-                  ),
                 ),
-                TextButton(
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            } on DioError catch (e) {
+              Navigator.of(context).pop();
+              final snackBar = SnackBar(
+                content: const Text('Algum problema aconteceu!'),
+                action: SnackBarAction(
+                  label: 'Ver Mais',
                   onPressed: () {
-                    /// setState(() {
-                    ///   users.remove(user);
-                    ///   Navigator.pop(context);
-                    /// });
-                    Navigator.pop(context);
+                    moreDetailsDialog(context, 'Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}');
                   },
-                  child: const Text(
-                    "Deletar",
-                    style: TextStyle(color: Colors.red),
-                  ),
                 ),
-              ],
-            ));
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            }
+            Navigator.pop(context);
+          },
+          child: const Center(child: Icon(Icons.delete_outline)),
+        ),
+      ],
+    )
+  );
 }

@@ -9,6 +9,8 @@ abstract class UserRepository {
 
   Future<UserModel> findByEmail(String email);
 
+  Future<String> delete(int id);
+
   Future<List<UserInfoModel>> getuserList({String? query}); 
 
   Future<String> ativaUsuario(String email);

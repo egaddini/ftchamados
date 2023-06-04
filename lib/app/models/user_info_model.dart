@@ -117,4 +117,20 @@ class UserInfoModel {
   bool isAdmin() {
     return 'ADMIN' == role;
   }
+
+  List<UserInfoModel> convertJsonToUsers(List<Map<String, dynamic>> jsonList) {
+    return jsonList.map((json) {
+      return UserInfoModel(
+        id: json['id'],
+        email: json['email'],
+        nome: json['nome'],
+        sobrenome: json['sobrenome'],
+        telefone: json['telefone'],
+        role: json['role'],
+        token: json['token'],
+        habilitado: json['habilitado'],
+        dataCriacao: json['dataCriacao'],
+      );
+    }).toList();
+  }
 }

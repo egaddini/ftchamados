@@ -74,26 +74,25 @@ class UserRepositoryImpl implements UserRepository {
   }
 
   @override
-  Future<List<UserInfoModel>> getuserList({String? query}) async {
-    try {
-      final response = await Dio().get(
-        BASE_PATH, 
-        options: Options(headers: await getAuthHeader(true)),
-      );
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.data);
-        var results = data.map((e) => UserInfoModel.fromJson(e)).toList();
-        if (query != null) {
-          results = results.where((element) => element.firstname!.toLowerCase().contains((query.toLowerCase()))).toList();
-        }
-        return results;
-      } else {
-        print("fetch error");
+  Future<List<UserInfoModel>> getuserList({String? query}) async {   
+    List<UserInfoModel> results = [];
+
+    final response = await Dio().get(
+      BASE_PATH, 
+      options: Options(headers: await getAuthHeader(false)),
+    );
+    if (response.statusCode == 200) {
+      List<dynamic> jsonList = response.data as List<dynamic>;
+      results = jsonList.map((json) => UserInfoModel.fromMap(json)).toList();
+      if (query != null) {
+        results = results.where((element) => element.email!.toLowerCase().contains((query.toLowerCase()))).toList();
       }
-    } catch (e) {
-      print('error: $e');
+    } else {
+      print(response.statusMessage);
+      final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
     }
-    return [];
+    return results;
   }
 
   @override
@@ -111,5 +110,21 @@ class UserRepositoryImpl implements UserRepository {
     }
     return message;
   }
+
+  @override
+  Future<String> delete(int id) async {
+    String message;
+    final result = await Dio().delete(
+      '$BASE_PATH/$id',
+      options: Options(headers: await getAuthHeader(true)),
+    );
+    if (result.statusCode == 200) {
+      message = result.statusMessage!;
+    } else {
+      final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+    }
+    return message;
+  }  
 
 }
