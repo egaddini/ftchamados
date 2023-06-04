@@ -43,6 +43,8 @@ ThemeData lightTheme = ThemeData(
     fillColor: MaterialStateProperty.all<Color>(Pallete.gradient3),  
   ),
 
+  
+  
   /*brightness: Brightness.light,
   primaryColor: Pallete.gradient3,
 

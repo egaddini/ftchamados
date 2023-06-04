@@ -11,33 +11,31 @@ class EditUserPageBody extends StatefulWidget {
 }
 
 class _EditUserPageBodyState extends State<EditUserPageBody> {
-
+  
   late UserInfoModel usuarioLogado;
-
   late TextEditingController _idEC;
   late TextEditingController _firstNameEC;
   late TextEditingController _lastNameEC;
   late TextEditingController _emailEC;
   late TextEditingController _roleEC;
-  late UserInfoModel logedUser;
   final _passwordEC = TextEditingController();
   final _confirmPasswordEC = TextEditingController();
   final _senhaAtualEC = TextEditingController();
   UserService userSvc = UserServiceImpl();
-  bool _isAdmin = true;
-
-    @override
-    void initState() {
-      usuarioLogado = widget._client;
-      _idEC = TextEditingController(text: usuarioLogado.id.toString());
-      _firstNameEC = TextEditingController(text: usuarioLogado.nome);
-      _lastNameEC = TextEditingController(text: usuarioLogado.sobrenome);
-      _emailEC = TextEditingController(text: usuarioLogado.email);
-      _roleEC = TextEditingController(text: usuarioLogado.role);
-      logedUser = userSvc.getLogedUserInfo();
-      _isAdmin = logedUser.habilitado!;
-      super.initState();
-    }
+  late bool _isAdmin;
+  List<String> _items = ['ADMIN', 'USER'];
+  
+  @override
+  void initState() {
+    usuarioLogado = widget._client;
+    _idEC = TextEditingController(text: usuarioLogado.id.toString());
+    _firstNameEC = TextEditingController(text: usuarioLogado.nome);
+    _lastNameEC = TextEditingController(text: usuarioLogado.sobrenome);
+    _emailEC = TextEditingController(text: usuarioLogado.email);
+    _roleEC = TextEditingController(text: usuarioLogado.role);
+    _isAdmin = usuarioLogado.isAdmin();
+    super.initState();
+  }
 
 
   @override
@@ -47,7 +45,7 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
       child: Column(
         children: [
           addVerticalSpace(7),
-          AvatarField(text: logedUser.email.toString().substring(0,2).toUpperCase(),),
+          AvatarField(text: _emailEC.toString().substring(0,2).toUpperCase(),),
           addVerticalSpace(15),
           Visibility(
             visible: _isAdmin,
@@ -64,12 +62,30 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
                 ),
                 addHorizontalSpace(10),
                 Expanded(
-                  child: TextFormField(
-                    controller: _roleEC,
-                    decoration: const InputDecoration(
-                      labelText: 'Cargo',
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TypeAheadField<String>(
+                      textFieldConfiguration: TextFieldConfiguration(
+                        controller: _roleEC,
+                        decoration: const InputDecoration(
+                          labelText: 'Cargo',
+                          suffixIcon: Icon(Icons.arrow_drop_down),                                                          
+                        ),
+                      ),
+                      suggestionsCallback: (pattern) {
+                        return _items;
+                      },
+                      itemBuilder: (context, String cargo) {
+                        return ListTile(
+                          title: Text(cargo),
+                        );
+                      },
+                      onSuggestionSelected: (String cargo) async {
+                        setState(() {
+                          _roleEC.text = cargo; 
+                        });
+                      },
                     ),
-                    validator: Validatorless.required('Cargo Obrigatório'),
                   ),
                 ),
               ],
@@ -111,7 +127,10 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
           addVerticalSpace(10),
           Visibility(
             visible: _isAdmin,
-            child: CheckBoxField(isActive: usuarioLogado.habilitado!)
+            child: CheckBoxField(
+              email: _emailEC.text,
+              isActive: usuarioLogado.habilitado!
+            )
           ),
           addVerticalSpace(10),
           ExpansionTile(
@@ -134,6 +153,7 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
                 validator: [
                   Validatorless.required('A Nova Senha é obrigatória'),
                   Validatorless.min(6, 'A Nova Senha precisa ter no mínimo 6 caracteres'),
+                  Validators.difere(_senhaAtualEC, 'A Nova Senha precisa ser diferente da atual'),
                 ]
               ),
             addVerticalSpace(10),
@@ -159,7 +179,8 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
                 ),
               ),
               onPressed: () {
-                Navigator.pop(context, UserInfoModel());
+                moreDetailsDialog(context, 'Funcionalidade em melhoria!', 'funcionalidade travada para refatoração :D');
+                //Navigator.pop(context, UserInfoModel());
                 /*var formValid = _formKey.currentState?.validate() ?? false;
                 if (formValid) {
                   setState(() {
@@ -219,10 +240,11 @@ class AvatarField extends StatelessWidget {
 class CheckBoxField extends StatefulWidget {
   
   final bool isActive;
+  final String email;
 
   const CheckBoxField({
     super.key,
-    required this.isActive,
+    required this.isActive, required this.email,
   });
 
   @override
@@ -232,11 +254,15 @@ class CheckBoxField extends StatefulWidget {
 class _CheckBoxFieldState extends State<CheckBoxField> {
 
   late bool isActive;
+  late String email;
+
+  final UserRepository _userRepository = UserRepositoryImpl();
 
   @override
   void initState() {
     super.initState();
     isActive = widget.isActive;
+    email = widget.email;
   }
 
   @override
@@ -245,9 +271,35 @@ class _CheckBoxFieldState extends State<CheckBoxField> {
       children: [
         Checkbox(
           value: isActive,
-          onChanged: (value) {
+          onChanged: (value) {      
             setState(() {
-              isActive = value!;
+                isActive = value!;
+            });      
+            setState(() async {
+              try {
+                waitProgressBar(context); 
+                await _userRepository.ativaUsuario(email);
+                Navigator.of(context).pop();
+                String mensagem;
+                if (isActive) {
+                   mensagem = 'habilitada'; 
+                } else {
+                  mensagem = 'desabilitada';
+                }
+                moreDetailsDialog(context, 'Registrado com sucesso', 'Conta: $email $mensagem.');
+              } on DioError catch (e) {
+                Navigator.pop(context);
+                final snackBar = SnackBar(
+                  content: const Text('Algum problema aconteceu!'),
+                  action: SnackBarAction(
+                    label: 'Ver Mais',
+                    onPressed: () {
+                      moreDetailsDialog(context, 'Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}');
+                    },
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              }               
             });
           },
         ),

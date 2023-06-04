@@ -1,19 +1,22 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'package:chamados/app/models/error_dto.dart';
+import 'package:chamados/app/models/rest_exception.dart';
 import 'package:chamados/app/models/token_model.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/models/user_model.dart';
+import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/repositories/user_repository.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 
-class UserRepositoryImpl implements UserRepository {
+class UserRepositoryImpl implements UserRepository { 
 
   var data = [];
   String? token;
   List<UserInfoModel> results = [];
   static const String BASE_PATH = "http://localhost:9090/api/v1/user";
+  static const String ATIVA_PATH = "/ativa";
   LocalStorageServices localStorage = LocalStorageServices();  
 
   @override
@@ -93,18 +96,20 @@ class UserRepositoryImpl implements UserRepository {
     return [];
   }
 
-  Future<Map<String, String>> getAuthHeader(bool auth) async {
-    if (auth) {
-      token = await localStorage.getToken();
-      return {
-        'content-type': 'application/json;',
-        'authorization': 'Bearer $token'
-      };      
+  @override
+  Future<String> ativaUsuario(String email) async {
+    String message;
+    final result = await Dio().get(
+      '$BASE_PATH$ATIVA_PATH/$email',
+      options: Options(headers: await getAuthHeader(true)),
+    );
+    if (result.statusCode == 200) {
+      message = result.statusMessage!;
     } else {
-      return {
-        'content-type': 'application/json;',
-      };
+      final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
     }
+    return message;
   }
 
 }

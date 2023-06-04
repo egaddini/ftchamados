@@ -11,4 +11,6 @@ abstract class UserRepository {
 
   Future<List<UserInfoModel>> getuserList({String? query}); 
 
+  Future<String> ativaUsuario(String email);
+
 }

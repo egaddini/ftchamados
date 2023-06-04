@@ -1,7 +1,7 @@
 part of home_screen;
 
 class MenuDrawer extends StatefulWidget {
-  
+
   const MenuDrawer({super.key});
 
   @override
@@ -10,15 +10,20 @@ class MenuDrawer extends StatefulWidget {
 
 class _MenuDrawerState extends State<MenuDrawer> {
 
-  UserService userSvc = UserServiceImpl();
-  late UserInfoModel logedUser;
+  late UserInfoModel? logedUser;
   bool _isAdmin = false;
 
   @override
   void initState() {
+    initAsync();
     super.initState();
-    logedUser = userSvc.getLogedUserInfo();
-    _isAdmin = 'admin' == logedUser.role!;
+  }
+
+  Future<void> initAsync() async {
+    logedUser = await LocalStorageServices().getUser();
+    setState(() {
+      _isAdmin = logedUser!.isAdmin();
+    });
   }
 
   @override
@@ -31,10 +36,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
             decoration: const BoxDecoration(
               color: Pallete.gradient3
             ),
-            accountEmail: Text(logedUser.email.toString()),
-            accountName: Text(logedUser.nome.toString()),
+            accountEmail: Text(logedUser!.email.toString()),
+            accountName: Text(logedUser!.nome.toString()),
             currentAccountPicture: CircleAvatar(
-              child: Text(logedUser.email.toString().substring(0,2)),
+              child: Text(logedUser!.email.toString().substring(0,2)),
             ),
             
           ),
@@ -45,7 +50,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => EditUserPage(logedUser)))
+                          builder: (_) => EditUserPage(logedUser!)))
                   .then((newContact) {
                 if (newContact != null) {
                   messageResponse(context, newContact.name + " a sido modificado...!");

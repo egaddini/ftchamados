@@ -33,6 +33,7 @@ class AuthRepositoryImpl implements AuthRepository {
       LocalStorageServices localStorage = LocalStorageServices();
       final UserInfoModel userInfo = UserInfoModel.fromMap(result.data);
       await localStorage.saveUser(userInfo);
+      await localStorage.saveToken(userInfo.token.toString());
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
       throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
