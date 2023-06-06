@@ -39,6 +39,7 @@ class UserRepositoryImpl implements UserRepository {
       log("Erro na requisição", error: e);
       throw Exception("Erro na requisição");
     }
+    // ignore: unnecessary_null_comparison
     if (user == null) {
       throw Exception("Usuário não encontrado");
     }

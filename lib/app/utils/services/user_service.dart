@@ -1,9 +1,7 @@
-import 'dart:math';
 
 import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/models/user_info_model.dart';
-import 'package:flutter/material.dart';
 
 abstract class UserService {
   UserInfoModel getLogedUserInfo();

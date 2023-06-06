@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:chamados/app/models/error_dto.dart';
 import 'package:chamados/app/models/rest_exception.dart';
-import 'package:chamados/app/models/sucess_dto.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/models/user_model.dart';
 import 'package:chamados/app/utils/repositories/user_repository_impl.dart';
@@ -61,10 +60,7 @@ class AuthRepositoryImpl implements AuthRepository {
   void logout() async { 
     try {
       final uri = Uri.http('localhost:9090', '/api/v1/authentication/logout');
-      final result = Dio().get(
-        uri.toString(),
-        options: Options(headers: await getAuthHeader(true)),
-      );
+      Dio().get(uri.toString(), options: Options(headers: await getAuthHeader(true)),);
       
     } catch (e) {
       log("Erro na requisição", error: e);

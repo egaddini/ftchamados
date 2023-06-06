@@ -1,13 +1,10 @@
 library call_type_dashboard;
 
 import 'package:chamados/app/constans/pallete.dart';
-import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/models/call_type.dart';
-import 'package:chamados/app/shared_components/c_text_form_field.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:validatorless/validatorless.dart';
 
 part '../components/row_source.dart';
@@ -167,9 +164,19 @@ class _CallTypeDashboardScreenState extends State<CallTypeDashboardScreen> {
                           onPressed: () {
                             addCallType(context);
                           },
+                          child: const Text('Cadastrar Setor'),
+                        ),
+                      ),
+                      addHorizontalSpace(10),
+                      Expanded(
+                        child: FilledButton(
+                          onPressed: () {
+                            addCallType(context);
+                          },
                           child: const Text('Cadastrar Tipo de Chamado'),
                         ),
                       ),
+                      
                     ],
                   ),
                 )

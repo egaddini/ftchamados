@@ -15,7 +15,7 @@ class RegisterUserScreen extends StatefulWidget {
 }
 
 class _RegisterUserScreen extends State<RegisterUserScreen> {
-  final _formKey = GlobalKey<FormState>();
+  //final _formKey = GlobalKey<FormState>();
   final _nameEC = TextEditingController();
   final _surnameEC = TextEditingController();
   final _usernameEC = TextEditingController();

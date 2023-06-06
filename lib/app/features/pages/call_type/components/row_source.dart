@@ -59,7 +59,7 @@ void removeCallType(BuildContext context, CallType call) {
         context: context,
         builder: (_) => AlertDialog(
           title: const Text("Deletar Tipo de Chamado"),
-          content: Text("O usuário: ${call.titulo ?? "?"} será deletado para sempre, deseja realmente continuar?"),
+          content: Text("O usuário: ${call.titulo} será deletado para sempre, deseja realmente continuar?"),
           actions: [
             TextButton(
               onPressed: () {
@@ -102,6 +102,20 @@ void addCallType(BuildContext context) {
   );
 }
 
+void addSetor(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (_) => const AlertDialog(
+      title: Center(child: Text("Cadastrar Setor", style: TextStyle(fontWeight: FontWeight.bold),)),
+      content: SizedBox(
+        height: 390,
+        width: 350,
+        child: SaveCallType(),
+      ),
+    )
+  );
+}
+
 
 class SaveCallType extends StatefulWidget {
   const SaveCallType({super.key});
@@ -114,15 +128,19 @@ class _SaveCallTypeState extends State<SaveCallType> {
 
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController _siglaController = TextEditingController();
-  TextEditingController _setorController = TextEditingController();
-  TextEditingController _tituloController = TextEditingController();
-  TextEditingController _prioridadeController = TextEditingController();
-  TextEditingController _descricaoController = TextEditingController();
+  final TextEditingController _siglaController = TextEditingController();
+  final TextEditingController _setorController = TextEditingController();
+  final TextEditingController _tituloController = TextEditingController();
+  final TextEditingController _prioridadeController = TextEditingController();
+  final TextEditingController _descricaoController = TextEditingController();
 
   @override
   void dispose() {
-
+    _siglaController.dispose();
+    _setorController.dispose();
+    _tituloController.dispose();
+    _prioridadeController.dispose();
+    _descricaoController.dispose();
     super.dispose();
   }
   
@@ -197,8 +215,10 @@ class _SaveCallTypeState extends State<SaveCallType> {
                       titulo: _tituloController.text, 
                       prioridade: _prioridadeController.text, 
                       descricao: _descricaoController.text,
-                    ));                     
-                    String? response = 'asd'; //await authRepository.authenticate(loginModel!);
+                    ));
+                                         
+                    String response = 'null'; //await authRepository.authenticate(loginModel!);
+                    // ignore: unnecessary_null_comparison
                     if (response != null) {
                       Navigator.pop(context);
                     } else {
@@ -219,3 +239,88 @@ class _SaveCallTypeState extends State<SaveCallType> {
     );
   }
 }
+// class SaveSetor extends StatefulWidget {
+// const SaveSetor({super.key});
+
+// @override
+// State<SaveSetor> createState() => _SaveSetorState();
+// }
+
+// class _SaveSetorState extends State<SaveSetor> {
+
+// final _formKey = GlobalKey<FormState>();
+
+// final TextEditingController _siglaController = TextEditingController();
+// final TextEditingController _setorController = TextEditingController();
+
+// @override
+// void dispose() {
+//   _siglaController.dispose();
+//   _setorController.dispose();
+//   super.dispose();
+// }
+
+// @override
+// Widget build(BuildContext context) {
+//   return SingleChildScrollView(
+//     child: Form(
+//       key: _formKey,
+//       child: Column(
+//         children: [
+//           addVerticalSpace(5),
+//           TextFormField(
+//             controller: _siglaController,
+//             decoration: const InputDecoration(
+//               labelText: 'Sigla',
+//             ),
+//             validator: Validatorless.required('Sigla Obrigatório'), 
+//           ),         
+//           addVerticalSpace(10),
+//           TextFormField(
+//             controller: _setorController,
+//             decoration: const InputDecoration(
+//               labelText: 'Setor',
+//             ),
+//             validator: Validatorless.required('Setor Obrigatório'), 
+//           ),         
+          
+//           addVerticalSpace(10),
+//           Center(
+//             child: TextButton(
+//               child: const Icon(Icons.add, color: Colors.green), 
+//               onPressed: () async {     
+//                 var formValid = _formKey.currentState?.validate() ?? false;
+//                 if (formValid) {
+//                   setState(() {
+//                   });
+//                   CallType(id: null, 
+//                     sigla: _siglaController.text,
+//                     setor: _setorController.text, 
+//                   );
+//                   UserService userService = UserServiceImpl();
+//                   userService.addCallType(                    
+//                     CallType(id: null, 
+//                     sigla: _siglaController.text,
+//                     setor: _setorController.text, 
+//                   ));                     
+//                   String? response = 'asd'; //await authRepository.authenticate(loginModel!);
+//                   if (response != null) {
+//                     Navigator.pop(context);
+//                   } else {
+//                     ScaffoldMessenger.of(context).showSnackBar(
+//                       const SnackBar(
+//                         content: Text('As credenciais informadas não batem. Tente novamente.'),
+//                         backgroundColor: Pallete.gradient3,
+//                       ),
+//                     );
+//                   }
+//                 }
+//               },
+//             ),
+//           ),                   
+//         ],
+//       ),
+//     ),
+//   );
+// }
+// }

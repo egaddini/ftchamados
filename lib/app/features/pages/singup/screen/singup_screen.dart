@@ -1,10 +1,6 @@
 library singup_screen;
 
-import 'dart:io';
-import 'dart:math';
-
 import 'package:chamados/app/models/error_dto.dart';
-import 'package:chamados/app/models/rest_exception.dart';
 import 'package:chamados/app/models/user_model.dart';
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';

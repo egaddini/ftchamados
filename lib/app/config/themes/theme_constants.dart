@@ -84,6 +84,12 @@ ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     
     brightness: Brightness.dark,
+
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Pallete.gradient3,
+    foregroundColor: Colors.white,
+    centerTitle: true,
+  ),
    /* 
     switchTheme: SwitchThemeData(
       trackColor: MaterialStateProperty.all<Color>(Colors.grey),
@@ -112,8 +118,4 @@ ThemeData darkTheme = ThemeData(
       )
   ),
   */
-  appBarTheme: AppBarTheme(
-    backgroundColor: Pallete.gradient3, 
-  ),
-
 );
