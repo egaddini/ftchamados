@@ -1,6 +1,5 @@
 library login_screen;
 import 'package:chamados/app/constans/pallete.dart';
-import 'package:chamados/app/features/pages/menu/screens/home_screen.dart';
 import 'package:chamados/app/models/error_dto.dart';
 import 'package:chamados/app/models/login_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
