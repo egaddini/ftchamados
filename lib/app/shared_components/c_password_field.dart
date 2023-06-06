@@ -1,7 +1,7 @@
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:flutter/material.dart';
 
-class PasswordField extends StatelessWidget {
+class PasswordField extends StatefulWidget {
   final String labelText;
   final TextEditingController controller;
   final List<FormFieldValidator<String>> validator;
@@ -14,26 +14,34 @@ class PasswordField extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  PasswordFieldState createState() => PasswordFieldState();
+}
+
+class PasswordFieldState extends State<PasswordField> {
+  bool _obscureText = true;
+
+  @override
   Widget build(BuildContext context) {
     return TextFormField(
-      controller: controller,
-      obscureText: true,
+      controller: widget.controller,
+      obscureText: _obscureText,
       decoration: InputDecoration(
-        contentPadding: EdgeInsets.all(23),
-        labelText: labelText,
+        contentPadding: const EdgeInsets.all(23),
+        labelText: widget.labelText,
         labelStyle: const TextStyle(
           color: Pallete.backgroundColor,
         ),
-        border: const OutlineInputBorder(),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Pallete.gradient3,
-            width: 2,
-          ),
+        suffixIcon: IconButton(
+          onPressed: () {
+            setState(() {
+              _obscureText = !_obscureText;
+            });
+          },
+          icon: Icon( _obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined,),
         ),
       ),
       validator: (value) {
-        for (final validate in validator) {
+        for (final validate in widget.validator) {
           final error = validate(value ?? '');
           if (error != null) {
             return error;
