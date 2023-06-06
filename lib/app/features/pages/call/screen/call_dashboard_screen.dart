@@ -25,17 +25,17 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
   onsortColum(int columnIndex, bool ascending) {
     if (columnIndex == 0) {
       if (ascending) {
-        filterData!.sort((a, b) => a.usuario.email.toString().compareTo(b.usuario.email.toString()));
+        filterData!.sort((a, b) => a.solicitante.email.toString().compareTo(b.solicitante.email.toString()));
       } else {
-        filterData!.sort((a, b) => b.usuario.email.toString().compareTo(a.usuario.email.toString()));
+        filterData!.sort((a, b) => b.solicitante.email.toString().compareTo(a.solicitante.email.toString()));
       }
     }
   }
 
   @override
   void initState() {
-    filterData = userSvc.getCalls();
-    myData = userSvc.getCalls();
+    filterData = []; // userSvc.getCalls();
+    myData = []; // userSvc.getCalls();
     super.initState();
   }
 
@@ -77,7 +77,7 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                     ),
                     onChanged: (value) {
                       setState(() {
-                        myData = filterData!.where((element) => element.usuario.email.toString().contains(value)).toList();
+                        myData = filterData!.where((element) => element.solicitante.email.toString().contains(value)).toList();
                       });
                     },
                   ),
