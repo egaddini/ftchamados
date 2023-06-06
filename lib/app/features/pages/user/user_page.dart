@@ -2,8 +2,8 @@ import 'package:chamados/app/features/pages/user/components/edit_user_page.dart'
 import 'package:chamados/app/features/pages/user/message_response.dart';
 import 'package:chamados/app/features/pages/user/screens/register_user_screen.dart';
 import 'package:chamados/app/models/user_info_model.dart';
-import 'package:chamados/app/utils/repositories/user_repository.dart';
-import 'package:chamados/app/utils/repositories/user_repository_impl.dart';
+import 'package:chamados/app/utils/repositories/user/user_repository.dart';
+import 'package:chamados/app/utils/repositories/user/user_repository_impl.dart';
 import 'package:flutter/material.dart';
 
 class UserPage extends StatefulWidget {
@@ -62,10 +62,10 @@ class _UserPage extends State<UserPage> {
                 },
                 title: Text((clients[index].nome ?? "não definido") + (clients[index].sobrenome ?? "não definido")),
                 subtitle: Text(clients[index].email ?? 'Email não disponível'),
-                leading: CircleAvatar(
+                leading: const CircleAvatar(
                   child: Text("clients[index].name.substring(0, 1)"),
                 ),
-                trailing: Icon(
+                trailing: const Icon(
                   Icons.call,
                   color: Colors.red,
                 ),
