@@ -3,8 +3,8 @@ import 'package:chamados/app/features/pages/user/message_response.dart';
 import 'package:chamados/app/features/pages/user/screens/register_user_screen.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/constans/pallete.dart';
-import 'package:chamados/app/utils/repositories/user_repository.dart';
-import 'package:chamados/app/utils/repositories/user_repository_impl.dart';
+import 'package:chamados/app/utils/repositories/user/user_repository.dart';
+import 'package:chamados/app/utils/repositories/user/user_repository_impl.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 

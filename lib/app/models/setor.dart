@@ -3,12 +3,12 @@ import 'dart:convert';
 
 class Setor {
   
-  int id;
+  int? id;
   String sigla;
   String nome;
 
   Setor({
-    required this.id,
+    this.id,
     required this.sigla,
     required this.nome,
   });

@@ -9,7 +9,7 @@ import 'package:get/get.dart';
 part 'app_routes.dart';
 
 class AppPages {
-  static const initial = Routes.login;
+  static const initial = Routes.callType;
 
   static final routes = [
     GetPage(

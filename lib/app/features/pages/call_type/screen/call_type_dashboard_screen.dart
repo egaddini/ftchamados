@@ -2,12 +2,19 @@ library call_type_dashboard;
 
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/call_type.dart';
+import 'package:chamados/app/models/error_dto.dart';
+import 'package:chamados/app/models/setor.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
+import 'package:chamados/app/utils/repositories/setor/setor_repository.dart';
+import 'package:chamados/app/utils/repositories/setor/setor_repository_impl.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';
 
 part '../components/row_source.dart';
+part '../components/setor.dart';
 
 class CallTypeDashboardScreen extends StatefulWidget {
   const CallTypeDashboardScreen({super.key});
@@ -162,7 +169,7 @@ class _CallTypeDashboardScreenState extends State<CallTypeDashboardScreen> {
                       Expanded(
                         child: FilledButton(
                           onPressed: () {
-                            addCallType(context);
+                            registrarSetor(context);
                           },
                           child: const Text('Cadastrar Setor'),
                         ),
@@ -183,6 +190,7 @@ class _CallTypeDashboardScreenState extends State<CallTypeDashboardScreen> {
               ],
             ),
           ),
-        ));
+        )
+      );
   }
 }
