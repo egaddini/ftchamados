@@ -12,25 +12,25 @@ import 'package:intl/intl.dart';
 
 part '../components/row_source.dart';
 
-class UserDashboardScreen extends StatefulWidget {
-  const UserDashboardScreen({super.key});
+class UserListScreen extends StatefulWidget {
+  const UserListScreen({super.key});
 
   @override
-  State<UserDashboardScreen> createState() => _UserDashboardScreenState();
+  State<UserListScreen> createState() => _UserListScreenState();
 }
 
-class _UserDashboardScreenState extends State<UserDashboardScreen> {
+class _UserListScreenState extends State<UserListScreen> {
   
   bool isLoading = true;
   bool sort = true;
-  List<UserInfoModel> filterData = [], myData = [];
+  List<UserInfoModel> filterData = [], userList = [];
   TextEditingController controller = TextEditingController();
   UserRepository userRepo = UserRepositoryImpl();
 
   onsortColum(int columnIndex, bool ascending) {
     if (columnIndex == 0) {
       if (ascending) {
-        filterData.sort((a, b) => a.email!.compareTo(b.email!));
+        userList.sort((a, b) => a.email!.compareTo(b.email!));
       } else {
         filterData.sort((a, b) => b.email!.compareTo(a.email!));
       }
@@ -38,8 +38,8 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> {
   }
 
   Future<void> _init() async {
-    filterData = await userRepo.getuserList();
-    myData = await userRepo.getuserList();
+    userList.addAll(await userRepo.getuserList());
+    filterData.addAll(userList);
     _setLoading();
   }
 
@@ -97,7 +97,7 @@ class _UserDashboardScreenState extends State<UserDashboardScreen> {
                 ),
                 source: RowSource(
                   context: context,
-                  myData: myData,
+                  myData: userList,
                   count: 2,
                 ),
                 checkboxHorizontalMargin: 10,

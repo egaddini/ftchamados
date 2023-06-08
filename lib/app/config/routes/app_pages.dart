@@ -3,7 +3,7 @@ import 'package:chamados/app/features/pages/call_type/screen/call_type_dashboard
 import 'package:chamados/app/features/pages/login/screen/login_screen.dart';
 import 'package:chamados/app/features/pages/menu/screens/home_screen.dart';
 import 'package:chamados/app/features/pages/singup/screen/singup_screen.dart';
-import 'package:chamados/app/features/pages/user/screens/user_dashboard_screen.dart';
+import 'package:chamados/app/features/pages/user/screens/user_list_screen.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -39,7 +39,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.users,
-      page: () => const UserDashboardScreen(),
+      page: () => const UserListScreen(),
       //binding: DashboardBinding(),
     ),
     GetPage(

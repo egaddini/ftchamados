@@ -17,7 +17,7 @@ class _SaveSetorState extends State<SaveSetor> {
 
   final SetorRepository setorRep = SetorRepositoryImpl();
 
-    bool isLoading = false;
+  bool isLoading = false;
 
   @override
   void dispose() {
@@ -80,11 +80,11 @@ class _SaveSetorState extends State<SaveSetor> {
   }
 }
 
-void registrarSetor(BuildContext context) {
+void saveSetorDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (_) => const AlertDialog(
-      title: Center(child: Text('Registrar Setor', style: TextStyle(fontWeight: FontWeight.bold),)),
+      title: Center(child: Text('Cadastrar Setor', style: TextStyle(fontWeight: FontWeight.bold),)),
       content: SizedBox(
         width: 350,
         child: SaveSetor()

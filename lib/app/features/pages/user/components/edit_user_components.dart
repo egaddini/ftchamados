@@ -137,16 +137,16 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
             title: const Text('Alterar Senhas'),
             textColor: Pallete.gradient3,
             children: [
-            addVerticalSpace(4),
-              PasswordField(
-                labelText: "Senha Atual",
-                controller: _senhaAtualEC,
-                validator: [
-                  Validatorless.required('É obrigatório inserir a Senha Atual'),
-                  Validatorless.min(6, 'Senha Atual precisa ter no mínimo 6 caracteres'),
-                ]
-              ),                  
-            addVerticalSpace(10),
+              addVerticalSpace(4),
+                PasswordField(
+                  labelText: "Senha Atual",
+                  controller: _senhaAtualEC,
+                  validator: [
+                    Validatorless.required('É obrigatório inserir a Senha Atual'),
+                    Validatorless.min(6, 'Senha Atual precisa ter no mínimo 6 caracteres'),
+                  ]
+                ),                  
+              addVerticalSpace(10),
               PasswordField(
                 labelText: "Nova Senha",
                 controller: _passwordEC,
@@ -156,7 +156,7 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
                   Validators.difere(_senhaAtualEC, 'A Nova Senha precisa ser diferente da atual'),
                 ]
               ),
-            addVerticalSpace(10),
+              addVerticalSpace(10),
               PasswordField(
                 labelText: 'Confirmar Nova Senha',
                 controller: _confirmPasswordEC,

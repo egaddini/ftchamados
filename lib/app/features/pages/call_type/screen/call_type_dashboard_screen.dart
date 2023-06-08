@@ -2,8 +2,11 @@ library call_type_dashboard;
 
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/call_type.dart';
+import 'package:chamados/app/models/priority.dart';
 import 'package:chamados/app/models/setor.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
+import 'package:chamados/app/utils/repositories/priority/priority_repository.dart';
+import 'package:chamados/app/utils/repositories/priority/priority_repository_impl.dart';
 import 'package:chamados/app/utils/repositories/setor/setor_repository.dart';
 import 'package:chamados/app/utils/repositories/setor/setor_repository_impl.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
@@ -13,8 +16,9 @@ import 'package:validatorless/validatorless.dart';
 
 part '../components/setor.dart';
 part '../components/row_source.dart';
+part '../components/save_priority_dialog.dart';
+part '../components/save_call_type_dialog.dart';
 part '../components/remove_call_type_dialog.dart';
-part '../components/register_call_type_dialog.dart';
 
 class CallTypeListScreen extends StatefulWidget {
   const CallTypeListScreen({super.key});
@@ -169,7 +173,16 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                     Expanded(
                       child: FilledButton(
                         onPressed: () {
-                          registrarSetor(context);
+                          savePriorityDialog(context);
+                        },
+                        child: const Text('Cadastrar Prioridade'),
+                      ),
+                    ),
+                    addHorizontalSpace(10),                    
+                    Expanded(
+                      child: FilledButton(
+                        onPressed: () {
+                          saveSetorDialog(context);
                         },
                         child: const Text('Cadastrar Setor'),
                       ),
@@ -178,7 +191,7 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                     Expanded(
                       child: FilledButton(
                         onPressed: () {
-                          addCallType(context);
+                          saveCallTypeDialog(context);
                         },
                         child: const Text('Cadastrar Tipo de Chamado'),
                       ),

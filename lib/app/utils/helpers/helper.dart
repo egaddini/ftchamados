@@ -137,14 +137,18 @@ void tratarErro(BuildContext context, DioError e) {
 }
 
 Widget buildLoadingIndicator() {
-  return Center(
-    child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const CircularProgressIndicator(),
-          addVerticalSpace(5),
-          const BlinkText('Carregando...'),
-        ],
+  return SizedBox(
+    height: 100,
+    width: 100,
+    child: Center(
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const CircularProgressIndicator(),
+            addVerticalSpace(5),
+            const BlinkText('Carregando...'),
+          ],
+      ),
     ),
   );
 }

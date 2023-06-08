@@ -1,26 +1,26 @@
 part of call_type_dashboard;
 
-void addCallType(BuildContext context) {
+void saveCallTypeDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (_) => const AlertDialog(
-      title: Center(child: Text("Novo Tipo de Chamado", style: TextStyle(fontWeight: FontWeight.bold),)),
+      title: Center(child: Text("Cadastrar Tipo de Chamado", style: TextStyle(fontWeight: FontWeight.bold),)),
       content: SizedBox(
         width: 350,
-        child: SaveCallTypeDialog(),
+        child: SaveCallType(),
       ),
     )
   );
 }
 
-class SaveCallTypeDialog extends StatefulWidget {
-  const SaveCallTypeDialog({super.key});
+class SaveCallType extends StatefulWidget {
+  const SaveCallType({super.key});
 
   @override
-  State<SaveCallTypeDialog> createState() => _SaveCallTypeState();
+  State<SaveCallType> createState() => _SaveCallTypeState();
 }
 
-class _SaveCallTypeState extends State<SaveCallTypeDialog> {
+class _SaveCallTypeState extends State<SaveCallType> {
 
   final _formKey = GlobalKey<FormState>();
 
