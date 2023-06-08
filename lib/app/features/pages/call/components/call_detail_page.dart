@@ -36,7 +36,7 @@ class _CallDetailPageState extends State<CallDetailPage> {
     _ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(widget.call.dataUltAtualizacao));
     _solicitanteC = TextEditingController(text: widget.call.solicitante.email);
     _statusC = TextEditingController(text: widget.call.status);
-    _setorC = TextEditingController(text: widget.call.callType!.setor);
+    _setorC = TextEditingController(text: widget.call.callType!.setor.nome);
     _prioridadeC = TextEditingController(text: widget.call.callType!.prioridade);
     _idC = TextEditingController(text: widget.call.id);
     _tituloC = TextEditingController(text: widget.call.callType!.titulo);
@@ -44,7 +44,7 @@ class _CallDetailPageState extends State<CallDetailPage> {
     _historicoC = TextEditingController(text: 'Não implementei ainda');
     _participantesC = TextEditingController(text: widget.call.participantes.toString());
     _comentarioC = TextEditingController(text: 'Não implementei ainda');
-    _siglaC = TextEditingController(text: widget.call.callType!.sigla);
+    _siglaC = TextEditingController(text: widget.call.callType!.setor.sigla);
   }
   
   @override

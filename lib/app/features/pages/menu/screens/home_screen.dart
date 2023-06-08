@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen>  {
   @override
   void initState() {
     super.initState();
-    _items = userSvc.getAllCallTypes();
+    // _items = userSvc.getAllCallTypes();
   }
 
   @override
@@ -90,7 +90,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                           },
                           itemBuilder: (context, CallType call) {
                             return ListTile(
-                              title: Text('${call.sigla} - ${call.titulo}'),
+                              title: Text('${call.setor.sigla} - ${call.titulo}'),
                             );
                           },
                           onSuggestionSelected: (CallType call) async {

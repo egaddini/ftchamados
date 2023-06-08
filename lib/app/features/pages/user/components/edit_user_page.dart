@@ -1,6 +1,7 @@
 library edit_user_page;
 
 import 'package:chamados/app/constans/pallete.dart';
+import 'package:chamados/app/models/setor.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/shared_components/c_password_field.dart';
 import 'package:chamados/app/shared_components/c_text_form_field.dart';

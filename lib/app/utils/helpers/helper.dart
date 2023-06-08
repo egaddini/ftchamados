@@ -1,5 +1,8 @@
+import 'package:chamados/app/models/error_dto.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 
 Widget addVerticalSpace(double height){
@@ -100,4 +103,59 @@ Future<Map<String, String>> getAuthHeader(bool auth) async {
       'content-type': 'application/json;',
     };
   }
+}
+
+void tratarErro(BuildContext context, DioError e) {
+  Navigator.of(context).pop();
+  if (e.response != null && e.response!.data != null) {
+    ErrorDTO erro = ErrorDTO.fromMap(e.response!.data);
+    if (409.isEqual(erro.status)) {
+      final snackBar = SnackBar(
+        content: Text(erro.message),
+        action: SnackBarAction(
+          label: 'Ver Mais',
+          onPressed: () {
+            moreDetailsDialog(context, 'Já Registrado', erro.message);
+          },
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  } else {
+    final snackBar = SnackBar(
+      content: const Text('Algum problema aconteceu!'),
+      action: SnackBarAction(
+        label: 'Ver Mais',
+        onPressed: () {
+          moreDetailsDialog(context, 'Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}');
+        },
+      ),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+}
+
+Widget buildLoadingIndicator() {
+  return const SizedBox(
+    height: 30,
+    width: 30,
+    child: Center(
+      child: SizedBox(
+        child: CircularProgressIndicator()
+      ),
+    ),
+  );
+}
+
+void snackSucessRegister(BuildContext context, String message) {
+    final snackBar = SnackBar(
+    content: const Text('Registrado com Sucesso!'),
+    action: SnackBarAction(
+      label: 'Ver Mais',
+      onPressed: () {
+        moreDetailsDialog(context, 'Registrado com Sucesso', message);
+      },
+    ),
+  );
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

@@ -5,8 +5,6 @@ import 'package:chamados/app/models/user_info_model.dart';
 abstract class UserService {
   UserInfoModel getLogedUserInfo();
   List<UserInfoModel> getAllUsersInfo();
-  List<CallType> getAllCallTypes();
-  Future<void> addCallType(CallType newCall);
 }
 
 class UserServiceImpl implements UserService {
@@ -50,41 +48,8 @@ class UserServiceImpl implements UserService {
     return getAllUsersInfo().firstWhere((userInfo) => userInfo.id == id, orElse: () => UserInfoModel(id: 1, email: 'eddergaddini@gmail.com', nome: 'Edder', sobrenome: 'Gaddini', role: 'admin', token: '289798897789', habilitado: true, dataCriacao: DateTime.now().toString()),);
   }
 
-  @override
-  List<CallType> getAllCallTypes() {
-      if(call.isEmpty) {
-        call.addAll([getCallType1(), getCallType2(), getCallType3(), getCallType4(), getCallType5(), getCallType6(), ]);
-      }
-      return call;
-     }
 
   List<CallType> call = [];
-
-  @override
-  Future<void> addCallType(CallType newCall) async {
-    call.add(newCall);
-    print(newCall.descricao);
-  }
-
-  CallType getCallType1() {
-    return CallType(id: 1, sigla: 'TEC', setor: 'Tecnologia', titulo: 'Formatar computador', prioridade: 'URGENTE', descricao: 'Para caso seu computador tenha problemas ou esteja com virus.');
-  }
-  CallType getCallType2() {
-    return CallType(id: 2, sigla: 'TEC', setor: 'Tecnologia', titulo: 'Formatar calculadora', prioridade: 'SEM PRIORIDADE', descricao: 'Para caso sua calculadora apresente problemas.');
-  }
-  CallType getCallType3() {
-    return CallType(id: 3, sigla: 'TEC', setor: 'Tecnologia', titulo: 'Erro visual na aplicação X.', prioridade: 'LEVE', descricao: 'Para caso seja identificado erro visual em algum componente da aplicação X.');
-  }
-  CallType getCallType4() {
-    return CallType(id: 4, sigla: 'INF', setor: 'Infraestrutura', titulo: 'Teclado Novo', prioridade: 'MÉDIA', descricao: 'Solicitação de periférico.');
-  }
-  CallType getCallType5() {
-    return CallType(id: 5, sigla: 'INF', setor: 'Infraestrutura', titulo: 'Problema na catraca de acesso a empresa', prioridade: 'URGENTE', descricao: 'Problema relacionado ao acesso a empresa.');
-  }
-  CallType getCallType6() {
-    return CallType(id: 6, sigla: 'GEN', setor: 'Todos', titulo: 'Chamado', prioridade: 'A VERIFICAR', descricao: 'Para criar chamado de problemas\necessidades que não tenham sido cadastradas.');
-  }
-
   
 }
 

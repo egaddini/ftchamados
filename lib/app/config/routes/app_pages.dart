@@ -19,12 +19,12 @@ class AppPages {
     ),
     GetPage(
       name: Routes.home,
-      page: () => HomeScreen(),
+      page: () => const HomeScreen(),
       //binding: DashboardBinding(),
     ),
       GetPage(
       name: Routes.singup,
-      page: () => SingupScreen(),
+      page: () => const SingupScreen(),
       //binding: DashboardBinding(),
     ),
     ///   GetPage(
@@ -44,7 +44,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.callType,
-      page: () => const CallTypeDashboardScreen(),
+      page: () => const CallTypeListScreen(),
       //binding: DashboardBinding(),
     ),
   ];

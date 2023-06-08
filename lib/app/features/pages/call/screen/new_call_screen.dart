@@ -36,7 +36,7 @@ class _NewCallScreenState extends State<NewCallScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Novo chamado - ${_callType.sigla} ${_callType.titulo}')),
+      appBar: AppBar(title: Text('Novo chamado - ${_callType.setor.nome} ${_callType.titulo}')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(18),
         child: Column(
@@ -47,7 +47,7 @@ class _NewCallScreenState extends State<NewCallScreen> {
                 Expanded(
                   child: TextField(
                     readOnly: true,
-                    controller: TextEditingController(text: _callType.setor),
+                    controller: TextEditingController(text: _callType.setor.nome),
                     decoration: const InputDecoration(
                       labelText: 'Setor',
                     ),
