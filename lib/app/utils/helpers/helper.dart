@@ -1,3 +1,4 @@
+import 'package:blinking_text/blinking_text.dart';
 import 'package:chamados/app/models/error_dto.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:dio/dio.dart';
@@ -136,13 +137,14 @@ void tratarErro(BuildContext context, DioError e) {
 }
 
 Widget buildLoadingIndicator() {
-  return const SizedBox(
-    height: 30,
-    width: 30,
-    child: Center(
-      child: SizedBox(
-        child: CircularProgressIndicator()
-      ),
+  return Center(
+    child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          const CircularProgressIndicator(),
+          addVerticalSpace(5),
+          const BlinkText('Carregando...'),
+        ],
     ),
   );
 }

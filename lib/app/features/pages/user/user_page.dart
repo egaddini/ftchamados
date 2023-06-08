@@ -23,7 +23,7 @@ class _UserPage extends State<UserPage> {
   }
 
   @override
-    void initState() {
+  void initState() {
     super.initState();
     _init();
   }
