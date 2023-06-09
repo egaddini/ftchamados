@@ -5,11 +5,12 @@ import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/models/priority.dart';
 import 'package:chamados/app/models/setor.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
+import 'package:chamados/app/utils/repositories/call_type/call_type_repository.dart';
+import 'package:chamados/app/utils/repositories/call_type/call_type_repository_impl.dart';
 import 'package:chamados/app/utils/repositories/priority/priority_repository.dart';
 import 'package:chamados/app/utils/repositories/priority/priority_repository_impl.dart';
 import 'package:chamados/app/utils/repositories/setor/setor_repository.dart';
 import 'package:chamados/app/utils/repositories/setor/setor_repository_impl.dart';
-import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:validatorless/validatorless.dart';
@@ -28,35 +29,46 @@ class CallTypeListScreen extends StatefulWidget {
 }
 
 class _CallTypeListState extends State<CallTypeListScreen> {
-  bool sort = true;
-  List<CallType>? filterData, myData;
-  UserService userSvc = UserServiceImpl();
 
+  bool sort = true;
+  bool isLoading = true;
+  List<CallType> filterData = [], myData = [];
+  TextEditingController controller = TextEditingController();
+  CallTypeRepository callRepo = CallTypeRepositoryImpl();
+
+  @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  Future<void> _init() async {
+    // myData.addAll(await callRepo.());
+    // filterData.addAll(userList);
+    _setLoading();
+  }
+
+  void _setLoading() {
+    setState(() {
+      isLoading = isLoading ? false : true;
+    });
+  }
 
   onsortColum(int columnIndex, bool ascending) {
     if (columnIndex == 0) {
       if (ascending) {
-        filterData!.sort((a, b) => a.titulo.toString().compareTo(b.titulo.toString()));
+        filterData.sort((a, b) => a.titulo.toString().compareTo(b.titulo.toString()));
       } else {
-        filterData!.sort((a, b) => b.titulo.toString().compareTo(a.titulo.toString()));
+        filterData.sort((a, b) => b.titulo.toString().compareTo(a.titulo.toString()));
       }
     }
   }
 
   @override
-  void initState() {
-    filterData = [];
-    myData = [];
-    super.initState();
-  }
-
-  TextEditingController controller = TextEditingController();
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Tipo de chamados')),
-      body: SingleChildScrollView(
+      body: isLoading ? buildLoadingIndicator() : SingleChildScrollView(
         physics: const AlwaysScrollableScrollPhysics(),
         child: Container(
           padding: const EdgeInsets.all(8.0),
@@ -90,14 +102,14 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                       ),
                       onChanged: (value) {
                         setState(() {
-                          myData = filterData!.where((element) => element.titulo.toString().contains(value)).toList();
+                          myData = filterData.where((element) => element.titulo.toString().contains(value)).toList();
                         });
                       },
                     ),
                     source: RowSource(
                       context: context,
                       myData: myData,
-                      count: myData?.length,
+                      count: myData.length,
                     ),
       
                     checkboxHorizontalMargin: 10,

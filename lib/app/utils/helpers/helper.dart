@@ -165,3 +165,7 @@ void snackSucessRegister(BuildContext context, String message) {
   );
   ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }
+
+Future<void> waitThreeSeconds() {
+  return Future.delayed(Duration(seconds: 3));
+}

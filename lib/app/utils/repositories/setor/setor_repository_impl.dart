@@ -10,7 +10,7 @@ import 'package:dio/dio.dart';
 
 class SetorRepositoryImpl implements SetorRepository {
   
-  final String BASE_PATH = "http://localhost:9090/api/v1/call/setor";
+  final String BASE_PATH = "http://localhost:9090/api/v1/call-type/setor";
 
   @override
   Future<String> register(Setor setor) async {

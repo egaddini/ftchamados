@@ -6,7 +6,7 @@ void saveCallTypeDialog(BuildContext context) {
     builder: (_) => const AlertDialog(
       title: Center(child: Text("Cadastrar Tipo de Chamado", style: TextStyle(fontWeight: FontWeight.bold),)),
       content: SizedBox(
-        width: 350,
+        width: 400,
         child: SaveCallType(),
       ),
     )
@@ -22,48 +22,70 @@ class SaveCallType extends StatefulWidget {
 
 class _SaveCallTypeState extends State<SaveCallType> {
 
+  bool isLoading = true;
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController _setorC = TextEditingController();
+  final TextEditingController _tituloC = TextEditingController();
+  final TextEditingController _prioridadeC = TextEditingController();
+  final TextEditingController _descricaoC = TextEditingController();
 
-  final TextEditingController _setor = TextEditingController();
-  final TextEditingController _tituloController = TextEditingController();
-  final TextEditingController _prioridadeController = TextEditingController();
-  final TextEditingController _descricaoController = TextEditingController();
-
-  List<Setor> _setores = [
-    Setor(sigla: "sigla", nome: "nome"),
-    Setor(sigla: "sigla", nome: "nome"),
-    Setor(sigla: "sigla", nome: "nome"),
-    Setor(sigla: "sigla", nome: "nome"),
-  ];
-
+  List<Setor> setores = [];
+  List<PriorityModel> prioridades = [];
 
   @override
   void dispose() {
-    _setor.dispose();
-    _tituloController.dispose();
-    _prioridadeController.dispose();
-    _descricaoController.dispose();
+    _setorC.dispose();
+    _tituloC.dispose();
+    _prioridadeC.dispose();
+    _descricaoC.dispose();
     super.dispose();
+  }
+
+    @override
+  void initState() {
+    super.initState();
+    _init();
+  }
+
+  Future<void> _init() async {
+    // myData.addAll(await callRepo.());
+    // filterData.addAll(userList);
+    await waitThreeSeconds();
+    _setLoading();
+  }
+
+  void _setLoading() {
+    setState(() {
+      isLoading = isLoading ? false : true;
+    });
   }
   
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return isLoading ? buildLoadingIndicator() : SingleChildScrollView(
       child: Form(
         key: _formKey,
         child: Column(
           children: [
             addVerticalSpace(5),
+            TextFormField(
+              controller: _tituloC,
+              decoration: const InputDecoration(
+                labelText: 'Titulo',
+              ),
+              validator: Validatorless.required('Titulo Obrigatório'), 
+            ),         
+            addVerticalSpace(10),
             TypeAheadField<Setor>(
               textFieldConfiguration: TextFieldConfiguration(
-                controller: _setor,
+                controller: _setorC,
                 decoration: const InputDecoration(
-                  labelText: 'Cargo',
+                  labelText: 'Setor',
                   suffixIcon: Icon(Icons.arrow_drop_down),                                                          
                 ),
               ),
               suggestionsCallback: (pattern) {
-                return _setores;
+                return setores;
               },
               itemBuilder: (context, Setor setor) {
                 return ListTile(
@@ -72,29 +94,37 @@ class _SaveCallTypeState extends State<SaveCallType> {
               },
               onSuggestionSelected: (Setor setor) async {
                 setState(() {
-                  _setor.text = setor.nome; 
+                  _setorC.text = setor.nome; 
                 });
               },
             ),
             addVerticalSpace(10),
-            TextFormField(
-              controller: _tituloController,
-              decoration: const InputDecoration(
-                labelText: 'Titulo',
+            TypeAheadField<PriorityModel>(
+              textFieldConfiguration: TextFieldConfiguration(
+                controller: _prioridadeC,
+                decoration: const InputDecoration(
+                  labelText: 'Prioridades',
+                  suffixIcon: Icon(Icons.arrow_drop_down),                                                          
+                ),
               ),
-              validator: Validatorless.required('Titulo Obrigatório'), 
+              suggestionsCallback: (pattern) {
+                return prioridades;
+              },
+              itemBuilder: (context, PriorityModel priority) {
+                return ListTile(
+                  title: Text(priority.nome),
+                );
+              },
+              onSuggestionSelected: (PriorityModel priority) async {
+                setState(() {
+                  _prioridadeC.text = priority.nome; 
+                });
+              },
             ),         
             addVerticalSpace(10),
             TextFormField(
-              controller: _prioridadeController,
-              decoration: const InputDecoration(
-                labelText: 'Prioridade',
-              ),
-              validator: Validatorless.required('Prioridade Obrigatório'), 
-            ),         
-            addVerticalSpace(10),
-            TextFormField(
-              controller: _descricaoController,
+              controller: _descricaoC,
+              maxLines: 5,
               decoration: const InputDecoration(
                 labelText: 'Descrição',
               ),
@@ -111,19 +141,19 @@ class _SaveCallTypeState extends State<SaveCallType> {
                     });
                     // CallType(id: null, 
                     //   sigla: _siglaController.text,
-                    //   setor: _setorController.text, 
-                    //   titulo: _tituloController.text, 
-                    //   prioridade: _prioridadeController.text, 
-                    //   descricao: _descricaoController.text,
+                    //   setor: _setorCController.text, 
+                    //   titulo: _tituloC.text, 
+                    //   prioridade: _prioridadeC.text, 
+                    //   descricao: _descricaoC.text,
                     // );
                     // UserService userService = UserServiceImpl();
                     // userService.addCallType(                    
                     //   CallType(id: null, 
                     //   sigla: _siglaController.text,
-                    //   setor: _setorController.text, 
-                    //   titulo: _tituloController.text, 
-                    //   prioridade: _prioridadeController.text, 
-                    //   descricao: _descricaoController.text,
+                    //   setor: _setorCController.text, 
+                    //   titulo: _tituloC.text, 
+                    //   prioridade: _prioridadeC.text, 
+                    //   descricao: _descricaoC.text,
                     // ));
                     String response = 'null'; //await authRepository.authenticate(loginModel!);
                     // ignore: unnecessary_null_comparison

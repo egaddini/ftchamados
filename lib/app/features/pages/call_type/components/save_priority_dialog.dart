@@ -38,12 +38,13 @@ class _SavePriorityState extends State<SavePriority> {
     _descricaoC.dispose();
     super.dispose();
   }
+
   void _setLoading() {
     setState(() {
       isLoading = isLoading ? false : true;
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return isLoading ? buildLoadingIndicator() : SingleChildScrollView (
@@ -55,7 +56,7 @@ class _SavePriorityState extends State<SavePriority> {
             TextFormField(
               controller: _descricaoC,
               decoration: const InputDecoration(
-                labelText: 'Setor',
+                labelText: 'Nome',
               ),
               validator: Validatorless.required('Setor Obrigatório'), 
             ),
@@ -89,13 +90,13 @@ class _SavePriorityState extends State<SavePriority> {
                 onPressed: () {     
                   var formValid = _formKey.currentState?.validate() ?? false;
                   if (formValid) {
-                  _setLoading();
-                  priRepo.register(PriorityModel(nome: _descricaoC.text, peso: int.parse(_pesoC.text))).then((_) {
-                  Navigator.pop(context);
-                  snackSucessRegister(context, 'Prioridade ${_descricaoC.text} registrado com sucesso!');
-                  }).catchError((error) {
-                    tratarErro(context, error);
-                  });                    
+                    _setLoading();
+                    priRepo.register(PriorityModel(nome: _descricaoC.text, peso: int.parse(_pesoC.text))).then((_) {
+                    Navigator.pop(context);
+                    snackSucessRegister(context, 'Prioridade ${_descricaoC.text} registrado com sucesso!');
+                    }).catchError((error) {
+                      tratarErro(context, error);
+                    });                    
                   }
                 },
               ),

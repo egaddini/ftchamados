@@ -10,7 +10,7 @@ import 'package:dio/dio.dart';
 
 class PriorityRepositoryImpl implements PriorityRepository {
   
-  final String BASE_PATH = "http://localhost:9090/api/v1/call/priority";
+  final String BASE_PATH = "http://localhost:9090/api/v1/call-type/priority";
 
   @override
   Future<String> register(PriorityModel priority) async {
