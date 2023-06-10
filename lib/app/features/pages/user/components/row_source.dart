@@ -1,9 +1,10 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of user_dashboard;
 
 class RowSource extends DataTableSource {
-  var myData;
-  final count;
-  final context;
+  dynamic myData;
+  int count;
+  BuildContext context;
 
 
   RowSource({
@@ -64,49 +65,72 @@ DataRow recentFileDataRow(UserInfoModel user, BuildContext context) {
 }
 
 void removeClient(BuildContext context, UserInfoModel user) {
-
-  UserRepository userRepo = UserRepositoryImpl();
-  
   showDialog(
     context: context,
     builder: (_) => AlertDialog(
-      title: const Text("Deletar Cliente"),
-      content: Text("O usuário: ${user.email ?? "?"} será deletado para sempre, deseja realmente continuar?"),
-      actions: [
-        TextButton(
-          onPressed: () async {
-            try {
-              waitProgressBar(context); 
-              await userRepo.delete(user.id!);
-              Navigator.pop(context);
-              final snackBar = SnackBar(
-                content: const Text('Usuário removido com sucesso!'),
-                action: SnackBarAction(
-                  label: 'Ver Mais',
-                  onPressed: () {
-                    moreDetailsDialog(context, 'Usuário removido com sucesso!', 'O usuário: ${user.email ?? "?"} foi deletado.');
-                  },
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            } on DioError catch (e) {
-              Navigator.of(context).pop();
-              final snackBar = SnackBar(
-                content: const Text('Algum problema aconteceu!'),
-                action: SnackBarAction(
-                  label: 'Ver Mais',
-                  onPressed: () {
-                    moreDetailsDialog(context, 'Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}');
-                  },
-                ),
-              );
-              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-            }
-            Navigator.pop(context);
-          },
-          child: const Center(child: Icon(Icons.delete_outline)),
-        ),
-      ],
+      title: const Center(child: Text("Deletar Cliente")),
+      content: DeleteUserDialog(user: user),
+      actions: null,
     )
   );
+}
+
+
+class DeleteUserDialog extends StatefulWidget {
+
+  final UserInfoModel user;
+
+  const DeleteUserDialog({
+    Key? key,
+    required this.user,
+  }) : super(key: key);
+
+  @override
+  State<DeleteUserDialog> createState() => _DeleteUserDialogState();
+}
+
+class _DeleteUserDialogState extends State<DeleteUserDialog> {
+
+  bool isLoading = false;
+  late UserInfoModel user;
+
+  UserRepository userRepo = UserRepositoryImpl();
+
+  @override
+  void initState() {
+    user = widget.user;
+    super.initState();
+  }
+
+  void _setLoading() {
+    setState(() {
+      isLoading = isLoading ? false : true;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return isLoading ? buildLoadingIndicator() : SingleChildScrollView(
+      child: Column(
+        children: [
+          Text("O usuário: ${user.email ?? "?"} será deletado para sempre, deseja realmente continuar?"),
+          addVerticalSpace(10),
+          TextButton(
+            onPressed: () async {
+                _setLoading();
+                userRepo.delete(user.id!).then((_) {
+                  Navigator.pop(context);
+                  moreDetailsDialog(context, 'Usuário removido com sucesso!', 'O usuário: ${user.email ?? "?"} foi deletado.');
+                }).catchError((error) {
+                  _setLoading();
+                  Navigator.pop(context);
+                  tratarErro(context, error);
+                });               
+              },
+            child: const Center(child: Icon(Icons.delete_outline)),
+          ),
+        ],
+      ),
+    );
+  }
 }

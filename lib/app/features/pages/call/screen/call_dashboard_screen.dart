@@ -3,7 +3,6 @@ library call_dashboard;
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/features/pages/call/components/call_detail_page.dart';
 import 'package:chamados/app/models/call.dart';
-import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -19,8 +18,6 @@ class CallDashboardScreen extends StatefulWidget {
 class _CallDashboardScreenState extends State<CallDashboardScreen> {
   bool sort = true;
   List<Call>? filterData, myData;
-  UserService userSvc = UserServiceImpl();
-
 
   onsortColum(int columnIndex, bool ascending) {
     if (columnIndex == 0) {
@@ -84,7 +81,7 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                   source: RowSource(
                     context: context,
                     myData: myData,
-                    count: myData?.length,
+                    count: myData!.length,
                   ),
         
                   checkboxHorizontalMargin: 10,

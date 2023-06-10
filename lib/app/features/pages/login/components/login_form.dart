@@ -26,7 +26,7 @@ class _LoginFormState extends State<LoginForm> {
     super.dispose();
   }
 
-    void _setLoading() {
+  void _setLoading() {
     setState(() {
       isLoading = isLoading ? false : true;
     });

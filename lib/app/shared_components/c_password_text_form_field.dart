@@ -13,17 +13,16 @@ class PasswordTextFormField extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _PasswordTextFormFieldState createState() => _PasswordTextFormFieldState();
+  PasswordTextFormFieldState createState() => PasswordTextFormFieldState();
 }
 
-class _PasswordTextFormFieldState extends State<PasswordTextFormField> {
-  bool _obscureText = true;
+class PasswordTextFormFieldState extends State<PasswordTextFormField> {
 
   @override
   Widget build(BuildContext context) {
   return TextFormField(
     controller: widget.controller,
-    obscureText: _obscureText,
+    obscureText: true,
     decoration: const InputDecoration(
       contentPadding: EdgeInsets.all(23),
       labelText: 'Senha',

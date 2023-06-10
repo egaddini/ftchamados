@@ -1,7 +1,6 @@
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/utils/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -17,7 +16,6 @@ class NewCallScreen extends StatefulWidget {
 
 class _NewCallScreenState extends State<NewCallScreen> {
 
-  final UserService userService = UserServiceImpl();
   late CallType _callType;
   late String _emailUsuario;
   late TextEditingController _descreverProblemaC;
@@ -29,7 +27,7 @@ class _NewCallScreenState extends State<NewCallScreen> {
   void initState() {
     super.initState();
     _callType =  widget.call;
-    _emailUsuario = userService.getLogedUserInfo().email.toString();
+    //_emailUsuario = userService.getLogedUserInfo().email.toString();
     _descreverProblemaC = TextEditingController(text: '');
   }
 

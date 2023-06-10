@@ -10,13 +10,13 @@ import 'package:dio/dio.dart';
 
 class PriorityRepositoryImpl implements PriorityRepository {
   
-  final String BASE_PATH = "http://localhost:9090/api/v1/call-type/priority";
+  final String _basePath = "http://localhost:9090/api/v1/call-type/priority";
 
   @override
   Future<String> register(PriorityModel priority) async {
     String message;
     final result = await Dio().post(
-      BASE_PATH,
+      _basePath,
       data: jsonEncode(priority.toMap()),
       options: Options(headers: await getAuthHeader(false)),
     );
@@ -34,7 +34,7 @@ class PriorityRepositoryImpl implements PriorityRepository {
     List<PriorityModel> results = [];
 
     final response = await Dio().get(
-      BASE_PATH, 
+      _basePath, 
       options: Options(headers: await getAuthHeader(false)),
     );
     if (response.statusCode == 200) {
@@ -54,7 +54,7 @@ class PriorityRepositoryImpl implements PriorityRepository {
   Future<String> delete(int id) async {
     String message;
     final result = await Dio().delete(
-      '$BASE_PATH/$id',
+      '$_basePath/$id',
       options: Options(headers: await getAuthHeader(true)),
     );
     if (result.statusCode == 200) {

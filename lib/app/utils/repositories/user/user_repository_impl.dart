@@ -15,8 +15,8 @@ class UserRepositoryImpl implements UserRepository {
   var data = [];
   String? token;
   List<UserInfoModel> results = [];
-  static const String BASE_PATH = "http://localhost:9090/api/v1/user";
-  static const String ATIVA_PATH = "/ativa";
+  static const String _basePath = "http://localhost:9090/api/v1/user";
+  static const String _ativaPath = "/ativa";
   LocalStorageServices localStorage = LocalStorageServices();  
 
   @override
@@ -79,7 +79,7 @@ class UserRepositoryImpl implements UserRepository {
     List<UserInfoModel> results = [];
 
     final response = await Dio().get(
-      BASE_PATH, 
+      _basePath, 
       options: Options(headers: await getAuthHeader(false)),
     );
     if (response.statusCode == 200) {
@@ -89,7 +89,6 @@ class UserRepositoryImpl implements UserRepository {
         results = results.where((element) => element.email!.toLowerCase().contains((query.toLowerCase()))).toList();
       }
     } else {
-      print(response.statusMessage);
       final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
       throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
     }
@@ -100,7 +99,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<String> ativaUsuario(String email) async {
     String message;
     final result = await Dio().get(
-      '$BASE_PATH$ATIVA_PATH/$email',
+      '$_basePath$_ativaPath/$email',
       options: Options(headers: await getAuthHeader(true)),
     );
     if (result.statusCode == 200) {
@@ -116,7 +115,7 @@ class UserRepositoryImpl implements UserRepository {
   Future<String> delete(int id) async {
     String message;
     final result = await Dio().delete(
-      '$BASE_PATH/$id',
+      '$_basePath/$id',
       options: Options(headers: await getAuthHeader(true)),
     );
     if (result.statusCode == 200) {

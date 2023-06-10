@@ -6,7 +6,6 @@ import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/repositories/user/user_repository.dart';
 import 'package:chamados/app/utils/repositories/user/user_repository_impl.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 

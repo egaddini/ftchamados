@@ -1,9 +1,9 @@
 part of call_type_dashboard;
 
 class RowSource extends DataTableSource {
-  var myData;
-  final count;
-  final context;
+  dynamic myData;
+  int count;
+  BuildContext context;
 
 
   RowSource({

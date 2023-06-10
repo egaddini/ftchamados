@@ -6,13 +6,13 @@ import 'package:intl/intl.dart';
 class CallDetailPage extends StatefulWidget {
   final Call call;
 
-  CallDetailPage(this.call);
+  const CallDetailPage(this.call, {super.key});
 
   @override
-  _CallDetailPageState createState() => _CallDetailPageState();
+  CallDetailPageState createState() => CallDetailPageState();
 }
 
-class _CallDetailPageState extends State<CallDetailPage> {
+class CallDetailPageState extends State<CallDetailPage> {
 
   late TextEditingController _dataAberturaC;
   late TextEditingController _ultAtualizacaoC;

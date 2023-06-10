@@ -21,9 +21,8 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
   final _passwordEC = TextEditingController();
   final _confirmPasswordEC = TextEditingController();
   final _senhaAtualEC = TextEditingController();
-  UserService userSvc = UserServiceImpl();
   late bool _isAdmin;
-  List<String> _items = ['ADMIN', 'USER'];
+  final List<String> _items = ['ADMIN', 'USER'];
   
   @override
   void initState() {
@@ -255,6 +254,7 @@ class _CheckBoxFieldState extends State<CheckBoxField> {
 
   late bool isActive;
   late String email;
+  bool isLoading = false;
 
   final UserRepository _userRepository = UserRepositoryImpl();
 
@@ -273,33 +273,17 @@ class _CheckBoxFieldState extends State<CheckBoxField> {
           value: isActive,
           onChanged: (value) {      
             setState(() {
-                isActive = value!;
-            });      
-            setState(() async {
-              try {
-                waitProgressBar(context); 
-                await _userRepository.ativaUsuario(email);
-                Navigator.of(context).pop();
-                String mensagem;
-                if (isActive) {
-                   mensagem = 'habilitada'; 
-                } else {
-                  mensagem = 'desabilitada';
-                }
-                moreDetailsDialog(context, 'Registrado com sucesso', 'Conta: $email $mensagem.');
-              } on DioError catch (e) {
+              isActive = value!;
+              waitProgressBar(context); 
+              _userRepository.ativaUsuario(email).then((_) {
                 Navigator.pop(context);
-                final snackBar = SnackBar(
-                  content: const Text('Algum problema aconteceu!'),
-                  action: SnackBarAction(
-                    label: 'Ver Mais',
-                    onPressed: () {
-                      moreDetailsDialog(context, 'Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}');
-                    },
-                  ),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }               
+                String mensagem;
+                mensagem = (isActive) ? 'habilitada' : 'desabilitada' ;
+                moreDetailsDialog(context, 'Registrado com sucesso', 'Conta: $email $mensagem.');
+              }).catchError((error) {
+                Navigator.pop(context);
+                tratarErro(context, error);
+              });                 
             });
           },
         ),

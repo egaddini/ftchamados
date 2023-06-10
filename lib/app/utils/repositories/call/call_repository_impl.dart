@@ -10,14 +10,14 @@ import 'call_repository.dart';
 
 class CallRepositoryImpl implements CallRepository {
 
-  final String BASE_PATH = "http://localhost:9090/api/v1/auth";
+  final String _basePath = "http://localhost:9090/api/v1/auth";
 
 
   @override
   Future<String> register(Call call) async {
     String message;
     final result = await Dio().post(
-      BASE_PATH,
+      _basePath,
       data: jsonEncode(call.toMap()),
       options: Options(headers: await getAuthHeader(false)),
     );

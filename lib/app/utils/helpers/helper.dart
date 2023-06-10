@@ -38,12 +38,10 @@ void waitProgressBar(BuildContext context) {
     context: context,
     barrierDismissible: false,
     builder: (BuildContext context) {
-      return const AlertDialog(
-        title: Center(child: Text('Aguarde')),
-        content: SizedBox(width: 4, height: 4 , child: CircularProgressIndicator()),
-        actions: [
-          Center(child: Text('Processando...')),
-        ],
+      return AlertDialog(
+        title: const Center(child: Text('Aguarde')),
+        content: buildLoadingIndicator(),
+        actions: null,
       );
     },
   );
@@ -195,5 +193,5 @@ void snackSucessRegister(BuildContext context, String message) {
 }
 
 Future<void> waitThreeSeconds() {
-  return Future.delayed(Duration(seconds: 3));
+  return Future.delayed(const Duration(seconds: 3));
 }
