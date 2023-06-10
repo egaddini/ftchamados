@@ -111,6 +111,7 @@ void tratarErro(BuildContext context, DioError e) {
     ErrorDTO erro = ErrorDTO.fromMap(e.response!.data);
     if (409.isEqual(erro.status)) {
       final snackBar = SnackBar(
+        behavior: SnackBarBehavior.floating,
         content: Text(erro.message),
         action: SnackBarAction(
           label: 'Ver Mais',
@@ -123,6 +124,7 @@ void tratarErro(BuildContext context, DioError e) {
     }
     if (401.isEqual(erro.status)) {
       final snackBar = SnackBar(
+        behavior: SnackBarBehavior.floating,
         content: Text(erro.message),
         action: SnackBarAction(
           label: 'Ver Mais',
@@ -135,6 +137,7 @@ void tratarErro(BuildContext context, DioError e) {
     }
     if (403.isEqual(erro.status)) {
       final snackBar = SnackBar(
+        behavior: SnackBarBehavior.floating,
         content: Text(erro.message),
         action: SnackBarAction(
           label: 'Ver Mais',
@@ -148,6 +151,7 @@ void tratarErro(BuildContext context, DioError e) {
   } else {
     final snackBar = SnackBar(
       content: const Text('Algum problema aconteceu!'),
+      behavior: SnackBarBehavior.floating,
       action: SnackBarAction(
         label: 'Ver Mais',
         onPressed: () {
@@ -179,6 +183,7 @@ Widget buildLoadingIndicator() {
 void snackSucessRegister(BuildContext context, String message) {
     final snackBar = SnackBar(
     content: const Text('Registrado com Sucesso!'),
+    behavior: SnackBarBehavior.floating,
     action: SnackBarAction(
       label: 'Ver Mais',
       onPressed: () {

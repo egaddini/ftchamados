@@ -1,6 +1,3 @@
-// ignore_for_file: file_names
-
-import 'package:chamados/app/constans/pallete.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatelessWidget {
@@ -20,24 +17,7 @@ class CustomTextFormField extends StatelessWidget {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(23),
-        labelText: labelText,
-        labelStyle: const TextStyle(
-          color: Pallete.backgroundColor
-        ),
-        border: const OutlineInputBorder(),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Pallete.gradient3,
-            width: 2,
-          ),
-        ),
-        /*suffix: GestureDetector(
-          child: const Icon(Icons.cancel),
-            onTap: () {
-              controller.clear();
-            },
-        )*/        
+        labelText: labelText,        
       ),
       validator: (value) {
         for (final validate in validator) {

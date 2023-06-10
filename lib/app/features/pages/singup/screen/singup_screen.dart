@@ -22,9 +22,18 @@ class SingupScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: null,
-      body: SizedBox(
-        width: 400,
-        child: SingupForm()
+      body:Center(
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                width: 400,
+                child: SingupForm()
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
