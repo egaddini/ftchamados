@@ -107,7 +107,6 @@ Future<Map<String, String>> getAuthHeader(bool auth) async {
 }
 
 void tratarErro(BuildContext context, DioError e) {
-  Navigator.of(context).pop();
   if (e.response != null && e.response!.data != null) {
     ErrorDTO erro = ErrorDTO.fromMap(e.response!.data);
     if (409.isEqual(erro.status)) {
@@ -117,6 +116,30 @@ void tratarErro(BuildContext context, DioError e) {
           label: 'Ver Mais',
           onPressed: () {
             moreDetailsDialog(context, 'Já Registrado', erro.message);
+          },
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    if (401.isEqual(erro.status)) {
+      final snackBar = SnackBar(
+        content: Text(erro.message),
+        action: SnackBarAction(
+          label: 'Ver Mais',
+          onPressed: () {
+            moreDetailsDialog(context, 'Credenciais invalidas', erro.message);
+          },
+        ),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    if (403.isEqual(erro.status)) {
+      final snackBar = SnackBar(
+        content: Text(erro.message),
+        action: SnackBarAction(
+          label: 'Ver Mais',
+          onPressed: () {
+            moreDetailsDialog(context, 'Conta Inativa', erro.message);
           },
         ),
       );

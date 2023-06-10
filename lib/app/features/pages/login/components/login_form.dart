@@ -17,11 +17,19 @@ class _LoginFormState extends State<LoginForm> {
 
   LoginModel? loginModel;
 
+  bool isLoading = false;
+
   @override
   void dispose() {
     _emailEC.dispose();
     _passwordEC.dispose();
     super.dispose();
+  }
+
+    void _setLoading() {
+    setState(() {
+      isLoading = isLoading ? false : true;
+    });
   }
 
   @override
@@ -33,7 +41,7 @@ class _LoginFormState extends State<LoginForm> {
         child: Center(
           child: SizedBox(
             width: 400,
-            child: Column(
+            child: isLoading ? buildLoadingIndicator() : Column(
               children: [
                 addVerticalSpace(60),
                 const Text(
@@ -66,7 +74,7 @@ class _LoginFormState extends State<LoginForm> {
                     FilledButton(                                  
                       child: const Text('Continuar',),
                       onPressed: () async {
-                      var formValid = _formKey.currentState?.validate() ?? false;
+                        var formValid = _formKey.currentState?.validate() ?? false;
                         if (formValid) {
                           setState(() {
                             loginModel = LoginModel(
@@ -75,49 +83,13 @@ class _LoginFormState extends State<LoginForm> {
                             );
                           }); 
                           try {
-                            waitProgressBar(context); 
+                            _setLoading();
+                        await waitThreeSeconds();
                             await authRepository.authenticate(loginModel!);
                             Navigator.popAndPushNamed(context, 'home');
                           } on DioError catch (e) {
-                            Navigator.of(context).pop();
-                            if (e.response != null && e.response!.data != null) {
-                              ErrorDTO erro = ErrorDTO.fromMap(e.response!.data);
-                              if (403.isEqual(erro.status)) {
-                                final snackBar = SnackBar(
-                                  content: Text(erro.message),
-                                  action: SnackBarAction(
-                                    label: 'Ver Mais',
-                                    onPressed: () {
-                                      moreDetailsDialog(context, 'Conta Inativa', erro.message);
-                                    },
-                                  ),
-                                );
-                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                              }
-                              if (401.isEqual(erro.status)) {
-                                final snackBar = SnackBar(
-                                  content: Text(erro.message),
-                                  action: SnackBarAction(
-                                    label: 'Ver Mais',
-                                    onPressed: () {
-                                      moreDetailsDialog(context, 'Credenciais invalidas', erro.message);
-                                    },
-                                  ),
-                                );
-                                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                              }
-                            } else {
-                              final snackBar = SnackBar(
-                                content: const Text('Algum problema aconteceu!'),
-                                action: SnackBarAction(
-                                  label: 'Ver Mais',
-                                  onPressed: () {
-                                    moreDetailsDialog(context, 'Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}');
-                                  },
-                                ),
-                              );
-                              ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                            }
+                            _setLoading();
+                            tratarErro(context, e);
                           }
                         } 
                       }, 
