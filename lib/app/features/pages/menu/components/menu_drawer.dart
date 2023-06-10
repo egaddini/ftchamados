@@ -12,6 +12,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
   late UserInfoModel? logedUser;
   bool _isAdmin = false;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -24,12 +25,19 @@ class _MenuDrawerState extends State<MenuDrawer> {
     setState(() {
       _isAdmin = logedUser!.isAdmin();
     });
+    _setLoading();
+  }
+
+  void _setLoading() {
+    setState(() {
+      isLoading = isLoading ? false : true;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
+    return  Drawer(
+      child:  isLoading ? buildLoadingIndicator() : ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
@@ -53,7 +61,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                           builder: (_) => EditUserPage(logedUser!)))
                   .then((newContact) {
                 if (newContact != null) {
-                  messageResponse(context, newContact.name + " a sido modificado...!");
+                  //messageResponse(context, newContact.name + " a sido modificado...!");
                   //Logica para alterar usuario logado :D
                 }
               });

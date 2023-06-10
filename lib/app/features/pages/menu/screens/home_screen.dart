@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 library home_screen;
 
+import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/features/pages/call/screen/new_call_screen.dart';
 import 'package:chamados/app/features/pages/user/components/edit_user_page.dart';
-import 'package:chamados/app/features/pages/user/message_response.dart';
 import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/services/user_service.dart';
