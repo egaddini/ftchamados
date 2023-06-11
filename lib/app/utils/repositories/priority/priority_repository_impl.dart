@@ -30,7 +30,7 @@ class PriorityRepositoryImpl implements PriorityRepository {
   }
 
   @override
-  Future<List<PriorityModel>> getSetorList({String? query}) async {   
+  Future<List<PriorityModel>> getPriorityList({String? query}) async {   
     List<PriorityModel> results = [];
 
     final response = await Dio().get(

@@ -2,6 +2,7 @@ library call_type_dashboard;
 
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/call_type.dart';
+import 'package:chamados/app/models/call_type_dto.dart';
 import 'package:chamados/app/models/priority.dart';
 import 'package:chamados/app/models/setor.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';

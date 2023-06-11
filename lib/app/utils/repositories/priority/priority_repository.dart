@@ -4,7 +4,7 @@ abstract class PriorityRepository {
 
   Future<String> register(PriorityModel priority);
   
-  Future<List<PriorityModel>> getSetorList({String? query});
+  Future<List<PriorityModel>> getPriorityList({String? query});
 
   Future<String> delete(int id);
 

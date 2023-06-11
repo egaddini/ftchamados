@@ -65,7 +65,7 @@ class _NewCallScreenState extends State<NewCallScreen> {
                 Expanded(
                   child: TextField(
                     readOnly: true,
-                    controller: TextEditingController(text: _callType.prioridade),
+                    controller: TextEditingController(text: _callType.prioridade.nome),
                     decoration: const InputDecoration(
                       labelText: 'Prioridade',
                     ),

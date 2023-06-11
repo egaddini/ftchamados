@@ -37,11 +37,9 @@ class _HomeScreenState extends State<HomeScreen>  {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: const Center(
           child: Text('Apoio'),
         ),
-        backgroundColor: Pallete.gradient3,
       ),
       endDrawer: const MenuDrawer(),
       body: SingleChildScrollView(
@@ -70,16 +68,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                             textCapitalization: TextCapitalization.words,
                             decoration: const InputDecoration(
                               labelText: 'Digite um texto',
-                              contentPadding: EdgeInsets.all(23),
-                              border: OutlineInputBorder(),
-                              labelStyle: TextStyle(
-                                color: Pallete.backgroundColor
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color: Pallete.gradient3,
-                                ),
-                              ),                                                            
+                              suffixIcon: Icon(Icons.search_outlined),                                                            
                             ),
                           ),
                           suggestionsCallback: (pattern) {

@@ -179,7 +179,7 @@ Widget buildLoadingIndicator() {
 }
 
 void snackSucessRegister(BuildContext context, String message) {
-    final snackBar = SnackBar(
+  final snackBar = SnackBar(
     content: const Text('Registrado com Sucesso!'),
     behavior: SnackBarBehavior.floating,
     action: SnackBarAction(

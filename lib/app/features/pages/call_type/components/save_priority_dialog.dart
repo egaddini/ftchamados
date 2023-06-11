@@ -58,7 +58,7 @@ class _SavePriorityState extends State<SavePriority> {
               decoration: const InputDecoration(
                 labelText: 'Nome',
               ),
-              validator: Validatorless.required('Setor Obrigatório'), 
+              validator: Validatorless.required('Nome Obrigatório'), 
             ),
             addVerticalSpace(10),         
             TypeAheadField<String>(
@@ -91,10 +91,11 @@ class _SavePriorityState extends State<SavePriority> {
                   var formValid = _formKey.currentState?.validate() ?? false;
                   if (formValid) {
                     _setLoading();
-                    priRepo.register(PriorityModel(nome: _descricaoC.text, peso: int.parse(_pesoC.text))).then((_) {
+                    priRepo.register(PriorityModel(nome: _descricaoC.text.toUpperCase(), peso: int.parse(_pesoC.text))).then((_) {
                     Navigator.pop(context);
                     snackSucessRegister(context, 'Prioridade ${_descricaoC.text} registrado com sucesso!');
                     }).catchError((error) {
+                      Navigator.pop(context);
                       tratarErro(context, error);
                     });                    
                   }

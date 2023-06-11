@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:chamados/app/models/priority.dart';
 import 'package:chamados/app/models/setor.dart';
 
 class CallType {
@@ -8,9 +9,9 @@ class CallType {
   int? id;
   Setor setor;
   String titulo;
-  String prioridade;
+  PriorityModel prioridade;
   String descricao;
-
+  
   CallType({
     this.id,
     required this.setor,
@@ -23,7 +24,7 @@ class CallType {
     int? id,
     Setor? setor,
     String? titulo,
-    String? prioridade,
+    PriorityModel? prioridade,
     String? descricao,
   }) {
     return CallType(
@@ -40,7 +41,7 @@ class CallType {
       'id': id,
       'setor': setor.toMap(),
       'titulo': titulo,
-      'prioridade': prioridade,
+      'prioridade': prioridade.toMap(),
       'descricao': descricao,
     };
   }
@@ -50,7 +51,7 @@ class CallType {
       id: map['id'] != null ? map['id'] as int : null,
       setor: Setor.fromMap(map['setor'] as Map<String,dynamic>),
       titulo: map['titulo'] as String,
-      prioridade: map['prioridade'] as String,
+      prioridade: PriorityModel.fromMap(map['prioridade'] as Map<String,dynamic>),
       descricao: map['descricao'] as String,
     );
   }

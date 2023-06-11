@@ -37,7 +37,7 @@ class CallDetailPageState extends State<CallDetailPage> {
     _solicitanteC = TextEditingController(text: widget.call.solicitante.email);
     _statusC = TextEditingController(text: widget.call.status);
     _setorC = TextEditingController(text: widget.call.callType!.setor.nome);
-    _prioridadeC = TextEditingController(text: widget.call.callType!.prioridade);
+    _prioridadeC = TextEditingController(text: widget.call.callType!.prioridade.nome);
     _idC = TextEditingController(text: widget.call.id);
     _tituloC = TextEditingController(text: widget.call.callType!.titulo);
     _descSolicitC = TextEditingController(text: widget.call.descricao);

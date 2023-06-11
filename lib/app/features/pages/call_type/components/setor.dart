@@ -67,6 +67,7 @@ class _SaveSetorState extends State<SaveSetor> {
                   Navigator.pop(context);
                   snackSucessRegister(context, 'Setor ${_nomeC.text} registrado com sucesso!');
                   }).catchError((error) {
+                    Navigator.pop(context);
                     tratarErro(context, error);
                   });                    
                   }

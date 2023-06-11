@@ -35,7 +35,7 @@ DataRow recentFileDataRow(CallType call, BuildContext context) {
       DataCell(Text(call.setor.sigla)),
       DataCell(Text(call.setor.nome)),
       DataCell(Text(call.titulo)),
-      DataCell(Text(call.prioridade)),
+      DataCell(Text(call.prioridade.nome)),
       DataCell(Text(call.descricao)),
       DataCell(
         InkWell(

@@ -29,9 +29,16 @@ class _SaveCallTypeState extends State<SaveCallType> {
   final TextEditingController _prioridadeC = TextEditingController();
   final TextEditingController _descricaoC = TextEditingController();
 
+  final CallTypeRepository callTypeRepo = CallTypeRepositoryImpl();
+  final SetorRepository setorRepo = SetorRepositoryImpl();
+  final PriorityRepository priRepo = PriorityRepositoryImpl();
+
   List<Setor> setores = [];
   List<PriorityModel> prioridades = [];
 
+  late Setor _setor;
+  late PriorityModel _priority;
+  
   @override
   void dispose() {
     _setorC.dispose();
@@ -48,8 +55,8 @@ class _SaveCallTypeState extends State<SaveCallType> {
   }
 
   Future<void> _init() async {
-    // myData.addAll(await callRepo.());
-    // filterData.addAll(userList);
+    setores.addAll(await setorRepo.getSetorList());
+    prioridades.addAll(await priRepo.getPriorityList());
     await waitThreeSeconds();
     _setLoading();
   }
@@ -94,6 +101,7 @@ class _SaveCallTypeState extends State<SaveCallType> {
               },
               onSuggestionSelected: (Setor setor) async {
                 setState(() {
+                  _setor = setor;
                   _setorC.text = setor.nome; 
                 });
               },
@@ -117,6 +125,7 @@ class _SaveCallTypeState extends State<SaveCallType> {
               },
               onSuggestionSelected: (PriorityModel priority) async {
                 setState(() {
+                  _priority = priority;
                   _prioridadeC.text = priority.nome; 
                 });
               },
@@ -134,39 +143,17 @@ class _SaveCallTypeState extends State<SaveCallType> {
             Center(
               child: TextButton(
                 child: const Icon(Icons.add, color: Colors.green), 
-                onPressed: () async {     
+                onPressed: () {     
                   var formValid = _formKey.currentState?.validate() ?? false;
                   if (formValid) {
-                    setState(() {
-                    });
-                    // CallType(id: null, 
-                    //   sigla: _siglaController.text,
-                    //   setor: _setorCController.text, 
-                    //   titulo: _tituloC.text, 
-                    //   prioridade: _prioridadeC.text, 
-                    //   descricao: _descricaoC.text,
-                    // );
-                    // UserService userService = UserServiceImpl();
-                    // userService.addCallType(                    
-                    //   CallType(id: null, 
-                    //   sigla: _siglaController.text,
-                    //   setor: _setorCController.text, 
-                    //   titulo: _tituloC.text, 
-                    //   prioridade: _prioridadeC.text, 
-                    //   descricao: _descricaoC.text,
-                    // ));
-                    String response = 'null'; //await authRepository.authenticate(loginModel!);
-                    // ignore: unnecessary_null_comparison
-                    if (response != null) {
+                    _setLoading();
+                    callTypeRepo.register(CallTypeDTO(titulo: _tituloC.text, setorId: _setor.id!, prioridadeId: _priority.id!, descricao: _descricaoC.text)).then((_) {
+                    Navigator.pop(context);
+                    snackSucessRegister(context, 'Prioridade ${_descricaoC.text} registrado com sucesso!');
+                    }).catchError((error) {
                       Navigator.pop(context);
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('As credenciais informadas não batem. Tente novamente.'),
-                          backgroundColor: Pallete.gradient3,
-                        ),
-                      );
-                    }
+                      tratarErro(context, error);
+                    });
                   }
                 },
               ),
