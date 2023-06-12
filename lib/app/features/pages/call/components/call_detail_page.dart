@@ -32,17 +32,17 @@ class CallDetailPageState extends State<CallDetailPage> {
   @override
   void initState() {
     super.initState();
-    _dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(widget.call.dataCriacao));
-    _ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(widget.call.dataUltAtualizacao));
-    _solicitanteC = TextEditingController(text: widget.call.solicitante.email);
+    _dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(widget.call.dataCriacao)));
+    _ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(widget.call.dataUltAtualizacao)));
+    _solicitanteC = TextEditingController(text: widget.call.solicitante!.email);
     _statusC = TextEditingController(text: widget.call.status);
     _setorC = TextEditingController(text: widget.call.callType!.setor.nome);
     _prioridadeC = TextEditingController(text: widget.call.callType!.prioridade.nome);
-    _idC = TextEditingController(text: widget.call.id);
+    _idC = TextEditingController(text: widget.call.id.toString());
     _tituloC = TextEditingController(text: widget.call.callType!.titulo);
     _descSolicitC = TextEditingController(text: widget.call.descricao);
     _historicoC = TextEditingController(text: 'Não implementei ainda');
-    _participantesC = TextEditingController(text: widget.call.participantes.toString());
+    // _participantesC = TextEditingController(text: widget.call.participant);
     _comentarioC = TextEditingController(text: 'Não implementei ainda');
     _siglaC = TextEditingController(text: widget.call.callType!.setor.sigla);
   }

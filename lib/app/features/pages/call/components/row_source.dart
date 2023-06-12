@@ -32,12 +32,12 @@ DataRow recentFileDataRow(Call call, BuildContext context) {
     onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => CallDetailPage(call),),),
     cells: [
       DataCell(Text('${call.callType!.setor.sigla} ${call.id}')),
-      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(call.dataCriacao).toString())),
+      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataCriacao)).toString())),
       DataCell(Text(call.callType!.setor.toString())),
       DataCell(Text(call.callType!.prioridade.toString())),
-      DataCell(Text(call.solicitante.email.toString())),
+      DataCell(Text(call.solicitante!.email.toString())),
       DataCell(Text(call.status.toString())),
-      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(call.dataUltAtualizacao).toString())),
+      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataUltAtualizacao)).toString())),
       //DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(user.dataCriacao!).toString())),
     ],
   );

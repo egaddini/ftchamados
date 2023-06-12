@@ -24,24 +24,38 @@ class CallDashboardScreen extends StatefulWidget {
 }
 
 class _CallDashboardScreenState extends State<CallDashboardScreen> {
+  
   bool sort = true;
-  List<Call>? filterData, myData;
+  bool isLoading = true;
+  List<Call> filterData = [], myData = [];
+  final CallRepository _callRepo = CallRepositoryImpl();
 
   onsortColum(int columnIndex, bool ascending) {
     if (columnIndex == 0) {
       if (ascending) {
-        filterData!.sort((a, b) => a.solicitante.email.toString().compareTo(b.solicitante.email.toString()));
+        filterData.sort((a, b) => a.solicitante!.email.toString().compareTo(b.solicitante!.email.toString()));
       } else {
-        filterData!.sort((a, b) => b.solicitante.email.toString().compareTo(a.solicitante.email.toString()));
+        filterData.sort((a, b) => b.solicitante!.email.toString().compareTo(a.solicitante!.email.toString()));
       }
     }
   }
 
   @override
   void initState() {
-    filterData = []; // userSvc.getCalls();
-    myData = []; // userSvc.getCalls();
+    _init();
     super.initState();
+  }
+
+  Future<void> _init() async {
+    myData.addAll(await _callRepo.getCallList());
+    filterData.addAll(myData);
+    _setLoading();
+  }
+
+  void _setLoading() {
+    setState(() {
+      isLoading = isLoading ? false : true;
+    });
   }
 
   TextEditingController controller = TextEditingController();
@@ -50,7 +64,7 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: const Text('Chamados')),
-        body: SingleChildScrollView(
+        body: isLoading ? buildLoadingIndicator() : SingleChildScrollView(
           physics: const AlwaysScrollableScrollPhysics(),
           child: Container(
             padding: const EdgeInsets.all(8.0),
@@ -82,14 +96,14 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                     ),
                     onChanged: (value) {
                       setState(() {
-                        myData = filterData!.where((element) => element.solicitante.email.toString().contains(value)).toList();
+                        myData = filterData.where((element) => element.solicitante!.email.toString().contains(value)).toList();
                       });
                     },
                   ),
                   source: RowSource(
                     context: context,
                     myData: myData,
-                    count: myData!.length,
+                    count: myData.length,
                   ),
         
                   checkboxHorizontalMargin: 10,
