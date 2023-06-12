@@ -1,24 +1,24 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class ClassDTO {
+class CallDTO {
 
   int solicitante;
   int callType;
   String descricao;
-  ClassDTO({
+  CallDTO({
     required this.solicitante,
     required this.callType,
     required this.descricao,
   });
   
 
-  ClassDTO copyWith({
+  CallDTO copyWith({
     int? solicitante,
     int? callType,
     String? descricao,
   }) {
-    return ClassDTO(
+    return CallDTO(
       solicitante: solicitante ?? this.solicitante,
       callType: callType ?? this.callType,
       descricao: descricao ?? this.descricao,
@@ -33,8 +33,8 @@ class ClassDTO {
     };
   }
 
-  factory ClassDTO.fromMap(Map<String, dynamic> map) {
-    return ClassDTO(
+  factory CallDTO.fromMap(Map<String, dynamic> map) {
+    return CallDTO(
       solicitante: map['solicitante'] as int,
       callType: map['callType'] as int,
       descricao: map['descricao'] as String,
@@ -43,13 +43,13 @@ class ClassDTO {
 
   String toJson() => json.encode(toMap());
 
-  factory ClassDTO.fromJson(String source) => ClassDTO.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CallDTO.fromJson(String source) => CallDTO.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'ClassDTO(solicitante: $solicitante, callType: $callType, descricao: $descricao)';
+  String toString() => 'CallDTO(solicitante: $solicitante, callType: $callType, descricao: $descricao)';
 
   @override
-  bool operator ==(covariant ClassDTO other) {
+  bool operator ==(covariant CallDTO other) {
     if (identical(this, other)) return true;
   
     return 

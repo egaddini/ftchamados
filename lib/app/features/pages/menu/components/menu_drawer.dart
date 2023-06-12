@@ -16,11 +16,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
 
   @override
   void initState() {
-    initAsync();
+    _init();
     super.initState();
   }
 
-  Future<void> initAsync() async {
+  Future<void> _init() async {
     logedUser = await LocalStorageServices().getUser();
     setState(() {
       _isAdmin = logedUser!.isAdmin();

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:chamados/app/models/call.dart';
+import 'package:chamados/app/models/call_dto.dart';
 import 'package:chamados/app/models/error_dto.dart';
 import 'package:chamados/app/models/rest_exception.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
@@ -10,11 +10,11 @@ import 'call_repository.dart';
 
 class CallRepositoryImpl implements CallRepository {
 
-  final String _basePath = "http://localhost:9090/api/v1/auth";
+  final String _basePath = "http://localhost:9090/api/v1/call";
 
 
   @override
-  Future<String> register(Call call) async {
+  Future<String> register(CallDTO call) async {
     String message;
     final result = await Dio().post(
       _basePath,
