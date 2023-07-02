@@ -4,7 +4,7 @@ void newCallDialog(BuildContext context, CallType call) {
   showDialog(
     context: context,
     builder: (_) => AlertDialog(
-      title: Center(child: Text("Novo Chamado, ${call.titulo}", style: const TextStyle(fontWeight: FontWeight.bold),)),
+      title: Center(child: Text(call.titulo, style: const TextStyle(fontWeight: FontWeight.bold),)),
       content: SizedBox(
         width: 600,
         child: NewCallForm(call: call),

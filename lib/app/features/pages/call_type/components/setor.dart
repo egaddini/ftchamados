@@ -15,7 +15,7 @@ class _SaveSetorState extends State<SaveSetor> {
   final TextEditingController _siglaC = TextEditingController();
   final TextEditingController _nomeC = TextEditingController();
 
-  final SetorRepository setorRep = SetorRepositoryImpl();
+  final SetorRepository setorRep = SetorRepository();
 
   bool isLoading = false;
 

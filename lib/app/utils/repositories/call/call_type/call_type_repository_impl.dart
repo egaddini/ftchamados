@@ -5,7 +5,7 @@ import 'package:chamados/app/models/call_type_dto.dart';
 import 'package:chamados/app/models/error_dto.dart';
 import 'package:chamados/app/models/rest_exception.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/utils/repositories/call_type/call_type_repository.dart';
+import 'package:chamados/app/utils/repositories/call/call_type/call_type_repository.dart';
 import 'package:dio/dio.dart';
 
 

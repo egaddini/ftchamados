@@ -7,6 +7,7 @@ class Routes {
   static const users = _Paths.users;
   static const call = _Paths.call;
   static const callType = _Paths.callType;
+  static const userCall = _Paths.userCall;
 }
 
 
@@ -18,5 +19,6 @@ class _Paths {
   static const users = '/users';
   static const call = '/call';
   static const callType = '/call-type';
+  static const userCall = '/user-call';
 
 }

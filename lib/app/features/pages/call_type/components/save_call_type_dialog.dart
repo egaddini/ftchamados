@@ -30,8 +30,8 @@ class _SaveCallTypeState extends State<SaveCallType> {
   final TextEditingController _descricaoC = TextEditingController();
 
   final CallTypeRepository callTypeRepo = CallTypeRepositoryImpl();
-  final SetorRepository setorRepo = SetorRepositoryImpl();
-  final PriorityRepository priRepo = PriorityRepositoryImpl();
+  final SetorRepository setorRepo = SetorRepository();
+  final PriorityRepository priRepo = PriorityRepository();
 
   List<Setor> setores = [];
   List<PriorityModel> prioridades = [];
@@ -48,15 +48,15 @@ class _SaveCallTypeState extends State<SaveCallType> {
     super.dispose();
   }
 
-    @override
+  @override
   void initState() {
     super.initState();
     _init();
   }
 
   Future<void> _init() async {
-    setores.addAll(await setorRepo.getSetorList());
-    prioridades.addAll(await priRepo.getPriorityList());
+    setores.addAll(await setorRepo.getList());
+    prioridades.addAll(await priRepo.getList());
     await waitThreeSeconds();
     _setLoading();
   }

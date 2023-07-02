@@ -30,7 +30,7 @@ class _SavePriorityState extends State<SavePriority> {
 
   final List<String> _pesos = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
 
-  PriorityRepository priRepo = PriorityRepositoryImpl();
+  PriorityRepository priRepo = PriorityRepository();
 
   @override
   void dispose() {

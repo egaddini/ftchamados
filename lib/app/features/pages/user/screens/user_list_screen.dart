@@ -1,6 +1,5 @@
 library user_dashboard;
 
-import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/features/pages/user/components/edit_user_page.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
@@ -59,45 +58,31 @@ class _UserListScreenState extends State<UserListScreen> {
     return Scaffold(
       appBar: AppBar(title: const Text('Usuários')),
       body: isLoading ? buildLoadingIndicator() : SingleChildScrollView(
-        physics: const AlwaysScrollableScrollPhysics(),
-        child: Container(
-          padding: const EdgeInsets.all(8.0),
-          decoration: BoxDecoration(
-            color: Theme.of(context).canvasColor,
-            borderRadius: const BorderRadius.all(Radius.circular(10)),
-          ),
-          child: SizedBox(
-            width: double.infinity,
-            child: Theme(
-              data: ThemeData.light().copyWith(cardColor: Theme.of(context).canvasColor, ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [ 
+            addVerticalSpace(10),
+            SizedBox(
+              width: double.infinity,
               child: PaginatedDataTable(
                 sortColumnIndex: 0,
                 sortAscending: sort,
-                header: TextField(
+                header: TextFormField(
                   controller: controller,
                   decoration: const InputDecoration(
-                    labelText: 'Buscar por email',  
-                    contentPadding: EdgeInsets.all(23),                                         
-                    border: OutlineInputBorder(),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: Pallete.gradient3,
-                      ),
-                    ),                              
-                    labelStyle: TextStyle(
-                      color: Pallete.backgroundColor
-                    ),                      
+                    labelText: 'Buscar por e-mail',
+                    suffixIcon: Icon(Icons.search_outlined),                                                   
                   ),
                   onChanged: (value) {
                     setState(() {
-                    // myData = filterData!.where((element) => element.email!.contains(value)).toList();
+                      //myData = filterData.where((element) => element.solicitante!.email.toString().contains(value)).toList();
                     });
                   },
                 ),
                 source: RowSource(
                   context: context,
                   myData: userList,
-                  count: 2,
+                  count: userList.length,
                 ),
                 checkboxHorizontalMargin: 10,
                 rowsPerPage: 10,
@@ -166,10 +151,10 @@ class _UserListScreenState extends State<UserListScreen> {
                   ),                                            
                 ],
               ),
-            )
-          ),
+            ),
+          ],
         ),
-      )
+      ),
     );
   }
 }

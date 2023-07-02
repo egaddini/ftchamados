@@ -39,6 +39,18 @@ ThemeData lightTheme = ThemeData(
     ),
   ),
 
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor: MaterialStateProperty.all<Color>(Pallete.gradient3),
+      padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(23)),
+      textStyle: MaterialStateProperty.all<TextStyle>(
+        const TextStyle(fontSize: 14),
+      ),
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+    ),
+  ),
+
+
   checkboxTheme: CheckboxThemeData(
     fillColor: MaterialStateProperty.all<Color>(Pallete.gradient3),  
   ),

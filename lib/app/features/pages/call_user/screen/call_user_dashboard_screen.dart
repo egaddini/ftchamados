@@ -1,29 +1,25 @@
-library call_dashboard;
+library call_user_dashboard;
 
 import 'package:chamados/app/constans/pallete.dart';
-import 'package:chamados/app/features/pages/call/components/call_detail_page.dart';
 import 'package:chamados/app/models/call.dart';
-import 'package:chamados/app/models/call_dto.dart';
-import 'package:chamados/app/models/call_type.dart';
-import 'package:chamados/app/models/user_info_model.dart';
+import 'package:chamados/app/shared_components/c_expanded_text_field.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/repositories/call/call/call_repository.dart';
 import 'package:chamados/app/utils/repositories/call/call/call_repository_impl.dart';
-import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 part '../components/row_source.dart';
-part '../components/new_call_dialog.dart';
+part '../components/call_detail_page.dart';
 
-class CallDashboardScreen extends StatefulWidget {
-  const CallDashboardScreen({super.key});
+class CallUserDashboardScreen extends StatefulWidget {
+  const CallUserDashboardScreen({super.key});
 
   @override
-  State<CallDashboardScreen> createState() => _CallDashboardScreenState();
+  State<CallUserDashboardScreen> createState() => _CallUserDashboardScreenState();
 }
 
-class _CallDashboardScreenState extends State<CallDashboardScreen> {
+class _CallUserDashboardScreenState extends State<CallUserDashboardScreen> {
   
   bool sort = true;
   bool isLoading = true;
@@ -63,36 +59,22 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: const Text('Chamados')),
-        body: isLoading ? buildLoadingIndicator() : SingleChildScrollView(
-          physics: const AlwaysScrollableScrollPhysics(),
-          child: Container(
-            padding: const EdgeInsets.all(8.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).canvasColor,
-              borderRadius: const BorderRadius.all(Radius.circular(10)),
-            ),
-            child: SizedBox(
+      appBar: AppBar(title: const Text('Chamados')),
+      body: isLoading ? Center(child: buildLoadingIndicator()) : SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            addVerticalSpace(10), 
+            SizedBox(
               width: double.infinity,
-              child: Theme(
-                data: ThemeData.light().copyWith(cardColor: Theme.of(context).canvasColor, ),
                 child: PaginatedDataTable(
                   sortColumnIndex: 0,
                   sortAscending: sort,
-                  header: TextField(
+                  header: TextFormField(
                     controller: controller,
                     decoration: const InputDecoration(
-                      labelText: 'Buscar por nome',
-                      contentPadding: EdgeInsets.all(23),                     
-                      border: OutlineInputBorder(),                      
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Pallete.gradient3,
-                        ),
-                      ),
-                      labelStyle: TextStyle(
-                        color: Pallete.backgroundColor
-                      ),                                                    
+                      labelText: 'Buscar por Titulo',
+                      suffixIcon: Icon(Icons.search_outlined),                                                   
                     ),
                     onChanged: (value) {
                       setState(() {
@@ -113,18 +95,10 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                   columns: [
                     const DataColumn(
                       label: Text(
-                        "ID",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
+                        "Título",
+                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                       ),
-                    ),
-                    const DataColumn(
-                      label: Text(
-                        "Criado em",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),                        
+                    ),                   
                     DataColumn(
                       label: const Text(
                         "Setor",
@@ -148,31 +122,31 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                     ),
                     const DataColumn(
                       label: Text(
-                        "Solicitante",
+                        "Status",
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 14),
+                      ),
+                    ),                    
+                    const DataColumn(
+                      label: Text(
+                        "Criado em",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                     ),
                     const DataColumn(
                       label: Text(
-                        "Status",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),                        
-                    const DataColumn(
-                      label: Text(
                         "Ultima atualizacao",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
+                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                       ),
-                    ),                        
+                    ),                                                                                            
                   ],
                 ),
-              )
             ),
-          ),
-        ));
+          ]
+        ),
+      )
+    );
   }
 }
 

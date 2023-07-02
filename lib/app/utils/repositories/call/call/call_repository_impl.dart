@@ -1,23 +1,24 @@
 import 'dart:convert';
 
+import 'package:chamados/app/models/call.dart';
+import 'package:chamados/app/models/call_dto.dart';
 import 'package:chamados/app/models/error_dto.dart';
 import 'package:chamados/app/models/rest_exception.dart';
-import 'package:chamados/app/models/setor.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/utils/repositories/setor/setor_repository.dart';
 import 'package:dio/dio.dart';
 
+import 'call_repository.dart';
 
-class SetorRepositoryImpl implements SetorRepository {
-  
-  final String _basePath = "http://localhost:9090/api/v1/call-type/setor";
+class CallRepositoryImpl implements CallRepository {
+
+  final String _basePath = "http://localhost:9090/api/v1/call";
 
   @override
-  Future<String> register(Setor setor) async {
+  Future<String> register(CallDTO call) async {
     String message;
     final result = await Dio().post(
       _basePath,
-      data: jsonEncode(setor.toMap()),
+      data: jsonEncode(call.toMap()),
       options: Options(headers: await getAuthHeader(false)),
     );
     if (result.statusCode == 200) {
@@ -28,10 +29,10 @@ class SetorRepositoryImpl implements SetorRepository {
     }
     return message;  
   }
-
+  
   @override
-  Future<List<Setor>> getSetorList({String? query}) async {   
-    List<Setor> results = [];
+  Future<List<Call>> getCallList({String? query}) async {   
+    List<Call> results = [];
 
     final response = await Dio().get(
       _basePath, 
@@ -39,9 +40,9 @@ class SetorRepositoryImpl implements SetorRepository {
     );
     if (response.statusCode == 200) {
       List<dynamic> jsonList = response.data as List<dynamic>;
-      results = jsonList.map((json) => Setor.fromMap(json)).toList();
+      results = jsonList.map((json) => Call.fromMap(json)).toList();
       if (query != null) {
-        results = results.where((element) => element.sigla.toLowerCase().contains((query.toLowerCase()))).toList();
+        results = results.where((element) => element.descricao.toLowerCase().contains((query.toLowerCase()))).toList();
       }
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
@@ -49,21 +50,4 @@ class SetorRepositoryImpl implements SetorRepository {
     }
     return results;
   }
-
-  @override
-  Future<String> delete(int id) async {
-    String message;
-    final result = await Dio().delete(
-      '$_basePath/$id',
-      options: Options(headers: await getAuthHeader(true)),
-    );
-    if (result.statusCode == 200) {
-      message = result.statusMessage!;
-    } else {
-      final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
-    }
-    return message;
-  } 
-
 }

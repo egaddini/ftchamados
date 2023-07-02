@@ -24,6 +24,7 @@ class Call {
     required this.status,
     required this.solicitante,
     required this.responsavel,
+    required this.callType,
     required this.descricao,
     required this.historico,
   });
@@ -36,6 +37,7 @@ class Call {
     String? status,
     UserDTO? solicitante,
     UserDTO? responsavel,
+    CallType? callType,    
     String? descricao,
     String? historico,
   }) {
@@ -46,6 +48,7 @@ class Call {
       status: status ?? this.status,
       solicitante: solicitante ?? this.solicitante,
       responsavel: responsavel ?? this.responsavel,
+      callType: callType ?? this.callType,
       descricao: descricao ?? this.descricao,
       historico: historico ?? this.historico,
     );
@@ -68,8 +71,9 @@ class Call {
       dataCriacao: map['dataCriacao'] as String,
       dataUltAtualizacao: map['dataUltAtualizacao'] as String,
       status: map['status'] as String,
-      solicitante: UserDTO.fromMap(map['solicitante'] as Map<String,dynamic>),
-      responsavel: UserDTO.fromMap(map['responsavel'] as Map<String,dynamic>),
+      solicitante: UserDTO.fromMap(map['solicitante'] as Map<String, dynamic>),
+      responsavel: map['responsavel'] != null ? UserDTO.fromMap(map['responsavel'] as Map<String, dynamic>) : null,
+      callType: map['callType'] != null ? CallType.fromMap(map['callType'] as Map<String, dynamic>) : null,
       descricao: map['descricao'] as String,
       historico: map['historico'] as String,
     );
@@ -81,7 +85,7 @@ class Call {
 
   @override
   String toString() {
-    return 'Call(id: $id, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, status: $status, solicitante: $solicitante, responsavel: $responsavel, descricao: $descricao, historico: $historico)';
+    return 'Call(id: $id, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, status: $status, solicitante: $solicitante, responsavel: $responsavel, callType: $callType, descricao: $descricao, historico: $historico)';
   }
 
   @override
@@ -95,6 +99,7 @@ class Call {
       other.status == status &&
       other.solicitante == solicitante &&
       other.responsavel == responsavel &&
+      other.callType == callType &&
       other.descricao == descricao &&
       other.historico == historico;
   }
@@ -107,6 +112,7 @@ class Call {
       status.hashCode ^
       solicitante.hashCode ^
       responsavel.hashCode ^
+      callType.hashCode ^
       descricao.hashCode ^
       historico.hashCode;
   }

@@ -3,8 +3,8 @@ library home_screen;
 
 import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/utils/repositories/call_type/call_type_repository.dart';
-import 'package:chamados/app/utils/repositories/call_type/call_type_repository_impl.dart';
+import 'package:chamados/app/utils/repositories/call/call_type/call_type_repository.dart';
+import 'package:chamados/app/utils/repositories/call/call_type/call_type_repository_impl.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -27,6 +27,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen>  {
 
+  bool isHovered = false;
   bool isLoading = true;
   final TextEditingController _aheadController = TextEditingController();
   CallTypeRepository callRepo = CallTypeRepositoryImpl();
@@ -78,7 +79,7 @@ class _HomeScreenState extends State<HomeScreen>  {
                     textCapitalization: TextCapitalization.words,
                     decoration: const InputDecoration(
                       labelText: 'Digite um texto',
-                      suffixIcon: Icon(Icons.search_outlined),                                                            
+                      suffixIcon: Icon(Icons.search_outlined), 
                     ),
                   ),
                   suggestionsCallback: (pattern) {

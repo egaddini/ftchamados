@@ -42,7 +42,7 @@ class CallDetailPageState extends State<CallDetailPage> {
     _tituloC = TextEditingController(text: widget.call.callType!.titulo);
     _descSolicitC = TextEditingController(text: widget.call.descricao);
     _historicoC = TextEditingController(text: 'Não implementei ainda');
-    // _participantesC = TextEditingController(text: widget.call.participant);
+    _participantesC = TextEditingController(text: ':()');
     _comentarioC = TextEditingController(text: 'Não implementei ainda');
     _siglaC = TextEditingController(text: widget.call.callType!.setor.sigla);
   }

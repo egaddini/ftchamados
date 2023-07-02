@@ -1,4 +1,4 @@
-part of call_dashboard;
+part of call_user_dashboard;
 
 class RowSource extends DataTableSource {
   dynamic myData;
@@ -29,14 +29,13 @@ class RowSource extends DataTableSource {
 
 DataRow recentFileDataRow(Call call, BuildContext context) {
   return DataRow(
-    onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => CallDetailPage(call),),),
+    onSelectChanged: (value)  => callDetailDialog(context, call),
     cells: [
-      DataCell(Text('${call.callType!.setor.sigla} ${call.id}')),
-      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataCriacao)).toString())),
+      DataCell(Text(call.callType!.titulo)),
       DataCell(Text(call.callType!.setor.nome)),
       DataCell(Text(call.callType!.prioridade.nome)),
-      DataCell(Text(call.solicitante!.email.toString())),
       DataCell(Text(call.status.toString())),
+      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataCriacao)).toString())),
       DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataUltAtualizacao)).toString())),
       //DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(user.dataCriacao!).toString())),
     ],
