@@ -12,7 +12,8 @@ class EditUserPageBody extends StatefulWidget {
 
 class _EditUserPageBodyState extends State<EditUserPageBody> {
   
-  late UserInfoModel usuarioLogado;
+  late UserInfoModel dadosUsuario;
+  late UserInfoModel? logedUser; 
   late TextEditingController _idEC;
   late TextEditingController _firstNameEC;
   late TextEditingController _lastNameEC;
@@ -21,25 +22,41 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
   final _passwordEC = TextEditingController();
   final _confirmPasswordEC = TextEditingController();
   final _senhaAtualEC = TextEditingController();
-  late bool _isAdmin;
   final List<String> _items = ['ADMIN', 'USER'];
+  bool _isAdmin = false;
+  bool isLoading = true;
   
   @override
   void initState() {
-    usuarioLogado = widget._client;
-    _idEC = TextEditingController(text: usuarioLogado.id.toString());
-    _firstNameEC = TextEditingController(text: usuarioLogado.nome);
-    _lastNameEC = TextEditingController(text: usuarioLogado.sobrenome);
-    _emailEC = TextEditingController(text: usuarioLogado.email);
-    _roleEC = TextEditingController(text: usuarioLogado.role);
-    _isAdmin = usuarioLogado.isAdmin();
+    _init();
+    dadosUsuario = widget._client;
+    _idEC = TextEditingController(text: dadosUsuario.id.toString());
+    _firstNameEC = TextEditingController(text: dadosUsuario.nome);
+    _lastNameEC = TextEditingController(text: dadosUsuario.sobrenome);
+    _emailEC = TextEditingController(text: dadosUsuario.email);
+    _roleEC = TextEditingController(text: dadosUsuario.role);
+
     super.initState();
+  }
+
+  Future<void> _init() async {
+    logedUser = await LocalStorageServices().getUser();
+    setState(() {
+      _isAdmin = logedUser!.isAdmin();
+    });
+    _setLoading();
+  }
+
+  void _setLoading() {
+    setState(() {
+      isLoading = isLoading ? false : true;
+    });
   }
 
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
+    return isLoading ? buildLoadingIndicator() : SingleChildScrollView(
       padding: const EdgeInsets.all(8),
       child: Column(
         children: [
@@ -128,7 +145,7 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
             visible: _isAdmin,
             child: CheckBoxField(
               email: _emailEC.text,
-              isActive: usuarioLogado.habilitado!
+              isActive: dadosUsuario.habilitado!
             )
           ),
           addVerticalSpace(10),

@@ -72,7 +72,6 @@ class _MenuDrawerState extends State<MenuDrawer> {
             title: const Text("Chat"),
             onTap: () {
               Navigator.pop(context);
-              //Navegar para outra página
             },
           ),
           ListTile(
@@ -127,7 +126,9 @@ class _MenuDrawerState extends State<MenuDrawer> {
             title: const Text("Logout"),
             onTap: () {
               //_authRepo.logout();
-              Navigator.popAndPushNamed(context, 'login');
+              Navigator.of(context).popUntil((route) => route.isFirst);
+              Navigator.pushReplacementNamed(context, 'login');
+
             },
           ),
         ],

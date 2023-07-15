@@ -41,9 +41,9 @@ class CallDetailPageState extends State<CallDetailPage> {
     _idC = TextEditingController(text: widget.call.id.toString());
     _tituloC = TextEditingController(text: widget.call.callType!.titulo);
     _descSolicitC = TextEditingController(text: widget.call.descricao);
-    _historicoC = TextEditingController(text: 'Não implementei ainda');
+    _historicoC = TextEditingController(text: '');
     _participantesC = TextEditingController(text: ':()');
-    _comentarioC = TextEditingController(text: 'Não implementei ainda');
+    _comentarioC = TextEditingController(text: '');
     _siglaC = TextEditingController(text: widget.call.callType!.setor.sigla);
   }
   
@@ -51,7 +51,7 @@ class CallDetailPageState extends State<CallDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Novo chamado - ${_siglaC.text} ${_tituloC.text}'),
+        title: Text('Chamado - ${_siglaC.text} ${_tituloC.text}'),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(18),

@@ -57,7 +57,7 @@ class _UserListScreenState extends State<UserListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Usuários')),
-      body: isLoading ? buildLoadingIndicator() : SingleChildScrollView(
+      body: isLoading ? Center(child: buildLoadingIndicator()) : SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [ 
@@ -75,7 +75,7 @@ class _UserListScreenState extends State<UserListScreen> {
                   ),
                   onChanged: (value) {
                     setState(() {
-                      //myData = filterData.where((element) => element.solicitante!.email.toString().contains(value)).toList();
+                      userList = filterData.where((element) => element.email.toString().toUpperCase().contains(value.toUpperCase())).toList();
                     });
                   },
                 ),

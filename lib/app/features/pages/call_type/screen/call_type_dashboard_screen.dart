@@ -85,7 +85,7 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                   ),
                   onChanged: (value) {
                     setState(() {
-                      myData = filterData.where((element) => element.titulo.toString().contains(value)).toList();
+                      myData = filterData.where((element) => element.titulo.toString().toUpperCase().contains(value.toUpperCase())).toList();
                     });
                   },
                 ),

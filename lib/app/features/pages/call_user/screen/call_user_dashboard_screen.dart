@@ -2,12 +2,15 @@ library call_user_dashboard;
 
 import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/call.dart';
+import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/shared_components/c_expanded_text_field.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/repositories/call/call/call_repository.dart';
 import 'package:chamados/app/utils/repositories/call/call/call_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../../../../utils/services/local_storage/local_storage.dart';
 
 part '../components/row_source.dart';
 part '../components/call_detail_page.dart';
@@ -25,6 +28,7 @@ class _CallUserDashboardScreenState extends State<CallUserDashboardScreen> {
   bool isLoading = true;
   List<Call> filterData = [], myData = [];
   final CallRepository _callRepo = CallRepositoryImpl();
+  late UserInfoModel? logedUser;
 
   onsortColum(int columnIndex, bool ascending) {
     if (columnIndex == 0) {
@@ -43,7 +47,9 @@ class _CallUserDashboardScreenState extends State<CallUserDashboardScreen> {
   }
 
   Future<void> _init() async {
-    myData.addAll(await _callRepo.getCallList());
+    logedUser = await LocalStorageServices().getUser();
+    myData = await _callRepo.getCallList();
+    myData = myData.where((element) => element.solicitante.toString().toLowerCase().contains((logedUser!.email.toString().toLowerCase()))).toList();
     filterData.addAll(myData);
     _setLoading();
   }
@@ -78,7 +84,7 @@ class _CallUserDashboardScreenState extends State<CallUserDashboardScreen> {
                     ),
                     onChanged: (value) {
                       setState(() {
-                        myData = filterData.where((element) => element.solicitante!.email.toString().contains(value)).toList();
+                        myData = filterData.where((element) => element.callType!.titulo.toString().toUpperCase().contains(value.toUpperCase())).toList();
                       });
                     },
                   ),
