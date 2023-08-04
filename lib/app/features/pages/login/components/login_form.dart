@@ -102,9 +102,6 @@ class _LoginFormState extends State<LoginForm> {
                   }, 
                   child: const Text(
                     'Entre aqui',
-                    style: TextStyle(
-                      color: Pallete.gradient3,
-                    ),
                   ),
                 ),
               ],

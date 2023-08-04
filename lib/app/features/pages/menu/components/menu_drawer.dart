@@ -41,15 +41,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            decoration: const BoxDecoration(
-              color: Pallete.gradient3
-            ),
             accountEmail: Text(logedUser!.email.toString()),
             accountName: Text(logedUser!.nome.toString()),
             currentAccountPicture: CircleAvatar(
               child: Text(logedUser!.email.toString().substring(0,2)),
             ),
-            
           ),
           ListTile(
             leading: const Icon(Icons.person_outline),

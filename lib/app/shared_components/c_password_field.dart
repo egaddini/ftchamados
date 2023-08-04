@@ -26,11 +26,7 @@ class PasswordFieldState extends State<PasswordField> {
       controller: widget.controller,
       obscureText: _obscureText,
       decoration: InputDecoration(
-        contentPadding: const EdgeInsets.all(23),
         labelText: widget.labelText,
-        labelStyle: const TextStyle(
-          color: Pallete.backgroundColor,
-        ),
         suffixIcon: IconButton(
           onPressed: () {
             setState(() {

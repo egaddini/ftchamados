@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Chamados',
-      theme: darkTheme,
+      theme: lightTheme,
       darkTheme: lightTheme,
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,

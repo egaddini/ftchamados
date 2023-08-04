@@ -119,9 +119,6 @@ class _SingupFormState extends State<SingupForm> {
                 }, 
                 child: const Text(
                   'Voltar e entrar',
-                  style: TextStyle(
-                    color: Pallete.gradient3,
-                  ),
                 ),
               ),
               addHorizontalSpace(176),

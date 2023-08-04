@@ -19,20 +19,9 @@ class CustomIDTextFormField extends StatelessWidget {
       controller: controller,
       enabled: false,
       decoration: InputDecoration(
-        fillColor: Colors.grey[300],
         filled: true, 
-        contentPadding: const EdgeInsets.all(23),
         labelText: labelText,
-        labelStyle: const TextStyle(
-          color: Pallete.backgroundColor,
-        ),
-        border: const OutlineInputBorder(),
-        focusedBorder: const OutlineInputBorder(
-          borderSide: BorderSide(
-            color: Pallete.gradient3,
-            width: 2,
-          ),
-        ),        
+        border: const OutlineInputBorder(),       
       ),
     );
   }

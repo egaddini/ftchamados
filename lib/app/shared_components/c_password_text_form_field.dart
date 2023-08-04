@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:chamados/app/constans/pallete.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
 
@@ -24,18 +23,8 @@ class PasswordTextFormFieldState extends State<PasswordTextFormField> {
     controller: widget.controller,
     obscureText: true,
     decoration: const InputDecoration(
-      contentPadding: EdgeInsets.all(23),
       labelText: 'Senha',
-      labelStyle: TextStyle(
-        color: Pallete.gradient3,
-      ),
       border:  OutlineInputBorder(),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(
-          color: Pallete.gradient3,
-          width: 2,
-        ),
-      ),
       /*suffixIcon:GestureDetector(
         onTap: () {
           setState(() {
