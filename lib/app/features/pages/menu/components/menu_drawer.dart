@@ -72,6 +72,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   title: const Text("Usuarios"),
                   onTap: () => Get.toNamed(AppRoutes.users),
                 ),              
+                ListTile(
+                  leading: const Icon(Icons.settings),
+                  title: const Text("Configura Sistema"),
+                  onTap: () => Get.toNamed(AppRoutes.systemSettings),
+                ),                
               ],
             ),
           ),

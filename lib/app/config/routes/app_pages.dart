@@ -4,6 +4,7 @@ import 'package:chamados/app/features/pages/call_user/screen/call_user_dashboard
 import 'package:chamados/app/features/pages/login/screen/login_screen.dart';
 import 'package:chamados/app/features/pages/menu/home_screen.dart';
 import 'package:chamados/app/features/pages/singup/screen/singup_screen.dart';
+import 'package:chamados/app/features/pages/system_configs/system_configs_screen.dart';
 import 'package:chamados/app/features/pages/user/screens/user_list_screen.dart';
 import 'package:get/get.dart';
 
@@ -44,6 +45,11 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.userCall,
       page: () => const CallUserDashboardScreen(),
+      //binding: DashboardBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.systemSettings,
+      page: () => SystemSettingsScreen(),
       //binding: DashboardBinding(),
     ),
   ];

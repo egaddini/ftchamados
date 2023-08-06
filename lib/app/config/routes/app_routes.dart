@@ -10,6 +10,7 @@ abstract class AppRoutes {
   static const callType = '/call-type';
   static const userCall = '/user-call';
   static const user = '/user';
+  static const systemSettings = '/system-settings';
   
 }
 
