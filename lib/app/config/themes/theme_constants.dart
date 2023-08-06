@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 // In that case remove them after copying this theme to your app.
 ThemeData lightTheme = FlexThemeData.light(
   subThemesData: const FlexSubThemesData(
+    
     appBarBackgroundSchemeColor: SchemeColor.primary,
     interactionEffects: false,
     tintedDisabledControls: false,

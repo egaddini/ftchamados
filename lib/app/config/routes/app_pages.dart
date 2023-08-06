@@ -2,49 +2,47 @@ import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.da
 import 'package:chamados/app/features/pages/call_type/screen/call_type_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/call_user/screen/call_user_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/login/screen/login_screen.dart';
-import 'package:chamados/app/features/pages/menu/screens/home_screen.dart';
+import 'package:chamados/app/features/pages/menu/home_screen.dart';
 import 'package:chamados/app/features/pages/singup/screen/singup_screen.dart';
 import 'package:chamados/app/features/pages/user/screens/user_list_screen.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
 
-class AppPages {
-  static const initial = Routes.login;
-
-  static final routes = [
+abstract class AppPages {
+  static final List<GetPage> pages = [
     GetPage(
-      name: Routes.login,
+      name: AppRoutes.login,
       page: () => const LoginScreen(),
       //binding: DashboardBinding(),
     ),
     GetPage(
-      name: Routes.home,
+      name: AppRoutes.home,
       page: () => const HomeScreen(),
       //binding: DashboardBinding(),
     ),
       GetPage(
-      name: Routes.singup,
+      name: AppRoutes.singup,
       page: () => const SingupScreen(),
       //binding: DashboardBinding(),
     ),
     GetPage(
-      name: Routes.call,
+      name: AppRoutes.call,
       page: () => const CallDashboardScreen(),
       //binding: DashboardBinding(),
     ),
     GetPage(
-      name: Routes.users,
+      name: AppRoutes.users,
       page: () => const UserListScreen(),
       //binding: DashboardBinding(),
     ),
     GetPage(
-      name: Routes.callType,
+      name: AppRoutes.callType,
       page: () => const CallTypeListScreen(),
       //binding: DashboardBinding(),
     ),
     GetPage(
-      name: Routes.userCall,
+      name: AppRoutes.userCall,
       page: () => const CallUserDashboardScreen(),
       //binding: DashboardBinding(),
     ),

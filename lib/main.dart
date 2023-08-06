@@ -21,8 +21,8 @@ class MyApp extends StatelessWidget {
       title: 'Chamados',
       theme: lightTheme,
       darkTheme: lightTheme,
-      initialRoute: AppPages.initial,
-      getPages: AppPages.routes,
+      initialRoute: AppRoutes.login,
+      getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       scrollBehavior: CustomScrollBehaviour(),
     );

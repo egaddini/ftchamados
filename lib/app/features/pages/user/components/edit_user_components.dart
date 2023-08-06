@@ -151,7 +151,6 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
           addVerticalSpace(10),
           ExpansionTile(
             title: const Text('Alterar Senhas'),
-            textColor: Pallete.gradient3,
             children: [
               addVerticalSpace(4),
                 PasswordField(

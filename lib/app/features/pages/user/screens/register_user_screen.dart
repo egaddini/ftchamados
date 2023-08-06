@@ -101,18 +101,9 @@ class _RegisterUserScreen extends State<RegisterUserScreen> {
                     Validators.compare(_passwordEC, 'Senhas não conferem'),
                   ]),
                 const SizedBox(height: 15),                
-                ElevatedButton(
-                  style: ButtonStyle(
-                      minimumSize: MaterialStateProperty.all<Size>(
-                      const Size(410, 65),
-                      ),
-                    backgroundColor: MaterialStateProperty.all<Color>(Pallete.gradient3),                                    
-                  ),
+                ElevatedButton(                          
                   child: const Text(
                     'Alterar Usuário',
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
                   ),
                   onPressed: () {
                     Navigator.pop(context,

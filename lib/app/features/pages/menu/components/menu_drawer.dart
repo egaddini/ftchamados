@@ -9,77 +9,47 @@ class MenuDrawer extends StatefulWidget {
 }
 
 class _MenuDrawerState extends State<MenuDrawer> {
-
-  late UserInfoModel? logedUser;
-  bool _isAdmin = false;
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    _init();
-    super.initState();
-  }
-
-  Future<void> _init() async {
-    logedUser = await LocalStorageServices().getUser();
-    setState(() {
-      _isAdmin = logedUser!.isAdmin();
-    });
-    _setLoading();
-  }
-
-  void _setLoading() {
-    setState(() {
-      isLoading = isLoading ? false : true;
-    });
-  }
+  
+  final MenuDrawerController controller = Get.put(MenuDrawerController());
 
   @override
   Widget build(BuildContext context) {
-    return  Drawer(
-      child:  isLoading ? buildLoadingIndicator() : ListView(
+    return Obx(() => Drawer(
+      child: controller.isLoading.value? buildLoadingIndicator() : ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           UserAccountsDrawerHeader(
-            accountEmail: Text(logedUser!.email.toString()),
-            accountName: Text(logedUser!.nome.toString()),
-            currentAccountPicture: CircleAvatar(
-              child: Text(logedUser!.email.toString().substring(0,2)),
+            accountEmail: Text(controller.logedUser.email!),
+            accountName: Text(controller.logedUser.nome!),
+            currentAccountPicture: InkWell(
+              child: CircleAvatar(child: Text(controller.logedUser.email!.substring(0,2)),),
+              onTap: () => Get.to(EditUserPage(controller.logedUser), routeName: 'edit-user/${controller.logedUser.email!}'),
             ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.person_outline),
-            title: const Text("Minha conta"),
-            onTap: () {
-              Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) => EditUserPage(logedUser!)))
-                  .then((newContact) {
-                if (newContact != null) {
-                  //messageResponse(context, newContact.name + " a sido modificado...!");
-                  //Logica para alterar usuario logado :D
-                }
-              });
-            },
+            otherAccountsPictures: [
+              Badge(
+                alignment: const Alignment(0, -1.10),
+                label: Text('${controller.notificacoes.value}', style: const TextStyle(fontSize: 10),),
+                child: InkWell(
+                  child: const Icon(Icons.notifications_outlined, color: Colors.white),
+                  onTap: () {
+                    
+                  },
+                ),
+              ),
+            ],          
           ),
           ListTile(
             leading: const Icon(Icons.message_outlined),
             title: const Text("Chat"),
-            onTap: () {
-              Navigator.pop(context);
-            },
+            onTap: () => Get.toNamed(AppRoutes.callType),
           ),
           ListTile(
             title: const Text("Meus Chamados"),
             leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, 'user-call');
-            },
+            onTap: () => Get.toNamed(AppRoutes.userCall),
           ),          
           Visibility(
-            visible: _isAdmin,
+            visible: controller.isAdmin.value,
             child: ExpansionTile(
               title: const Text('Painel do Administrador'),
               leading: const Icon(Icons.admin_panel_settings_outlined),
@@ -91,28 +61,19 @@ class _MenuDrawerState extends State<MenuDrawer> {
                     ListTile(
                       title: const Text("Dashboard"),
                       leading: const Icon(Icons.bar_chart_outlined),
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.pushNamed(context, 'call');
-                      },
+                      onTap: () => Get.toNamed(AppRoutes.call),
                     ),
                     ListTile(
                       title: const Text("Categorias"),
                       leading: const Icon(Icons.note_add_outlined),
-                      onTap: () {
-                        Navigator.pop(context);
-                        Navigator.pushNamed(context, 'call-type');
-                      },
+                      onTap: () => Get.toNamed(AppRoutes.callType),
                     ),                    
                   ],
                 ),
                 ListTile(
                   leading: const Icon(Icons.safety_divider),
                   title: const Text("Usuarios"),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushNamed(context, 'users');
-                  },
+                  onTap: () => Get.toNamed(AppRoutes.users),
                 ),              
               ],
             ),
@@ -120,15 +81,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
           ListTile(
             leading: const Icon(Icons.logout),
             title: const Text("Logout"),
-            onTap: () {
-              //_authRepo.logout();
-              Navigator.of(context).popUntil((route) => route.isFirst);
-              Navigator.pushReplacementNamed(context, 'login');
-
-            },
+            onTap: () => Get.offAndToNamed(AppRoutes.login),
           ),
         ],
       ),
-    );
+    ),);
   }
 }
