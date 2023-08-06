@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:chamados/app/config/themes/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get.dart';
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       title: 'Chamados',
+      themeMode: ThemeManager().themeMode,
       theme: lightTheme,
-      darkTheme: lightTheme,
+      darkTheme: darkTheme,
       initialRoute: AppRoutes.login,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,

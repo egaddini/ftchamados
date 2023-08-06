@@ -15,9 +15,9 @@ class _MenuDrawerState extends State<MenuDrawer> {
   @override
   Widget build(BuildContext context) {
     return Obx(() => Drawer(
-      child: controller.isLoading.value? buildLoadingIndicator() : ListView(
-        padding: EdgeInsets.zero,
-        children: <Widget>[
+      elevation: 5,
+      child: controller.isLoading.value? buildLoadingIndicator() : Column(
+        children: <Widget>[   
           UserAccountsDrawerHeader(
             accountEmail: Text(controller.logedUser.email!),
             accountName: Text(controller.logedUser.nome!),
@@ -35,56 +35,78 @@ class _MenuDrawerState extends State<MenuDrawer> {
               ),
             ],          
           ),
-          ListTile(
-            leading: const Icon(Icons.message_outlined),
-            title: const Text("Chat"),
-            onTap: () => Get.toNamed(AppRoutes.callType),
-          ),
-          ListTile(
-            title: const Text("Meus Chamados"),
-            leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
-            onTap: () => Get.toNamed(AppRoutes.userCall),
-          ),          
-          Visibility(
-            visible: controller.isAdmin.value,
-            child: ExpansionTile(
-              title: const Text('Painel do Administrador'),
-              leading: const Icon(Icons.admin_panel_settings_outlined),
+          Expanded(
+            child: ListView(
               children: [
-                ExpansionTile(
-                  title: const Text('Chamados'),
-                  leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
-                  children: [                
-                    ListTile(
-                      title: const Text("Dashboard"),
-                      leading: const Icon(Icons.bar_chart_outlined),
-                      onTap: () => Get.toNamed(AppRoutes.call),
-                    ),
-                    ListTile(
-                      title: const Text("Categorias"),
-                      leading: const Icon(Icons.note_add_outlined),
-                      onTap: () => Get.toNamed(AppRoutes.callType),
-                    ),                    
-                  ],
+                ListTile(
+                  leading: const Icon(Icons.message_outlined),
+                  title: const Text("Chat"),
+                  onTap: () => Get.toNamed(AppRoutes.callType),
                 ),
                 ListTile(
-                  leading: const Icon(Icons.safety_divider),
-                  title: const Text("Usuarios"),
-                  onTap: () => Get.toNamed(AppRoutes.users),
-                ),              
+                  title: const Text("Meus Chamados"),
+                  leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
+                  onTap: () => Get.toNamed(AppRoutes.userCall),
+                ),          
+                Visibility(
+                  visible: controller.isAdmin.value,
+                  child: ExpansionTile(
+                    title: const Text('Painel do Administrador'),
+                    leading: const Icon(Icons.admin_panel_settings_outlined),
+                    children: [
+                      ExpansionTile(
+                        title: const Text('Chamados'),
+                        leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
+                        children: [                
+                          ListTile(
+                            title: const Text("Dashboard"),
+                            leading: const Icon(Icons.bar_chart_outlined),
+                            onTap: () => Get.toNamed(AppRoutes.call),
+                          ),
+                          ListTile(
+                            title: const Text("Categorias"),
+                            leading: const Icon(Icons.note_add_outlined),
+                            onTap: () => Get.toNamed(AppRoutes.callType),
+                          ),                    
+                        ],
+                      ),
+                      ListTile(
+                        leading: const Icon(Icons.safety_divider),
+                        title: const Text("Usuarios"),
+                        onTap: () => Get.toNamed(AppRoutes.users),
+                      ),              
+                      ListTile(
+                        leading: const Icon(Icons.settings),
+                        title: const Text("Configura Sistema"),
+                        onTap: () => systemSettingsDialog(Get.context!),
+                      ),                
+                    ],
+                  ),
+                ),
                 ListTile(
-                  leading: const Icon(Icons.settings),
-                  title: const Text("Configura Sistema"),
-                  onTap: () => Get.toNamed(AppRoutes.systemSettings),
-                ),                
+                  leading: const Icon(Icons.logout),
+                  title: const Text("Logout"),
+                  onTap: () => Get.offAndToNamed(AppRoutes.login),
+                ),
               ],
+            )
+          ),
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Get.theme.colorScheme.primary,
+              borderRadius: BorderRadius.circular(90),
+            ),
+            child: Card(
+              color: Get.theme.colorScheme.background,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90), ),
+              child: Center(
+                child: cInkWell(50, 55, Icons.dark_mode, Icons.dark_mode_outlined, Get.theme.colorScheme.primary , null, 'Dark Mode', () => print('object'),),
+              ),
             ),
           ),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text("Logout"),
-            onTap: () => Get.offAndToNamed(AppRoutes.login),
-          ),
+          addVerticalSpace(10),          
         ],
       ),
     ),);
