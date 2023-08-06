@@ -21,20 +21,17 @@ class _MenuDrawerState extends State<MenuDrawer> {
           UserAccountsDrawerHeader(
             accountEmail: Text(controller.logedUser.email!),
             accountName: Text(controller.logedUser.nome!),
+            currentAccountPictureSize: Size(controller.currentAccountPictureSize.value, controller.currentAccountPictureSize.value),
             currentAccountPicture: InkWell(
-              child: CircleAvatar(child: Text(controller.logedUser.email!.substring(0,2)),),
-              onTap: () => Get.to(EditUserPage(controller.logedUser), routeName: 'edit-user/${controller.logedUser.email!}'),
+              onHover: (value) {controller.currentAccountPictureSize.value = value ? 80 : 70;},
+              onTap: () => Get.to(EditUserPage(controller.logedUser), routeName: 'edit-user/{controller.logedUser.email!}'),
+              child: Tooltip(message: 'Minha Conta', child: CircleAvatar(child: Text(controller.logedUser.email!.substring(0,2)),)),
             ),
             otherAccountsPictures: [
               Badge(
                 alignment: const Alignment(0, -1.10),
                 label: Text('${controller.notificacoes.value}', style: const TextStyle(fontSize: 10),),
-                child: InkWell(
-                  child: const Icon(Icons.notifications_outlined, color: Colors.white),
-                  onTap: () {
-                    
-                  },
-                ),
+                child: cInkWell(30, 35, Icons.notifications_outlined, null, Colors.white, null, 'Notificações', () {}),
               ),
             ],          
           ),
