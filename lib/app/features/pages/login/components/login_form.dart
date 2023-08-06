@@ -15,9 +15,9 @@ class _LoginFormState extends State<LoginForm> {
 
   final AuthRepository authRepository = AuthRepositoryImpl();
 
-  LoginModel? loginModel;
+  final LoginScreenController _controller = Get.put(LoginScreenController());
 
-  bool isLoading = false;
+  LoginModel? loginModel;
 
   @override
   void dispose() {
@@ -26,15 +26,10 @@ class _LoginFormState extends State<LoginForm> {
     super.dispose();
   }
 
-  void _setLoading() {
-    setState(() {
-      isLoading = isLoading ? false : true;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return isLoading ? buildLoadingIndicator() :  Form(
+    return _controller.isLoading.value ? buildLoadingIndicator() :  Form(
       key: _formKey,
       child: Center(
         child: Column(
@@ -78,11 +73,11 @@ class _LoginFormState extends State<LoginForm> {
                         );
                       });
 
-                      _setLoading();
+                      _controller.isLoading.value = true;
                       authRepository.authenticate(loginModel!).then((_) {
-                        Navigator.popAndPushNamed(context, 'home');
+                        Get.offAndToNamed(AppRoutes.home);
                       }).catchError((error) {
-                        _setLoading();
+                        _controller.isLoading.value = false;
                         tratarErro(context, error);
                       }); 
                     } 
@@ -97,12 +92,8 @@ class _LoginFormState extends State<LoginForm> {
               children: [
                 const Text('Não tem uma conta?'),
                 TextButton(
-                  onPressed: (){
-                    Navigator.pushNamed(context, 'singup');
-                  }, 
-                  child: const Text(
-                    'Entre aqui',
-                  ),
+                  onPressed: () {Get.toNamed(AppRoutes.singup);}, 
+                  child: const Text('Entre aqui',),
                 ),
               ],
             ),

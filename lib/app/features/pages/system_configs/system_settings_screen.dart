@@ -8,34 +8,53 @@ import 'package:get/get.dart';
 
 part 'system_settings_controller.dart';
 
-class SystemSettingsScreen extends StatelessWidget {
+class SystemSettingsScreen extends StatefulWidget {
   
   const SystemSettingsScreen({super.key});
 
-  //final SystemSettingsController _controller = Get.put(SystemSettingsController());
+  @override
+  State<SystemSettingsScreen> createState() => _SystemSettingsScreenState();
+}
+
+class _SystemSettingsScreenState extends State<SystemSettingsScreen> {
+
+  final SystemSettingsController _controller = Get.put(SystemSettingsController());
 
   @override
    Widget build(BuildContext context) {
-    return Column(
+    return Obx(() => !_controller.isLoading.value? Container() : Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,     
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomFlexCard(content: const Center(child: Text('Setor')), function: () =>  Get.toNamed(AppRoutes.home) ),
-            CustomFlexCard(content: const Center(child: Text('Prioridade')), function: () =>  savePriorityDialog(context),),
+            Flexible(
+            child: Card(
+              elevation: 4,
+              child: InkWell(
+                child: SizedBox(
+                width: 300,
+                height: 100,
+                  child: Text('data'),
+                ),
+                onTap: () => savePriorityDialog(Get.context!),
+              ),
+            ),
+          ),
+          InkWell(child: CustomFlexCard(content: const Center(child: Text('Categoria')), function: () {print('olá');},),
+          onTap: () => print('object'),),
           ],
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomFlexCard(content: const Center(child: Text('Categoria')), function: () {},),
-            CustomFlexCard(content: const Center(child: Text('Fluxo')), function: () {},),
+            CustomFlexCard(content: const Center(child: Text('Categoria')), function: () {print('olá');},),
+            CustomFlexCard(content: const Center(child: Text('Fluxo')), function: () {print('olá');},),
           ],
         ),                  
       ],
-    );
+    ));
   }
 }
 

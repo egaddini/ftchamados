@@ -31,7 +31,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               Badge(
                 alignment: const Alignment(0, -1.10),
                 label: Text('${controller.notificacoes.value}', style: const TextStyle(fontSize: 10),),
-                child: cInkWell(30, 35, Icons.notifications_outlined, null, Colors.white, null, 'Notificações', () {}),
+                child: cInkWell(30, 35, Icons.notifications_outlined, null, Colors.white, null, 'Notificações', () => print('asdasd'),),
               ),
             ],          
           ),
@@ -91,21 +91,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               ],
             )
           ),
-          Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Get.theme.colorScheme.primary,
-              borderRadius: BorderRadius.circular(90),
-            ),
-            child: Card(
-              color: Get.theme.colorScheme.background,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90), ),
-              child: Center(
-                child: cInkWell(50, 55, Icons.dark_mode, Icons.dark_mode_outlined, Get.theme.colorScheme.primary , null, 'Dark Mode', () => {},),
-              ),
-            ),
-          ),
+          controller.themeInk.value,  
           addVerticalSpace(10),          
         ],
       ),

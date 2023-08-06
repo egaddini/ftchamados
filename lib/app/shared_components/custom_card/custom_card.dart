@@ -30,3 +30,19 @@ class CustomFlexCard extends StatelessWidget {
     );
   }
 }
+
+Widget customFlexCard(Widget content, Function function) {
+  return Flexible(
+    child: Card(
+      elevation: 4,
+      child: InkWell(
+        child: SizedBox(
+        width: 300,
+        height: 100,
+          child: content,
+        ),
+        onTap: () => function,
+      ),
+    ),
+  );
+}

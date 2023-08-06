@@ -9,11 +9,12 @@ Widget cInkWell(double defaultWidith, double? hoverWidith, IconData defaultIcon,
   
   
   return Obx(() => InkWell(
-      child: Tooltip(message: message, child: Icon(dIcon.value, size: dWidith.value, color: dColor.value)),
+      borderRadius: BorderRadius.circular(90),
       onHover: (value) {
         if (hoverWidith != null) dWidith.value = value ? hoverWidith : defaultWidith;
         if (hoverIcon != null) dIcon.value = value ? hoverIcon : defaultIcon;
       },
-      onTap: () => function,
+      onTap: () => function(),
+      child: Tooltip(message: message, child: Icon(dIcon.value, size: dWidith.value, color: dColor.value)),
   ),);
 }

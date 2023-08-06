@@ -1,6 +1,7 @@
 library home_screen;
 
 import 'package:chamados/app/config/routes/app_pages.dart';
+import 'package:chamados/app/config/themes/theme_constants.dart';
 import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/system_configs/system_settings_screen.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
@@ -20,20 +21,14 @@ part 'components/menu_drawer.dart';
 part 'components/menu_drawer_controller.dart';
 part 'home_screen_controller.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreen extends StatelessWidget {
   
-  const HomeScreen({Key? key,}) : super(key: key);
+  HomeScreen({Key? key,}) : super(key: key);
   
-  @override
-  State<HomeScreen> createState() => _HomeScreenState();
-
-}
-
-class _HomeScreenState extends State<HomeScreen> {
-
   final HomeScreenController _controller = Get.put(HomeScreenController());
+
   final TextEditingController _aheadController = TextEditingController();
-  
+
   @override
   Widget build(BuildContext context) {
     return Obx(() =>  Scaffold(
