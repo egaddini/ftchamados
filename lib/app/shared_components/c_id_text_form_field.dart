@@ -1,6 +1,5 @@
 // ignore_for_file: file_names
 
-import 'package:chamados/app/constans/pallete.dart';
 import 'package:flutter/material.dart';
 
 class CustomIDTextFormField extends StatelessWidget {

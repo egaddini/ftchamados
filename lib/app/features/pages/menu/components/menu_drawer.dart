@@ -102,7 +102,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
               color: Get.theme.colorScheme.background,
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(90), ),
               child: Center(
-                child: cInkWell(50, 55, Icons.dark_mode, Icons.dark_mode_outlined, Get.theme.colorScheme.primary , null, 'Dark Mode', () => print('object'),),
+                child: cInkWell(50, 55, Icons.dark_mode, Icons.dark_mode_outlined, Get.theme.colorScheme.primary , null, 'Dark Mode', () => {},),
               ),
             ),
           ),

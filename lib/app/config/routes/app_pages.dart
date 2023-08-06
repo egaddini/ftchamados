@@ -49,7 +49,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.systemSettings,
-      page: () => SystemSettingsScreen(),
+      page: () => const SystemSettingsScreen(),
       //binding: DashboardBinding(),
     ),
   ];

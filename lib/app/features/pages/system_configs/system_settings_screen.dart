@@ -10,9 +10,9 @@ part 'system_settings_controller.dart';
 
 class SystemSettingsScreen extends StatelessWidget {
   
-  SystemSettingsScreen({super.key});
+  const SystemSettingsScreen({super.key});
 
-  final SystemSettingsController _controller = Get.put(SystemSettingsController());
+  //final SystemSettingsController _controller = Get.put(SystemSettingsController());
 
   @override
    Widget build(BuildContext context) {
@@ -42,8 +42,8 @@ class SystemSettingsScreen extends StatelessWidget {
 void systemSettingsDialog(BuildContext context) {
   showDialog(
     context: context,
-    builder: (_) =>  AlertDialog(
-      title: const Center(child: Text("Configura Sistema", style: TextStyle(fontWeight: FontWeight.bold),)),
+    builder: (_) =>  const AlertDialog(
+      title: Center(child: Text("Configura Sistema", style: TextStyle(fontWeight: FontWeight.bold),)),
       content: SizedBox(
         child: SystemSettingsScreen(),
       ),

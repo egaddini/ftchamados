@@ -1,10 +1,5 @@
-import 'package:chamados/app/constans/pallete.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
-
-// ThemeData lightTheme = FlexThemeData.light(scheme: FlexScheme.amber, useMaterial3: true, );
-
-// ThemeData darkTheme = FlexThemeData.dark(scheme: FlexScheme.amber, useMaterial3: true);
 
 // Theme config for FlexColorScheme version 7.1.x. Make sure you use
 // same or higher package version, but still same major version. If you
