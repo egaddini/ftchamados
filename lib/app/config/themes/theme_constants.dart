@@ -15,6 +15,7 @@ ThemeData lightTheme = FlexThemeData.light(
     useTextTheme: true,
     useM2StyleDividerInM3: true,
   ),
+  
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
   swapLegacyOnMaterial3: true,

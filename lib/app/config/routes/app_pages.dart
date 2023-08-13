@@ -1,10 +1,11 @@
 import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.dart';
-import 'package:chamados/app/features/pages/call_type/screen/call_type_dashboard_screen.dart';
+import 'package:chamados/app/features/pages/call_category/screen/call_category_dashboard_screen.dart';
+import 'package:chamados/app/features/pages/call_status/call_status_bidings.dart';
+import 'package:chamados/app/features/pages/call_status/call_status_screen.dart';
 import 'package:chamados/app/features/pages/call_user/screen/call_user_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/login/screen/login_screen.dart';
 import 'package:chamados/app/features/pages/menu/home_screen.dart';
 import 'package:chamados/app/features/pages/singup/screen/singup_screen.dart';
-import 'package:chamados/app/features/pages/system_configs/system_settings_screen.dart';
 import 'package:chamados/app/features/pages/user/screens/user_list_screen.dart';
 import 'package:get/get.dart';
 
@@ -48,9 +49,9 @@ abstract class AppPages {
       //binding: DashboardBinding(),
     ),
     GetPage(
-      name: AppRoutes.systemSettings,
-      page: () => const SystemSettingsScreen(),
-      //binding: DashboardBinding(),
+      name: AppRoutes.callStatus,
+      page: () => const CallStatusScreen(),
+      binding: CallStatusBindings(),
     ),
   ];
 }

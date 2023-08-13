@@ -68,6 +68,11 @@ class _MenuDrawerState extends State<MenuDrawer> {
                             leading: const Icon(Icons.note_add_outlined),
                             onTap: () => Get.toNamed(AppRoutes.callType),
                           ),                    
+                          ListTile(
+                            leading: const Icon(Icons.settings),
+                            title: const Text("Configurações"),
+                            onTap: () => systemSettingsDialog(Get.context!),
+                          ),                
                         ],
                       ),
                       ListTile(
@@ -75,11 +80,6 @@ class _MenuDrawerState extends State<MenuDrawer> {
                         title: const Text("Usuarios"),
                         onTap: () => Get.toNamed(AppRoutes.users),
                       ),              
-                      ListTile(
-                        leading: const Icon(Icons.settings),
-                        title: const Text("Configura Sistema"),
-                        onTap: () => systemSettingsDialog(Get.context!),
-                      ),                
                     ],
                   ),
                 ),

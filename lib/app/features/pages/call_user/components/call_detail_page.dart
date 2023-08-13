@@ -110,7 +110,7 @@ class CallDetailPageState extends State<CallDetailPage> {
                       child: IconButton(
                         icon: Icon(
                           Icons.send,
-                          color: isHovered ? Pallete.gradient3 : Colors.black,
+                          color: isHovered ? Get.theme.primaryColor : Colors.black,
                         ),
                         onPressed: () {
                           // Ação do botão

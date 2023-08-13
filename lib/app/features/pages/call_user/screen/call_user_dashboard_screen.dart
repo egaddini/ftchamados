@@ -1,6 +1,5 @@
 library call_user_dashboard;
 
-import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/shared_components/c_expanded_text_field.dart';
@@ -8,6 +7,7 @@ import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/repositories/call/call/call_repository.dart';
 import 'package:chamados/app/utils/repositories/call/call/call_repository_impl.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../utils/services/local_storage/local_storage.dart';

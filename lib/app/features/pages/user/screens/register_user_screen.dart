@@ -1,9 +1,9 @@
 import 'package:chamados/app/models/user_info_model.dart';
-import 'package:chamados/app/constans/pallete.dart';
 import 'package:chamados/app/shared_components/c_password_field.dart';
 import 'package:chamados/app/shared_components/c_text_form_field.dart';
 import 'package:chamados/app/utils/validators/validators.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';
 
 
@@ -43,7 +43,7 @@ class _RegisterUserScreen extends State<RegisterUserScreen> {
           title: const Center(
             child: Text("Registrar Usuário")
           ),
-          backgroundColor: Pallete.gradient3,
+          backgroundColor: Get.theme.primaryColor,
         ),
         body: Center(
           child: SizedBox(

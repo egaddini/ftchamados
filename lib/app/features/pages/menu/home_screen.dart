@@ -3,7 +3,7 @@ library home_screen;
 import 'package:chamados/app/config/routes/app_pages.dart';
 import 'package:chamados/app/config/themes/theme_constants.dart';
 import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.dart';
-import 'package:chamados/app/features/pages/system_configs/system_settings_screen.dart';
+import 'package:chamados/app/features/pages/call_settings/call_settings_screen.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/repositories/call/call_type/call_type_repository.dart';

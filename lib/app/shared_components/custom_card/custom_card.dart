@@ -24,7 +24,7 @@ class CustomFlexCard extends StatelessWidget {
           height: 100,
             child: content,
           ),
-          onTap: () => function,
+          onTap: () => function(),
         ),
       ),
     );
@@ -41,7 +41,7 @@ Widget customFlexCard(Widget content, Function function) {
         height: 100,
           child: content,
         ),
-        onTap: () => function,
+        onTap: () => function(),
       ),
     ),
   );

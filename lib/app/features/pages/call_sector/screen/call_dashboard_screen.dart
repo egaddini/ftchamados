@@ -73,20 +73,17 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
               child: PaginatedDataTable(
                 sortColumnIndex: 0,
                 sortAscending: sort,
-                header: Padding(
-                  padding: const EdgeInsets.only(top : 8.0),
-                  child: TextFormField(
-                    controller: controller,
-                    decoration: const InputDecoration(
-                      labelText: 'Buscar por Solicitante',
-                      suffixIcon: Icon(Icons.search_outlined),                                                   
-                    ),
-                    onChanged: (value) {
-                      setState(() {
-                        myData = filterData.where((element) => element.solicitante.toString().toUpperCase().contains(value.toUpperCase())).toList();
-                      });
-                    },
+                header: TextFormField(
+                  controller: controller,
+                  decoration: const InputDecoration(
+                    labelText: 'Buscar por Solicitante',
+                    suffixIcon: Icon(Icons.search_outlined),                                                   
                   ),
+                  onChanged: (value) {
+                    setState(() {
+                      myData = filterData.where((element) => element.solicitante.toString().toUpperCase().contains(value.toUpperCase())).toList();
+                    });
+                  },
                 ),
                 source: RowSource(
                   context: context,
@@ -98,7 +95,6 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                 rowsPerPage: 10,
                 columnSpacing: 6,
                 showCheckboxColumn: false,
-                
                 columns: [
                   const DataColumn(
                     label: Text(

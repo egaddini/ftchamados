@@ -1,9 +1,10 @@
+import 'package:chamados/app/constans/api_path.dart';
 import 'package:chamados/app/models/setor.dart';
 import 'package:chamados/app/utils/repositories/base_repository.dart';
 
 class SetorRepository extends BaseRepository<Setor> {
   
-  SetorRepository() : super("http://localhost:9090/api/v1/call-type/setor");
+  SetorRepository() : super(ApiPath.sector);
   
   @override
   Setor entityFromMap(Map<String, dynamic> map) {

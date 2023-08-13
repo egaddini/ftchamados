@@ -1,48 +1,52 @@
-library call_type_dashboard;
+library call_dashboard;
 
-import 'package:chamados/app/constans/pallete.dart';
+import 'package:chamados/app/features/pages/call/components/call_detail_page.dart';
+import 'package:chamados/app/models/call.dart';
+import 'package:chamados/app/models/call_dto.dart';
 import 'package:chamados/app/models/call_type.dart';
-import 'package:chamados/app/models/call_type_dto.dart';
-import 'package:chamados/app/models/priority.dart';
-import 'package:chamados/app/models/setor.dart';
+import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/utils/repositories/call/call_type/call_type_repository.dart';
-import 'package:chamados/app/utils/repositories/call/call_type/call_type_repository_impl.dart';
-import 'package:chamados/app/utils/repositories/call/priority/priority_repository.dart';
-import 'package:chamados/app/utils/repositories/call/setor/setor_repository.dart';
+import 'package:chamados/app/utils/repositories/call/call/call_repository.dart';
+import 'package:chamados/app/utils/repositories/call/call/call_repository_impl.dart';
+import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
-import 'package:validatorless/validatorless.dart';
+import 'package:intl/intl.dart';
 
-part '../components/setor.dart';
 part '../components/row_source.dart';
-part '../components/save_priority_dialog.dart';
-part '../components/save_call_type_dialog.dart';
-part '../components/remove_call_type_dialog.dart';
+part '../components/new_call_dialog.dart';
 
-class CallTypeListScreen extends StatefulWidget {
-  const CallTypeListScreen({super.key});
+class CallDashboardScreen extends StatefulWidget {
+  const CallDashboardScreen({super.key});
 
   @override
-  State<CallTypeListScreen> createState() => _CallTypeListState();
+  State<CallDashboardScreen> createState() => _CallDashboardScreenState();
 }
 
-class _CallTypeListState extends State<CallTypeListScreen> {
-
+class _CallDashboardScreenState extends State<CallDashboardScreen> {
+  
   bool sort = true;
   bool isLoading = true;
-  List<CallType> filterData = [], myData = [];
-  TextEditingController controller = TextEditingController();
-  CallTypeRepository callRepo = CallTypeRepositoryImpl();
+  List<Call> filterData = [], myData = [];
+  final CallRepository _callRepo = CallRepositoryImpl();
+
+  onsortColum(int columnIndex, bool ascending) {
+    if (columnIndex == 0) {
+      if (ascending) {
+        filterData.sort((a, b) => a.solicitante!.email.toString().compareTo(b.solicitante!.email.toString()));
+      } else {
+        filterData.sort((a, b) => b.solicitante!.email.toString().compareTo(a.solicitante!.email.toString()));
+      }
+    }
+  }
 
   @override
   void initState() {
-    super.initState();
     _init();
+    super.initState();
   }
 
   Future<void> _init() async {
-    myData.addAll(await callRepo.getCallTypeList());
+    myData.addAll(await _callRepo.getCallList());
     filterData.addAll(myData);
     _setLoading();
   }
@@ -53,24 +57,16 @@ class _CallTypeListState extends State<CallTypeListScreen> {
     });
   }
 
-  onsortColum(int columnIndex, bool ascending) {
-    if (columnIndex == 0) {
-      if (ascending) {
-        filterData.sort((a, b) => a.titulo.toString().compareTo(b.titulo.toString()));
-      } else {
-        filterData.sort((a, b) => b.titulo.toString().compareTo(a.titulo.toString()));
-      }
-    }
-  }
+  TextEditingController controller = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Categoria de chamado')),
+      appBar: AppBar(title: const Text('Chamados')),
       body: isLoading ? Center(child: buildLoadingIndicator()) : SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
+          children: [ 
             addVerticalSpace(10),
             SizedBox(
               width: double.infinity,
@@ -80,12 +76,12 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                 header: TextFormField(
                   controller: controller,
                   decoration: const InputDecoration(
-                    labelText: 'Buscar por Titulo',
+                    labelText: 'Buscar por Solicitante',
                     suffixIcon: Icon(Icons.search_outlined),                                                   
                   ),
                   onChanged: (value) {
                     setState(() {
-                      myData = filterData.where((element) => element.titulo.toString().toUpperCase().contains(value.toUpperCase())).toList();
+                      myData = filterData.where((element) => element.solicitante.toString().toUpperCase().contains(value.toUpperCase())).toList();
                     });
                   },
                 ),
@@ -94,7 +90,7 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                   myData: myData,
                   count: myData.length,
                 ),
-            
+      
                 checkboxHorizontalMargin: 10,
                 rowsPerPage: 10,
                 columnSpacing: 6,
@@ -104,12 +100,12 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                     label: Text(
                       "ID",
                       style: TextStyle(
-                        fontWeight: FontWeight.w600, fontSize: 14),
+                          fontWeight: FontWeight.w600, fontSize: 14),
                     ),
                   ),
                   const DataColumn(
                     label: Text(
-                      "Sigla",
+                      "Criado em",
                       style: TextStyle(
                           fontWeight: FontWeight.w600, fontSize: 14),
                     ),
@@ -130,13 +126,6 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                   ),
                   const DataColumn(
                     label: Text(
-                      "Titulo",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 14),
-                    ),
-                  ),
-                  const DataColumn(
-                    label: Text(
                       "Prioridade",
                       style: TextStyle(
                           fontWeight: FontWeight.w600, fontSize: 14),
@@ -144,14 +133,21 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                   ),
                   const DataColumn(
                     label: Text(
-                      "Descrição",
+                      "Solicitante",
                       style: TextStyle(
                           fontWeight: FontWeight.w600, fontSize: 14),
                     ),
                   ),
                   const DataColumn(
                     label: Text(
-                      "",
+                      "Status",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 14),
+                    ),
+                  ),                        
+                  const DataColumn(
+                    label: Text(
+                      "Ultima atualizacao",
                       style: TextStyle(
                           fontWeight: FontWeight.w600, fontSize: 14),
                     ),
@@ -159,43 +155,12 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                 ],
               ),
             ),
-            addVerticalSpace(10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: () {
-                        savePriorityDialog(context);
-                      },
-                      child: const Text('Cadastrar Prioridade'),
-                    ),
-                  ),
-                  addHorizontalSpace(10),                    
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: () {
-                        saveSetorDialog(context);
-                      },
-                      child: const Text('Cadastrar Setor'),
-                    ),
-                  ),
-                  addHorizontalSpace(10),
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: () {
-                        saveCallTypeDialog(context);
-                      },
-                      child: const Text('Cadastrar Tipo de Chamado'),
-                    ),
-                  ),
-                ],
-              ),
-            )
           ],
         ),
-      ),
+      )
     );
   }
 }
+
+
+

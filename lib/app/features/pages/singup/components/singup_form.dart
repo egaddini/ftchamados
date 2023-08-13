@@ -49,14 +49,8 @@ class _SingupFormState extends State<SingupForm> {
       key: _formKey,
       child: Column(
         children: [
-          const Text(
-            'Crie sua conta',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 35,
-            ),
-          ),                       
-          addVerticalSpace(20),                            
+          const Text('Crie sua conta', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 35,),),                       
+          addVerticalSpace(50),                            
           TextFormField(
             controller: _nameEC,
             decoration: const InputDecoration(
@@ -89,7 +83,6 @@ class _SingupFormState extends State<SingupForm> {
               labelText: 'Telefone', 
             ),
             validator: Validatorless.required('Telefone Obrigatório'),
-            
           ),
           addVerticalSpace(10),
           PasswordField(
@@ -112,46 +105,37 @@ class _SingupFormState extends State<SingupForm> {
           ),
           addVerticalSpace(15),
           Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TextButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                }, 
-                child: const Text(
-                  'Voltar e entrar',
-                ),
-              ),
-              addHorizontalSpace(176),
-              Expanded(
-                child: FilledButton(
-                  child:  isLoading ? buildLoadingIndicator() :  const Text('Avançar'),
-                  onPressed: () {
-                    var formValid = _formKey.currentState?.validate() ?? false;
-                    if (formValid) {
-                      setState(() {
-                        userModel = UserModel(
-                          firstname: _nameEC.text,
-                          lastname: _surnameEC.text,
-                          phone: int.parse(_phoneEC.text.replaceAll(' ', '').replaceAll(')', '').replaceAll('(', '').replaceAll('-', '')),
-                          email: _emailEC.text,
-                          password: _passwordEC.text
-                        );
-                      });
+              TextButton(onPressed: () => Get.back(), child: const Text('Voltar e entrar',),),
+              FilledButton(
+                child:  isLoading ? buildLoadingIndicator() :  const Text('Avançar'),
+                onPressed: () {
+                  var formValid = _formKey.currentState?.validate() ?? false;
+                  if (formValid) {
+                    setState(() {
+                      userModel = UserModel(
+                        firstname: _nameEC.text,
+                        lastname: _surnameEC.text,
+                        phone: int.parse(_phoneEC.text.replaceAll(' ', '').replaceAll(')', '').replaceAll('(', '').replaceAll('-', '')),
+                        email: _emailEC.text,
+                        password: _passwordEC.text
+                      );
+                    });
+                    _setLoading();
+                    authRepository.register(userModel!).then((_) {
                       _setLoading();
-                      authRepository.register(userModel!).then((_) {
-                        _setLoading();
-                        registerSucess(context, 'Conta registrada com sucesso!', 'Sua solicitação será revisada e conta habilitada em até 2 dias úteis.');
-                      }).catchError((error) {
-                        _setLoading();
-                        tratarErro(context, error);
-                      });                                                 
-                    }
-                  }, 
-                ),
+                      registerSucess(context, 'Conta registrada com sucesso!', 'Sua solicitação será revisada e conta habilitada em até 2 dias úteis.');
+                    }).catchError((error) {
+                      _setLoading();
+                      tratarErro(context, error);
+                    });                                                 
+                  }
+                }, 
               ),
             ],
           ),
-          addVerticalSpace(150),
         ],
       ),
     );

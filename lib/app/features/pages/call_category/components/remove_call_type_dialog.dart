@@ -11,10 +11,7 @@ void removeCallType(BuildContext context, CallType call) {
           onPressed: () {
             Navigator.pop(context);
           },
-          child: const Text(
-            "Voltar",
-            style: TextStyle(color: Pallete.backgroundColor),
-          ),
+          child: Text("Voltar", style: TextStyle(color: Get.theme.colorScheme.primary),),
         ),
         TextButton(
           onPressed: () async {

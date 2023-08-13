@@ -1,9 +1,10 @@
+import 'package:chamados/app/constans/api_path.dart';
 import 'package:chamados/app/models/priority.dart';
 import 'package:chamados/app/utils/repositories/base_repository.dart';
 
 class PriorityRepository extends BaseRepository<PriorityModel> {
 
-  PriorityRepository() : super("http://localhost:9090/api/v1/call-type/priority");
+  PriorityRepository() : super(ApiPath.priority);
 
   @override
   PriorityModel entityFromMap(Map<String, dynamic> map) {

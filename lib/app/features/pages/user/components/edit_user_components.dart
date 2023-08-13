@@ -238,12 +238,12 @@ class AvatarField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return  CircleAvatar(
-      backgroundColor: Pallete.gradient3,
+      backgroundColor: Get.theme.primaryColor,
       maxRadius: 60,
       child: Text(
         text,
-          style: const TextStyle(
-            color: Pallete.whiteColor,
+          style: TextStyle(
+            color: Get.theme.primaryColor,
             fontSize: 35,
           ),
       ),
