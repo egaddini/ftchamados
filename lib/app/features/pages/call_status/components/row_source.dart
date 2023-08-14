@@ -4,17 +4,19 @@ class RowSource extends DataTableSource {
   dynamic myData;
   int count;
   BuildContext context;
+  CallStatusController controller;
 
 
   RowSource({
     required this.context,
     required this.myData,
     required this.count,
+    required this.controller,
   });
 
   @override
   DataRow? getRow(int index) {
-    return (index < rowCount) ? recentFileDataRow(myData![index], context) : null;
+    return (index < rowCount) ? recentFileDataRow(myData[index], context, controller, index) : null;
   }
 
   @override
@@ -27,18 +29,16 @@ class RowSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-DataRow recentFileDataRow(Call call, BuildContext context) {
+DataRow recentFileDataRow(CallStatusModel status, BuildContext context, CallStatusController controller, int index) {
   return DataRow(
-    onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => CallDetailPage(call),),),
+    // onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => CallDetailPage(call),),),
     cells: [
-      DataCell(Text('${call.callType!.setor.sigla} ${call.id}')),
-      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataCriacao)).toString())),
-      DataCell(Text(call.callType!.setor.nome)),
-      DataCell(Text(call.callType!.prioridade.nome)),
-      DataCell(Text(call.solicitante!.email.toString())),
-      DataCell(Text(call.status.toString())),
-      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataUltAtualizacao)).toString())),
-      //DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(user.dataCriacao!).toString())),
+      DataCell(Text(status.id.toString())),
+      DataCell(Text(status.name)),
+      DataCell(Text(status.description)),
+      DataCell(Text(status.weight.toString())),
+      DataCell(Checkbox(value: status.notify, onChanged: (value) => controller.setValue(index),),),
+      DataCell(SizedBox(height: 40, width: 40, child: cInkWell(22, 30, Icons.delete, Icons.delete_forever_outlined, Get.theme.primaryColor, Colors.red, 'Deletar', () => controller.deleteItem(index)))),        
     ],
   );
 }

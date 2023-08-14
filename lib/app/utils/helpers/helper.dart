@@ -195,3 +195,28 @@ void snackSucessRegister(BuildContext context, String message) {
 Future<void> waitThreeSeconds() {
   return Future.delayed(const Duration(seconds: 3));
 }
+
+Future<bool?> perguntaSimOuNao(String text) async {
+  return showDialog(
+    context: Get.context!,
+    builder: (_) => AlertDialog(
+      content: Text(text, style: Get.theme.textTheme.bodyMedium),
+      elevation: 4,
+      actions: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            TextButton(
+              onPressed: () => Get.back(result: false),
+              child: Text("Voltar", style: TextStyle(color: Get.theme.primaryColor),),
+            ),
+            TextButton(
+              onPressed: () => Get.back(result: true),
+              child: const Text("Deletar", style: TextStyle(color: Colors.red),),
+            ),
+          ],
+        ),
+      ],
+    )
+  );
+}

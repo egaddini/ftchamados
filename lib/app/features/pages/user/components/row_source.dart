@@ -37,15 +37,7 @@ DataRow recentFileDataRow(UserInfoModel user, BuildContext context) {
       DataCell(Text(user.nome.toString())),
       DataCell(Text(user.sobrenome.toString())),
       DataCell(Text(user.role.toString())),
-      DataCell(
-        IgnorePointer(
-          ignoring: true,
-          child: Checkbox(
-            value: user.habilitado,
-            onChanged: null,
-          ),
-        ),
-      ),
+      DataCell(IgnorePointer(ignoring: true,child: Checkbox(value: user.habilitado,onChanged: null,),),),
       DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(user.dataCriacao!)).toString())),
       DataCell(
         InkWell(

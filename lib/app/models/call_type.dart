@@ -7,14 +7,14 @@ import 'package:chamados/app/models/setor.dart';
 class CallType {
 
   int? id;
-  Setor setor;
+  Setor sector;
   String titulo;
   PriorityModel prioridade;
   String descricao;
   
   CallType({
     this.id,
-    required this.setor,
+    required this.sector,
     required this.titulo,
     required this.prioridade,
     required this.descricao,
@@ -22,14 +22,14 @@ class CallType {
 
   CallType copyWith({
     int? id,
-    Setor? setor,
+    Setor? sector,
     String? titulo,
     PriorityModel? prioridade,
     String? descricao,
   }) {
     return CallType(
       id: id ?? this.id,
-      setor: setor ?? this.setor,
+      sector: sector ?? this.sector,
       titulo: titulo ?? this.titulo,
       prioridade: prioridade ?? this.prioridade,
       descricao: descricao ?? this.descricao,
@@ -39,7 +39,7 @@ class CallType {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'setor': setor.toMap(),
+      'setor': sector.toMap(),
       'titulo': titulo,
       'prioridade': prioridade.toMap(),
       'descricao': descricao,
@@ -49,7 +49,7 @@ class CallType {
   factory CallType.fromMap(Map<String, dynamic> map) {
     return CallType(
       id: map['id'] != null ? map['id'] as int : null,
-      setor: Setor.fromMap(map['setor'] as Map<String,dynamic>),
+      sector: Setor.fromMap(map['sector'] as Map<String,dynamic>),
       titulo: map['titulo'] as String,
       prioridade: PriorityModel.fromMap(map['prioridade'] as Map<String,dynamic>),
       descricao: map['descricao'] as String,
@@ -62,7 +62,7 @@ class CallType {
 
   @override
   String toString() {
-    return 'CallType(id: $id, setor: $setor, titulo: $titulo, prioridade: $prioridade, descricao: $descricao)';
+    return 'CallType(id: $id, sector: $sector, titulo: $titulo, prioridade: $prioridade, descricao: $descricao)';
   }
 
   @override
@@ -71,7 +71,7 @@ class CallType {
   
     return 
       other.id == id &&
-      other.setor == setor &&
+      other.sector == sector &&
       other.titulo == titulo &&
       other.prioridade == prioridade &&
       other.descricao == descricao;
@@ -80,7 +80,7 @@ class CallType {
   @override
   int get hashCode {
     return id.hashCode ^
-      setor.hashCode ^
+      sector.hashCode ^
       titulo.hashCode ^
       prioridade.hashCode ^
       descricao.hashCode;

@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeManager().themeMode,
       theme: lightTheme,
       darkTheme: darkTheme,
-      initialRoute: AppRoutes.home,
+      initialRoute: AppRoutes.login,
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       scrollBehavior: CustomScrollBehaviour(),

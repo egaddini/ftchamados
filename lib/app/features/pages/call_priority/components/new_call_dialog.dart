@@ -68,7 +68,7 @@ class NewCallFormState extends State<NewCallForm> {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: _callType.setor.nome),
+                  controller: TextEditingController(text: _callType.sector.nome),
                   decoration: const InputDecoration(
                     labelText: 'Setor',
                   ),

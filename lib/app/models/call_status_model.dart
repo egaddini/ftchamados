@@ -3,7 +3,7 @@ import 'dart:convert';
 
 class CallStatusModel {
   
-    int id;
+    int? id;
     String name;
     String description;
     int weight;

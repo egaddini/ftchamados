@@ -32,8 +32,8 @@ DataRow recentFileDataRow(CallType call, BuildContext context) {
     //onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => CallDetailPage(call),),),
     cells: [
       DataCell(Text('${call.id}')),
-      DataCell(Text(call.setor.sigla)),
-      DataCell(Text(call.setor.nome)),
+      DataCell(Text(call.sector.sigla)),
+      DataCell(Text(call.sector.nome)),
       DataCell(Text(call.titulo)),
       DataCell(Text(call.prioridade.nome)),
       DataCell(Text(call.descricao)),

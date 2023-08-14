@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
                     return _controller.items;
                   },
                   itemBuilder: (context, CallType call) {
-                    return ListTile(title: Text('${call.setor.sigla} - ${call.titulo}'),);
+                    return ListTile(title: Text('${call.sector.sigla} - ${call.titulo}'),);
                   },
                   onSuggestionSelected: (CallType call) async {newCallDialog(context, call);},
                 ),

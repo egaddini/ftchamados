@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:chamados/app/constans/api_path.dart';
 import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/models/call_type_dto.dart';
 import 'package:chamados/app/models/error_dto.dart';
@@ -11,7 +12,7 @@ import 'package:dio/dio.dart';
 
 class CallTypeRepositoryImpl implements CallTypeRepository {
   
-  final String _basePath = "http://localhost:9090/api/v1/call-type";
+  final String _basePath = ApiPath.callType;
 
   @override
   Future<String> register(CallTypeDTO call) async {
