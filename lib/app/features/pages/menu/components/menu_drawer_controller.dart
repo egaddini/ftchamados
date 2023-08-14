@@ -2,7 +2,7 @@ part of home_screen;
 
 class MenuDrawerController extends GetxController {
 
-  late UserInfoModel logedUser;
+  late Rx<UserInfoModel> logedUser;
   RxBool isLoading = true.obs, isAdmin = false.obs, isLight = false.obs;
   RxInt notificacoes = 0.obs; 
   RxDouble currentAccountPictureSize = 70.00.obs;
@@ -15,6 +15,7 @@ class MenuDrawerController extends GetxController {
     Get.changeTheme(lightTheme);
     },
   );
+
   late Widget darkModeInk = cInkWell(50, 55, Icons.dark_mode, Icons.dark_mode_outlined, Get.theme.colorScheme.primary , null, 'Dark Mode', () {
     themeInk.value = lightModeInk;
     Get.changeThemeMode(ThemeMode.dark);
@@ -24,10 +25,15 @@ class MenuDrawerController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    logedUser = (await LocalStorageServices().getUser())!;
-    isAdmin.value = logedUser.isAdmin();
+    logedUser = (await LocalStorageServices().getUser())!.obs;
+    isAdmin.value = logedUser.value.isAdmin();
     isLoading.value = false;
     super.onInit(); 
+  }
+
+  Future<void> clearLocalStorageData() async {
+    await LocalStorageServices().clearData();
+    isAdmin.value = false;
   }
 
 }

@@ -19,13 +19,13 @@ class _MenuDrawerState extends State<MenuDrawer> {
       child: controller.isLoading.value? buildLoadingIndicator() : Column(
         children: <Widget>[   
           UserAccountsDrawerHeader(
-            accountEmail: Text(controller.logedUser.email!),
-            accountName: Text(controller.logedUser.nome!),
+            accountEmail: Text(controller.logedUser.value.email!),
+            accountName: Text(controller.logedUser.value.nome!),
             currentAccountPictureSize: Size(controller.currentAccountPictureSize.value, controller.currentAccountPictureSize.value),
             currentAccountPicture: InkWell(
               onHover: (value) {controller.currentAccountPictureSize.value = value ? 80 : 70;},
-              onTap: () => Get.to(EditUserPage(controller.logedUser), routeName: 'edit-user/{controller.logedUser.email!}'),
-              child: Tooltip(message: 'Minha Conta', child: CircleAvatar(child: Text(controller.logedUser.email!.substring(0,2)),)),
+              onTap: () => Get.to(EditUserPage(controller.logedUser.value), routeName: 'edit-user/{controller.logedUser.email!}'),
+              child: Tooltip(message: 'Minha Conta', child: CircleAvatar(child: Text(controller.logedUser.value.email!.substring(0,2)),)),
             ),
             otherAccountsPictures: [
               Badge(
@@ -55,21 +55,25 @@ class _MenuDrawerState extends State<MenuDrawer> {
                     leading: const Icon(Icons.admin_panel_settings_outlined),
                     children: [
                       ExpansionTile(
+                        tilePadding: const EdgeInsets.only(left: 20),
                         title: const Text('Chamados'),
                         leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
                         children: [                
                           ListTile(
+                            contentPadding: const EdgeInsets.only(left: 40),
                             title: const Text("Dashboard"),
                             leading: const Icon(Icons.bar_chart_outlined),
                             onTap: () => Get.toNamed(AppRoutes.call),
                           ),
                           ListTile(
+                            contentPadding: const EdgeInsets.only(left: 40),
                             title: const Text("Categorias"),
                             leading: const Icon(Icons.note_add_outlined),
                             onTap: () => Get.toNamed(AppRoutes.callType),
                           ),                    
                           ListTile(
-                            leading: const Icon(Icons.settings),
+                            contentPadding: const EdgeInsets.only(left: 40),
+                            leading: const Icon(Icons.settings,),
                             title: const Text("Configurações"),
                             onTap: () => systemSettingsDialog(Get.context!),
                           ),                
@@ -86,7 +90,10 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 ListTile(
                   leading: const Icon(Icons.logout),
                   title: const Text("Logout"),
-                  onTap: () => Get.offAndToNamed(AppRoutes.login),
+                  onTap: () {
+                    controller.clearLocalStorageData();
+                    Get.offAllNamed(AppRoutes.login);
+                  }
                 ),
               ],
             )
