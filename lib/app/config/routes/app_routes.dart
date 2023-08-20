@@ -13,6 +13,7 @@ abstract class AppRoutes {
   static const systemSettings = '/system-settings';
   static const callStatus = '/call-status';
   static const callSector = '/call-sector';
+  static const callPriority = '/call-priority';
   
 }
 

@@ -4,7 +4,7 @@ void createUpdateSectorDialog(SectorModel? sector) {
   showDialog(
     context: Get.context!,
     builder: (_) => AlertDialog(
-      title: Center(child: Text(sector == null ? "Novo Setor" : sector.nome, style: Get.theme.textTheme.titleLarge)),
+      title: Center(child: Text(sector == null ? "Nova Setor" : "Editar Setor", style: Get.theme.textTheme.titleLarge)),
       content: SizedBox(
         width: 350,
         child: createUpdateStatusForm(sector),

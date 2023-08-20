@@ -1,21 +1,21 @@
-part of call_status;
+part of call_priority;
 
-Future<bool> createUpdateStatusDialog(CallStatusModel? status) {
-  return showDialog(
+void createUpdatePriorityDialog(PriorityModel? priority) {
+  showDialog(
     context: Get.context!,
     builder: (_) => AlertDialog(
-      title: Center(child: Text( status == null ? "Nova Status" : "Editar Status", style: Get.theme.textTheme.titleLarge)),
+      title: Center(child: Text(priority == null ? "Nova Prioridade" : "Editar Prioridade", style: Get.theme.textTheme.titleLarge)),
       content: SizedBox(
         width: 350,
-        child:  createUpdateStatusForm(status),
+        child: createUpdateStatusForm(priority),
       ),
     )
-  ).then((value) => Get.delete<CreateUpdateStatusController>());
+  ).then((value) => Get.delete<CreateUpdatePriorityController>());
 }
 
-Widget createUpdateStatusForm(CallStatusModel? status) {
+Widget createUpdateStatusForm(PriorityModel? priority) {
 
-  CreateUpdateStatusController controller = Get.put(CreateUpdateStatusController(status: status));
+  CreateUpdatePriorityController controller = Get.put(CreateUpdatePriorityController(priority: priority));
 
   return controller.isLoading.value ? buildLoadingIndicator() : SingleChildScrollView (
     child: Form(
@@ -27,8 +27,8 @@ Widget createUpdateStatusForm(CallStatusModel? status) {
             controller: controller.nomeC,
             decoration: const InputDecoration(labelText: 'Nome',),
             validator: Validatorless.required('Nome Obrigatório'), 
-          ),
-          addVerticalSpace(10),                        
+          ),                     
+          addVerticalSpace(10),         
           TypeAheadField<String>(
             textFieldConfiguration: TextFieldConfiguration(
               controller: controller.pesoC,
@@ -48,24 +48,6 @@ Widget createUpdateStatusForm(CallStatusModel? status) {
             onSuggestionSelected: (String peso) async {
               controller.pesoC.text = peso;
             },
-          ),
-          addVerticalSpace(10),         
-          TextFormField(
-            controller: controller.descricaoC,
-            maxLines: 3,
-            decoration: const InputDecoration(labelText: 'Descrição',),
-            validator: Validatorless.required('Nome Obrigatório'), 
-          ),
-          addVerticalSpace(10),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Checkbox(
-                value: controller.notificaC.value, 
-                onChanged: (value) => controller.notificaC.value = value!,
-              ),
-              const Text('Notificar Usuário'),
-            ],
           ),
           addVerticalSpace(10),
           Center(

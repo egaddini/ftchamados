@@ -5,23 +5,23 @@ class PriorityModel {
 
   int? id;
   String nome;
-  int peso;
+  int weight;
   
   PriorityModel({
     this.id,
     required this.nome,
-    required this.peso,
+    required this.weight,
   });
 
   PriorityModel copyWith({
     int? id,
     String? nome,
-    int? peso,
+    int? weight,
   }) {
     return PriorityModel(
       id: id ?? this.id,
       nome: nome ?? this.nome,
-      peso: peso ?? this.peso,
+      weight: weight ?? this.weight,
     );
   }
 
@@ -29,7 +29,7 @@ class PriorityModel {
     return <String, dynamic>{
       'id': id,
       'nome': nome,
-      'peso': peso,
+      'weight': weight,
     };
   }
 
@@ -37,7 +37,7 @@ class PriorityModel {
     return PriorityModel(
       id: map['id'] != null ? map['id'] as int : null,
       nome: map['nome'] as String,
-      peso: map['peso'] as int,
+      weight: map['weight'] as int,
     );
   }
 
@@ -46,7 +46,7 @@ class PriorityModel {
   factory PriorityModel.fromJson(String source) => PriorityModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'PriorityModel(id: $id, nome: $nome, peso: $peso)';
+  String toString() => 'PriorityModel(id: $id, nome: $nome, weight: $weight)';
 
   @override
   bool operator ==(covariant PriorityModel other) {
@@ -55,9 +55,9 @@ class PriorityModel {
     return 
       other.id == id &&
       other.nome == nome &&
-      other.peso == peso;
+      other.weight == weight;
   }
 
   @override
-  int get hashCode => id.hashCode ^ nome.hashCode ^ peso.hashCode;
+  int get hashCode => id.hashCode ^ nome.hashCode ^ weight.hashCode;
 }

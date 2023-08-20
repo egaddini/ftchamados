@@ -15,7 +15,6 @@ import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';
 
 part '../components/row_source.dart';
-part '../../call_priority/save_priority_dialog.dart';
 part '../components/save_call_type_dialog.dart';
 part '../components/remove_call_type_dialog.dart';
 
@@ -159,38 +158,6 @@ class _CallTypeListState extends State<CallTypeListScreen> {
               ),
             ),
             addVerticalSpace(10),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: () {
-                        savePriorityDialog(context);
-                      },
-                      child: const Text('Cadastrar Prioridade'),
-                    ),
-                  ),
-                  addHorizontalSpace(10),                    
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: () {
-                      },
-                      child: const Text('Cadastrar Setor'),
-                    ),
-                  ),
-                  addHorizontalSpace(10),
-                  Expanded(
-                    child: FilledButton(
-                      onPressed: () {
-                        saveCallTypeDialog(context);
-                      },
-                      child: const Text('Cadastrar Tipo de Chamado'),
-                    ),
-                  ),
-                ],
-              ),
-            )
           ],
         ),
       ),

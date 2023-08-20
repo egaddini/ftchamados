@@ -67,7 +67,7 @@ Widget chamadosSettingsForm() {
                 Text('Prioridade', style: Get.textTheme.titleLarge,),
               ],
             ), 
-            function: () => {}, 
+            function: () =>  Get.toNamed(AppRoutes.callPriority),  
           ),
           CustomFlexCard(
             content: Column(
