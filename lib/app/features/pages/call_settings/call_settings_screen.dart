@@ -49,7 +49,7 @@ Widget chamadosSettingsForm() {
                 Text('Setor', style: Get.textTheme.titleLarge,),
               ],
             ), 
-            function: () => print ('Chamados'), 
+            function: () =>  Get.toNamed(AppRoutes.callSector), 
           ),
         ],
       ),

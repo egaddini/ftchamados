@@ -8,16 +8,12 @@ class CallStatusController extends GetxController {
   
   bool sort = true;
   RxBool isLoading = true.obs;
-
   TextEditingController formFieldC = TextEditingController();
-
   RxList<CallStatusModel> myData = <CallStatusModel>[].obs;
-  
   final CallStatusRepository _callStatusRepository;
+  final RxList<String> pesos = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].obs;
 
   CallStatusController(this._callStatusRepository);
-
-  final RxList<String> pesos = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].obs;
 
   @override
   void onInit() async {
@@ -26,7 +22,7 @@ class CallStatusController extends GetxController {
     isLoading = false.obs;
     super.onInit();
   }
-
+  
   void refreshValoresDisponiveis() {
     for (var element in myData) {
       pesos.remove(element.weight.toString());
@@ -55,19 +51,6 @@ class CallStatusController extends GetxController {
         tratarErro(Get.context!, error);
       }); 
     }
-  }
-
-  void saveItem(CallStatusModel status) async {
-    isLoading.value = true;
-    _callStatusRepository.register(status).then((_) async {
-      myData.add(await _callStatusRepository.getByName(status.name));
-      refreshValoresDisponiveis();
-      Get.back();
-      snackSucessRegister(Get.context!, 'Status ${status.name} registrado com sucesso!');
-    }).catchError((error) {
-      Get.back();
-      tratarErro(Get.context!, error);
-    });  
   }
 
 }

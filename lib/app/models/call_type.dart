@@ -2,12 +2,12 @@
 import 'dart:convert';
 
 import 'package:chamados/app/models/priority.dart';
-import 'package:chamados/app/models/setor.dart';
+import 'package:chamados/app/models/setor_model.dart';
 
 class CallType {
 
   int? id;
-  Setor sector;
+  SectorModel sector;
   String titulo;
   PriorityModel prioridade;
   String descricao;
@@ -22,7 +22,7 @@ class CallType {
 
   CallType copyWith({
     int? id,
-    Setor? sector,
+    SectorModel? sector,
     String? titulo,
     PriorityModel? prioridade,
     String? descricao,
@@ -49,7 +49,7 @@ class CallType {
   factory CallType.fromMap(Map<String, dynamic> map) {
     return CallType(
       id: map['id'] != null ? map['id'] as int : null,
-      sector: Setor.fromMap(map['sector'] as Map<String,dynamic>),
+      sector: SectorModel.fromMap(map['sector'] as Map<String,dynamic>),
       titulo: map['titulo'] as String,
       prioridade: PriorityModel.fromMap(map['prioridade'] as Map<String,dynamic>),
       descricao: map['descricao'] as String,

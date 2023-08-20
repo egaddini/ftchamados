@@ -3,7 +3,7 @@ library call_type_dashboard;
 import 'package:chamados/app/models/call_type.dart';
 import 'package:chamados/app/models/call_type_dto.dart';
 import 'package:chamados/app/models/priority.dart';
-import 'package:chamados/app/models/setor.dart';
+import 'package:chamados/app/models/setor_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/repositories/call/call_type/call_type_repository.dart';
 import 'package:chamados/app/utils/repositories/call/call_type/call_type_repository_impl.dart';
@@ -14,7 +14,6 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';
 
-part '../../call_sector/setor.dart';
 part '../components/row_source.dart';
 part '../../call_priority/save_priority_dialog.dart';
 part '../components/save_call_type_dialog.dart';
@@ -176,7 +175,6 @@ class _CallTypeListState extends State<CallTypeListScreen> {
                   Expanded(
                     child: FilledButton(
                       onPressed: () {
-                        saveSetorDialog(context);
                       },
                       child: const Text('Cadastrar Setor'),
                     ),

@@ -70,10 +70,7 @@ class _LoginFormState extends State<LoginForm> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text('Não tem uma conta?'),
-                TextButton(
-                  onPressed: () {Get.toNamed(AppRoutes.singup);}, 
-                  child: const Text('Entre aqui',),
-                ),
+                TextButton(onPressed: () => Get.toNamed(AppRoutes.singup), child: const Text('Entre aqui',),),
               ],
             ),
             addVerticalSpace(20),

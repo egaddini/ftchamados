@@ -1,26 +1,26 @@
-library call_status;
+library call_sector;
 
-import 'package:chamados/app/features/pages/call_status/call_status_controller.dart';
-import 'package:chamados/app/features/pages/call_status/components/create_update_status_controller.dart';
-import 'package:chamados/app/models/call_status_model.dart';
+import 'package:chamados/app/features/pages/call_sector/call_sector_controller.dart';
+import 'package:chamados/app/models/setor_model.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';
 
+import 'components/create_update_sector_controller.dart';
+
 part 'components/row_source.dart';
-part 'components/create_update_status_dialog.dart';
+part 'components/create_update_sector_dialog.dart';
 
-class CallStatusScreen extends GetView<CallStatusController>  {
+class CallSectorStatusScreen extends GetView<CallSectorController>  {
 
-  const CallStatusScreen({super.key});
+  const CallSectorStatusScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Status')),
+      appBar: AppBar(title: const Text('Setor')),
       body: SingleChildScrollView(
         child: Column(
           children: [ 
@@ -54,19 +54,16 @@ class CallStatusScreen extends GetView<CallStatusController>  {
                   count: controller.myData.length,
                   controller: controller
                 ),
-
                 actions: [
-                  FilledButton(onPressed: () => createUpdateStatusDialog(null).then((value) => controller.myData.refresh()), child: const Text('Novo Registro'),)
+                  FilledButton(onPressed: () => createUpdateSectorDialog(null), child: const Text('Novo Registro'),)
                 ],
                 rowsPerPage: 10,
                 columnSpacing: 2,
                 showCheckboxColumn: false,
                 columns: const [
                   DataColumn(label: Text("Id",style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),
+                  DataColumn(label: Text("Sigla", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),    
                   DataColumn(label: Text("Nome", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),    
-                  DataColumn(label: Text("Descrição", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),    
-                  DataColumn(label: Text("Peso", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),    
-                  DataColumn(label: Text("Notifica Usuário", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),), 
                   DataColumn(label: Text('',),),    
                 ],
               ),

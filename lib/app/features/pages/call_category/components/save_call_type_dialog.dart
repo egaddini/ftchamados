@@ -33,10 +33,10 @@ class _SaveCallTypeState extends State<SaveCallType> {
   final SetorRepository setorRepo = SetorRepository();
   final PriorityRepository priRepo = PriorityRepository();
 
-  List<Setor> setores = [];
+  List<SectorModel> setores = [];
   List<PriorityModel> prioridades = [];
 
-  late Setor _setor;
+  late SectorModel _setor;
   late PriorityModel _priority;
   
   @override
@@ -83,7 +83,7 @@ class _SaveCallTypeState extends State<SaveCallType> {
               validator: Validatorless.required('Titulo Obrigatório'), 
             ),         
             addVerticalSpace(10),
-            TypeAheadField<Setor>(
+            TypeAheadField<SectorModel>(
               textFieldConfiguration: TextFieldConfiguration(
                 controller: _setorC,
                 decoration: const InputDecoration(
@@ -94,12 +94,12 @@ class _SaveCallTypeState extends State<SaveCallType> {
               suggestionsCallback: (pattern) {
                 return setores;
               },
-              itemBuilder: (context, Setor setor) {
+              itemBuilder: (context, SectorModel setor) {
                 return ListTile(
                   title: Text(setor.nome),
                 );
               },
-              onSuggestionSelected: (Setor setor) async {
+              onSuggestionSelected: (SectorModel setor) async {
                 setState(() {
                   _setor = setor;
                   _setorC.text = setor.nome; 

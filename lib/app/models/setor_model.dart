@@ -1,24 +1,24 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
-class Setor {
+class SectorModel {
   
   int? id;
   String sigla;
   String nome;
 
-  Setor({
+  SectorModel({
     this.id,
     required this.sigla,
     required this.nome,
   });
 
-  Setor copyWith({
+  SectorModel copyWith({
     int? id,
     String? sigla,
     String? nome,
   }) {
-    return Setor(
+    return SectorModel(
       id: id ?? this.id,
       sigla: sigla ?? this.sigla,
       nome: nome ?? this.nome,
@@ -33,8 +33,8 @@ class Setor {
     };
   }
 
-  factory Setor.fromMap(Map<String, dynamic> map) {
-    return Setor(
+  factory SectorModel.fromMap(Map<String, dynamic> map) {
+    return SectorModel(
       id: map['id'] as int,
       sigla: map['sigla'] as String,
       nome: map['nome'] as String,
@@ -43,13 +43,13 @@ class Setor {
 
   String toJson() => json.encode(toMap());
 
-  factory Setor.fromJson(String source) => Setor.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory SectorModel.fromJson(String source) => SectorModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'Setor(id: $id, sigla: $sigla, nome: $nome)';
+  String toString() => 'SectorModel(id: $id, sigla: $sigla, nome: $nome)';
 
   @override
-  bool operator ==(covariant Setor other) {
+  bool operator ==(covariant SectorModel other) {
     if (identical(this, other)) return true;
   
     return 

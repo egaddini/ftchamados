@@ -9,11 +9,14 @@ ThemeData lightTheme = FlexThemeData.light(
   scheme: FlexScheme.deepPurple,
   surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
   blendLevel: 7,
+  appBarElevation: 1.5,
   subThemesData: const FlexSubThemesData(
     blendOnLevel: 10,
     blendOnColors: false,
     useTextTheme: true,
     useM2StyleDividerInM3: true,
+    elevatedButtonRadius: 4.0,
+    filledButtonRadius: 4.0,
   ),
   
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -26,10 +29,13 @@ ThemeData darkTheme = FlexThemeData.dark(
   scheme: FlexScheme.deepPurple,
   surfaceMode: FlexSurfaceMode.levelSurfacesLowScaffold,
   blendLevel: 13,
+  appBarElevation: 1.5,
   subThemesData: const FlexSubThemesData(
     blendOnLevel: 20,
     useTextTheme: true,
     useM2StyleDividerInM3: true,
+    elevatedButtonRadius: 4.0,
+    filledButtonRadius: 4.0,
   ),
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,

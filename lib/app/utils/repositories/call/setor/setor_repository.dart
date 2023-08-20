@@ -1,23 +1,23 @@
 import 'package:chamados/app/constans/api_path.dart';
-import 'package:chamados/app/models/setor.dart';
+import 'package:chamados/app/models/setor_model.dart';
 import 'package:chamados/app/utils/repositories/base_repository.dart';
 
-class SetorRepository extends BaseRepository<Setor> {
+class SetorRepository extends BaseRepository<SectorModel> {
   
   SetorRepository() : super(ApiPath.sector);
   
   @override
-  Setor entityFromMap(Map<String, dynamic> map) {
-    return Setor.fromMap(map);
+  SectorModel entityFromMap(Map<String, dynamic> map) {
+    return SectorModel.fromMap(map);
   }
 
   @override
-  Map<String, dynamic> entityToMap(Setor entity) {
+  Map<String, dynamic> entityToMap(SectorModel entity) {
     return entity.toMap();
   }
 
   @override
-  bool shouldIncludeInList(Setor entity, String query) {
+  bool shouldIncludeInList(SectorModel entity, String query) {
     return entity.nome.toLowerCase().contains(query.toLowerCase());
   }
 
