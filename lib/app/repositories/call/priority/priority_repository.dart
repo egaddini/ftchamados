@@ -1,6 +1,6 @@
 import 'package:chamados/app/constans/api_path.dart';
 import 'package:chamados/app/models/priority.dart';
-import 'package:chamados/app/utils/repositories/base_repository.dart';
+import 'package:chamados/app/repositories/base_repository.dart';
 
 class PriorityRepository extends BaseRepository<PriorityModel> {
 

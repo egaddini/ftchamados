@@ -1,6 +1,6 @@
 import 'package:chamados/app/models/call_status_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/utils/repositories/call/call_status/call_status_repository.dart';
+import 'package:chamados/app/repositories/call/call_status/call_status_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

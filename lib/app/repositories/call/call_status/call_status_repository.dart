@@ -3,7 +3,7 @@ import 'package:chamados/app/models/call_status_model.dart';
 import 'package:chamados/app/models/error_dto.dart';
 import 'package:chamados/app/models/rest_exception.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/utils/repositories/base_repository.dart';
+import 'package:chamados/app/repositories/base_repository.dart';
 import 'package:dio/dio.dart';
 
 class CallStatusRepository extends BaseRepository<CallStatusModel> {

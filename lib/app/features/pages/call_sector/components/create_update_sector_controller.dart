@@ -1,6 +1,6 @@
 import 'package:chamados/app/models/setor_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/utils/repositories/call/setor/setor_repository.dart';
+import 'package:chamados/app/repositories/call/setor/setor_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

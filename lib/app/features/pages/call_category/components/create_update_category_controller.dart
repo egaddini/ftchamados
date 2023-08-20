@@ -3,9 +3,9 @@ import 'package:chamados/app/models/call_category_register_model.dart';
 import 'package:chamados/app/models/priority.dart';
 import 'package:chamados/app/models/setor_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/utils/repositories/call/call_category/call_category_repository.dart';
-import 'package:chamados/app/utils/repositories/call/priority/priority_repository.dart';
-import 'package:chamados/app/utils/repositories/call/setor/setor_repository.dart';
+import 'package:chamados/app/repositories/call/call_category/call_category_repository.dart';
+import 'package:chamados/app/repositories/call/priority/priority_repository.dart';
+import 'package:chamados/app/repositories/call/setor/setor_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

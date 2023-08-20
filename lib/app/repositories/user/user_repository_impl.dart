@@ -6,7 +6,7 @@ import 'package:chamados/app/models/token_model.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/models/user_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/utils/repositories/user/user_repository.dart';
+import 'package:chamados/app/repositories/user/user_repository.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:dio/dio.dart';
 

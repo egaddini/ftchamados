@@ -1,4 +1,4 @@
-import 'package:chamados/app/utils/repositories/call/setor/setor_repository.dart';
+import 'package:chamados/app/repositories/call/setor/setor_repository.dart';
 import 'package:get/get.dart';
 import 'call_sector_controller.dart';
 
