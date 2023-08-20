@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 class CreateUpdateSectorController extends GetxController {
 
   final SectorModel? sector;
-  final SetorRepository setorRep = SetorRepository();
+  final SectorRepository setorRep = SectorRepository();
   final formKey = GlobalKey<FormState>();
   final TextEditingController siglaC = TextEditingController();
   final TextEditingController nomeC = TextEditingController();

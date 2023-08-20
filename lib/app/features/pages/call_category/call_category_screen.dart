@@ -1,7 +1,9 @@
 library call_category;
 
 import 'package:chamados/app/features/pages/call_category/call_category_controller.dart';
-import 'package:chamados/app/models/call_category_model_.dart';
+import 'package:chamados/app/models/call_category_model.dart';
+import 'package:chamados/app/models/priority.dart';
+import 'package:chamados/app/models/setor_model.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:flutter/material.dart';

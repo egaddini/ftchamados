@@ -30,7 +30,7 @@ class RowSource extends DataTableSource {
 
 DataRow recentFileDataRow(CallCategoryModel category, BuildContext context, CallCategoryController controller, int index) {
   return DataRow(
-    // onSelectChanged: (value) => createUpdatePriorityDialog(category),
+    onSelectChanged: (value) => createUpdateCategoryDialog(category),
     cells: [
       DataCell(Text(category.id.toString())),
       DataCell(Text(category.sector!.sigla)),

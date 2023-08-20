@@ -3,7 +3,7 @@ library call_dashboard;
 import 'package:chamados/app/features/pages/call/components/call_detail_page.dart';
 import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/models/call_dto.dart';
-import 'package:chamados/app/models/call_category_model_.dart';
+import 'package:chamados/app/models/call_category_model.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/repositories/call/call/call_repository.dart';

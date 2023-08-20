@@ -6,7 +6,7 @@ class CallSectorBindings implements Bindings {
 
   @override
   void dependencies() {
-    Get.lazyPut(() => CallSectorController(SetorRepository()));
+    Get.lazyPut(() => CallSectorController(SectorRepository()));
   }
 
 }

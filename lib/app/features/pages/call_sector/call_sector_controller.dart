@@ -10,7 +10,7 @@ class CallSectorController extends GetxController {
   RxBool isLoading = true.obs;
   TextEditingController formFieldC = TextEditingController();
   RxList<SectorModel> myData = <SectorModel>[].obs;
-  final SetorRepository _sectorRepository;
+  final SectorRepository _sectorRepository;
 
   CallSectorController(this._sectorRepository);
 
