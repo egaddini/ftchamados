@@ -36,15 +36,15 @@ class CallDetailPageState extends State<CallDetailPage> {
     _ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(widget.call.dataUltAtualizacao)));
     _solicitanteC = TextEditingController(text: widget.call.solicitante!.email);
     _statusC = TextEditingController(text: widget.call.status);
-    _setorC = TextEditingController(text: widget.call.callType!.sector.nome);
-    _prioridadeC = TextEditingController(text: widget.call.callType!.prioridade.nome);
+    _setorC = TextEditingController(text: widget.call.callType!.sector!.nome);
+    _prioridadeC = TextEditingController(text: widget.call.callType!.prioridade!.nome);
     _idC = TextEditingController(text: widget.call.id.toString());
     _tituloC = TextEditingController(text: widget.call.callType!.titulo);
     _descSolicitC = TextEditingController(text: widget.call.descricao);
     _historicoC = TextEditingController(text: '');
     _participantesC = TextEditingController(text: ':()');
     _comentarioC = TextEditingController(text: '');
-    _siglaC = TextEditingController(text: widget.call.callType!.sector.sigla);
+    _siglaC = TextEditingController(text: widget.call.callType!.sector!.sigla);
   }
   
   @override

@@ -7,7 +7,7 @@ abstract class AppRoutes {
   static const singup = '/singup';
   static const users = '/users';
   static const call = '/call';
-  static const callType = '/call-type';
+  static const callCategory = '/call-category';
   static const userCall = '/user-call';
   static const user = '/user';
   static const systemSettings = '/system-settings';

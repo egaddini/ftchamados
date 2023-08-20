@@ -1,20 +1,21 @@
-part of call_type_dashboard;
+part of call_category;
 
 class RowSource extends DataTableSource {
   dynamic myData;
   int count;
   BuildContext context;
-
+  CallCategoryController controller;
 
   RowSource({
     required this.context,
     required this.myData,
     required this.count,
+    required this.controller,
   });
 
   @override
   DataRow? getRow(int index) {
-    return (index < rowCount) ? recentFileDataRow(myData![index], context) : null;
+    return (index < rowCount) ? recentFileDataRow(myData[index], context, controller, index) : null;
   }
 
   @override
@@ -27,29 +28,17 @@ class RowSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-DataRow recentFileDataRow(CallType call, BuildContext context) {
+DataRow recentFileDataRow(CallCategoryModel category, BuildContext context, CallCategoryController controller, int index) {
   return DataRow(
-    //onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => CallDetailPage(call),),),
+    // onSelectChanged: (value) => createUpdatePriorityDialog(category),
     cells: [
-      DataCell(Text('${call.id}')),
-      DataCell(Text(call.sector.sigla)),
-      DataCell(Text(call.sector.nome)),
-      DataCell(Text(call.titulo)),
-      DataCell(Text(call.prioridade.nome)),
-      DataCell(Text(call.descricao)),
-      DataCell(
-        InkWell(
-          borderRadius: BorderRadius.circular(50),
-          onTap: () {
-            removeCallType(context, call);
-          },
-          child:  const SizedBox(
-            width: 35,
-            height: 35,
-            child: Icon(Icons.delete_outline_outlined),
-          ),
-        ),
-      ),
+      DataCell(Text(category.id.toString())),
+      DataCell(Text(category.sector!.sigla)),
+      DataCell(Text(category.sector!.nome)),
+      DataCell(Text(category.titulo!)),
+      DataCell(Text(category.prioridade!.nome)),
+      DataCell(Text(category.descricao!)),      
+      DataCell(SizedBox(height: 40, width: 40, child: cInkWell(22, 30, Icons.delete, Icons.delete_forever_outlined, Get.theme.primaryColor, Colors.red, 'Deletar', () => controller.deleteItem(index)))),        
     ],
   );
 }

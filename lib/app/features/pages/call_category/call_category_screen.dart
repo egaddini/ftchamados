@@ -1,7 +1,7 @@
-library call_priority;
+library call_category;
 
-import 'package:chamados/app/features/pages/call_priority/call_priority_controller.dart';
-import 'package:chamados/app/models/priority.dart';
+import 'package:chamados/app/features/pages/call_category/call_category_controller.dart';
+import 'package:chamados/app/models/call_category_model_.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:flutter/material.dart';
@@ -9,22 +9,22 @@ import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';
 
-import 'components/create_update_priority_controller.dart';
+import 'components/create_update_category_controller.dart';
 
 part 'components/row_source.dart';
-part 'components/create_update_priority_dialog.dart';
+part 'components/create_update_category_dialog.dart';
 
-class CallPriorityStatusScreen extends GetView<CallPriorityController>  {
+class CallCategoryStatusScreen extends GetView<CallCategoryController>  {
 
-  const CallPriorityStatusScreen({super.key});
+  const CallCategoryStatusScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context)  {
     return Scaffold(
-      appBar: AppBar(title: const Text('Prioridade')),
+      appBar: AppBar(title: const Text('Categoria')),
       body: SingleChildScrollView(
         child: Column(
-          children : [ 
+          children: [ 
             addVerticalSpace(10),
             SizedBox(
               width: double.infinity,
@@ -53,18 +53,21 @@ class CallPriorityStatusScreen extends GetView<CallPriorityController>  {
                   context: context,
                   myData: controller.myData,
                   count: controller.myData.length,
-                  controller: controller
+                  controller: controller,
                 ),
                 actions: [
-                  FilledButton(onPressed: () => createUpdatePriorityDialog(null), child: const Text('Novo Registro'),)
+                  FilledButton(onPressed: () => createUpdateCategoryDialog(null), child: const Text('Novo Registro'),)
                 ],
                 rowsPerPage: 10,
                 columnSpacing: 2,
                 showCheckboxColumn: false,
                 columns: const [
                   DataColumn(label: Text("Id",style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),
-                  DataColumn(label: Text("Nome", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),    
-                  DataColumn(label: Text("Peso", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),    
+                  DataColumn(label: Text("Sigla", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),    
+                  DataColumn(label: Text("Nome", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),
+                  DataColumn(label: Text("Titulo",style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),
+                  DataColumn(label: Text("Prioridade", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),    
+                  DataColumn(label: Text("Descrição", style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),),),     
                   DataColumn(label: Text('',),),    
                 ],
               ),

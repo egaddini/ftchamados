@@ -31,9 +31,9 @@ DataRow recentFileDataRow(Call call, BuildContext context) {
   return DataRow(
     onSelectChanged: (value)  => callDetailDialog(context, call),
     cells: [
-      DataCell(Text(call.callType!.titulo)),
-      DataCell(Text(call.callType!.sector.nome)),
-      DataCell(Text(call.callType!.prioridade.nome)),
+      DataCell(Text(call.callType!.titulo!)),
+      DataCell(Text(call.callType!.sector!.nome)),
+      DataCell(Text(call.callType!.prioridade!.nome)),
       DataCell(Text(call.status.toString())),
       DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataCriacao)).toString())),
       DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataUltAtualizacao)).toString())),

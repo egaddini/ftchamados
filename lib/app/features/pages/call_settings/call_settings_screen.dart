@@ -80,7 +80,7 @@ Widget chamadosSettingsForm() {
                 Text('Categoria', style: Get.textTheme.titleLarge,),
               ],
             ), 
-            function: () => print ('Chamados'), 
+            function: () =>  Get.toNamed(AppRoutes.callCategory),  
           ),
         ],
       ),                                        

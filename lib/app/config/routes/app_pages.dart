@@ -1,5 +1,6 @@
 import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.dart';
-import 'package:chamados/app/features/pages/call_category/screen/call_category_dashboard_screen.dart';
+import 'package:chamados/app/features/pages/call_category/call_category_bidings.dart';
+import 'package:chamados/app/features/pages/call_category/call_category_screen.dart';
 import 'package:chamados/app/features/pages/call_priority/call_priority_bidings.dart';
 import 'package:chamados/app/features/pages/call_priority/call_priority_screen.dart';
 import 'package:chamados/app/features/pages/call_sector/call_sector_bidings.dart';
@@ -43,9 +44,9 @@ abstract class AppPages {
       //binding: DashboardBinding(),
     ),
     GetPage(
-      name: AppRoutes.callType,
-      page: () => const CallTypeListScreen(),
-      //binding: DashboardBinding(),
+      name: AppRoutes.callCategory,
+      page: () => const CallCategoryStatusScreen(),
+      binding: CallCategoryBindings(),
     ),
     GetPage(
       name: AppRoutes.userCall,

@@ -41,7 +41,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                 ListTile(
                   leading: const Icon(Icons.message_outlined),
                   title: const Text("Chat"),
-                  onTap: () => Get.toNamed(AppRoutes.callType),
+                  onTap: () => Get.toNamed(AppRoutes.callCategory),
                 ),
                 ListTile(
                   title: const Text("Meus Chamados"),
@@ -64,13 +64,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                             title: const Text("Dashboard"),
                             leading: const Icon(Icons.bar_chart_outlined),
                             onTap: () => Get.toNamed(AppRoutes.call),
-                          ),
-                          ListTile(
-                            contentPadding: const EdgeInsets.only(left: 40),
-                            title: const Text("Categorias"),
-                            leading: const Icon(Icons.note_add_outlined),
-                            onTap: () => Get.toNamed(AppRoutes.callType),
-                          ),                    
+                          ),                  
                           ListTile(
                             contentPadding: const EdgeInsets.only(left: 40),
                             leading: const Icon(Icons.settings,),

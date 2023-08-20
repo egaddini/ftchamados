@@ -4,15 +4,15 @@ import 'dart:convert';
 import 'package:chamados/app/models/priority.dart';
 import 'package:chamados/app/models/setor_model.dart';
 
-class CallType {
+class CallCategoryModel {
 
   int? id;
-  SectorModel sector;
-  String titulo;
-  PriorityModel prioridade;
-  String descricao;
+  SectorModel? sector;
+  String? titulo;
+  PriorityModel? prioridade;
+  String? descricao;
   
-  CallType({
+  CallCategoryModel({
     this.id,
     required this.sector,
     required this.titulo,
@@ -20,14 +20,14 @@ class CallType {
     required this.descricao,
   });
 
-  CallType copyWith({
+  CallCategoryModel copyWith({
     int? id,
     SectorModel? sector,
     String? titulo,
     PriorityModel? prioridade,
     String? descricao,
   }) {
-    return CallType(
+    return CallCategoryModel(
       id: id ?? this.id,
       sector: sector ?? this.sector,
       titulo: titulo ?? this.titulo,
@@ -39,15 +39,15 @@ class CallType {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'setor': sector.toMap(),
+      'setor': sector ?? sector!.toMap(),
       'titulo': titulo,
-      'prioridade': prioridade.toMap(),
+      'prioridade': prioridade ?? prioridade!.toMap(),
       'descricao': descricao,
     };
   }
 
-  factory CallType.fromMap(Map<String, dynamic> map) {
-    return CallType(
+  factory CallCategoryModel.fromMap(Map<String, dynamic> map) {
+    return CallCategoryModel(
       id: map['id'] != null ? map['id'] as int : null,
       sector: SectorModel.fromMap(map['sector'] as Map<String,dynamic>),
       titulo: map['titulo'] as String,
@@ -58,15 +58,15 @@ class CallType {
 
   String toJson() => json.encode(toMap());
 
-  factory CallType.fromJson(String source) => CallType.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CallCategoryModel.fromJson(String source) => CallCategoryModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {
-    return 'CallType(id: $id, sector: $sector, titulo: $titulo, prioridade: $prioridade, descricao: $descricao)';
+    return 'CallCategoryModel(id: $id, sector: $sector, titulo: $titulo, prioridade: $prioridade, descricao: $descricao)';
   }
 
   @override
-  bool operator ==(covariant CallType other) {
+  bool operator ==(covariant CallCategoryModel other) {
     if (identical(this, other)) return true;
   
     return 

@@ -1,10 +1,10 @@
 part of call_dashboard;
 
-void newCallDialog(BuildContext context, CallType call) {
+void newCallDialog(BuildContext context, CallCategoryModel call) {
   showDialog(
     context: context,
     builder: (_) => AlertDialog(
-      title: Center(child: Text(call.titulo, style: const TextStyle(fontWeight: FontWeight.bold),)),
+      title: Center(child: Text(call.titulo!, style: const TextStyle(fontWeight: FontWeight.bold),)),
       content: SizedBox(
         width: 600,
         child: NewCallForm(call: call),
@@ -15,7 +15,7 @@ void newCallDialog(BuildContext context, CallType call) {
 
 class NewCallForm extends StatefulWidget {
   
-  final CallType call;
+  final CallCategoryModel call;
 
   const NewCallForm({super.key, required this.call});
 
@@ -27,7 +27,7 @@ class NewCallFormState extends State<NewCallForm> {
 
   bool isLoading = true;
 
-  late CallType _callType;
+  late CallCategoryModel _callType;
   late TextEditingController _descreverProblemaC;
   TextEditingController? emailUsuarioC = TextEditingController();
   final TextEditingController _dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now()));
@@ -68,7 +68,7 @@ class NewCallFormState extends State<NewCallForm> {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: _callType.sector.nome),
+                  controller: TextEditingController(text: _callType.sector!.nome),
                   decoration: const InputDecoration(
                     labelText: 'Setor',
                   ),
@@ -88,7 +88,7 @@ class NewCallFormState extends State<NewCallForm> {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: _callType.prioridade.nome),
+                  controller: TextEditingController(text: _callType.prioridade!.nome),
                   decoration: const InputDecoration(
                     labelText: 'Prioridade',
                   ),

@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:chamados/app/models/user_dto.dart';
 
-import 'call_type.dart';
+import 'call_category_model_.dart';
 
 class Call {
 
@@ -13,7 +13,7 @@ class Call {
     String status;
     UserDTO? solicitante;
     UserDTO? responsavel;
-    CallType? callType;
+    CallCategoryModel? callType;
     String descricao;
     String historico;
 
@@ -37,7 +37,7 @@ class Call {
     String? status,
     UserDTO? solicitante,
     UserDTO? responsavel,
-    CallType? callType,    
+    CallCategoryModel? callType,    
     String? descricao,
     String? historico,
   }) {
@@ -73,7 +73,7 @@ class Call {
       status: map['status'] as String,
       solicitante: UserDTO.fromMap(map['solicitante'] as Map<String, dynamic>),
       responsavel: map['responsavel'] != null ? UserDTO.fromMap(map['responsavel'] as Map<String, dynamic>) : null,
-      callType: map['callType'] != null ? CallType.fromMap(map['callType'] as Map<String, dynamic>) : null,
+      callType: map['callType'] != null ? CallCategoryModel.fromMap(map['callType'] as Map<String, dynamic>) : null,
       descricao: map['descricao'] as String,
       historico: map['historico'] as String,
     );
