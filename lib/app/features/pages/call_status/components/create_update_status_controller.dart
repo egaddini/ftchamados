@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/repositories/call/call_status/call_status_repository.dart';
+import 'package:chamados/app/repositories/call/status/call_status_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

@@ -7,7 +7,7 @@ import 'package:chamados/app/features/pages/call_sector/call_sector_bidings.dart
 import 'package:chamados/app/features/pages/call_sector/call_sector_screen.dart';
 import 'package:chamados/app/features/pages/call_status/call_status_bidings.dart';
 import 'package:chamados/app/features/pages/call_status/call_status_screen.dart';
-import 'package:chamados/app/features/pages/call_user/screen/call_user_dashboard_screen.dart';
+import 'package:chamados/app/features/pages/call_requester/screen/call_requester_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/login/screen/login_screen.dart';
 import 'package:chamados/app/features/pages/menu/home_screen.dart';
 import 'package:chamados/app/features/pages/singup/screen/singup_screen.dart';

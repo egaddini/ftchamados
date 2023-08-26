@@ -6,7 +6,7 @@ import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.da
 import 'package:chamados/app/features/pages/call_settings/call_settings_screen.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/repositories/call/call_category/call_category_repository.dart';
+import 'package:chamados/app/repositories/call/category/call_category_repository.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';

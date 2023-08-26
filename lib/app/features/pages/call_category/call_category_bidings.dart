@@ -1,4 +1,4 @@
-import 'package:chamados/app/repositories/call/call_category/call_category_repository.dart';
+import 'package:chamados/app/repositories/call/category/call_category_repository.dart';
 import 'package:get/get.dart';
 
 import 'call_category_controller.dart';

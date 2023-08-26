@@ -1,72 +1,26 @@
 library call_user_dashboard;
 
+import 'package:chamados/app/features/pages/call_requester/screen/call_requester_dashboard_controller.dart';
 import 'package:chamados/app/models/call.dart';
-import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/shared_components/c_expanded_text_field.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
-import 'package:chamados/app/repositories/call/call/call_repository.dart';
-import 'package:chamados/app/repositories/call/call/call_repository_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-import '../../../../utils/services/local_storage/local_storage.dart';
 
 part '../components/row_source.dart';
 part '../components/call_detail_page.dart';
 
-class CallUserDashboardScreen extends StatefulWidget {
-  const CallUserDashboardScreen({super.key});
-
-  @override
-  State<CallUserDashboardScreen> createState() => _CallUserDashboardScreenState();
-}
-
-class _CallUserDashboardScreenState extends State<CallUserDashboardScreen> {
+class CallUserDashboardScreen extends GetView<CallRequesterDashboardController> {
   
-  bool sort = true;
-  bool isLoading = true;
-  List<Call> filterData = [], myData = [];
-  final CallRepository _callRepo = CallRepositoryImpl();
-  late UserInfoModel? logedUser;
-
-  onsortColum(int columnIndex, bool ascending) {
-    if (columnIndex == 0) {
-      if (ascending) {
-        filterData.sort((a, b) => a.solicitante!.email.toString().compareTo(b.solicitante!.email.toString()));
-      } else {
-        filterData.sort((a, b) => b.solicitante!.email.toString().compareTo(a.solicitante!.email.toString()));
-      }
-    }
-  }
-
-  @override
-  void initState() {
-    _init();
-    super.initState();
-  }
-
-  Future<void> _init() async {
-    logedUser = await LocalStorageServices().getUser();
-    myData = await _callRepo.getCallList();
-    myData = myData.where((element) => element.solicitante.toString().toLowerCase().contains((logedUser!.email.toString().toLowerCase()))).toList();
-    filterData.addAll(myData);
-    _setLoading();
-  }
-
-  void _setLoading() {
-    setState(() {
-      isLoading = isLoading ? false : true;
-    });
-  }
-
-  TextEditingController controller = TextEditingController();
+  const CallUserDashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Chamados')),
-      body: isLoading ? Center(child: buildLoadingIndicator()) : SingleChildScrollView(
+      appBar: AppBar(title: const Text('Meus Chamados')),
+      body: controller.isLoading ? Center(child: buildLoadingIndicator()) : SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -75,72 +29,71 @@ class _CallUserDashboardScreenState extends State<CallUserDashboardScreen> {
               width: double.infinity,
                 child: PaginatedDataTable(
                   sortColumnIndex: 0,
-                  sortAscending: sort,
+                  sortAscending: controller.sort,
                   header: TextFormField(
-                    controller: controller,
+                    controller: controller.controller,
                     decoration: const InputDecoration(
                       labelText: 'Buscar por Titulo',
                       suffixIcon: Icon(Icons.search_outlined),                                                   
                     ),
                     onChanged: (value) {
-                      setState(() {
-                        myData = filterData.where((element) => element.callType!.titulo.toString().toUpperCase().contains(value.toUpperCase())).toList();
-                      });
+                      // setState(() {
+                      //   myData = filterData.where((element) => element.callType!.titulo.toString().toUpperCase().contains(value.toUpperCase())).toList();
+                      // });
                     },
                   ),
                   source: RowSource(
                     context: context,
-                    myData: myData,
-                    count: myData.length,
+                    myData: controller.myData,
+                    count: controller.myData.length,
                   ),
-        
                   checkboxHorizontalMargin: 10,
                   rowsPerPage: 10,
                   columnSpacing: 6,
                   showCheckboxColumn: false,
-                  columns: [
-                    const DataColumn(
+                  columns: const [
+                    DataColumn(
                       label: Text(
                         "Título",
                         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                     ),                   
                     DataColumn(
-                      label: const Text(
+                      label: Text(
                         "Setor",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14
                         ),
                       ),
-                      onSort: (columnIndex, ascending) {
-                        setState(() {
-                          sort = !sort;
-                        });
-                        onsortColum(columnIndex, ascending);
-                      }
+                      // onSort: (columnIndex, ascending) {
+                      //   setState(() {
+                      //     sort = !sort;
+                      //   });
+                      //   onsortColum(columnIndex, ascending);
+                      // }
                     ),
-                    const DataColumn(
+                    DataColumn(
                       label: Text(
                         "Prioridade",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                     ),
-                    const DataColumn(
+                    DataColumn(
                       label: Text(
                         "Status",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                     ),                    
-                    const DataColumn(
+                    DataColumn(
                       label: Text(
                         "Criado em",
                         style: TextStyle(
                             fontWeight: FontWeight.w600, fontSize: 14),
                       ),
                     ),
-                    const DataColumn(
+                    DataColumn(
                       label: Text(
                         "Ultima atualizacao",
                         style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
