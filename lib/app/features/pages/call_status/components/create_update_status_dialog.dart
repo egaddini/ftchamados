@@ -7,7 +7,7 @@ Future<bool> createUpdateStatusDialog(CallStatusModel? status) {
       title: Center(child: Text( status == null ? "Nova Status" : "Editar Status", style: Get.theme.textTheme.titleLarge)),
       content: SizedBox(
         width: 350,
-        child:  createUpdateStatusForm(status),
+        child: Obx(() => createUpdateStatusForm(status),),
       ),
     )
   ).then((value) => Get.delete<CreateUpdateStatusController>());
@@ -62,7 +62,7 @@ Widget createUpdateStatusForm(CallStatusModel? status) {
             children: [
               Checkbox(
                 value: controller.notificaC.value, 
-                onChanged: (value) => controller.notificaC.value = value!,
+                onChanged: (value) => print('object'),
               ),
               const Text('Notificar Usuário'),
             ],

@@ -22,8 +22,8 @@ Widget chamadosSettingsForm() {
     mainAxisAlignment: MainAxisAlignment.center,
     mainAxisSize: MainAxisSize.min,     
     children: [
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      Wrap(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomFlexCard(
             content: Column(
@@ -53,8 +53,8 @@ Widget chamadosSettingsForm() {
           ),
         ],
       ),
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+      Wrap(
+        // mainAxisAlignment: MainAxisAlignment.center,
         children: [
           CustomFlexCard(
             content: Column(
