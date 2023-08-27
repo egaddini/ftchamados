@@ -104,60 +104,14 @@ Future<Map<String, String>> getAuthHeader(bool auth) async {
   }
 }
 
-void tratarErro(BuildContext context, DioError e) {
+void tratarErro(BuildContext context, DioException e) {
   if (e.response != null && e.response!.data != null) {
     ErrorDTO erro = ErrorDTO.fromMap(e.response!.data);
-    if (409.isEqual(erro.status)) {
-      final snackBar = SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(erro.message),
-        action: SnackBarAction(
-          label: 'Ver Mais',
-          onPressed: () {
-            moreDetailsDialog(context, 'Já Registrado', erro.message);
-          },
-        ),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    if (401.isEqual(erro.status)) {
-      final snackBar = SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(erro.message),
-        action: SnackBarAction(
-          label: 'Ver Mais',
-          onPressed: () {
-            moreDetailsDialog(context, 'Credenciais invalidas', erro.message);
-          },
-        ),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
-    if (403.isEqual(erro.status)) {
-      final snackBar = SnackBar(
-        behavior: SnackBarBehavior.floating,
-        content: Text(erro.message),
-        action: SnackBarAction(
-          label: 'Ver Mais',
-          onPressed: () {
-            moreDetailsDialog(context, 'Conta Inativa', erro.message);
-          },
-        ),
-      );
-      ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    }
+    if (409.isEqual(erro.status)) Get.snackbar('Já Registrado', erro.message, icon: const Icon(Icons.info), onTap: (snack) => moreDetailsDialog(context, 'Já Registrado', erro.message), );
+    if (401.isEqual(erro.status)) Get.snackbar('Credenciais invalidas', erro.message, icon: const Icon(Icons.info), onTap: (snack) => moreDetailsDialog(context, 'Credenciais invalidas', erro.message));
+    if (403.isEqual(erro.status)) Get.snackbar('Conta Inativa', erro.message, icon: const Icon(Icons.info), onTap: (snack) => moreDetailsDialog(context, 'Conta Inativa', erro.message),);
   } else {
-    final snackBar = SnackBar(
-      content: const Text('Algum problema aconteceu!'),
-      behavior: SnackBarBehavior.floating,
-      action: SnackBarAction(
-        label: 'Ver Mais',
-        onPressed: () {
-          moreDetailsDialog(context, 'Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}');
-        },
-      ),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    Get.snackbar('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte', onTap:(snack) => moreDetailsDialog(context, 'Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}'));
   }
 }
 

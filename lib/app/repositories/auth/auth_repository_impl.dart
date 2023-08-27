@@ -23,6 +23,8 @@ class AuthRepositoryImpl implements AuthRepository {
   
   @override
   Future<void> authenticate(LoginModel login) async {
+
+
     final result = await Dio().post(
       BASE_PATH + AUTH_PATH,
       data: jsonEncode(login.toMap()),
