@@ -23,9 +23,5 @@ class CallRequesterDashboardController extends GetxController {
     }
   }
 
-
-
   TextEditingController controller = TextEditingController();
-
-  
 }

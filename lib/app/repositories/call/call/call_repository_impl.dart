@@ -11,7 +11,7 @@ import 'call_repository.dart';
 
 class CallRepositoryImpl implements CallRepository {
 
-  final String _basePath = "http://localhost:9090/api/v1/call";
+  final String _basePath = "http://localhost:9090/api/call/v1";
 
   @override
   Future<String> register(CallDTO call) async {

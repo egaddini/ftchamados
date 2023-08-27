@@ -2,18 +2,13 @@ library call_dashboard;
 
 import 'package:chamados/app/features/pages/call/components/call_detail_page.dart';
 import 'package:chamados/app/models/call.dart';
-import 'package:chamados/app/models/call_dto.dart';
-import 'package:chamados/app/models/call_category_model.dart';
-import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/call/call_repository.dart';
 import 'package:chamados/app/repositories/call/call/call_repository_impl.dart';
-import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 part '../components/row_source.dart';
-part '../components/new_call_dialog.dart';
 
 class CallDashboardScreen extends StatefulWidget {
   const CallDashboardScreen({super.key});

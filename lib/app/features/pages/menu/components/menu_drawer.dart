@@ -47,7 +47,28 @@ class _MenuDrawerState extends State<MenuDrawer> {
                   title: const Text("Meus Chamados"),
                   leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
                   onTap: () => Get.toNamed(AppRoutes.userCall),
-                ),          
+                ),
+                Visibility(
+                  visible: controller.isAdmin.value,
+                  child: ExpansionTile(
+                    title: const Text('Painel do Solucionador'),
+                    leading: const Icon(Icons.supervisor_account_outlined),
+                    children: [
+                      ListTile(
+                        contentPadding: const EdgeInsets.only(left: 40),
+                        title: const Text("Fila de Chamados"),
+                        leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
+                        onTap: () => Get.toNamed(AppRoutes.call),
+                      ),                      
+                      ListTile(
+                        contentPadding: const EdgeInsets.only(left: 40),
+                        title: const Text("Dashboard"),
+                        leading: const Icon(Icons.bar_chart_outlined),
+                        onTap: () => Get.toNamed(AppRoutes.call),
+                      ),                  
+                    ],
+                  ),
+                ),                          
                 Visibility(
                   visible: controller.isAdmin.value,
                   child: ExpansionTile(

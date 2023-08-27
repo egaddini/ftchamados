@@ -2,6 +2,7 @@ library home_screen;
 
 import 'package:chamados/app/config/routes/app_pages.dart';
 import 'package:chamados/app/config/themes/theme_constants.dart';
+import 'package:chamados/app/features/pages/call/components/new_call/new_call_dialog.dart';
 import 'package:chamados/app/features/pages/call/screen/call_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/call_settings/call_settings_screen.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
@@ -58,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                   itemBuilder: (context, CallCategoryModel call) {
                     return ListTile(title: Text('${call.sector!.sigla} - ${call.titulo}'),);
                   },
-                  onSuggestionSelected: (CallCategoryModel call) async {newCallDialog(context, call);},
+                  onSuggestionSelected: (CallCategoryModel call) async {newCallDialog(call);},
                 ),
               ),
               const SizedBox(height: 600),

@@ -4,7 +4,7 @@ Future<bool> createUpdateStatusDialog(CallStatusModel? status) {
   return showDialog(
     context: Get.context!,
     builder: (_) => AlertDialog(
-      title: Center(child: Text( status == null ? "Nova Status" : "Editar Status", style: Get.theme.textTheme.titleLarge)),
+      title: Center(child: Text( status == null ? "Novo Status" : "Editar Status", style: Get.theme.textTheme.titleLarge)),
       content: SizedBox(
         width: 350,
         child: Obx(() => createUpdateStatusForm(status),),

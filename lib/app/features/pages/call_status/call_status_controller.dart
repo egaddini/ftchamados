@@ -47,7 +47,6 @@ class CallStatusController extends GetxController {
         Get.back();
         snackSucessRegister(Get.context!, 'Status ${data.name} Deletado com sucesso!');
       }).catchError((error) {
-        Get.back();
         tratarErro(Get.context!, error);
       }); 
     }

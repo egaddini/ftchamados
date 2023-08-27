@@ -1,64 +1,34 @@
-part of call_dashboard;
+import 'package:chamados/app/features/pages/call/components/new_call/new_call_controller.dart';
+import 'package:chamados/app/models/call_category_model.dart';
+import 'package:chamados/app/utils/helpers/helper.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-void newCallDialog(BuildContext context, CallCategoryModel call) {
+void newCallDialog(CallCategoryModel call) {
   showDialog(
-    context: context,
+    context: Get.context!,
     builder: (_) => AlertDialog(
       title: Center(child: Text(call.titulo!, style: const TextStyle(fontWeight: FontWeight.bold),)),
       content: SizedBox(
         width: 600,
-        child: NewCallForm(call: call),
+        child: NewCallForm(call: call,),
       ),
     )
-  );
+  ).then((value) => Get.delete<NewCallController>());
 }
 
-class NewCallForm extends StatefulWidget {
+class NewCallForm extends StatelessWidget {
   
   final CallCategoryModel call;
 
-  const NewCallForm({super.key, required this.call});
-
-  @override
-  State<NewCallForm> createState() => NewCallFormState();
-}
-
-class NewCallFormState extends State<NewCallForm> {
-
-  bool isLoading = true;
-
-  late CallCategoryModel _callType;
-  late TextEditingController _descreverProblemaC;
-  TextEditingController? emailUsuarioC = TextEditingController();
-  final TextEditingController _dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now()));
-  final CallRepository _callRepo = CallRepositoryImpl();
-  
-  late UserInfoModel? _logedUser; 
-
-  @override
-  void initState() {
-    super.initState();
-    _init();
-    _callType =  widget.call;
-    _descreverProblemaC = TextEditingController(text: '');
-  }
-
-  Future<void> _init() async {
-    waitThreeSeconds();
-     _logedUser = await LocalStorageServices().getUser();
-     emailUsuarioC!.text =  _logedUser!.email!;
-    _setLoading();
-  }
-
-  void _setLoading() {
-    setState(() {
-      isLoading = isLoading ? false : true;
-    });
-  }
+  const NewCallForm({super.key, required this.call}); 
   
   @override
   Widget build(BuildContext context) {
-    return isLoading ? buildLoadingIndicator() : SingleChildScrollView(
+
+  final NewCallController controller = Get.put(NewCallController(callCategory: call), permanent: false);
+
+    return controller.isLoading.value ? buildLoadingIndicator() : SingleChildScrollView(
       padding: const EdgeInsets.all(18),
       child: Column(
         children: [
@@ -68,7 +38,7 @@ class NewCallFormState extends State<NewCallForm> {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: _callType.sector!.nome),
+                  controller: TextEditingController(text: controller.callCategory.sector!.nome),
                   decoration: const InputDecoration(
                     labelText: 'Setor',
                   ),
@@ -78,7 +48,7 @@ class NewCallFormState extends State<NewCallForm> {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: _callType.titulo),
+                  controller: TextEditingController(text: controller.callCategory.titulo),
                   decoration: const InputDecoration(
                     labelText: 'Titulo',
                   ),
@@ -88,7 +58,7 @@ class NewCallFormState extends State<NewCallForm> {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: _callType.prioridade!.nome),
+                  controller: TextEditingController(text: controller.callCategory.prioridade!.nome),
                   decoration: const InputDecoration(
                     labelText: 'Prioridade',
                   ),
@@ -102,7 +72,7 @@ class NewCallFormState extends State<NewCallForm> {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: _callType.descricao),                    
+                  controller: TextEditingController(text: controller.callCategory.descricao),                    
                   decoration:const InputDecoration(
                     labelText: 'Descrição do chamado',
                   ),
@@ -122,7 +92,7 @@ class NewCallFormState extends State<NewCallForm> {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: _dataAberturaC,
+                  controller: controller.dataAberturaC,
                   decoration: const InputDecoration(
                     labelText: 'Data de abertura da solicitação',
                   ),
@@ -132,7 +102,7 @@ class NewCallFormState extends State<NewCallForm> {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: emailUsuarioC,                    
+                  controller: controller.emailUsuarioC,                    
                   decoration: const InputDecoration(
                     labelText: 'Usuário solicitante',
                   ),
@@ -145,7 +115,7 @@ class NewCallFormState extends State<NewCallForm> {
             children: [
               Expanded(
                 child: TextField(
-                  controller: _descreverProblemaC,
+                  controller: controller.descreverProblemaC,
                   maxLines: 10,
                   decoration: const  InputDecoration(
                     labelText: 'Descreva o problema',
@@ -155,27 +125,7 @@ class NewCallFormState extends State<NewCallForm> {
             ],
           ),
           addVerticalSpace(10),
-          FilledButton(
-            child: const Text(
-              'Registrar chamado',
-              style: TextStyle(
-                fontSize: 16,
-              ),
-            ),
-            onPressed: () {
-              setState(() {
-                CallDTO call = CallDTO(solicitante: _logedUser!.id!, callType: _callType.id!, descricao: _descreverProblemaC.text);
-                _setLoading();
-                _callRepo.register(call).then((_) {
-                Navigator.pop(context);
-                snackSucessRegister(context, 'Chamado registrado com sucesso!');
-                }).catchError((error) {
-                  Navigator.pop(context);
-                  tratarErro(context, error);
-                });              
-              });
-            }, 
-          ),
+          FilledButton(child: const Text('Registrar chamado', style: TextStyle(fontSize: 16,),), onPressed: () => controller.onClickNewCall(), ),
         ],
       ),
     );
