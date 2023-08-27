@@ -60,10 +60,10 @@ Widget createUpdateStatusForm(CallStatusModel? status) {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              Checkbox(
+              Obx(() =>  Checkbox(
                 value: controller.notificaC.value, 
-                onChanged: (value) => print('object'),
-              ),
+                onChanged: (value) => controller.notificaC.value = value!,
+              ),),
               const Text('Notificar Usuário'),
             ],
           ),

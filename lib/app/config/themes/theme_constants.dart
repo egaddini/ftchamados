@@ -16,6 +16,7 @@ ThemeData lightTheme = FlexThemeData.light(
     useTextTheme: true,
     useM2StyleDividerInM3: true,
     elevatedButtonRadius: 4.0,
+    appBarCenterTitle: true,
     filledButtonRadius: 4.0,
   ),
   
@@ -36,6 +37,7 @@ ThemeData darkTheme = FlexThemeData.dark(
     useM2StyleDividerInM3: true,
     elevatedButtonRadius: 4.0,
     filledButtonRadius: 4.0,
+    appBarCenterTitle: true,
   ),
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
