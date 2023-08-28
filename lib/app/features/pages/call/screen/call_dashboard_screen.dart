@@ -1,11 +1,12 @@
 library call_dashboard;
 
-import 'package:chamados/app/features/pages/call/components/call_detail_page.dart';
+import 'package:chamados/app/features/pages/call/components/call_detail/call_detail_screen.dart';
 import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/call/call_repository.dart';
 import 'package:chamados/app/repositories/call/call/call_repository_impl.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 part '../components/row_source.dart';

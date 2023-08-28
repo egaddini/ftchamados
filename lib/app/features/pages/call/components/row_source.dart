@@ -29,7 +29,8 @@ class RowSource extends DataTableSource {
 
 DataRow recentFileDataRow(Call call, BuildContext context) {
   return DataRow(
-    onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => CallDetailPage(call),),),
+    // onSelectChanged: (value) async =>  await Navigator.push(context, MaterialPageRoute(builder: (_) => CallDetailScreen(call),),),
+    onSelectChanged: (value) async =>  callDetailDialog(call),
     cells: [
       DataCell(Text('${call.callType!.sector!.sigla} ${call.id}')),
       DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataCriacao)).toString())),
