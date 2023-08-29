@@ -90,7 +90,7 @@ class _MenuDrawerState extends State<MenuDrawer> {
                             contentPadding: const EdgeInsets.only(left: 40),
                             leading: const Icon(Icons.settings,),
                             title: const Text("Configurações"),
-                            onTap: () => systemSettingsDialog(Get.context!),
+                            onTap: () => systemSettingsDialog(),
                           ),                
                         ],
                       ),

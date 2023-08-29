@@ -21,13 +21,13 @@ class CallStatusScreen extends GetView<CallStatusController>  {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Status')),
-      body: SingleChildScrollView(
+      body: Obx(() => SingleChildScrollView(
         child: Column(
           children: [ 
             addVerticalSpace(10),
             SizedBox(
               width: double.infinity,
-              child: Obx(() => PaginatedDataTable(
+              child: PaginatedDataTable(
                 sortColumnIndex: 0,
                 // sortAscending: sort,
                 header: Padding(
@@ -54,9 +54,8 @@ class CallStatusScreen extends GetView<CallStatusController>  {
                   count: controller.myData.length,
                   controller: controller
                 ),
-
                 actions: [
-                  FilledButton(onPressed: () => createUpdateStatusDialog(null).then((value) => controller.myData.refresh()), child: const Text('Novo Registro'),)
+                  FilledButton(onPressed: () async => await createUpdateStatusDialog(null).then((value) async => await controller.atualizarItens()), child: const Text('Novo Registro'),)
                 ],
                 rowsPerPage: 10,
                 columnSpacing: 2,
@@ -70,11 +69,11 @@ class CallStatusScreen extends GetView<CallStatusController>  {
                   DataColumn(label: Text('',),),    
                 ],
               ),
-            )),
+            ),
           ],
         ),
       )
-    );
+    ));
   }
 }
 

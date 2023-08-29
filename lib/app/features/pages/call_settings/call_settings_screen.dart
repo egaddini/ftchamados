@@ -5,9 +5,9 @@ import 'package:get/get.dart';
 import 'package:chamados/app/shared_components/custom_card/custom_card.dart';
 
 
-systemSettingsDialog(BuildContext context) {
+void systemSettingsDialog() {
   showDialog(
-    context: context,
+    context: Get.context!,
     builder: (_) => AlertDialog(
       title: const Center(child: Text("Configura Sistema", style: TextStyle(fontWeight: FontWeight.bold),)),
       content: SizedBox(
@@ -36,7 +36,7 @@ Widget chamadosSettingsForm() {
                 Text('Status', style: Get.textTheme.titleLarge,),
               ],
             ), 
-            function: () => Get.toNamed(AppRoutes.callStatus), 
+            function: () => Get.offAndToNamed(AppRoutes.callStatus), 
           ),
           CustomFlexCard(
             content: Column(

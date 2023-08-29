@@ -1,6 +1,6 @@
 part of call_status;
 
-Future<bool> createUpdateStatusDialog(CallStatusModel? status) {
+Future<bool> createUpdateStatusDialog(CallStatusModel? status)  {
   return showDialog(
     context: Get.context!,
     builder: (_) => AlertDialog(
@@ -10,7 +10,7 @@ Future<bool> createUpdateStatusDialog(CallStatusModel? status) {
         child: Obx(() => createUpdateStatusForm(status),),
       ),
     )
-  ).then((value) => Get.delete<CreateUpdateStatusController>());
+  ).then((value) => Get.delete<CreateUpdateStatusController>(),);
 }
 
 Widget createUpdateStatusForm(CallStatusModel? status) {
@@ -29,7 +29,7 @@ Widget createUpdateStatusForm(CallStatusModel? status) {
             validator: Validatorless.required('Nome Obrigatório'), 
           ),
           addVerticalSpace(10),                        
-          TypeAheadField<String>(
+          TypeAheadField<int>(
             textFieldConfiguration: TextFieldConfiguration(
               controller: controller.pesoC,
               decoration: const InputDecoration(
@@ -40,13 +40,13 @@ Widget createUpdateStatusForm(CallStatusModel? status) {
             suggestionsCallback: (pattern) {
               return controller.pesos;
             },
-            itemBuilder: (context, String peso) {
+            itemBuilder: (context, int peso) {
               return ListTile(
-                title: Text(peso),
+                title: Text(peso.toString()),
               );
             },
-            onSuggestionSelected: (String peso) async {
-              controller.pesoC.text = peso;
+            onSuggestionSelected: (int peso) async {
+              controller.pesoC.text = peso.toString();
             },
           ),
           addVerticalSpace(10),         
@@ -71,10 +71,7 @@ Widget createUpdateStatusForm(CallStatusModel? status) {
           Center(
             child: FilledButton(
               child: controller.buttonText,
-              onPressed: () {     
-                var formValid = controller.formKey.currentState?.validate() ?? false;
-                if (formValid) controller.criarAtualizarStatus();
-              },
+              onPressed: () async => await controller.criarAtualizarStatus(),
             ),
           ),                   
         ],

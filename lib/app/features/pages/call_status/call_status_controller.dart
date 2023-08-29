@@ -6,34 +6,24 @@ import 'package:get/get.dart';
 
 class CallStatusController extends GetxController {
   
-  bool sort = true;
+  bool sort = false;
   RxBool isLoading = true.obs;
   TextEditingController formFieldC = TextEditingController();
   RxList<CallStatusModel> myData = <CallStatusModel>[].obs;
   final CallStatusRepository _callStatusRepository;
-  final RxList<String> pesos = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].obs;
 
   CallStatusController(this._callStatusRepository);
 
   @override
   void onInit() async {
-    myData.addAll(await _callStatusRepository.getList());
-    refreshValoresDisponiveis();
-    isLoading = false.obs;
+    isLoading = true.obs;
+    atualizarItens();
     super.onInit();
-  }
-  
-  void refreshValoresDisponiveis() {
-    for (var element in myData) {
-      pesos.remove(element.weight.toString());
-    }
-    pesos.refresh();
-    myData.refresh();
   }
 
   void setValue(int index) {
-      myData[index].notify = !myData[index].notify;
-      myData.refresh();
+    myData[index].notify = !myData[index].notify;
+    myData.refresh();
   }
 
   void deleteItem(int index) async {
@@ -41,15 +31,19 @@ class CallStatusController extends GetxController {
     bool? deleta = await perguntaSimOuNao('Deseja remover o Status: ${data.name}');
     if (deleta != null && deleta) {
       _callStatusRepository.delete(data.id!).then((_) {
-        pesos.add(data.weight.toString());
         myData.removeAt(index);
-        refreshValoresDisponiveis();
-        Get.back();
+        myData.refresh();
         snackSucessRegister(Get.context!, 'Status ${data.name} Deletado com sucesso!');
       }).catchError((error) {
         tratarErro(Get.context!, error);
       }); 
     }
+  }
+
+  Future<bool> atualizarItens() async {
+    myData.value = await _callStatusRepository.getList();
+    myData.refresh();
+    return true;
   }
 
 }

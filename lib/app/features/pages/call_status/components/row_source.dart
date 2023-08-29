@@ -30,7 +30,7 @@ class RowSource extends DataTableSource {
 
 DataRow recentFileDataRow(CallStatusModel status, BuildContext context, CallStatusController controller, int index) {
   return DataRow(
-    onSelectChanged: (value) => createUpdateStatusDialog(status).then((value) => controller.myData.refresh()),
+    onSelectChanged: (value) async => await createUpdateStatusDialog(status).then((value) => controller.myData.refresh()),
     cells: [
       DataCell(Text(status.id.toString())),
       DataCell(Text(status.name)),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:chamados/app/constans/api_path.dart';
 import 'package:chamados/app/models/call_status_model.dart';
 import 'package:chamados/app/models/error_dto.dart';
@@ -10,13 +12,26 @@ class CallStatusRepository extends BaseRepository<CallStatusModel> {
   
   CallStatusRepository() : super(ApiPath.status);
 
-    Future<CallStatusModel> getByName(String name) async {
+  Future<CallStatusModel> getByName(String name) async {
     final response = await Dio().get(
       '$basePath/name?name=$name',
       options: Options(headers: await getAuthHeader(false)),
     );
     if (response.statusCode == 200) {
       return entityFromMap(response.data);
+    } else {
+      final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+    }
+  }
+
+  Future<List<int>> getFreeWeights() async {
+    final response = await Dio().get(
+      '$basePath/free-weights',
+      options: Options(headers: await getAuthHeader(false)),
+    );
+    if (response.statusCode == 200) {
+      return List<int>.from(response.data);
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
       throw RestException(message: errorDTO.message, statusCode: errorDTO.status);

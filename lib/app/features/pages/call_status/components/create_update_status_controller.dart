@@ -21,12 +21,12 @@ class CreateUpdateStatusController extends GetxController {
 
   late Text buttonText;
 
-  final RxList<String> pesos = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'].obs;
+  late RxList<int> pesos = <int>[].obs;
   
   CreateUpdateStatusController({this.status,});
   
   @override
-  void onInit() {
+  void onInit() async {
     buttonText = Text(status == null ? "Adicionar": "Atualizar");
     if (status != null) {
       descricaoC.text = status!.description;
@@ -34,24 +34,23 @@ class CreateUpdateStatusController extends GetxController {
       pesoC.text = status!.weight.toString();
       notificaC.value = status!.notify;
     }
+    pesos.value = (await callRepository.getFreeWeights()).obs;
     super.onInit();
   }
 
-  void criarAtualizarStatus() {
+  Future<void> criarAtualizarStatus() async {
     var formValid = formKey.currentState?.validate() ?? false;
     if (formValid) {
       status == null ?
-      saveItem(CallStatusModel(id: null, name: nomeC.text, description: descricaoC.text, weight: int.parse(pesoC.text), notify: notificaC.value)):
-      saveItem(CallStatusModel(id: null, name: nomeC.text, description: descricaoC.text, weight: int.parse(pesoC.text), notify: notificaC.value));
+      await saveItem(CallStatusModel(id: null, name: nomeC.text, description: descricaoC.text, weight: int.parse(pesoC.text), notify: notificaC.value)):
+      await saveItem(CallStatusModel(id: null, name: nomeC.text, description: descricaoC.text, weight: int.parse(pesoC.text), notify: notificaC.value));
     }
+    Get.back();
   }
 
-    void saveItem(CallStatusModel status) async {
+    Future<void> saveItem(CallStatusModel status) async {
     isLoading.value = true;
     callRepository.register(status).then((_) async {
-      await callRepository.getByName(status.name);
-      // refreshValoresDisponiveis();
-      Get.back();
       snackSucessRegister(Get.context!, 'Status ${status.name} registrado com sucesso!');
     }).catchError((error) {
       Get.back();
