@@ -17,7 +17,7 @@ class CallStatusController extends GetxController {
   @override
   void onInit() async {
     isLoading = true.obs;
-    atualizarItens();
+    myData.value = await _callStatusRepository.getList();
     super.onInit();
   }
 
@@ -41,6 +41,7 @@ class CallStatusController extends GetxController {
   }
 
   Future<bool> atualizarItens() async {
+    await Future.delayed(const Duration(milliseconds: 500));
     myData.value = await _callStatusRepository.getList();
     myData.refresh();
     return true;

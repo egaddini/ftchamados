@@ -30,7 +30,7 @@ class RowSource extends DataTableSource {
 
 DataRow recentFileDataRow(SectorModel sector, BuildContext context, CallSectorController controller, int index) {
   return DataRow(
-    onSelectChanged: (value) => createUpdateSectorDialog(sector),
+    onSelectChanged: (value) => createUpdateSectorDialog(sector).then((value) => controller.atualizarItens()),
     cells: [
       DataCell(Text(sector.id.toString())),
       DataCell(Text(sector.sigla)),

@@ -15,8 +15,7 @@ class CustomFlexCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Flexible(
-      child: Card(
+    return Card(
         elevation: 4,
         child: InkWell(
           child: SizedBox(
@@ -26,7 +25,6 @@ class CustomFlexCard extends StatelessWidget {
           ),
           onTap: () => function(),
         ),
-      ),
     );
   }
 }

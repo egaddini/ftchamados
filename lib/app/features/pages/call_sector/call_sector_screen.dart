@@ -55,7 +55,7 @@ class CallSectorStatusScreen extends GetView<CallSectorController>  {
                   controller: controller
                 ),
                 actions: [
-                  FilledButton(onPressed: () => createUpdateSectorDialog(null), child: const Text('Novo Registro'),)
+                  FilledButton(onPressed: () => createUpdateSectorDialog(null).then((value) => controller.atualizarItens()), child: const Text('Novo Registro'),)
                 ],
                 rowsPerPage: 10,
                 columnSpacing: 2,

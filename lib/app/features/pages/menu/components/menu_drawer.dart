@@ -62,8 +62,8 @@ class _MenuDrawerState extends State<MenuDrawer> {
                       ),                      
                       ListTile(
                         contentPadding: const EdgeInsets.only(left: 40),
-                        title: const Text("Dashboard"),
-                        leading: const Icon(Icons.bar_chart_outlined),
+                        title: const Text("Estatísticas"),
+                        leading: const Icon(Icons.poll_outlined),
                         onTap: () => Get.toNamed(AppRoutes.call),
                       ),                  
                     ],
@@ -75,29 +75,17 @@ class _MenuDrawerState extends State<MenuDrawer> {
                     title: const Text('Painel do Administrador'),
                     leading: const Icon(Icons.admin_panel_settings_outlined),
                     children: [
-                      ExpansionTile(
-                        tilePadding: const EdgeInsets.only(left: 20),
-                        title: const Text('Chamados'),
-                        leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
-                        children: [                
-                          ListTile(
-                            contentPadding: const EdgeInsets.only(left: 40),
-                            title: const Text("Dashboard"),
-                            leading: const Icon(Icons.bar_chart_outlined),
-                            onTap: () => Get.toNamed(AppRoutes.call),
-                          ),                  
-                          ListTile(
-                            contentPadding: const EdgeInsets.only(left: 40),
-                            leading: const Icon(Icons.settings,),
-                            title: const Text("Configurações"),
-                            onTap: () => systemSettingsDialog(),
-                          ),                
-                        ],
-                      ),
                       ListTile(
-                        leading: const Icon(Icons.safety_divider),
+                        contentPadding: const EdgeInsets.only(left: 40),
+                        title: const Text('Chamados'),
+                        leading: const Icon(Icons.receipt_long_outlined),
+                        onTap: () => callSettingsDialog(),
+                      ),                                 
+                      ListTile(
+                        contentPadding: const EdgeInsets.only(left: 40),
+                        leading: const Icon(Icons.manage_accounts_outlined),
                         title: const Text("Usuarios"),
-                        onTap: () => Get.toNamed(AppRoutes.users),
+                        onTap: () => usersSettingsDialog(),
                       ),              
                     ],
                   ),

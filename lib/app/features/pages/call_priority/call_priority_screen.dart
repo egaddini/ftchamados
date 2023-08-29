@@ -56,7 +56,7 @@ class CallPriorityStatusScreen extends GetView<CallPriorityController>  {
                   controller: controller
                 ),
                 actions: [
-                  FilledButton(onPressed: () => createUpdatePriorityDialog(null), child: const Text('Novo Registro'),)
+                  FilledButton(onPressed: () => createUpdatePriorityDialog(null).then((value) => controller.atualizarItens()), child: const Text('Novo Registro'),)
                 ],
                 rowsPerPage: 10,
                 columnSpacing: 2,

@@ -14,19 +14,22 @@ class CreateUpdatePriorityController extends GetxController {
   TextEditingController pesoC = TextEditingController();
   late Text buttonText;
 
-  final List<String> pesos = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
+  late RxList<int> pesos = <int>[].obs;
 
   CreateUpdatePriorityController({this.priority,});
   
   @override
-  void onInit() {
+  void onInit() async {
+
     bool parametro = validaParametro();
     buttonText = Text(parametro ? "Adicionar": "Atualizar");
     if (!parametro) {
       pesoC.text = priority!.weight.toString();
       nomeC.text = priority!.nome;
     }
+    pesos.value = (await setorRep.getFreeWeights()).obs;
     super.onInit();
+
   }
 
   bool validaParametro() => priority == null ? true : false;

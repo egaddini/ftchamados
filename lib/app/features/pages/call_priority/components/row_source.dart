@@ -30,7 +30,7 @@ class RowSource extends DataTableSource {
 
 DataRow recentFileDataRow(PriorityModel priority, BuildContext context, CallPriorityController controller, int index) {
   return DataRow(
-    onSelectChanged: (value) => createUpdatePriorityDialog(priority),
+    onSelectChanged: (value) => createUpdatePriorityDialog(priority).then((value) => controller.atualizarItens()),
     cells: [
       DataCell(Text(priority.id.toString())),
       DataCell(Text(priority.nome)),

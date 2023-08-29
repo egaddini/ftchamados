@@ -27,13 +27,19 @@ class CallPriorityController extends GetxController {
     if (deleta != null && deleta) {
       _priorityRepository.delete(data.id!).then((_) {
         myData.removeAt(index);
-        Get.back();
+        myData.refresh();
         snackSucessRegister(Get.context!, 'Prioridade ${data.nome} Deletado com sucesso!');
       }).catchError((error) {
-        Get.back();
         tratarErro(Get.context!, error);
       }); 
     }
+  }
+
+  Future<bool> atualizarItens() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    myData.value = await _priorityRepository.getList();
+    myData.refresh();
+    return true;
   }
 
 }

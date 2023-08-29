@@ -58,7 +58,7 @@ class CallCategoryStatusScreen extends GetView<CallCategoryController>  {
                   controller: controller,
                 ),
                 actions: [
-                  FilledButton(onPressed: () => createUpdateCategoryDialog(null), child: const Text('Novo Registro'),)
+                  FilledButton(onPressed: () => createUpdateCategoryDialog(null).then((value) => controller.atualizarItens()), child: const Text('Novo Registro'),)
                 ],
                 rowsPerPage: 10,
                 columnSpacing: 2,

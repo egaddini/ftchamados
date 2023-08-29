@@ -36,4 +36,11 @@ class CallCategoryController extends GetxController {
     }
   }
 
+  Future<bool> atualizarItens() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    myData.value = await _callCategoryRepository.getList();
+    myData.refresh();
+    return true;
+  }
+
 }

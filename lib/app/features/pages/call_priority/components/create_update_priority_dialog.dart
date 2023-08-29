@@ -1,7 +1,7 @@
 part of call_priority;
 
-void createUpdatePriorityDialog(PriorityModel? priority) {
-  showDialog(
+Future<bool> createUpdatePriorityDialog(PriorityModel? priority) {
+  return showDialog(
     context: Get.context!,
     builder: (_) => AlertDialog(
       title: Center(child: Text(priority == null ? "Nova Prioridade" : "Editar Prioridade", style: Get.theme.textTheme.titleLarge)),
@@ -29,7 +29,7 @@ Widget createUpdateStatusForm(PriorityModel? priority) {
             validator: Validatorless.required('Nome Obrigatório'), 
           ),                     
           addVerticalSpace(10),         
-          TypeAheadField<String>(
+          TypeAheadField<int>(
             textFieldConfiguration: TextFieldConfiguration(
               controller: controller.pesoC,
               decoration: const InputDecoration(
@@ -40,13 +40,13 @@ Widget createUpdateStatusForm(PriorityModel? priority) {
             suggestionsCallback: (pattern) {
               return controller.pesos;
             },
-            itemBuilder: (context, String peso) {
+            itemBuilder: (context, int peso) {
               return ListTile(
-                title: Text(peso),
+                title: Text(peso.toString()),
               );
             },
-            onSuggestionSelected: (String peso) async {
-              controller.pesoC.text = peso;
+            onSuggestionSelected: (int peso) async {
+              controller.pesoC.text = peso.toString();
             },
           ),
           addVerticalSpace(10),

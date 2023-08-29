@@ -1,7 +1,7 @@
 part of call_sector;
 
-void createUpdateSectorDialog(SectorModel? sector) {
-  showDialog(
+Future<bool> createUpdateSectorDialog(SectorModel? sector) {
+  return showDialog(
     context: Get.context!,
     builder: (_) => AlertDialog(
       title: Center(child: Text(sector == null ? "Nova Setor" : "Editar Setor", style: Get.theme.textTheme.titleLarge)),

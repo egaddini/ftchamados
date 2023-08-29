@@ -1,7 +1,7 @@
 part of call_category;
 
-void createUpdateCategoryDialog(CallCategoryModel? category) {
-  showDialog(
+Future<bool> createUpdateCategoryDialog(CallCategoryModel? category) {
+  return showDialog(
     context: Get.context!,
     builder: (_) => AlertDialog(
       title: Center(child: Text(category == null ? "Nova Categoria" : "Editar Categoria", style: Get.theme.textTheme.titleLarge)),

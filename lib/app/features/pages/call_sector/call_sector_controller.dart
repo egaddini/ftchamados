@@ -27,7 +27,7 @@ class CallSectorController extends GetxController {
     if (deleta != null && deleta) {
       _sectorRepository.delete(data.id!).then((_) {
         myData.removeAt(index);
-        Get.back();
+        myData.refresh();
         snackSucessRegister(Get.context!, 'Status ${data.nome} Deletado com sucesso!');
       }).catchError((error) {
         Get.back();
@@ -36,4 +36,10 @@ class CallSectorController extends GetxController {
     }
   }
 
+  Future<bool> atualizarItens() async {
+    await Future.delayed(const Duration(milliseconds: 500));
+    myData.value = await _sectorRepository.getList();
+    myData.refresh();
+    return true;
+  }
 }
