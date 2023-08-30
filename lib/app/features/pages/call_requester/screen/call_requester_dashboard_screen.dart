@@ -20,7 +20,7 @@ class CallUserDashboardScreen extends GetView<CallRequesterDashboardController> 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Meus Chamados')),
-      body: controller.isLoading ? Center(child: buildLoadingIndicator()) : SingleChildScrollView(
+      body: Obx(() => controller.isLoading.value ? Center(child: buildLoadingIndicator()) : SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -105,7 +105,7 @@ class CallUserDashboardScreen extends GetView<CallRequesterDashboardController> 
           ]
         ),
       )
-    );
+    ));
   }
 }
 

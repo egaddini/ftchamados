@@ -14,7 +14,7 @@ class Call {
     UserDTO? responsavel;
     CallCategoryModel? callType;
     String descricao;
-    String historico;
+    List<String> historico;
 
   Call({
     required this.id,
@@ -38,7 +38,7 @@ class Call {
     UserDTO? responsavel,
     CallCategoryModel? callType,    
     String? descricao,
-    String? historico,
+    List<String>? historico,
   }) {
     return Call(
       id: id ?? this.id,
@@ -74,7 +74,7 @@ class Call {
       responsavel: map['responsavel'] != null ? UserDTO.fromMap(map['responsavel'] as Map<String, dynamic>) : null,
       callType: map['callType'] != null ? CallCategoryModel.fromMap(map['callType'] as Map<String, dynamic>) : null,
       descricao: map['descricao'] as String,
-      historico: map['historico'] as String,
+      historico:  List<String>.from(map['historico']),
     );
   }
 

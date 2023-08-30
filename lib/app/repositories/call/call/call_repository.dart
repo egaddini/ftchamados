@@ -7,4 +7,6 @@ abstract class CallRepository {
 
   Future<List<Call>> getCallList({String? query});
 
+  Future<List<Call>> getCallListByEmail(String email);
+
 }

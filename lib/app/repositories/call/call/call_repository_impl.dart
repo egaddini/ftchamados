@@ -50,4 +50,23 @@ class CallRepositoryImpl implements CallRepository {
     }
     return results;
   }
+
+  @override
+  Future<List<Call>> getCallListByEmail(String email) async {   
+    List<Call> results = [];
+
+    final response = await Dio().get(
+      '$_basePath/email/$email', 
+      options: Options(headers: await getAuthHeader(false)),
+    );
+    if (response.statusCode == 200) {
+      List<dynamic> jsonList = response.data as List<dynamic>;
+      results = jsonList.map((json) => Call.fromMap(json)).toList();
+    } else {
+      final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+    }
+    return results;
+  }
+
 }

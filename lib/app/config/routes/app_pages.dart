@@ -3,6 +3,7 @@ import 'package:chamados/app/features/pages/call_category/call_category_bidings.
 import 'package:chamados/app/features/pages/call_category/call_category_screen.dart';
 import 'package:chamados/app/features/pages/call_priority/call_priority_bidings.dart';
 import 'package:chamados/app/features/pages/call_priority/call_priority_screen.dart';
+import 'package:chamados/app/features/pages/call_requester/screen/call_requester_dashboard_bidings.dart';
 import 'package:chamados/app/features/pages/call_sector/call_sector_bidings.dart';
 import 'package:chamados/app/features/pages/call_sector/call_sector_screen.dart';
 import 'package:chamados/app/features/pages/call_status/call_status_bidings.dart';
@@ -53,7 +54,7 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.userCall,
       page: () => const CallUserDashboardScreen(),
-      //binding: DashboardBinding(),
+      binding: CallRequesterDashboardBindings(),
     ),
     GetPage(
       name: AppRoutes.callStatus,

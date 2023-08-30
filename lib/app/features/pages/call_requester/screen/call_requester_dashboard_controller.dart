@@ -2,26 +2,27 @@ import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/repositories/call/call/call_repository.dart';
 import 'package:chamados/app/repositories/call/call/call_repository_impl.dart';
+import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CallRequesterDashboardController extends GetxController {
 
   bool sort = true;
-  bool isLoading = true;
-  List<Call> filterData = [], myData = [];
+  RxBool isLoading = true.obs;
+  RxList<Call> myData = <Call>[].obs;
   final CallRepository _callRepo = CallRepositoryImpl();
-  late UserInfoModel? logedUser;
-
-  onsortColum(int columnIndex, bool ascending) {
-    if (columnIndex == 0) {
-      if (ascending) {
-        filterData.sort((a, b) => a.solicitante!.email.toString().compareTo(b.solicitante!.email.toString()));
-      } else {
-        filterData.sort((a, b) => b.solicitante!.email.toString().compareTo(a.solicitante!.email.toString()));
-      }
-    }
-  }
+  late UserInfoModel logedUser;
 
   TextEditingController controller = TextEditingController();
+
+  @override
+  void onInit() async {
+    logedUser = (await LocalStorageServices().getUser())!;
+    myData = (await _callRepo.getCallListByEmail(logedUser.email!)).obs;
+    isLoading.value = false;
+    super.onInit();
+  }
+
+
 }
