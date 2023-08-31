@@ -1,5 +1,6 @@
 library call_user_dashboard;
 
+import 'package:chamados/app/features/pages/call_requester/components/call_requester_detail_dialog_controller.dart';
 import 'package:chamados/app/features/pages/call_requester/screen/call_requester_dashboard_controller.dart';
 import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/shared_components/c_expanded_text_field.dart';
@@ -10,7 +11,7 @@ import 'package:intl/intl.dart';
 
 
 part '../components/row_source.dart';
-part '../components/call_detail_page.dart';
+part '../components/call_requester_detail_dialog.dart';
 
 class CallUserDashboardScreen extends GetView<CallRequesterDashboardController> {
   

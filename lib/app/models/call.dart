@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:chamados/app/models/call_category_model.dart';
+import 'package:chamados/app/models/historic_model.dart';
 import 'package:chamados/app/models/user_dto.dart';
 
 class Call {
@@ -14,7 +15,7 @@ class Call {
     UserDTO? responsavel;
     CallCategoryModel? callType;
     String descricao;
-    List<String> historico;
+    List<HistoricModel> historico;
 
   Call({
     required this.id,
@@ -38,7 +39,7 @@ class Call {
     UserDTO? responsavel,
     CallCategoryModel? callType,    
     String? descricao,
-    List<String>? historico,
+    List<HistoricModel>? historico,
   }) {
     return Call(
       id: id ?? this.id,
@@ -74,7 +75,7 @@ class Call {
       responsavel: map['responsavel'] != null ? UserDTO.fromMap(map['responsavel'] as Map<String, dynamic>) : null,
       callType: map['callType'] != null ? CallCategoryModel.fromMap(map['callType'] as Map<String, dynamic>) : null,
       descricao: map['descricao'] as String,
-      historico:  List<String>.from(map['historico']),
+      historico: (map['historico'] as List<dynamic>).map((json) => HistoricModel.fromMap(json)).toList(),
     );
   }
 

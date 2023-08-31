@@ -29,7 +29,7 @@ class RowSource extends DataTableSource {
 
 DataRow recentFileDataRow(Call call, BuildContext context) {
   return DataRow(
-    onSelectChanged: (value)  => callDetailDialog(context, call),
+    onSelectChanged: (value)  => callRequesterDetailDialog(context, call),
     cells: [
       DataCell(Text(call.callType!.titulo!)),
       DataCell(Text(call.callType!.sector!.nome)),
