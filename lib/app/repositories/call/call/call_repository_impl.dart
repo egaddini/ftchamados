@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/models/call_dto.dart';
+import 'package:chamados/app/models/call_status_model.dart';
 import 'package:chamados/app/models/error_dto.dart';
 import 'package:chamados/app/models/rest_exception.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
@@ -67,6 +68,23 @@ class CallRepositoryImpl implements CallRepository {
       throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
     }
     return results;
+  }
+
+
+  @override
+  Future<CallStatusModel> setStatus(int callID, int statusID) async {
+    
+    final response = await Dio().get(
+      '$_basePath/set-status/$callID',
+      queryParameters: {'status': statusID.toString()},
+      options: Options(headers: await getAuthHeader(false)),
+    );
+    if (response.statusCode == 200) {
+      return CallStatusModel.fromMap(response.data);
+    } else {
+      final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+    } 
   }
 
 }

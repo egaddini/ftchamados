@@ -1,6 +1,10 @@
 import 'package:chamados/app/models/call.dart';
+import 'package:chamados/app/models/call_status_model.dart';
 import 'package:chamados/app/models/comment_model.dart';
 import 'package:chamados/app/models/user_info_model.dart';
+import 'package:chamados/app/repositories/call/call/call_repository.dart';
+import 'package:chamados/app/repositories/call/call/call_repository_impl.dart';
+import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -13,12 +17,12 @@ class CallRequesterDetailDialogController extends GetxController {
 
   bool isHovered = false;
 
-    late UserInfoModel logedUser;
+  late UserInfoModel logedUser;
 
   late TextEditingController dataAberturaC;
   late TextEditingController ultAtualizacaoC;
   late TextEditingController responsavelC;
-  late TextEditingController statusC;
+  late RxString statusC;
   late TextEditingController setorC;
   late TextEditingController prioridadeC;
   late TextEditingController tituloC;
@@ -36,7 +40,7 @@ class CallRequesterDetailDialogController extends GetxController {
     dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(call.dataCriacao)));
     ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(call.dataUltAtualizacao)));
     responsavelC = TextEditingController(text: call.responsavel == null ? 'Não definido' : call.responsavel!.email);
-    statusC = TextEditingController(text: call.status);
+    statusC = call.status.obs;
     setorC = TextEditingController(text: call.callType!.sector!.nome);
     prioridadeC = TextEditingController(text: call.callType!.prioridade!.nome);
     tituloC = TextEditingController(text: call.callType!.titulo);
@@ -49,6 +53,18 @@ class CallRequesterDetailDialogController extends GetxController {
     comments.insert(0, CommentModel(date: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.now()), message: comentarioC.text, user: logedUser.email!));
     comments.refresh();
     comentarioC.text = '';
+  }
+
+  void finalizarChamado() async {
+    
+    CallRepository repository = CallRepositoryImpl();
+    await repository.setStatus(call.id, 10).then((_) {
+        statusC.value = _.name;
+        snackSucessRegister(Get.context!, 'Chamado encerrado com sucesso!');
+      }).catchError((error) {
+        tratarErro(Get.context!, error);
+    }); 
+    statusC.refresh();
   }
 
   callHistoric() {
@@ -68,7 +84,6 @@ class CallRequesterDetailDialogController extends GetxController {
     return Padding(
         padding: const EdgeInsets.all(16),
         child: DataTable2(
-             
             columnSpacing: 12,
             horizontalMargin: 12,
             minWidth: 600,

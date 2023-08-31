@@ -38,7 +38,7 @@ class CallRequesterDetailForm extends GetView<CallRequesterDetailDialogControlle
           const SizedBox(height: 10),
           Row(
             children: [
-              CustomExpandedTextField(controller: controller.statusC, labelText: 'Status'),  
+              Obx(() => CustomExpandedTextField(controller: TextEditingController(text: controller.statusC.value), labelText: 'Status')),  
               const SizedBox(width: 10),
               CustomExpandedTextField(controller: controller.prioridadeC, labelText: 'Prioridade'),                              
               const SizedBox(width: 10),
@@ -61,9 +61,8 @@ class CallRequesterDetailForm extends GetView<CallRequesterDetailDialogControlle
               ),
               const SizedBox(width: 10),
               FilledButton(
-                child: const Text('Cancelar'),
-                onPressed: () {
-                },
+                child: const Text('Encerrar'),
+                onPressed: () => controller.finalizarChamado(),
               ),                                                
             ],
           ),
