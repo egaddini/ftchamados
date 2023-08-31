@@ -3,6 +3,7 @@ import 'package:chamados/app/models/comment_model.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -24,6 +25,8 @@ class CallDetailController extends GetxController {
   late TextEditingController comentarioC = TextEditingController(text: '');
   late TextEditingController siglaC = TextEditingController(text: '');
   late TextEditingController responsavelC = TextEditingController(text: '');
+
+  final FocusNode comentar = FocusNode();
 
   RxList<CommentModel> comments = <CommentModel>[].obs;
 
@@ -52,7 +55,7 @@ class CallDetailController extends GetxController {
   }
 
   void addComentario() {
-    comments.add(CommentModel(date: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.now()), message: comentarioC.text, user: logedUser.email!));
+    comments.insert(0, CommentModel(date: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.now()), message: comentarioC.text, user: logedUser.email!));
     comments.refresh();
     comentarioC.text = '';
   }

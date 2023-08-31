@@ -4,6 +4,7 @@ import 'package:chamados/app/features/pages/call_requester/components/call_reque
 import 'package:chamados/app/features/pages/call_requester/screen/call_requester_dashboard_controller.dart';
 import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/shared_components/c_expanded_text_field.dart';
+import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

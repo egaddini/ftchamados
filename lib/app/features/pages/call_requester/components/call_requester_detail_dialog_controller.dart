@@ -1,4 +1,7 @@
 import 'package:chamados/app/models/call.dart';
+import 'package:chamados/app/models/comment_model.dart';
+import 'package:chamados/app/models/user_info_model.dart';
+import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,28 +13,42 @@ class CallRequesterDetailDialogController extends GetxController {
 
   bool isHovered = false;
 
+    late UserInfoModel logedUser;
+
   late TextEditingController dataAberturaC;
   late TextEditingController ultAtualizacaoC;
-  late TextEditingController solicitanteC;
+  late TextEditingController responsavelC;
   late TextEditingController statusC;
   late TextEditingController setorC;
   late TextEditingController prioridadeC;
   late TextEditingController tituloC;
   late TextEditingController descSolicitC;
+  late TextEditingController comentarioC = TextEditingController(text: '');
+
+  final FocusNode comentar = FocusNode();
+
+  RxList<CommentModel> comments = <CommentModel>[].obs;
 
   CallRequesterDetailDialogController(this.call);
 
   @override
-  void onInit() {
+  void onInit() async {
     dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(call.dataCriacao)));
     ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(call.dataUltAtualizacao)));
-    solicitanteC = TextEditingController(text: call.solicitante!.email);
+    responsavelC = TextEditingController(text: call.responsavel == null ? 'Não definido' : call.responsavel!.email);
     statusC = TextEditingController(text: call.status);
     setorC = TextEditingController(text: call.callType!.sector!.nome);
     prioridadeC = TextEditingController(text: call.callType!.prioridade!.nome);
     tituloC = TextEditingController(text: call.callType!.titulo);
     descSolicitC = TextEditingController(text: call.descricao);
+    logedUser = (await LocalStorageServices().getUser())!;
     super.onInit();
+  }
+
+  void addComentario() {
+    comments.insert(0, CommentModel(date: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.now()), message: comentarioC.text, user: logedUser.email!));
+    comments.refresh();
+    comentarioC.text = '';
   }
 
   callHistoric() {

@@ -42,7 +42,7 @@ class CallRequesterDetailForm extends GetView<CallRequesterDetailDialogControlle
               const SizedBox(width: 10),
               CustomExpandedTextField(controller: controller.prioridadeC, labelText: 'Prioridade'),                              
               const SizedBox(width: 10),
-              CustomExpandedTextField(controller: controller.solicitanteC, labelText: 'Solicitante'),
+              CustomExpandedTextField(controller: controller.responsavelC, labelText: 'Solucionador'),
             ],
           ),
           const SizedBox(height: 10),
@@ -60,13 +60,36 @@ class CallRequesterDetailForm extends GetView<CallRequesterDetailDialogControlle
                 onPressed: () => controller.callHistoric(),
               ),
               const SizedBox(width: 10),
-               FilledButton(
-                child: const Text('Finalizar'),
+              FilledButton(
+                child: const Text('Cancelar'),
                 onPressed: () {
                 },
               ),                                                
             ],
           ),
+          addVerticalSpace(10),
+          TextFormField(controller: controller.comentarioC, maxLines: 1, focusNode: controller.comentar,  
+            onFieldSubmitted: (value) {
+              controller.addComentario(); 
+              FocusScope.of(Get.context!).requestFocus(controller.comentar);
+            }, 
+            decoration: InputDecoration(
+              labelText: 'Adicione um comentário...',
+              suffixIcon: cInkWell(25, 30, Icons.send_outlined, null, Get.theme.primaryColor, null, 'Enviar', () => controller.addComentario(),),
+            ),
+          ),
+          SizedBox(
+            height: 160,
+            child: Obx(() => ListView.builder(
+              itemCount: controller.comments.length,
+              itemBuilder: ((context, index) {
+                return ListTile(
+                  title: Text('${controller.comments[index].user}  -  ${controller.comments[index].date}', style: Get.theme.textTheme.bodySmall),
+                  subtitle: Text(controller.comments[index].message),
+                );
+              }),
+            ),),
+          ),          
         ],
       ),
     );

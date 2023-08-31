@@ -66,9 +66,14 @@ Widget callDetailScreen(Call call) {
           addVerticalSpace(10),
           TextFormField(controller: controller.descSolicitC, decoration: const InputDecoration(labelText: 'Descrição do solicitante',), maxLines: 4, readOnly: true),
           addVerticalSpace(10),
-          TextFormField(controller: controller.comentarioC, maxLines: 1, decoration: InputDecoration(
-            suffixIcon: cInkWell(25, 30, Icons.send_outlined, null, Get.theme.primaryColor, null, 'Enviar', () => controller.addComentario()),
-            labelText: 'Adicione um comentário...',
+          TextFormField(controller: controller.comentarioC, maxLines: 1, focusNode: controller.comentar,  
+            onFieldSubmitted: (value) {
+              controller.addComentario(); 
+              FocusScope.of(Get.context!).requestFocus(controller.comentar);
+            }, 
+            decoration: InputDecoration(
+              labelText: 'Adicione um comentário...',
+              suffixIcon: cInkWell(25, 30, Icons.send_outlined, null, Get.theme.primaryColor, null, 'Enviar', () => controller.addComentario(),),
             ),
           ),
           SizedBox(
