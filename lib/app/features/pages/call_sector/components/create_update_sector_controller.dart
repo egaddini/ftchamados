@@ -44,10 +44,10 @@ class CreateUpdateSectorController extends GetxController {
       isLoading.value = false;
       setorRep.register(sector).then((_) {
       Get.back();
-      snackSucessRegister(Get.context!, 'Setor ${nomeC.text} registrado com sucesso!');
+      snackSucessRegister('Setor ${nomeC.text} registrado com sucesso!');
       }).catchError((error) {
         Get.back();
-        tratarErro(Get.context!, error);
+        tratarErro(error);
       });                    
     } 
   }

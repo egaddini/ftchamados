@@ -129,7 +129,7 @@ class _SingupFormState extends State<SingupForm> {
                       registerSucess(context, 'Conta registrada com sucesso!', 'Sua solicitação será revisada e conta habilitada em até 2 dias úteis.');
                     }).catchError((error) {
                       _setLoading();
-                      tratarErro(context, error);
+                      tratarErro(error);
                     });                                                 
                   }
                 }, 

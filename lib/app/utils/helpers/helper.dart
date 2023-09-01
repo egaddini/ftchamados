@@ -47,9 +47,9 @@ void waitProgressBar(BuildContext context) {
   );
 }
 
-void moreDetailsDialog(BuildContext context, String titulo, String mensagem) {
+void moreDetailsDialog(String titulo, String mensagem) {
   showDialog(
-    context: context,
+    context: Get.context!,
     builder: (_) => AlertDialog(
       title: Center(child: Text(titulo, style: const TextStyle(fontWeight: FontWeight.bold),)),
       content: Text(mensagem),
@@ -57,9 +57,7 @@ void moreDetailsDialog(BuildContext context, String titulo, String mensagem) {
         Center(
           child: TextButton(
             child: const Icon(Icons.done), 
-            onPressed: () {     
-              Navigator.pop(context);
-            },
+            onPressed: () => Get.back(),
           ),
         ),
       ],
@@ -104,14 +102,18 @@ Future<Map<String, String>> getAuthHeader(bool auth) async {
   }
 }
 
-void tratarErro(BuildContext context, DioException e) {
+void tratarErro(DioException e) {
   if (e.response != null && e.response!.data != null) {
     ErrorDTO erro = ErrorDTO.fromMap(e.response!.data);
-    if (409.isEqual(erro.status)) Get.snackbar('Já Registrado', erro.message, icon: const Icon(Icons.info), onTap: (snack) => moreDetailsDialog(context, 'Já Registrado', erro.message), );
-    if (401.isEqual(erro.status)) Get.snackbar('Credenciais invalidas', erro.message, icon: const Icon(Icons.info), onTap: (snack) => moreDetailsDialog(context, 'Credenciais invalidas', erro.message));
-    if (403.isEqual(erro.status)) Get.snackbar('Conta Inativa', erro.message, icon: const Icon(Icons.info), onTap: (snack) => moreDetailsDialog(context, 'Conta Inativa', erro.message),);
+    if (409.isEqual(erro.status)) Get.snackbar('Já Registrado', erro.message, icon: const Icon(Icons.info), onTap: (snack) => moreDetailsDialog('Já Registrado', erro.message), );
+    if (401.isEqual(erro.status)) Get.snackbar('Credenciais invalidas', erro.message, icon: const Icon(Icons.info), onTap: (snack) => moreDetailsDialog('Credenciais invalidas', erro.message));
+    if (403.isEqual(erro.status)) Get.snackbar('Conta Inativa', erro.message, icon: const Icon(Icons.info), onTap: (snack) => moreDetailsDialog('Conta Inativa', erro.message),);
   } else {
-    Get.snackbar('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte', onTap:(snack) => moreDetailsDialog(context, 'Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}'));
+    Get.snackbar(
+      'Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte', 
+      onTap:(snack) => moreDetailsDialog('Algum problema aconteceu!', 'se o problema persistir entre em contato com o suporte \n${e.error}'),
+      snackPosition: SnackPosition.BOTTOM,
+    );
   }
 }
 
@@ -132,18 +134,12 @@ Widget buildLoadingIndicator() {
   );
 }
 
-void snackSucessRegister(BuildContext context, String message) {
-  final snackBar = SnackBar(
-    content: const Text('Registrado com Sucesso!'),
-    behavior: SnackBarBehavior.floating,
-    action: SnackBarAction(
-      label: 'Ver Mais',
-      onPressed: () {
-        moreDetailsDialog(context, 'Registrado com Sucesso', message);
-      },
-    ),
-  );
-  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+void snackSucessRegister(String message) {
+  Get.snackbar(
+      'Registrado com Sucesso!', '$message', 
+      onTap:(snack) => moreDetailsDialog('Registrado com Sucesso', message),
+      snackPosition: SnackPosition.BOTTOM,
+    );
 }
 
 Future<void> waitThreeSeconds() {

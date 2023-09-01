@@ -54,7 +54,7 @@ class CreateUpdateStatusController extends GetxController {
       snackSucessRegister(Get.context!, 'Status ${status.name} registrado com sucesso!');
     }).catchError((error) {
       Get.back();
-      tratarErro(Get.context!, error);
+      tratarErro(error);
     });  
   }
 

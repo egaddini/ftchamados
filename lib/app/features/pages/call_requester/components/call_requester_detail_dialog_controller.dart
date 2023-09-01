@@ -1,5 +1,4 @@
 import 'package:chamados/app/models/call.dart';
-import 'package:chamados/app/models/call_status_model.dart';
 import 'package:chamados/app/models/comment_model.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/repositories/call/call/call_repository.dart';
@@ -58,13 +57,11 @@ class CallRequesterDetailDialogController extends GetxController {
   void finalizarChamado() async {
     
     CallRepository repository = CallRepositoryImpl();
-    await repository.setStatus(call.id, 10).then((_) {
-        statusC.value = _.name;
-        snackSucessRegister(Get.context!, 'Chamado encerrado com sucesso!');
-      }).catchError((error) {
-        tratarErro(Get.context!, error);
-    }); 
-    statusC.refresh();
+    await repository.setStatus(call.id, 10).then((value) {
+        statusC.value = value.name;
+        statusC.refresh();
+        snackSucessRegister('Chamado encerrado com sucesso!');
+    }).catchError((error) {tratarErro(error);}); 
   }
 
   callHistoric() {

@@ -194,7 +194,7 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
                 ),
               ),
               onPressed: () {
-                moreDetailsDialog(context, 'Funcionalidade em melhoria!', 'funcionalidade travada para refatoração :D');
+                moreDetailsDialog('Funcionalidade em melhoria!', 'funcionalidade travada para refatoração :D');
                 //Navigator.pop(context, UserInfoModel());
                 /*var formValid = _formKey.currentState?.validate() ?? false;
                 if (formValid) {
@@ -295,10 +295,10 @@ class _CheckBoxFieldState extends State<CheckBoxField> {
                 Navigator.pop(context);
                 String mensagem;
                 mensagem = (isActive) ? 'habilitada' : 'desabilitada' ;
-                moreDetailsDialog(context, 'Registrado com sucesso', 'Conta: $email $mensagem.');
+                moreDetailsDialog('Registrado com sucesso', 'Conta: $email $mensagem.');
               }).catchError((error) {
                 Navigator.pop(context);
-                tratarErro(context, error);
+                tratarErro(error);
               });                 
             });
           },

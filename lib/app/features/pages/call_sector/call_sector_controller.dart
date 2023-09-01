@@ -28,10 +28,10 @@ class CallSectorController extends GetxController {
       _sectorRepository.delete(data.id!).then((_) {
         myData.removeAt(index);
         myData.refresh();
-        snackSucessRegister(Get.context!, 'Status ${data.nome} Deletado com sucesso!');
+        snackSucessRegister('Status ${data.nome} Deletado com sucesso!');
       }).catchError((error) {
         Get.back();
-        tratarErro(Get.context!, error);
+        tratarErro(error);
       }); 
     }
   }

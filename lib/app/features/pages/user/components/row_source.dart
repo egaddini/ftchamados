@@ -112,11 +112,11 @@ class _DeleteUserDialogState extends State<DeleteUserDialog> {
                 _setLoading();
                 userRepo.delete(user.id!).then((_) {
                   Navigator.pop(context);
-                  moreDetailsDialog(context, 'Usuário removido com sucesso!', 'O usuário: ${user.email ?? "?"} foi deletado.');
+                  moreDetailsDialog('Usuário removido com sucesso!', 'O usuário: ${user.email ?? "?"} foi deletado.');
                 }).catchError((error) {
                   _setLoading();
                   Navigator.pop(context);
-                  tratarErro(context, error);
+                  tratarErro(error);
                 });               
               },
             child: const Center(child: Icon(Icons.delete_outline)),

@@ -69,7 +69,7 @@ class CreateUpdateCategoryController extends GetxController {
       snackSucessRegister(Get.context!, 'Categoria ${tituloC.text} registrado com sucesso!');
       Get.back();
       }).catchError((error) {
-        tratarErro(Get.context!, error);
+        tratarErro(error);
       });                    
     } 
   }

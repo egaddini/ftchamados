@@ -27,7 +27,7 @@ class LoginScreenController extends GetxController {
         Get.offAndToNamed(AppRoutes.home);
       }).catchError((error) {
         isLoading.value = false;
-        tratarErro(Get.context!, error);
+        tratarErro(error);
       }); 
     } 
   }

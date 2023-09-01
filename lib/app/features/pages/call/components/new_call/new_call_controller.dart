@@ -45,7 +45,7 @@ class NewCallController extends GetxController {
       snackSucessRegister(Get.context!, 'Chamado registrado com sucesso!');
     }).catchError((error) {
       isLoading.value = false;
-      tratarErro(Get.context!, error);
+      tratarErro(error);
     });              
   }
 

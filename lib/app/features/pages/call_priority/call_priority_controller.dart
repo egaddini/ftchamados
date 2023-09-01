@@ -30,7 +30,7 @@ class CallPriorityController extends GetxController {
         myData.refresh();
         snackSucessRegister(Get.context!, 'Prioridade ${data.nome} Deletado com sucesso!');
       }).catchError((error) {
-        tratarErro(Get.context!, error);
+        tratarErro(error);
       }); 
     }
   }

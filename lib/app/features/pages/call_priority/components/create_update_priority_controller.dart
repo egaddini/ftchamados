@@ -52,7 +52,7 @@ class CreateUpdatePriorityController extends GetxController {
       snackSucessRegister(Get.context!, 'Prioridade ${nomeC.text} registrado com sucesso!');
       }).catchError((error) {
         Get.back();
-        tratarErro(Get.context!, error);
+        tratarErro(error);
       });                    
     } 
   }

@@ -31,7 +31,7 @@ class CallCategoryController extends GetxController {
         snackSucessRegister(Get.context!, 'Categoria ${data.descricao} Deletado com sucesso!');
       }).catchError((error) {
         Get.back();
-        tratarErro(Get.context!, error);
+        tratarErro(error);
       }); 
     }
   }
