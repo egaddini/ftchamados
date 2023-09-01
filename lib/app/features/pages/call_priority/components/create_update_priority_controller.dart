@@ -49,7 +49,7 @@ class CreateUpdatePriorityController extends GetxController {
       isLoading.value = false;
       setorRep.register(priority).then((_) {
       Get.back();
-      snackSucessRegister(Get.context!, 'Prioridade ${nomeC.text} registrado com sucesso!');
+      snackSucessRegister('Prioridade ${nomeC.text} registrado com sucesso!');
       }).catchError((error) {
         Get.back();
         tratarErro(error);

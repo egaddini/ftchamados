@@ -28,7 +28,7 @@ class CallCategoryController extends GetxController {
       _callCategoryRepository.delete(data.id!).then((_) {
         myData.removeAt(index);
         Get.back();
-        snackSucessRegister(Get.context!, 'Categoria ${data.descricao} Deletado com sucesso!');
+        snackSucessRegister('Categoria ${data.descricao} Deletado com sucesso!');
       }).catchError((error) {
         Get.back();
         tratarErro(error);

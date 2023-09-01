@@ -42,7 +42,7 @@ class NewCallController extends GetxController {
     CallDTO call = CallDTO(solicitante: logedUser!.id!, callType: callCategory.id!, descricao: descreverProblemaC.text);
     callRepo.register(call).then((_) {
       Get.back();
-      snackSucessRegister(Get.context!, 'Chamado registrado com sucesso!');
+      snackSucessRegister('Chamado registrado com sucesso!');
     }).catchError((error) {
       isLoading.value = false;
       tratarErro(error);
