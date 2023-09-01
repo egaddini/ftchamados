@@ -3,7 +3,6 @@ import 'package:chamados/app/models/comment_model.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 

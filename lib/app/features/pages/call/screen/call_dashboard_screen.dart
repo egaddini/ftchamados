@@ -6,7 +6,6 @@ import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/call/call_repository.dart';
 import 'package:chamados/app/repositories/call/call/call_repository_impl.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 part '../components/row_source.dart';

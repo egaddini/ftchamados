@@ -51,7 +51,7 @@ void moreDetailsDialog(String titulo, String mensagem) {
   showDialog(
     context: Get.context!,
     builder: (_) => AlertDialog(
-      title: Center(child: Text(titulo, style: const TextStyle(fontWeight: FontWeight.bold),)),
+      title: Center(child: Text(titulo, style: Get.theme.textTheme.titleLarge,)),
       content: Text(mensagem),
       actions: [
         Center(
@@ -65,19 +65,18 @@ void moreDetailsDialog(String titulo, String mensagem) {
   );
 }
 
-void registerSucess(BuildContext context, String titulo, String mensagem) {
+void registerSucess(String titulo, String mensagem) {
   showDialog(
-    context: context,
+    context: Get.context!,
     builder: (_) => AlertDialog(
-      title: Center(child: Text(titulo, style: const TextStyle(fontWeight: FontWeight.bold),)),
+      title: Center(child: Text(titulo, style: Get.theme.textTheme.titleLarge,)),
       content: Text(mensagem),
       actions: [
         Center(
           child: TextButton(
             child: const Icon(Icons.done), 
             onPressed: () {     
-              Navigator.pop(context);
-              Navigator.pop(context);
+              Get.back();
             },
           ),
         ),
@@ -136,10 +135,16 @@ Widget buildLoadingIndicator() {
 
 void snackSucessRegister(String message) {
   Get.snackbar(
-      'Registrado com Sucesso!', '$message', 
-      onTap:(snack) => moreDetailsDialog('Registrado com Sucesso', message),
-      snackPosition: SnackPosition.BOTTOM,
-    );
+    'Registrado com Sucesso!', 
+    message, 
+    onTap:(snack) => moreDetailsDialog('Registrado com Sucesso', message),
+    animationDuration: const Duration(seconds: 2),
+    barBlur: 1,
+    maxWidth: 1000,
+    padding: const EdgeInsets.all(6),
+    icon: const Icon(Icons.info),
+    margin: const EdgeInsets.all(8),
+  );
 }
 
 Future<void> waitThreeSeconds() {

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:chamados/app/constans/api_path.dart';
 import 'package:chamados/app/models/call_status_model.dart';
 import 'package:chamados/app/models/error_dto.dart';
