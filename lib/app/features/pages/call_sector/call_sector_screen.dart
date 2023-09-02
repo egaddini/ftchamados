@@ -1,7 +1,7 @@
 library call_sector;
 
 import 'package:chamados/app/features/pages/call_sector/call_sector_controller.dart';
-import 'package:chamados/app/models/setor_model.dart';
+import 'package:chamados/app/models/sector_model.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:flutter/material.dart';

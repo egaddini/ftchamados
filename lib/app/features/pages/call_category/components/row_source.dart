@@ -33,11 +33,11 @@ DataRow recentFileDataRow(CallCategoryModel category, BuildContext context, Call
     onSelectChanged: (value) => createUpdateCategoryDialog(category).then((value) => controller.atualizarItens()),
     cells: [
       DataCell(Text(category.id.toString())),
-      DataCell(Text(category.sector!.sigla)),
-      DataCell(Text(category.sector!.nome)),
-      DataCell(Text(category.titulo!)),
-      DataCell(Text(category.prioridade!.nome)),
-      DataCell(Text(category.descricao!)),      
+      DataCell(Text(category.sector!.acronym)),
+      DataCell(Text(category.sector!.name)),
+      DataCell(Text(category.title!)),
+      DataCell(Text(category.priority!.name)),
+      DataCell(Text(category.description!)),      
       DataCell(SizedBox(height: 40, width: 40, child: cInkWell(22, 30, Icons.delete, Icons.delete_forever_outlined, Get.theme.primaryColor, Colors.red, 'Deletar', () => controller.deleteItem(index)))),        
     ],
   );

@@ -23,12 +23,12 @@ class CallCategoryController extends GetxController {
 
   void deleteItem(int index) async {
     CallCategoryModel data = myData[index];
-    bool? deleta = await perguntaSimOuNao('Deseja remover a Categoria: ${data.descricao}');
+    bool? deleta = await perguntaSimOuNao('Deseja remover a Categoria: ${data.description}');
     if (deleta != null && deleta) {
       _callCategoryRepository.delete(data.id!).then((_) {
         myData.removeAt(index);
         Get.back();
-        snackSucessRegister('Registrado com sucesso', 'Categoria ${data.descricao} Deletado com sucesso!');
+        snackSucessRegister('Registrado com sucesso', 'Categoria ${data.description} Deletado com sucesso!');
       }).catchError((error) {
         Get.back();
         tratarErro(error);

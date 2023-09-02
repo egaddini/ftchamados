@@ -40,9 +40,9 @@ class CallRequesterDetailDialogController extends GetxController {
     ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(call.dataUltAtualizacao)));
     responsavelC = TextEditingController(text: call.responsavel == null ? 'Não definido' : call.responsavel!.email);
     statusC = call.status.obs;
-    setorC = TextEditingController(text: call.callType!.sector!.nome);
-    prioridadeC = TextEditingController(text: call.callType!.prioridade!.nome);
-    tituloC = TextEditingController(text: call.callType!.titulo);
+    setorC = TextEditingController(text: call.callType!.sector!.name);
+    prioridadeC = TextEditingController(text: call.callType!.priority!.name);
+    tituloC = TextEditingController(text: call.callType!.title);
     descSolicitC = TextEditingController(text: call.descricao);
     logedUser = (await LocalStorageServices().getUser())!;
     super.onInit();

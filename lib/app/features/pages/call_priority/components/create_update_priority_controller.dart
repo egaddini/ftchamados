@@ -25,7 +25,7 @@ class CreateUpdatePriorityController extends GetxController {
     buttonText = Text(parametro ? "Adicionar": "Atualizar");
     if (!parametro) {
       pesoC.text = priority!.weight.toString();
-      nomeC.text = priority!.nome;
+      nomeC.text = priority!.name;
     }
     pesos.value = (await setorRep.getFreeWeights()).obs;
     super.onInit();
@@ -37,7 +37,7 @@ class CreateUpdatePriorityController extends GetxController {
   void criarAtualizarStatus() {
     var formValid = formKey.currentState?.validate() ?? false;
     if (formValid) {
-      priority == null ? saveItem(PriorityModel(nome: nomeC.text, weight: int.parse(pesoC.text))) : null;
+      priority == null ? saveItem(PriorityModel(name: nomeC.text, weight: int.parse(pesoC.text))) : null;
       // saveItem(CallStatusModel(id: null, name: nomeC.text, description: descricaoC.text, weight: int.parse(pesoC.text), notify: notificaC.value)):
       // saveItem(CallStatusModel(id: null, name: nomeC.text, description: descricaoC.text, weight: int.parse(pesoC.text), notify: notificaC.value));
     }

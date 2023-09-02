@@ -1,43 +1,42 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
 class SectorModel {
   
   int? id;
-  String sigla;
-  String nome;
+  String acronym;
+  String name;
 
   SectorModel({
     this.id,
-    required this.sigla,
-    required this.nome,
+    required this.acronym,
+    required this.name,
   });
 
   SectorModel copyWith({
     int? id,
-    String? sigla,
-    String? nome,
+    String? acronym,
+    String? name,
   }) {
     return SectorModel(
       id: id ?? this.id,
-      sigla: sigla ?? this.sigla,
-      nome: nome ?? this.nome,
+      acronym: acronym ?? this.acronym,
+      name: name ?? this.name,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'sigla': sigla,
-      'nome': nome,
+      'acronym': acronym,
+      'name': name,
     };
   }
 
   factory SectorModel.fromMap(Map<String, dynamic> map) {
     return SectorModel(
       id: map['id'] as int,
-      sigla: map['sigla'] as String,
-      nome: map['nome'] as String,
+      acronym: map['acronym'] as String,
+      name: map['name'] as String,
     );
   }
 
@@ -46,7 +45,7 @@ class SectorModel {
   factory SectorModel.fromJson(String source) => SectorModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'SectorModel(id: $id, sigla: $sigla, nome: $nome)';
+  String toString() => 'SectorModel(id: $id, acronym: $acronym, name: $name)';
 
   @override
   bool operator ==(covariant SectorModel other) {
@@ -54,10 +53,10 @@ class SectorModel {
   
     return 
       other.id == id &&
-      other.sigla == sigla &&
-      other.nome == nome;
+      other.acronym == acronym &&
+      other.name == name;
   }
 
   @override
-  int get hashCode => id.hashCode ^ sigla.hashCode ^ nome.hashCode;
+  int get hashCode => id.hashCode ^ acronym.hashCode ^ name.hashCode;
 }

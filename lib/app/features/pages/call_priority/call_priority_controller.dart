@@ -23,12 +23,12 @@ class CallPriorityController extends GetxController {
 
   void deleteItem(int index) async {
     PriorityModel data = myData[index];
-    bool? deleta = await perguntaSimOuNao('Deseja remover a prioridade: ${data.nome}');
+    bool? deleta = await perguntaSimOuNao('Deseja remover a prioridade: ${data.name}');
     if (deleta != null && deleta) {
       _priorityRepository.delete(data.id!).then((_) {
         myData.removeAt(index);
         myData.refresh();
-        snackSucessRegister('Registrado com sucesso', 'Prioridade ${data.nome} Deletado com sucesso!');
+        snackSucessRegister('Registrado com sucesso', 'Prioridade ${data.name} Deletado com sucesso!');
       }).catchError((error) {
         tratarErro(error);
       }); 

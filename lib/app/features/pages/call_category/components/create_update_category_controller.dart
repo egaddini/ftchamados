@@ -1,7 +1,7 @@
 import 'package:chamados/app/models/call_category_model.dart';
 import 'package:chamados/app/models/call_category_register_model.dart';
 import 'package:chamados/app/models/priority.dart';
-import 'package:chamados/app/models/setor_model.dart';
+import 'package:chamados/app/models/sector_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/category/call_category_repository.dart';
 import 'package:chamados/app/repositories/call/priority/priority_repository.dart';
@@ -39,12 +39,12 @@ class CreateUpdateCategoryController extends GetxController {
     priorities = await _priorityRepository.getList();
     sectors = await _sectorRepository.getList();
     if (!_parametro) {
-        tituloC.text = category!.titulo!;
-        prioridadeC.text = '${category!.prioridade!.nome} - ${category!.prioridade!.weight}'; 
-        setorC.text = '${category!.sector!.sigla} - ${category!.sector!.nome}';
-        descricaoC.text = category!.descricao!;
+        tituloC.text = category!.title!;
+        prioridadeC.text = '${category!.priority!.name} - ${category!.priority!.weight}'; 
+        setorC.text = '${category!.sector!.acronym} - ${category!.sector!.name}';
+        descricaoC.text = category!.description!;
     } else {
-      category = CallCategoryModel(id: null, titulo: null, prioridade: null, sector: null, descricao: null);
+      category = CallCategoryModel(id: null, title: null, priority: null, sector: null, description: null);
     }
     super.onInit();
   }
@@ -54,8 +54,8 @@ class CreateUpdateCategoryController extends GetxController {
   void criarAtualizar() {
     var formValid = formKey.currentState?.validate() ?? false;
     if (formValid) {
-      _parametro? saveItem(CallCategoryRegisterModel(titulo: tituloC.text, descricao: descricaoC.text, setorId: category!.sector!.id!, prioridadeId: category!.prioridade!.id!)) 
-      : saveItem(CallCategoryRegisterModel(titulo: tituloC.text, descricao: descricaoC.text, setorId: category!.sector!.id!, prioridadeId: category!.prioridade!.id!));
+      _parametro? saveItem(CallCategoryRegisterModel(title: tituloC.text, description: descricaoC.text, sectorId: category!.sector!.id!, priorityId: category!.priority!.id!)) 
+      : saveItem(CallCategoryRegisterModel(title: tituloC.text, description: descricaoC.text, sectorId: category!.sector!.id!, priorityId: category!.priority!.id!));
       // saveItem(CallStatusModel(id: null, name: nomeC.text, description: descricaoC.text, weight: int.parse(pesoC.text), notify: notificaC.value)):
       // saveItem(CallStatusModel(id: null, name: nomeC.text, description: descricaoC.text, weight: int.parse(pesoC.text), notify: notificaC.value));
     }
@@ -66,8 +66,8 @@ class CreateUpdateCategoryController extends GetxController {
     if (formValid) {
       isLoading.value = false;
       categoryRep.registerByRegisterModel(category).then((_) {
-      snackSucessRegister('Registrado com sucesso', 'Categoria ${tituloC.text} registrado com sucesso!');
-      Get.back();
+        Get.back();
+        snackSucessRegister('Registrado com sucesso', 'Categoria ${tituloC.text} registrado com sucesso!');
       }).catchError((error) {
         tratarErro(error);
       });                    

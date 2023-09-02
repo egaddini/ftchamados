@@ -1,5 +1,5 @@
 import 'package:chamados/app/constans/api_path.dart';
-import 'package:chamados/app/models/setor_model.dart';
+import 'package:chamados/app/models/sector_model.dart';
 import 'package:chamados/app/repositories/base_repository.dart';
 
 class SectorRepository extends BaseRepository<SectorModel> {
@@ -18,7 +18,7 @@ class SectorRepository extends BaseRepository<SectorModel> {
 
   @override
   bool shouldIncludeInList(SectorModel entity, String query) {
-    return entity.nome.toLowerCase().contains(query.toLowerCase());
+    return entity.name.toLowerCase().contains(query.toLowerCase());
   }
 
 }

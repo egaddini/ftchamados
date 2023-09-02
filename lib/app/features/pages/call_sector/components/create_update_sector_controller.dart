@@ -1,4 +1,4 @@
-import 'package:chamados/app/models/setor_model.dart';
+import 'package:chamados/app/models/sector_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/setor/setor_repository.dart';
 import 'package:flutter/material.dart';
@@ -21,8 +21,8 @@ class CreateUpdateSectorController extends GetxController {
     bool parametro = validaParametro();
     buttonText = Text(parametro ? "Adicionar": "Atualizar");
     if (!parametro) {
-      siglaC.text = sector!.sigla;
-      nomeC.text = sector!.nome;
+      siglaC.text = sector!.acronym;
+      nomeC.text = sector!.name;
     }
     super.onInit();
   }
@@ -32,7 +32,7 @@ class CreateUpdateSectorController extends GetxController {
   void criarAtualizarStatus() {
     var formValid = formKey.currentState?.validate() ?? false;
     if (formValid) {
-      sector == null ? saveItem(SectorModel(nome: nomeC.text, sigla: siglaC.text.toUpperCase())) : null;
+      sector == null ? saveItem(SectorModel(name: nomeC.text, acronym: siglaC.text.toUpperCase())) : null;
       // saveItem(CallStatusModel(id: null, name: nomeC.text, description: descricaoC.text, weight: int.parse(pesoC.text), notify: notificaC.value)):
       // saveItem(CallStatusModel(id: null, name: nomeC.text, description: descricaoC.text, weight: int.parse(pesoC.text), notify: notificaC.value));
     }

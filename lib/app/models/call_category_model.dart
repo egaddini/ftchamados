@@ -2,37 +2,37 @@
 import 'dart:convert';
 
 import 'package:chamados/app/models/priority.dart';
-import 'package:chamados/app/models/setor_model.dart';
+import 'package:chamados/app/models/sector_model.dart';
 
 class CallCategoryModel {
 
   int? id;
   SectorModel? sector;
-  String? titulo;
-  PriorityModel? prioridade;
-  String? descricao;
+  String? title;
+  PriorityModel? priority;
+  String? description;
   
   CallCategoryModel({
     this.id,
     required this.sector,
-    required this.titulo,
-    required this.prioridade,
-    required this.descricao,
+    required this.title,
+    required this.priority,
+    required this.description,
   });
 
   CallCategoryModel copyWith({
     int? id,
     SectorModel? sector,
-    String? titulo,
-    PriorityModel? prioridade,
-    String? descricao,
+    String? title,
+    PriorityModel? priority,
+    String? description,
   }) {
     return CallCategoryModel(
       id: id ?? this.id,
       sector: sector ?? this.sector,
-      titulo: titulo ?? this.titulo,
-      prioridade: prioridade ?? this.prioridade,
-      descricao: descricao ?? this.descricao,
+      title: title ?? this.title,
+      priority: priority ?? this.priority,
+      description: description ?? this.description,
     );
   }
 
@@ -40,9 +40,9 @@ class CallCategoryModel {
     return <String, dynamic>{
       'id': id,
       'setor': sector ?? sector!.toMap(),
-      'titulo': titulo,
-      'prioridade': prioridade ?? prioridade!.toMap(),
-      'descricao': descricao,
+      'title': title,
+      'priority': priority ?? priority!.toMap(),
+      'description': description,
     };
   }
 
@@ -50,9 +50,9 @@ class CallCategoryModel {
     return CallCategoryModel(
       id: map['id'] != null ? map['id'] as int : null,
       sector: SectorModel.fromMap(map['sector'] as Map<String,dynamic>),
-      titulo: map['titulo'] as String,
-      prioridade: PriorityModel.fromMap(map['prioridade'] as Map<String,dynamic>),
-      descricao: map['descricao'] as String,
+      title: map['title'] as String,
+      priority: PriorityModel.fromMap(map['priority'] as Map<String,dynamic>),
+      description: map['description'] as String,
     );
   }
 
@@ -62,7 +62,7 @@ class CallCategoryModel {
 
   @override
   String toString() {
-    return 'CallCategoryModel(id: $id, sector: $sector, titulo: $titulo, prioridade: $prioridade, descricao: $descricao)';
+    return 'CallCategoryModel(id: $id, sector: $sector, title: $title, priority: $priority, description: $description)';
   }
 
   @override
@@ -72,17 +72,17 @@ class CallCategoryModel {
     return 
       other.id == id &&
       other.sector == sector &&
-      other.titulo == titulo &&
-      other.prioridade == prioridade &&
-      other.descricao == descricao;
+      other.title == title &&
+      other.priority == priority &&
+      other.description == description;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
       sector.hashCode ^
-      titulo.hashCode ^
-      prioridade.hashCode ^
-      descricao.hashCode;
+      title.hashCode ^
+      priority.hashCode ^
+      description.hashCode;
   }
 }

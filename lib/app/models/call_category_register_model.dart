@@ -2,47 +2,47 @@ import 'dart:convert';
 
 class CallCategoryRegisterModel {
 
-  String titulo;
-  int setorId;
-  int prioridadeId;
-  String descricao;
+  String title;
+  int sectorId;
+  int priorityId;
+  String description;
+
   CallCategoryRegisterModel({
-    required this.titulo,
-    required this.setorId,
-    required this.prioridadeId,
-    required this.descricao,
+    required this.title,
+    required this.sectorId,
+    required this.priorityId,
+    required this.description,
   });
-  
 
   CallCategoryRegisterModel copyWith({
-    String? titulo,
-    int? setorId,
-    int? prioridadeId,
-    String? descricao,
+    String? title,
+    int? sectorId,
+    int? priorityId,
+    String? description,
   }) {
     return CallCategoryRegisterModel(
-      titulo: titulo ?? this.titulo,
-      setorId: setorId ?? this.setorId,
-      prioridadeId: prioridadeId ?? this.prioridadeId,
-      descricao: descricao ?? this.descricao,
+      title: title ?? this.title,
+      sectorId: sectorId ?? this.sectorId,
+      priorityId: priorityId ?? this.priorityId,
+      description: description ?? this.description,
     );
   }
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
-      'titulo': titulo,
-      'setorId': setorId,
-      'prioridadeId': prioridadeId,
-      'descricao': descricao,
+      'title': title,
+      'sectorId': sectorId,
+      'priorityId': priorityId,
+      'description': description,
     };
   }
 
   factory CallCategoryRegisterModel.fromMap(Map<String, dynamic> map) {
     return CallCategoryRegisterModel(
-      titulo: map['titulo'] as String,
-      setorId: map['setorId'] as int,
-      prioridadeId: map['prioridadeId'] as int,
-      descricao: map['descricao'] as String,
+      title: map['title'] as String,
+      sectorId: map['sectorId'] as int,
+      priorityId: map['priorityId'] as int,
+      description: map['description'] as String,
     );
   }
 
@@ -52,7 +52,7 @@ class CallCategoryRegisterModel {
 
   @override
   String toString() {
-    return 'CallCategoryRegisterModel(titulo: $titulo, setorId: $setorId, prioridadeId: $prioridadeId, descricao: $descricao)';
+    return 'CallCategoryRegisterModel(title: $title, sectorId: $sectorId, priorityId: $priorityId, description: $description)';
   }
 
   @override
@@ -60,17 +60,17 @@ class CallCategoryRegisterModel {
     if (identical(this, other)) return true;
   
     return 
-      other.titulo == titulo &&
-      other.setorId == setorId &&
-      other.prioridadeId == prioridadeId &&
-      other.descricao == descricao;
+      other.title == title &&
+      other.sectorId == sectorId &&
+      other.priorityId == priorityId &&
+      other.description == description;
   }
 
   @override
   int get hashCode {
-    return titulo.hashCode ^
-      setorId.hashCode ^
-      prioridadeId.hashCode ^
-      descricao.hashCode;
+    return title.hashCode ^
+      sectorId.hashCode ^
+      priorityId.hashCode ^
+      description.hashCode;
   }
 }

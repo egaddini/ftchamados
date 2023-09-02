@@ -41,7 +41,7 @@ class CallCategoryRepository extends BaseRepository<CallCategoryModel> {
 
   @override
   bool shouldIncludeInList(CallCategoryModel entity, String query) {
-    return entity.descricao!.toLowerCase().contains(query.toLowerCase());
+    return entity.description!.toLowerCase().contains(query.toLowerCase());
   }
   
   

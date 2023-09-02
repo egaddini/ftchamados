@@ -33,7 +33,7 @@ DataRow recentFileDataRow(PriorityModel priority, BuildContext context, CallPrio
     onSelectChanged: (value) => createUpdatePriorityDialog(priority).then((value) => controller.atualizarItens()),
     cells: [
       DataCell(Text(priority.id.toString())),
-      DataCell(Text(priority.nome)),
+      DataCell(Text(priority.name)),
       DataCell(Text(priority.weight.toString())),
       DataCell(SizedBox(height: 40, width: 40, child: cInkWell(22, 30, Icons.delete, Icons.delete_forever_outlined, Get.theme.primaryColor, Colors.red, 'Deletar', () => controller.deleteItem(index)))),        
     ],

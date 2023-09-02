@@ -4,23 +4,23 @@ import 'dart:convert';
 class PriorityModel {
 
   int? id;
-  String nome;
+  String name;
   int weight;
   
   PriorityModel({
     this.id,
-    required this.nome,
+    required this.name,
     required this.weight,
   });
 
   PriorityModel copyWith({
     int? id,
-    String? nome,
+    String? name,
     int? weight,
   }) {
     return PriorityModel(
       id: id ?? this.id,
-      nome: nome ?? this.nome,
+      name: name ?? this.name,
       weight: weight ?? this.weight,
     );
   }
@@ -28,7 +28,7 @@ class PriorityModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'nome': nome,
+      'name': name,
       'weight': weight,
     };
   }
@@ -36,7 +36,7 @@ class PriorityModel {
   factory PriorityModel.fromMap(Map<String, dynamic> map) {
     return PriorityModel(
       id: map['id'] != null ? map['id'] as int : null,
-      nome: map['nome'] as String,
+      name: map['name'] as String,
       weight: map['weight'] as int,
     );
   }
@@ -46,7 +46,7 @@ class PriorityModel {
   factory PriorityModel.fromJson(String source) => PriorityModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
-  String toString() => 'PriorityModel(id: $id, nome: $nome, weight: $weight)';
+  String toString() => 'PriorityModel(id: $id, name: $name, weight: $weight)';
 
   @override
   bool operator ==(covariant PriorityModel other) {
@@ -54,10 +54,10 @@ class PriorityModel {
   
     return 
       other.id == id &&
-      other.nome == nome &&
+      other.name == name &&
       other.weight == weight;
   }
 
   @override
-  int get hashCode => id.hashCode ^ nome.hashCode ^ weight.hashCode;
+  int get hashCode => id.hashCode ^ name.hashCode ^ weight.hashCode;
 }

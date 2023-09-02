@@ -39,13 +39,13 @@ class CallDetailController extends GetxController {
     ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataUltAtualizacao)));
     solicitanteC = TextEditingController(text: call.solicitante!.email);
     statusC = TextEditingController(text: call.status);
-    setorC = TextEditingController(text: call.callType!.sector!.nome);
-    prioridadeC = TextEditingController(text: call.callType!.prioridade!.nome);
+    setorC = TextEditingController(text: call.callType!.sector!.name);
+    prioridadeC = TextEditingController(text: call.callType!.priority!.name);
     idC = TextEditingController(text: call.id.toString());
-    tituloC = TextEditingController(text: call.callType!.titulo);
+    tituloC = TextEditingController(text: call.callType!.title);
     descSolicitC = TextEditingController(text: call.descricao);
     historicoC = TextEditingController(text: '');
-    siglaC = TextEditingController(text: call.callType!.sector!.sigla);
+    siglaC = TextEditingController(text: call.callType!.sector!.acronym);
     participantesC = TextEditingController(text: ':()');
     comentarioC = TextEditingController(text: '');
     responsavelC = TextEditingController(text: call.responsavel == null ? 'Não atribuido' : call.responsavel!.email);

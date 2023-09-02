@@ -1,4 +1,4 @@
-import 'package:chamados/app/models/setor_model.dart';
+import 'package:chamados/app/models/sector_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/setor/setor_repository.dart';
 import 'package:flutter/material.dart';
@@ -23,12 +23,12 @@ class CallSectorController extends GetxController {
 
   void deleteItem(int index) async {
     SectorModel data = myData[index];
-    bool? deleta = await perguntaSimOuNao('Deseja remover o Status: ${data.nome}');
+    bool? deleta = await perguntaSimOuNao('Deseja remover o Status: ${data.name}');
     if (deleta != null && deleta) {
       _sectorRepository.delete(data.id!).then((_) {
         myData.removeAt(index);
         myData.refresh();
-        snackSucessRegister('Registrado com sucesso', 'Status ${data.nome} Deletado com sucesso!');
+        snackSucessRegister('Registrado com sucesso', 'Status ${data.name} Deletado com sucesso!');
       }).catchError((error) {
         Get.back();
         tratarErro(error);

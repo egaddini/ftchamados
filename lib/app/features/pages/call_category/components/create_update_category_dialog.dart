@@ -42,11 +42,11 @@ Widget createUpdateStatusForm(CallCategoryModel? category) {
             },
             itemBuilder: (context, SectorModel sector) {
               return ListTile(
-                title: Text('${sector.sigla} - ${sector.nome}'),
+                title: Text('${sector.acronym} - ${sector.name}'),
               );
             },
             onSuggestionSelected: (SectorModel sector) async {
-              controller.setorC.text = '${sector.sigla} - ${sector.nome}';
+              controller.setorC.text = '${sector.acronym} - ${sector.name}';
               controller.category!.sector = sector;
             },
           ),
@@ -64,12 +64,12 @@ Widget createUpdateStatusForm(CallCategoryModel? category) {
             },
             itemBuilder: (context, PriorityModel priority) {
               return ListTile(
-                title: Text('${priority.nome} - ${priority.weight}'),
+                title: Text('${priority.name} - ${priority.weight}'),
               );
             },
             onSuggestionSelected: (PriorityModel priority) async {
-              controller.prioridadeC.text = '${priority.nome} - ${priority.weight}';
-              controller.category!.prioridade = priority;
+              controller.prioridadeC.text = '${priority.name} - ${priority.weight}';
+              controller.category!.priority = priority;
             },
           ),
           addVerticalSpace(10),      

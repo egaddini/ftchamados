@@ -35,7 +35,7 @@ class PriorityRepository extends BaseRepository<PriorityModel> {
 
   @override
   bool shouldIncludeInList(PriorityModel entity, String query) {
-    return entity.nome.toLowerCase().contains(query.toLowerCase());
+    return entity.name.toLowerCase().contains(query.toLowerCase());
   }
   
 }

@@ -8,7 +8,7 @@ void newCallDialog(CallCategoryModel call) {
   showDialog(
     context: Get.context!,
     builder: (_) => AlertDialog(
-      title: Center(child: Text(call.titulo!, style: const TextStyle(fontWeight: FontWeight.bold),)),
+      title: Center(child: Text(call.title!, style: const TextStyle(fontWeight: FontWeight.bold),)),
       content: SizedBox(
         width: 600,
         child: NewCallForm(call: call,),
@@ -38,7 +38,7 @@ class NewCallForm extends StatelessWidget {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: controller.callCategory.sector!.nome),
+                  controller: TextEditingController(text: controller.callCategory.sector!.name),
                   decoration: const InputDecoration(
                     labelText: 'Setor',
                   ),
@@ -48,7 +48,7 @@ class NewCallForm extends StatelessWidget {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: controller.callCategory.titulo),
+                  controller: TextEditingController(text: controller.callCategory.title),
                   decoration: const InputDecoration(
                     labelText: 'Titulo',
                   ),
@@ -58,7 +58,7 @@ class NewCallForm extends StatelessWidget {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: controller.callCategory.prioridade!.nome),
+                  controller: TextEditingController(text: controller.callCategory.priority!.name),
                   decoration: const InputDecoration(
                     labelText: 'Prioridade',
                   ),
@@ -72,7 +72,7 @@ class NewCallForm extends StatelessWidget {
               Expanded(
                 child: TextField(
                   readOnly: true,
-                  controller: TextEditingController(text: controller.callCategory.descricao),                    
+                  controller: TextEditingController(text: controller.callCategory.description),                    
                   decoration:const InputDecoration(
                     labelText: 'Descrição do chamado',
                   ),
