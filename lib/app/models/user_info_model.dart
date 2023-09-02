@@ -5,46 +5,47 @@ class UserInfoModel {
   
   int? id;
   String? email;
-  String? nome;
-  String? sobrenome;
-  int? telefone;
+  String? firstName;
+  String? lastName;
+  int? phone;
   String? role;
   String? token;
-  bool? habilitado;
-  String? dataCriacao;
+  bool? active;
+  String? creationDT;
+
   UserInfoModel({
     this.id,
     this.email,
-    this.nome,
-    this.sobrenome,
-    this.telefone,
+    this.firstName,
+    this.lastName,
+    this.phone,
     this.role,
     this.token,
-    this.habilitado,
-    this.dataCriacao,
+    this.active,
+    this.creationDT,
   });
  
   UserInfoModel copyWith({
     int? id,
     String? email,
-    String? nome,
-    String? sobrenome,
-    int? telefone,
+    String? firstName,
+    String? lastName,
+    int? phone,
     String? role,
     String? token,
-    bool? habilitado,
-    String? dataCriacao,
+    bool? active,
+    String? creationDT,
   }) {
     return UserInfoModel(
       id: id ?? this.id,
       email: email ?? this.email,
-      nome: nome ?? this.nome,
-      sobrenome: sobrenome ?? this.sobrenome,
-      telefone: telefone ?? this.telefone,
+      firstName: firstName ?? this.firstName,
+      lastName: lastName ?? this.lastName,
+      phone: phone ?? this.phone,
       role: role ?? this.role,
       token: token ?? this.token,
-      habilitado: habilitado ?? this.habilitado,
-      dataCriacao: dataCriacao ?? this.dataCriacao,
+      active: active ?? this.active,
+      creationDT: creationDT ?? this.creationDT,
     );
   }
 
@@ -52,13 +53,13 @@ class UserInfoModel {
     return <String, dynamic>{
       'id': id,
       'email': email,
-      'nome': nome,
-      'sobrenome': sobrenome,
-      'telefone': telefone,
+      'firstName': firstName,
+      'lastName': lastName,
+      'phone': phone,
       'role': role,
       'token': token,
-      'habilitado': habilitado,
-      'dataCriacao': dataCriacao,
+      'active': active,
+      'creationDT': creationDT,
     };
   }
 
@@ -66,13 +67,13 @@ class UserInfoModel {
     return UserInfoModel(
       id: map['id'] != null ? map['id'] as int : null,
       email: map['email'] != null ? map['email'] as String : null,
-      nome: map['nome'] != null ? map['nome'] as String : null,
-      sobrenome: map['sobrenome'] != null ? map['sobrenome'] as String : null,
-      telefone: map['telefone'] != null ? map['telefone'] as int : null,
+      firstName: map['firstName'] != null ? map['firstName'] as String : null,
+      lastName: map['lastName'] != null ? map['lastName'] as String : null,
+      phone: map['phone'] != null ? map['phone'] as int : null,
       role: map['role'] != null ? map['role'] as String : null,
       token: map['token'] != null ? map['token'] as String : null,
-      habilitado: map['habilitado'] != null ? map['habilitado'] as bool : null,
-      dataCriacao: map['dataCriacao'] != null ? map['dataCriacao'] as String : null,
+      active: map['active'] != null ? map['active'] as bool : null,
+      creationDT: map['creationDT'] != null ? map['creationDT'] as String : null,
     );
   }
 
@@ -82,7 +83,7 @@ class UserInfoModel {
 
   @override
   String toString() {
-    return 'UserInfoModel(id: $id, email: $email, nome: $nome, sobrenome: $sobrenome, telefone: $telefone, role: $role, token: $token, habilitado: $habilitado, dataCriacao: $dataCriacao)';
+    return 'UserInfoModel(id: $id, email: $email, firstName: $firstName, lastName: $lastName, phone: $phone, role: $role, token: $token, active: $active, creationDT: $creationDT)';
   }
 
   @override
@@ -92,26 +93,26 @@ class UserInfoModel {
     return 
       other.id == id &&
       other.email == email &&
-      other.nome == nome &&
-      other.sobrenome == sobrenome &&
-      other.telefone == telefone &&
+      other.firstName == firstName &&
+      other.lastName == lastName &&
+      other.phone == phone &&
       other.role == role &&
       other.token == token &&
-      other.habilitado == habilitado &&
-      other.dataCriacao == dataCriacao;
+      other.active == active &&
+      other.creationDT == creationDT;
   }
 
   @override
   int get hashCode {
     return id.hashCode ^
       email.hashCode ^
-      nome.hashCode ^
-      sobrenome.hashCode ^
-      telefone.hashCode ^
+      firstName.hashCode ^
+      lastName.hashCode ^
+      phone.hashCode ^
       role.hashCode ^
       token.hashCode ^
-      habilitado.hashCode ^
-      dataCriacao.hashCode;
+      active.hashCode ^
+      creationDT.hashCode;
   }
 
   bool isAdmin() {
@@ -123,13 +124,13 @@ class UserInfoModel {
       return UserInfoModel(
         id: json['id'],
         email: json['email'],
-        nome: json['nome'],
-        sobrenome: json['sobrenome'],
-        telefone: json['telefone'],
+        firstName: json['firstName'],
+        lastName: json['lastName'],
+        phone: json['phone'],
         role: json['role'],
         token: json['token'],
-        habilitado: json['habilitado'],
-        dataCriacao: json['dataCriacao'],
+        active: json['active'],
+        creationDT: json['creationDT'],
       );
     }).toList();
   }

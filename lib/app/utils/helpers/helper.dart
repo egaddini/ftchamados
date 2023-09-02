@@ -113,19 +113,25 @@ void tratarErro(DioException e) {
 }
 
 Widget buildLoadingIndicator() {
-  return SizedBox(
-    height: 100,
-    width: 100,
-    child: Center(
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const CircularProgressIndicator(),
-            addVerticalSpace(5),
-            const BlinkText('Carregando...'),
-          ],
+  return Column(
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      SizedBox(
+        height: 120,
+        width: 250,
+        child: Card(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const CircularProgressIndicator(),
+                addVerticalSpace(5),
+                BlinkText('Carregando...', style: Get.theme.textTheme.titleMedium),
+              ],
+            )
+        ),
       ),
-    ),
+    ],
   );
 }
 

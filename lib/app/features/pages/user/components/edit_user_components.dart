@@ -31,8 +31,8 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
     _init();
     dadosUsuario = widget._client;
     _idEC = TextEditingController(text: dadosUsuario.id.toString());
-    _firstNameEC = TextEditingController(text: dadosUsuario.nome);
-    _lastNameEC = TextEditingController(text: dadosUsuario.sobrenome);
+    _firstNameEC = TextEditingController(text: dadosUsuario.firstName);
+    _lastNameEC = TextEditingController(text: dadosUsuario.lastName);
     _emailEC = TextEditingController(text: dadosUsuario.email);
     _roleEC = TextEditingController(text: dadosUsuario.role);
 
@@ -145,7 +145,7 @@ class _EditUserPageBodyState extends State<EditUserPageBody> {
             visible: _isAdmin,
             child: CheckBoxField(
               email: _emailEC.text,
-              isActive: dadosUsuario.habilitado!
+              isActive: dadosUsuario.active!
             )
           ),
           addVerticalSpace(10),

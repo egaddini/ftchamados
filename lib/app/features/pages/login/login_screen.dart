@@ -16,7 +16,7 @@ class LoginScreen extends GetView<LoginScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Obx(() => controller.isLoading.value ? buildLoadingIndicator() : Scaffold(
       appBar: null,
       body: Center(
         child: SingleChildScrollView(
@@ -27,9 +27,9 @@ class LoginScreen extends GetView<LoginScreenController> {
                 elevation: 2,
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
-                  child: Obx(() => SizedBox(
+                  child: SizedBox(
                     width: 400,
-                    child: controller.isLoading.value ? buildLoadingIndicator() :  Form(
+                    child: Form(
                       key: controller.formKey,
                       child: Center(
                         child: Column(
@@ -110,13 +110,12 @@ class LoginScreen extends GetView<LoginScreenController> {
                         ),
                       ),
                     ),
-                  ),
                 ),),
               ),
             ],
           ),
         ),
       ),
-    );
+    ),);
   }
 }

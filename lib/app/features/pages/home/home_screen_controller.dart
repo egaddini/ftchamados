@@ -15,4 +15,6 @@ class HomeScreenController extends GetxController {
     super.onInit();
   }
 
+  Widget drawer() => MenuDrawer(user: logedUser!);
+
 }

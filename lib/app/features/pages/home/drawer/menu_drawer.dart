@@ -1,26 +1,23 @@
 part of home_screen;
 
-class MenuDrawer extends StatefulWidget {
+class MenuDrawer extends StatelessWidget {
 
-  const MenuDrawer({super.key});
+  final UserInfoModel user;
 
-  @override
-  State<MenuDrawer> createState() => _MenuDrawerState();
-}
-
-class _MenuDrawerState extends State<MenuDrawer> {
-  
-  final MenuDrawerController controller = Get.put(MenuDrawerController());
+  const MenuDrawer({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => Drawer(
+
+  final MenuDrawerController controller = Get.put(MenuDrawerController(logedUser: user.obs));
+
+    return Obx(() =>  Drawer(
       elevation: 5,
-      child: controller.isLoading.value? buildLoadingIndicator() : Column(
+      child: Column(
         children: <Widget>[   
           UserAccountsDrawerHeader(
             accountEmail: Text(controller.logedUser.value.email!),
-            accountName: Text(controller.logedUser.value.nome!),
+            accountName: Text(controller.logedUser.value.firstName!),
             currentAccountPictureSize: Size(controller.currentAccountPictureSize.value, controller.currentAccountPictureSize.value),
             currentAccountPicture: InkWell(
               onHover: (value) {controller.currentAccountPictureSize.value = value ? 80 : 70;},

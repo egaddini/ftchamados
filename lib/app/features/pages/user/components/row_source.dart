@@ -34,11 +34,11 @@ DataRow recentFileDataRow(UserInfoModel user, BuildContext context) {
     cells: [
       DataCell(Text(user.id.toString())),
       DataCell(Text(user.email.toString())),
-      DataCell(Text(user.nome.toString())),
-      DataCell(Text(user.sobrenome.toString())),
+      DataCell(Text(user.firstName.toString())),
+      DataCell(Text(user.lastName.toString())),
       DataCell(Text(user.role.toString())),
-      DataCell(IgnorePointer(ignoring: true,child: Checkbox(value: user.habilitado,onChanged: null,),),),
-      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(user.dataCriacao!)).toString())),
+      DataCell(IgnorePointer(ignoring: true,child: Checkbox(value: user.active,onChanged: null,),),),
+      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(user.creationDT!)).toString())),
       DataCell(
         InkWell(
           borderRadius: BorderRadius.circular(50),

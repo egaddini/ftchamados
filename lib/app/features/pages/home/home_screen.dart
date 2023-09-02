@@ -17,8 +17,8 @@ import 'package:chamados/app/models/user_info_model.dart';
 import 'package:get/get.dart';
 
 
-part 'components/menu_drawer.dart';
-part 'components/menu_drawer_controller.dart';
+part 'drawer/menu_drawer.dart';
+part 'drawer/menu_drawer_controller.dart';
 part 'home_screen_controller.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -33,7 +33,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => _controller.isLoading.value ? buildLoadingIndicator() : Scaffold(
       appBar: AppBar(title: const Text('Apoio')),
-      endDrawer: const MenuDrawer(),
+      endDrawer: _controller.drawer(),
       body: Center(
         child: SingleChildScrollView(
           child: Column(

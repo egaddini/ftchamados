@@ -28,7 +28,7 @@ class LocalStorageServices {
 
   Future<UserInfoModel?> getUser() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? userJson =  prefs.getString('user');
+    String? userJson = prefs.getString('user');
     if (userJson != null) {
       return UserInfoModel.fromJson(userJson);
     }

@@ -1,13 +1,16 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of home_screen;
 
 class MenuDrawerController extends GetxController {
 
-  late Rx<UserInfoModel> logedUser;
+  Rx<UserInfoModel> logedUser;
   RxBool isLoading = true.obs, isAdmin = false.obs, isLight = false.obs;
   RxInt notificacoes = 0.obs; 
   RxDouble currentAccountPictureSize = 70.00.obs;
 
   late Rx<Widget> themeInk = darkModeInk.obs;
+
+  MenuDrawerController({required this.logedUser,});
 
   late Widget lightModeInk = cInkWell(50, 55, Icons.light_mode, Icons.light_mode_outlined, Get.theme.colorScheme.inversePrimary , null, 'Light Mode', () {
     themeInk.value = darkModeInk;
@@ -25,7 +28,6 @@ class MenuDrawerController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    logedUser = (await LocalStorageServices().getUser())!.obs;
     isAdmin.value = logedUser.value.isAdmin();
     isLoading.value = false;
     super.onInit(); 
