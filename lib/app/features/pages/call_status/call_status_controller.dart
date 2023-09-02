@@ -33,7 +33,7 @@ class CallStatusController extends GetxController {
       _callStatusRepository.delete(data.id!).then((_) {
         myData.removeAt(index);
         myData.refresh();
-        snackSucessRegister('Status ${data.name} Deletado com sucesso!');
+        snackSucessRegister('Registrado com sucesso', 'Status ${data.name} Deletado com sucesso!');
       }).catchError((error) {
         tratarErro(error);
       }); 

@@ -126,7 +126,9 @@ class _SingupFormState extends State<SingupForm> {
                     _setLoading();
                     authRepository.register(userModel!).then((_) {
                       _setLoading();
-                      registerSucess('Conta registrada com sucesso!', 'Sua solicitação será revisada e conta habilitada em até 2 dias úteis.');
+                      registerSucess('Conta registrada com sucesso!', 'Sua solicitação será revisada e conta habilitada em até 2 dias úteis.').then(
+                        (value) => Get.offAndToNamed(AppRoutes.login),
+                      );
                     }).catchError((error) {
                       _setLoading();
                       tratarErro(error);

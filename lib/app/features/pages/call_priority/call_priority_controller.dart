@@ -28,7 +28,7 @@ class CallPriorityController extends GetxController {
       _priorityRepository.delete(data.id!).then((_) {
         myData.removeAt(index);
         myData.refresh();
-        snackSucessRegister('Prioridade ${data.nome} Deletado com sucesso!');
+        snackSucessRegister('Registrado com sucesso', 'Prioridade ${data.nome} Deletado com sucesso!');
       }).catchError((error) {
         tratarErro(error);
       }); 

@@ -66,7 +66,7 @@ class CreateUpdateCategoryController extends GetxController {
     if (formValid) {
       isLoading.value = false;
       categoryRep.registerByRegisterModel(category).then((_) {
-      snackSucessRegister('Categoria ${tituloC.text} registrado com sucesso!');
+      snackSucessRegister('Registrado com sucesso', 'Categoria ${tituloC.text} registrado com sucesso!');
       Get.back();
       }).catchError((error) {
         tratarErro(error);

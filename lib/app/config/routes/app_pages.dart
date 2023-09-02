@@ -11,7 +11,7 @@ import 'package:chamados/app/features/pages/call_status/call_status_screen.dart'
 import 'package:chamados/app/features/pages/call_requester/screen/call_requester_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/login/login_screen.dart';
 import 'package:chamados/app/features/pages/login/login_screen_bindings.dart';
-import 'package:chamados/app/features/pages/menu/home_screen.dart';
+import 'package:chamados/app/features/pages/home/home_screen.dart';
 import 'package:chamados/app/features/pages/singup/screen/singup_screen.dart';
 import 'package:chamados/app/features/pages/user/screens/user_list_screen.dart';
 import 'package:get/get.dart';

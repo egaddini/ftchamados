@@ -18,6 +18,7 @@ ThemeData lightTheme = FlexThemeData.light(
     elevatedButtonRadius: 4.0,
     appBarCenterTitle: true,
     filledButtonRadius: 4.0,
+    snackBarBackgroundSchemeColor: SchemeColor.error,
   ),
   
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
@@ -38,7 +39,7 @@ ThemeData darkTheme = FlexThemeData.dark(
     elevatedButtonRadius: 4.0,
     filledButtonRadius: 4.0,
     appBarCenterTitle: true,
-  ),
+  ), 
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
   swapLegacyOnMaterial3: true,

@@ -1,5 +1,6 @@
 library singup_screen;
 
+import 'package:chamados/app/config/routes/app_pages.dart';
 import 'package:chamados/app/models/user_model.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/shared_components/c_password_field.dart';
@@ -16,7 +17,7 @@ part '../components/singup_form.dart';
 
 class SingupScreen extends StatelessWidget {
 
-  const SingupScreen({ Key? key }) : super(key: key);
+  const SingupScreen({Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

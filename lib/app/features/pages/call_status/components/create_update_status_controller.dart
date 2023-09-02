@@ -51,7 +51,7 @@ class CreateUpdateStatusController extends GetxController {
     Future<void> saveItem(CallStatusModel status) async {
     isLoading.value = true;
     callRepository.register(status).then((_) async {
-      snackSucessRegister('Status ${status.name} registrado com sucesso!');
+      snackSucessRegister('Registrado com sucesso', 'Status ${status.name} registrado com sucesso!');
     }).catchError((error) {
       Get.back();
       tratarErro(error);

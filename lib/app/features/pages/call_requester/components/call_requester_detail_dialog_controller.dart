@@ -60,7 +60,7 @@ class CallRequesterDetailDialogController extends GetxController {
     await repository.setStatus(call.id, 10).then((value) {
         statusC.value = value.name;
         statusC.refresh();
-        snackSucessRegister('Chamado encerrado com sucesso!');
+        snackSucessRegister('Registrado com sucesso', 'Chamado encerrado com sucesso!');
     }).catchError((error) {tratarErro(error);}); 
   }
 

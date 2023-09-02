@@ -31,11 +31,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() =>  Scaffold(
+    return Obx(() => _controller.isLoading.value ? buildLoadingIndicator() : Scaffold(
       appBar: AppBar(title: const Text('Apoio')),
       endDrawer: const MenuDrawer(),
       body: Center(
-        child: _controller.isLoading.value ? buildLoadingIndicator() : SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,              
             children: [
