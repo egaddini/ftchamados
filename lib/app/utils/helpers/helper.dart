@@ -103,12 +103,20 @@ Future<Map<String, String>> getAuthHeader(bool auth) async {
 
 void tratarErro(DioException e) {
   if (e.response != null && e.response!.data != null) {
-    ErrorDTO erro = ErrorDTO.fromMap(e.response!.data);
-    if (409.isEqual(erro.status)) snackSucessRegister('Já Registrado', erro.message);
-    if (401.isEqual(erro.status)) snackSucessRegister('Credenciais invalidas', erro.message);
-    if (403.isEqual(erro.status)) snackSucessRegister('Conta Inativa', erro.message);
+    switch (e.response!.statusCode!) {
+      case 409:
+        snackSucessRegister('Já Registrado', e.message!);
+        break;
+      case 403:
+        snackSucessRegister('Credenciais invalidas', e.message!);
+        break;
+      case 401:
+        snackSucessRegister('Conta Inativa', e.message!);
+        break;
+      default: snackSucessRegister('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte \n${e.error}');
+    }
   } else {
-    snackSucessRegister('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte \n${e.error}',);
+    snackSucessRegister('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte',);
   }
 }
 
@@ -138,7 +146,8 @@ Widget buildLoadingIndicator() {
 void snackSucessRegister(String title, String message) {
   Get.snackbar(
     title, 
-    message, 
+    message,
+    isDismissible: true, 
     onTap:(snack) => moreDetailsDialog(title, message),
     animationDuration: const Duration(seconds: 2),
     barBlur: 1,

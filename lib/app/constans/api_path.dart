@@ -6,6 +6,8 @@ class ApiPath {
 
   static const users = "$baseUrl/users";
 
+  static const user = "$baseUrl/v1/user";
+
   static const call = "$baseUrl/call/v1";
 
   static const status = "$call/status";

@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import 'package:chamados/app/models/sector_model.dart';
 
 class UserInfoModel {
   
@@ -12,6 +13,7 @@ class UserInfoModel {
   String? token;
   bool? active;
   String? creationDT;
+  List<SectorModel> sectors;
 
   UserInfoModel({
     this.id,
@@ -23,6 +25,7 @@ class UserInfoModel {
     this.token,
     this.active,
     this.creationDT,
+    required this.sectors,
   });
  
   UserInfoModel copyWith({
@@ -35,6 +38,7 @@ class UserInfoModel {
     String? token,
     bool? active,
     String? creationDT,
+    List<SectorModel>? sectors,
   }) {
     return UserInfoModel(
       id: id ?? this.id,
@@ -46,6 +50,7 @@ class UserInfoModel {
       token: token ?? this.token,
       active: active ?? this.active,
       creationDT: creationDT ?? this.creationDT,
+      sectors: sectors ?? this.sectors,
     );
   }
 
@@ -60,6 +65,7 @@ class UserInfoModel {
       'token': token,
       'active': active,
       'creationDT': creationDT,
+      'sectors': sectors,
     };
   }
 
@@ -74,6 +80,7 @@ class UserInfoModel {
       token: map['token'] != null ? map['token'] as String : null,
       active: map['active'] != null ? map['active'] as bool : null,
       creationDT: map['creationDT'] != null ? map['creationDT'] as String : null,
+      sectors: map['sectors'] != null ? (map['sectors'] as List<dynamic>).map((json) => SectorModel.fromMap(json)).toList() : [],
     );
   }
 
@@ -83,7 +90,7 @@ class UserInfoModel {
 
   @override
   String toString() {
-    return 'UserInfoModel(id: $id, email: $email, firstName: $firstName, lastName: $lastName, phone: $phone, role: $role, token: $token, active: $active, creationDT: $creationDT)';
+    return 'UserInfoModel(id: $id, email: $email, firstName: $firstName, lastName: $lastName, phone: $phone, role: $role, token: $token, active: $active, creationDT: $creationDT, sectors: $sectors)';
   }
 
   @override
@@ -99,7 +106,8 @@ class UserInfoModel {
       other.role == role &&
       other.token == token &&
       other.active == active &&
-      other.creationDT == creationDT;
+      other.creationDT == creationDT &&
+      other.sectors == sectors;
   }
 
   @override
@@ -112,26 +120,12 @@ class UserInfoModel {
       role.hashCode ^
       token.hashCode ^
       active.hashCode ^
-      creationDT.hashCode;
+      creationDT.hashCode ^
+      sectors.hashCode;
   }
 
   bool isAdmin() {
     return 'ADMIN' == role;
   }
 
-  List<UserInfoModel> convertJsonToUsers(List<Map<String, dynamic>> jsonList) {
-    return jsonList.map((json) {
-      return UserInfoModel(
-        id: json['id'],
-        email: json['email'],
-        firstName: json['firstName'],
-        lastName: json['lastName'],
-        phone: json['phone'],
-        role: json['role'],
-        token: json['token'],
-        active: json['active'],
-        creationDT: json['creationDT'],
-      );
-    }).toList();
-  }
 }

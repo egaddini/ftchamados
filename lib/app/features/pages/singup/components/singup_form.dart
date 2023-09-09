@@ -120,15 +120,15 @@ class _SingupFormState extends State<SingupForm> {
                         lastname: _surnameEC.text,
                         phone: int.parse(_phoneEC.text.replaceAll(' ', '').replaceAll(')', '').replaceAll('(', '').replaceAll('-', '')),
                         email: _emailEC.text,
-                        password: _passwordEC.text
+                        password: _passwordEC.text,
+                        sectors: [],
                       );
                     });
                     _setLoading();
                     authRepository.register(userModel!).then((_) {
                       _setLoading();
-                      registerSucess('Conta registrada com sucesso!', 'Sua solicitação será revisada e conta habilitada em até 2 dias úteis.').then(
-                        (value) => Get.offAndToNamed(AppRoutes.login),
-                      );
+                      snackSucessRegister('Conta registrada com sucesso!', 'Sua solicitação será revisada e conta habilitada em até 2 dias úteis.');
+                      Get.offAndToNamed(AppRoutes.login);
                     }).catchError((error) {
                       _setLoading();
                       tratarErro(error);

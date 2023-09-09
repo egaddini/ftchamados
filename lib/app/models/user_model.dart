@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:chamados/app/models/sector_model.dart';
+
 class UserModel {
   
   final String firstname;
@@ -8,6 +10,7 @@ class UserModel {
   final int phone;
   final String email;
   final String password;
+  final List<SectorModel> sectors;
   
   UserModel({
     required this.firstname,
@@ -15,6 +18,7 @@ class UserModel {
     required this.phone,
     required this.email,
     required this.password,
+    required this.sectors,
   });
   
   UserModel copyWith({
@@ -23,6 +27,7 @@ class UserModel {
     int? phone,
     String? email,
     String? password,
+    List<SectorModel>? sectors,
   }) {
     return UserModel(
       firstname: firstname ?? this.firstname,
@@ -30,6 +35,7 @@ class UserModel {
       phone: phone ?? this.phone,
       email: email ?? this.email,
       password: password ?? this.password,
+      sectors: sectors ?? this.sectors,
     );
   }
 
@@ -40,6 +46,7 @@ class UserModel {
       'phone': phone,
       'email': email,
       'password': password,
+      'sectors': sectors.map((e) => e.toMap()).toList(),
     };
   }
 
@@ -50,6 +57,7 @@ class UserModel {
       phone: map['phone'] as int,
       email: map['email'] as String,
       password: map['password'] as String,
+      sectors: map['sectors'] != null ? (map['sectors'] as List<dynamic>).map((json) => SectorModel.fromJson(json)).toList() : [],
     );
   }
 
@@ -59,7 +67,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(firstname: $firstname, lastname: $lastname, phone: $phone, email: $email, password: $password)';
+    return 'UserModel(firstname: $firstname, lastname: $lastname, phone: $phone, email: $email, password: $password, sectors: $sectors)';
   }
 
   @override
@@ -71,7 +79,8 @@ class UserModel {
       other.lastname == lastname &&
       other.phone == phone &&
       other.email == email &&
-      other.password == password;
+      other.password == password &&
+      other.sectors == sectors;
   }
 
   @override
@@ -80,6 +89,7 @@ class UserModel {
       lastname.hashCode ^
       phone.hashCode ^
       email.hashCode ^
-      password.hashCode;
+      password.hashCode ^
+      sectors.hashCode;
   }
 }

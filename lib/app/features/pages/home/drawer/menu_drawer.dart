@@ -21,7 +21,7 @@ class MenuDrawer extends StatelessWidget {
             currentAccountPictureSize: Size(controller.currentAccountPictureSize.value, controller.currentAccountPictureSize.value),
             currentAccountPicture: InkWell(
               onHover: (value) {controller.currentAccountPictureSize.value = value ? 80 : 70;},
-              onTap: () => Get.to(EditUserPage(controller.logedUser.value), routeName: 'edit-user/{controller.logedUser.email!}'),
+              //onTap: () => Get.to(EditUserPage(controller.logedUser.value), routeName: 'edit-user/{controller.logedUser.email!}'),
               child: Tooltip(message: 'Minha Conta', child: CircleAvatar(child: Text(controller.logedUser.value.email!.substring(0,2)),)),
             ),
             otherAccountsPictures: [

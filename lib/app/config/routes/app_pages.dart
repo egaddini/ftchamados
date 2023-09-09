@@ -13,7 +13,8 @@ import 'package:chamados/app/features/pages/login/login_screen.dart';
 import 'package:chamados/app/features/pages/login/login_screen_bindings.dart';
 import 'package:chamados/app/features/pages/home/home_screen.dart';
 import 'package:chamados/app/features/pages/singup/screen/singup_screen.dart';
-import 'package:chamados/app/features/pages/user/screens/user_list_screen.dart';
+import 'package:chamados/app/features/pages/user/screens/user_screen.dart';
+import 'package:chamados/app/features/pages/user/screens/user_screen_bindings.dart';
 import 'package:get/get.dart';
 
 part 'app_routes.dart';
@@ -43,8 +44,8 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.users,
-      page: () => const UserListScreen(),
-      //binding: DashboardBinding(),
+      page: () => const UserScreen(),
+      binding: UserScreenBindings(),
     ),
     GetPage(
       name: AppRoutes.callCategory,

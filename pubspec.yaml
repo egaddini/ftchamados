@@ -31,6 +31,7 @@ dependencies:
   mask_text_input_formatter: ^2.4.0
   flex_color_scheme: ^7.2.0
   data_table_2: ^2.5.7
+  dropdown_button2: ^2.3.9
 
 dev_dependencies:
   flutter_test:

@@ -20,7 +20,9 @@ ThemeData lightTheme = FlexThemeData.light(
     filledButtonRadius: 4.0,
     snackBarBackgroundSchemeColor: SchemeColor.error,
   ),
-  
+  textTheme: const TextTheme(
+    titleSmall: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+  ),  
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
   swapLegacyOnMaterial3: true,
@@ -39,7 +41,10 @@ ThemeData darkTheme = FlexThemeData.dark(
     elevatedButtonRadius: 4.0,
     filledButtonRadius: 4.0,
     appBarCenterTitle: true,
-  ), 
+  ),
+  textTheme: const TextTheme(
+    titleSmall: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+  ),   
   visualDensity: FlexColorScheme.comfortablePlatformDensity,
   useMaterial3: true,
   swapLegacyOnMaterial3: true,
