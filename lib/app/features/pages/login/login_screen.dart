@@ -55,7 +55,7 @@ class LoginScreen extends GetView<LoginScreenController> {
                             addVerticalSpace(20),
                             Column(                           
                               children: [
-                                FilledButton(                                  
+                                FilledButton(     
                                   child: const Text('Continuar',),
                                   onPressed: () => controller.onClickContinuar(), 
                                 ),

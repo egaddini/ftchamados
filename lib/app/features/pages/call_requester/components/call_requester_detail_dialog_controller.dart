@@ -55,7 +55,6 @@ class CallRequesterDetailDialogController extends GetxController {
   }
 
   void finalizarChamado() async {
-    
     CallRepository repository = CallRepositoryImpl();
     await repository.setStatus(call.id, 10).then((value) {
         statusC.value = value.name;

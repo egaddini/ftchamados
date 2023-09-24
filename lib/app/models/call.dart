@@ -68,14 +68,14 @@ class Call {
   factory Call.fromMap(Map<String, dynamic> map) {
     return Call(
       id: map['id'] as int,
-      dataCriacao: map['dataCriacao'] as String,
-      dataUltAtualizacao: map['dataUltAtualizacao'] as String,
+      dataCriacao: map['creationDT'] as String,
+      dataUltAtualizacao: map['lastUpdateDT'] as String,
       status: map['status'] as String,
-      solicitante: UserDTO.fromMap(map['solicitante'] as Map<String, dynamic>),
-      responsavel: map['responsavel'] != null ? UserDTO.fromMap(map['responsavel'] as Map<String, dynamic>) : null,
-      callType: map['callType'] != null ? CallCategoryModel.fromMap(map['callType'] as Map<String, dynamic>) : null,
-      descricao: map['descricao'] as String,
-      historico: (map['historico'] as List<dynamic>).map((json) => HistoricModel.fromMap(json)).toList(),
+      solicitante: UserDTO.fromMap(map['requester'] as Map<String, dynamic>),
+      responsavel: map['solver'] != null ? UserDTO.fromMap(map['solver'] as Map<String, dynamic>) : null,
+      callType: map['callCategory'] != null ? CallCategoryModel.fromMap(map['callCategory'] as Map<String, dynamic>) : null,
+      descricao: map['description'] as String,
+      historico: (map['historic'] as List<dynamic>).map((json) => HistoricModel.fromMap(json)).toList(),
     );
   }
 
@@ -85,7 +85,7 @@ class Call {
 
   @override
   String toString() {
-    return 'Call(id: $id, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, status: $status, solicitante: $solicitante, responsavel: $responsavel, callType: $callType, descricao: $descricao, historico: $historico)';
+    return 'Call(id: $id, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, status: $status, solicitante: $solicitante, solver: $responsavel, callType: $callType, descricao: $descricao, historico: $historico)';
   }
 
   @override

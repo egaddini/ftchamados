@@ -22,17 +22,18 @@ class CallUserDashboardScreen extends GetView<CallRequesterDashboardController> 
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Meus Chamados')),
-      body: Obx(() => controller.isLoading.value ? Center(child: buildLoadingIndicator()) : SingleChildScrollView(
+      body: Obx(() => SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             addVerticalSpace(10), 
             SizedBox(
               width: double.infinity,
-                child: PaginatedDataTable(
-                  sortColumnIndex: 0,
-                  sortAscending: controller.sort,
-                  header: TextFormField(
+              child: PaginatedDataTable(
+                sortColumnIndex: 0,
+                sortAscending: controller.sort,
+                header: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
                     controller: controller.controller,
                     decoration: const InputDecoration(
                       labelText: 'Buscar por Titulo',
@@ -44,65 +45,66 @@ class CallUserDashboardScreen extends GetView<CallRequesterDashboardController> 
                       // });
                     },
                   ),
-                  source: RowSource(
-                    context: context,
-                    myData: controller.myData,
-                    count: controller.myData.length,
-                  ),
-                  checkboxHorizontalMargin: 10,
-                  rowsPerPage: 10,
-                  columnSpacing: 6,
-                  showCheckboxColumn: false,
-                  columns: const [
-                    DataColumn(
-                      label: Text(
-                        "Título",
-                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),                   
-                    DataColumn(
-                      label: Text(
-                        "Setor",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14
-                        ),
-                      ),
-                      // onSort: (columnIndex, ascending) {
-                      //   setState(() {
-                      //     sort = !sort;
-                      //   });
-                      //   onsortColum(columnIndex, ascending);
-                      // }
-                    ),
-                    DataColumn(
-                      label: Text(
-                        "Prioridade",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        "Status",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),                    
-                    DataColumn(
-                      label: Text(
-                        "Criado em",
-                        style: TextStyle(
-                            fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        "Ultima atualizacao",
-                        style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
-                      ),
-                    ),                                                                                            
-                  ],
                 ),
+                source: RowSource(
+                  context: context,
+                  myData: controller.myData,
+                  count: controller.myData.length,
+                ),
+                checkboxHorizontalMargin: 10,
+                rowsPerPage: 10,
+                columnSpacing: 6,
+                showCheckboxColumn: false,
+                columns: const [
+                  DataColumn(
+                    label: Text(
+                      "Título",
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                    ),
+                  ),                   
+                  DataColumn(
+                    label: Text(
+                      "Setor",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 14
+                      ),
+                    ),
+                    // onSort: (columnIndex, ascending) {
+                    //   setState(() {
+                    //     sort = !sort;
+                    //   });
+                    //   onsortColum(columnIndex, ascending);
+                    // }
+                  ),
+                  DataColumn(
+                    label: Text(
+                      "Prioridade",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 14),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      "Status",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 14),
+                    ),
+                  ),                    
+                  DataColumn(
+                    label: Text(
+                      "Criado em",
+                      style: TextStyle(
+                          fontWeight: FontWeight.w600, fontSize: 14),
+                    ),
+                  ),
+                  DataColumn(
+                    label: Text(
+                      "Ultima atualizacao",
+                      style: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                    ),
+                  ),                                                                                            
+                ],
+              ),
             ),
           ]
         ),

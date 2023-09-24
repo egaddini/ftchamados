@@ -8,7 +8,8 @@ void newCallDialog(CallCategoryModel call) {
   showDialog(
     context: Get.context!,
     builder: (_) => AlertDialog(
-      title: Center(child: Text(call.title!, style: const TextStyle(fontWeight: FontWeight.bold),)),
+      titlePadding: const EdgeInsets.all(8),
+      title: AppBar(title: Text(call.title!), forceMaterialTransparency: true,),
       content: SizedBox(
         width: 600,
         child: NewCallForm(call: call,),
@@ -29,10 +30,8 @@ class NewCallForm extends StatelessWidget {
   final NewCallController controller = Get.put(NewCallController(callCategory: call), permanent: false);
 
     return controller.isLoading.value ? buildLoadingIndicator() : SingleChildScrollView(
-      padding: const EdgeInsets.all(18),
       child: Column(
         children: [
-          addVerticalSpace(10),
           Row(
             children: [
               Expanded(

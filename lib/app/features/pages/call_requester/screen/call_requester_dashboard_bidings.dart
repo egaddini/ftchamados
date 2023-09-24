@@ -6,7 +6,9 @@ class CallRequesterDashboardBindings extends Bindings {
 
   @override
   void dependencies() {
+
       Get.lazyPut(() => CallRequesterDashboardController());
+      
   }
   
 }

@@ -1,10 +1,11 @@
 import 'package:chamados/app/models/priority.dart';
+import 'package:chamados/app/shared_components/list_screen_controller.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/priority/priority_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CallPriorityController extends GetxController {
+class CallPriorityController extends ListScreenController {
   
   bool sort = true;
   RxBool isLoading = true.obs;
@@ -12,7 +13,7 @@ class CallPriorityController extends GetxController {
   RxList<PriorityModel> myData = <PriorityModel>[].obs;
   final PriorityRepository _priorityRepository;
 
-  CallPriorityController(this._priorityRepository);
+  CallPriorityController(this._priorityRepository) : super(repository: _priorityRepository);
 
   @override
   void onInit() async {

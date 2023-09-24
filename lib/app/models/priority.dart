@@ -58,6 +58,6 @@ class PriorityModel {
       other.weight == weight;
   }
 
-  @override
   int get hashCode => id.hashCode ^ name.hashCode ^ weight.hashCode;
+  
 }
