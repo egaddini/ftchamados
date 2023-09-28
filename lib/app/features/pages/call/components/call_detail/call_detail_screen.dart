@@ -2,6 +2,7 @@
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 
 import 'package:chamados/app/features/pages/call/components/call_detail/call_detail_controller.dart';
@@ -51,7 +52,26 @@ Widget callDetailScreen(Call call) {
               addHorizontalSpace(10),
               Expanded(child: TextFormField(controller: controller.solicitanteC, decoration: const InputDecoration(labelText: 'Solicitante',), readOnly: true)),
               addHorizontalSpace(10),
-              Expanded(child: TextFormField(controller: controller.statusC, decoration: const InputDecoration(labelText: 'Status',), readOnly: true)),                
+              Expanded(
+                child: Obx(() =>  TypeAheadField<String> (
+                  textFieldConfiguration: TextFieldConfiguration(
+                    controller: TextEditingController(text: controller.statusC.value),
+                    textInputAction: TextInputAction.search,
+                    textCapitalization: TextCapitalization.words,
+                    decoration: const InputDecoration(
+                      labelText: 'Status',
+                    ),
+                  ),
+                  suggestionsCallback: (pattern) async {
+                    return controller.status;
+                  },
+                  itemBuilder: (context, String call) {
+                    return ListTile(title: Text(call));
+                  },
+                  onSuggestionSelected: (String call) => controller.setStatusValue(call),
+                ),),
+              ),
+              // Expanded(child: TextFoÇrmField(controller: controller.statusC, decoration: const InputDecoration(labelText: 'Status',), readOnly: true)),                
             ],
           ),
           addVerticalSpace(10),

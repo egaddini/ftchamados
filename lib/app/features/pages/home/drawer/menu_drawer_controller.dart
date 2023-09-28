@@ -4,7 +4,7 @@ part of home_screen;
 class MenuDrawerController extends GetxController {
 
   Rx<UserInfoModel> logedUser;
-  RxBool isLoading = true.obs, isAdmin = false.obs, isLight = false.obs;
+  RxBool isLoading = true.obs, isAdmin = false.obs, isLight = false.obs, isSolver = false.obs;
   RxInt notificacoes = 0.obs; 
   RxDouble currentAccountPictureSize = 70.00.obs;
 
@@ -29,6 +29,8 @@ class MenuDrawerController extends GetxController {
   @override
   Future<void> onInit() async {
     isAdmin.value = logedUser.value.isAdmin();
+    isSolver.value = logedUser.value.isSolver();
+
     isLoading.value = false;
     super.onInit(); 
   }

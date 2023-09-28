@@ -128,4 +128,8 @@ class UserInfoModel {
     return 'ADMIN' == role;
   }
 
+  bool isSolver() {
+    return 'SOLVER' == role;
+  }
+
 }
