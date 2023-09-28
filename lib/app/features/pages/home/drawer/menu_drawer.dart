@@ -61,7 +61,7 @@ class MenuDrawer extends StatelessWidget {
                         contentPadding: const EdgeInsets.only(left: 40),
                         title: const Text("Estatísticas"),
                         leading: const Icon(Icons.poll_outlined),
-                        onTap: () => Get.toNamed(AppRoutes.call),
+                        onTap: () => Get.toNamed(AppRoutes.callSolverStatistics),
                       ),                  
                     ],
                   ),

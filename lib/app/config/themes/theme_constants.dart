@@ -19,6 +19,7 @@ ThemeData lightTheme = FlexThemeData.light(
     appBarCenterTitle: true,
     filledButtonRadius: 4.0,
     snackBarBackgroundSchemeColor: SchemeColor.error,
+    segmentedButtonSchemeColor: SchemeColor.primary
   ),
   textTheme: const TextTheme(
     titleSmall: TextStyle(fontWeight: FontWeight.w600, fontSize: 14),

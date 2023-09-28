@@ -14,6 +14,8 @@ abstract class AppRoutes {
   static const callStatus = '/call-status';
   static const callSector = '/call-sector';
   static const callPriority = '/call-priority';
+  static const callGraphs = '/call-graphs';
+  static const callSolverStatistics = '/call-solver-statistics';
   
 }
 

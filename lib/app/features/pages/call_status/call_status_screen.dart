@@ -1,5 +1,7 @@
 library call_status;
 
+import 'dart:math';
+
 import 'package:chamados/app/features/pages/call_status/call_status_controller.dart';
 import 'package:chamados/app/features/pages/call_status/components/create_update_status_controller.dart';
 import 'package:chamados/app/models/call_status_model.dart';
@@ -8,10 +10,12 @@ import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
+import 'package:graphite/graphite.dart';
 import 'package:validatorless/validatorless.dart';
 
 part 'components/row_source.dart';
 part 'components/create_update_status_dialog.dart';
+part 'components/call_status_flow_dialog.dart';
 
 class CallStatusScreen extends GetView<CallStatusController>  {
 
@@ -55,7 +59,8 @@ class CallStatusScreen extends GetView<CallStatusController>  {
                   controller: controller
                 ),
                 actions: [
-                  FilledButton(onPressed: () async => await createUpdateStatusDialog(null).then((value) async => await controller.atualizarItens()), child: const Text('Novo Registro'),)
+                  FilledButton(onPressed: () async => await createUpdateStatusDialog(null).then((value) async => await controller.atualizarItens()), child: const Text('Novo Registro'),),
+                  FilledButton(onPressed: () => callStatusFlowDialog(), child: const Text('Status Flow'),)
                 ],
                 rowsPerPage: 10,
                 columnSpacing: 2,
