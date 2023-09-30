@@ -29,8 +29,7 @@ class CallDetailController extends GetxController {
 
   RxList<CommentModel> comments = <CommentModel>[].obs;
 
-  List<String> status = ['Aberto', 'Em Triagem', 'Em Andamento', 'Aguardando Informações', 'Aguardando Aprovação', 'Em Espera', 'Pendente', 'Resolvido com Falha', 'Cancelado', 'Finalizado'
-];
+  List<String> status = ['Aberto', 'Em Triagem', 'Em Andamento', 'Aguardando Informações', 'Aguardando Aprovação', 'Em Espera', 'Pendente', 'Resolvido com Falha', 'Cancelado', 'Finalizado'];
 
   CallDetailController(this.call);
 

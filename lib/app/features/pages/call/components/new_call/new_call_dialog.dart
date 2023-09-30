@@ -16,7 +16,7 @@ void newCallDialog(CallCategoryModel call) {
       ),
     )
   ).then((value) => Get.delete<NewCallController>());
-}
+} 
 
 class NewCallForm extends StatelessWidget {
   
@@ -123,6 +123,8 @@ class NewCallForm extends StatelessWidget {
               ),
             ],
           ),
+          addVerticalSpace(10),
+          const Divider(height: 1,),
           addVerticalSpace(10),
           FilledButton(child: const Text('Registrar chamado', style: TextStyle(fontSize: 16,),), onPressed: () => controller.onClickNewCall(), ),
         ],

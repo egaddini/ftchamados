@@ -46,7 +46,7 @@ class MenuDrawer extends StatelessWidget {
                   onTap: () => Get.toNamed(AppRoutes.userCall),
                 ),
                 Visibility(
-                  visible: controller.isSolver.value,
+                  visible: controller.isSolver.value || controller.isAdmin.value,
                   child: ExpansionTile(
                     title: const Text('Painel do Solucionador'),
                     leading: const Icon(Icons.supervisor_account_outlined),

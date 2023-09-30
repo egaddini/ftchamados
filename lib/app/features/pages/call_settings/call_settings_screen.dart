@@ -87,25 +87,7 @@ class CallSettingsForm extends StatelessWidget {
               function: () => Get.toNamed(AppRoutes.callCategory),  
             ),
           ],
-        ),                                        
-        Wrap(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomFlexCard(
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.low_priority_rounded, size: 30, color: Get.theme.colorScheme.primary,),
-                  ),
-                  Text('Graphs', style: Get.textTheme.titleLarge,),
-                ],
-              ), 
-              function: () =>  Get.toNamed(AppRoutes.callGraphs),  
-            ),
-          ],
-        ),                                        
+        ),                                                                              
       ],
     );
   }

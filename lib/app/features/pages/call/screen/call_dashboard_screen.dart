@@ -5,12 +5,14 @@ import 'package:chamados/app/models/call.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/call/call_repository.dart';
 import 'package:chamados/app/repositories/call/call/call_repository_impl.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 part '../components/row_source.dart';
 
 class CallDashboardScreen extends StatefulWidget {
+  
   const CallDashboardScreen({super.key});
 
   @override
@@ -65,7 +67,8 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
             addVerticalSpace(10),
             SizedBox(
               width: double.infinity,
-              child: PaginatedDataTable(
+              child: PaginatedDataTable2(
+                actions: [],
                 sortColumnIndex: 0,
                 sortAscending: sort,
                 header: Padding(
@@ -88,69 +91,18 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                   myData: myData,
                   count: myData.length,
                 ),
-      
                 checkboxHorizontalMargin: 10,
                 rowsPerPage: 10,
                 columnSpacing: 6,
                 showCheckboxColumn: false,
-                
                 columns: [
-                  const DataColumn(
-                    label: Text(
-                      "ID",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 14),
-                    ),
-                  ),
-                  const DataColumn(
-                    label: Text(
-                      "Criado em",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 14),
-                    ),
-                  ),                        
-                  DataColumn(
-                    label: const Text(
-                      "Setor",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 14
-                      ),
-                    ),
-                    onSort: (columnIndex, ascending) {
-                      setState(() {
-                        sort = !sort;
-                      });
-                      onsortColum(columnIndex, ascending);
-                    }
-                  ),
-                  const DataColumn(
-                    label: Text(
-                      "Prioridade",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 14),
-                    ),
-                  ),
-                  const DataColumn(
-                    label: Text(
-                      "Solicitante",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 14),
-                    ),
-                  ),
-                  const DataColumn(
-                    label: Text(
-                      "Status",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 14),
-                    ),
-                  ),                        
-                  const DataColumn(
-                    label: Text(
-                      "Ultima atualizacao",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w600, fontSize: 14),
-                    ),
-                  ),                        
+                  const DataColumn(label: Text("ID",),),
+                  const DataColumn(label: Text("Criado em",),),                        
+                  DataColumn(label: const Text("Setor",), onSort: (columnIndex, ascending) {setState(() { sort = !sort;}); onsortColum(columnIndex, ascending);}),
+                  const DataColumn(label: Text("Prioridade",),),
+                  const DataColumn(label: Text("Solicitante",),),
+                  const DataColumn(label: Text("Status",),),                       
+                  const DataColumn(label: Text("Ultima atualizacao",),),                        
                 ],
               ),
             ),
