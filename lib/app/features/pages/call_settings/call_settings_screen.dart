@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 
 import 'package:chamados/app/shared_components/custom_card/custom_card.dart';
 
-
 void callSettingsDialog() {
   showDialog(
     context: Get.context!,

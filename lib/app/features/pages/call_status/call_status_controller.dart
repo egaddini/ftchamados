@@ -10,15 +10,19 @@ class CallStatusController extends GetxController {
   RxBool isLoading = true.obs;
   TextEditingController formFieldC = TextEditingController();
   RxList<CallStatusModel> myData = <CallStatusModel>[].obs;
+
   final CallStatusRepository _callStatusRepository;
 
   CallStatusController(this._callStatusRepository);
 
   @override
-  void onInit() async {
+  void onInit() {
     isLoading = true.obs;
-    myData.value = await _callStatusRepository.getList();
-    super.onInit();
+    _callStatusRepository.getList().then((value) => {
+      myData.value = value,
+      isLoading.value = false
+      });
+      super.onInit();
   }
 
   void setValue(int index) {

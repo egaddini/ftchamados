@@ -7,6 +7,7 @@ import 'package:chamados/app/features/pages/call_status/components/create_update
 import 'package:chamados/app/models/call_status_model.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
@@ -31,7 +32,7 @@ class CallStatusScreen extends GetView<CallStatusController>  {
             addVerticalSpace(10),
             SizedBox(
               width: double.infinity,
-              child: PaginatedDataTable(
+              child: PaginatedDataTable2(
                 sortColumnIndex: 0,
                 // sortAscending: sort,
                 header: Padding(

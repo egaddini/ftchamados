@@ -51,8 +51,6 @@ class CallSolverStatisticsScreen extends GetView<CallSolverStatisticsScreenContr
                           break;
                         default: controller.dataMapGeral.value = controller.dataMapAnual;
                       }
-                      
-
                     },
                   ),
                   addHorizontalSpace(10),
