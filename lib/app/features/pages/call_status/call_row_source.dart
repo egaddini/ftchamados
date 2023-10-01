@@ -1,28 +1,26 @@
 part of call_status;
 
 class RowSource extends DataTableSource {
-  dynamic myData;
-  int count;
+  dynamic data;
   BuildContext context;
   CallStatusController controller;
 
   RowSource({
     required this.context,
-    required this.myData,
-    required this.count,
+    required this.data,
     required this.controller,
   });
 
   @override
   DataRow? getRow(int index) {
-    return (index < rowCount) ? recentFileDataRow(myData[index], context, controller, index) : null;
+    return (index < rowCount) ? recentFileDataRow(data[index], context, controller, index) : null;
   }
 
   @override
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => count;
+  int get rowCount => data.length;
 
   @override
   int get selectedRowCount => 0;
@@ -30,7 +28,7 @@ class RowSource extends DataTableSource {
 
 DataRow recentFileDataRow(CallStatusModel status, BuildContext context, CallStatusController controller, int index) {
   return DataRow(
-    onSelectChanged: (value) async => await createUpdateStatusDialog(status).then((value) => controller.myData.refresh()),
+    onSelectChanged: (value) async => await createUpdateStatusDialog(status).then((value) => controller.data.refresh()),
     cells: [
       DataCell(Text(status.id.toString())),
       DataCell(Text(status.name)),

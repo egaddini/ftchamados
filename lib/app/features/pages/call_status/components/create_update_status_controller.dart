@@ -58,8 +58,6 @@ class CreateUpdateStatusController extends GetxController {
     });  
   }
 
-  void setNotificaC() {
-    notificaC.value = !notificaC.value;
-  }
+  void setNotificaC() => notificaC.value = !notificaC.value;
 
 }

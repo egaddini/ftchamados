@@ -1,5 +1,6 @@
 import 'package:blinking_text/blinking_text.dart';
 import 'package:chamados/app/models/error_dto.dart';
+import 'package:chamados/app/shared_components/custom_card/custom_card.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -121,25 +122,26 @@ void tratarErro(DioException e) {
 }
 
 Widget buildLoadingIndicator() {
-  return Column(
-    mainAxisAlignment: MainAxisAlignment.spaceAround,
-    mainAxisSize: MainAxisSize.min,
-    children: [
-      SizedBox(
-        height: 120,
-        width: 250,
-        child: Card(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const CircularProgressIndicator(),
-                addVerticalSpace(5),
-                BlinkText('Carregando...', style: Get.theme.textTheme.titleMedium),
-              ],
-            )
+  return Center(
+    child: Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        CustomFlexCard(
+          height: 120,
+          width: 250,
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const CircularProgressIndicator(),
+              addVerticalSpace(5),
+              BlinkText('Carregando...', style: Get.theme.textTheme.titleMedium),
+            ],
+          ),
+          function: (){}, 
         ),
-      ),
-    ],
+      ],
+    ),
   );
 }
 
