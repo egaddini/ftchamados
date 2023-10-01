@@ -3,11 +3,9 @@ part of call_sector;
 class RowSource extends DataTableSource {
   dynamic myData;
   int count;
-  BuildContext context;
   CallSectorController controller;
 
   RowSource({
-    required this.context,
     required this.myData,
     required this.count,
     required this.controller,
@@ -15,7 +13,7 @@ class RowSource extends DataTableSource {
 
   @override
   DataRow? getRow(int index) {
-    return (index < rowCount) ? recentFileDataRow(myData[index], context, controller, index) : null;
+    return (index < rowCount) ? recentFileDataRow(myData[index], controller, index) : null;
   }
 
   @override
@@ -28,7 +26,7 @@ class RowSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-DataRow recentFileDataRow(SectorModel sector, BuildContext context, CallSectorController controller, int index) {
+DataRow recentFileDataRow(SectorModel sector, CallSectorController controller, int index) {
   return DataRow(
     onSelectChanged: (value) => createUpdateSectorDialog(sector).then((value) => controller.atualizarItens()),
     cells: [

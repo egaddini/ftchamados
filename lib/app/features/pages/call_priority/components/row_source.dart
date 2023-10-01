@@ -3,11 +3,9 @@ part of call_priority;
 class RowSource extends DataTableSource {
   dynamic myData;
   int count;
-  BuildContext context;
   CallPriorityController controller;
 
   RowSource({
-    required this.context,
     required this.myData,
     required this.count,
     required this.controller,
@@ -15,7 +13,7 @@ class RowSource extends DataTableSource {
 
   @override
   DataRow? getRow(int index) {
-    return (index < rowCount) ? recentFileDataRow(myData[index], context, controller, index) : null;
+    return (index < rowCount) ? recentFileDataRow(myData[index], controller, index) : null;
   }
 
   @override
@@ -28,7 +26,7 @@ class RowSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-DataRow recentFileDataRow(PriorityModel priority, BuildContext context, CallPriorityController controller, int index) {
+DataRow recentFileDataRow(PriorityModel priority, CallPriorityController controller, int index) {
   return DataRow(
     onSelectChanged: (value) => createUpdatePriorityDialog(priority).then((value) => controller.atualizarItens()),
     cells: [

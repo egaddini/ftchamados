@@ -64,7 +64,7 @@ class CallStatusScreen extends CustomPaginatedDataTable2<CallStatusController>  
   @override
   DataTableSource getDataTableSource() {
     return RowSource(
-      context: Get.context!,
+      count: controller.data.length,
       controller: controller,
       data: controller.data,
     );

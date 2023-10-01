@@ -2,18 +2,18 @@ part of call_status;
 
 class RowSource extends DataTableSource {
   dynamic data;
-  BuildContext context;
+  int count;
   CallStatusController controller;
 
   RowSource({
-    required this.context,
+    required this.count,
     required this.data,
     required this.controller,
   });
 
   @override
   DataRow? getRow(int index) {
-    return (index < rowCount) ? recentFileDataRow(data[index], context, controller, index) : null;
+    return (index < rowCount) ? recentFileDataRow(data[index], controller, index) : null;
   }
 
   @override
@@ -26,7 +26,7 @@ class RowSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-DataRow recentFileDataRow(CallStatusModel status, BuildContext context, CallStatusController controller, int index) {
+DataRow recentFileDataRow(CallStatusModel status, CallStatusController controller, int index) {
   return DataRow(
     onSelectChanged: (value) async => await createUpdateStatusDialog(status).then((value) => controller.data.refresh()),
     cells: [

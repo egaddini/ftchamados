@@ -1,35 +1,33 @@
 import 'package:chamados/app/models/priority.dart';
-import 'package:chamados/app/shared_components/list_screen_controller.dart';
+import 'package:chamados/app/shared_components/custom_data_table/custom_paginated_data_table2.controller.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/priority/priority_repository.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CallPriorityController extends ListScreenController {
+class CallPriorityController extends CustomPaginatedDataTable2Controller<PriorityModel> {
   
   bool sort = true;
-  RxBool isLoading = true.obs;
-  TextEditingController formFieldC = TextEditingController();
-  RxList<PriorityModel> myData = <PriorityModel>[].obs;
-  final PriorityRepository _priorityRepository;
+  final PriorityRepository repository;
 
-  CallPriorityController(this._priorityRepository) : super(repository: _priorityRepository);
+  CallPriorityController(this.repository);
 
   @override
   void onInit() async {
-    myData.addAll(await _priorityRepository.getList());
-    isLoading = false.obs;
+    repository.getList().then((value) => {
+      data.value = value,
+      isLoading = false.obs,
+    });
     super.onInit();
   }
 
   void deleteItem(int index) async {
-    PriorityModel data = myData[index];
-    bool? deleta = await perguntaSimOuNao('Deseja remover a prioridade: ${data.name}');
+    PriorityModel priority = data[index];
+    bool? deleta = await perguntaSimOuNao('Deseja remover a prioridade: ${priority.name}');
     if (deleta != null && deleta) {
-      _priorityRepository.delete(data.id!).then((_) {
-        myData.removeAt(index);
-        myData.refresh();
-        snackSucessRegister('Registrado com sucesso', 'Prioridade ${data.name} Deletado com sucesso!');
+      repository.delete(priority.id!).then((_) {
+        data.removeAt(index);
+        data.refresh();
+        snackSucessRegister('Registrado com sucesso', 'Prioridade ${priority.name} Deletado com sucesso!');
       }).catchError((error) {
         tratarErro(error);
       }); 
@@ -38,8 +36,8 @@ class CallPriorityController extends ListScreenController {
 
   Future<bool> atualizarItens() async {
     await Future.delayed(const Duration(milliseconds: 500));
-    myData.value = await _priorityRepository.getList();
-    myData.refresh();
+    data.value = await repository.getList();
+    data.refresh();
     return true;
   }
 
