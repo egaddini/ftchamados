@@ -12,7 +12,7 @@ class RowSource extends DataTableSource {
   });
 
   @override
-  DataRow? getRow(int index) {
+  DataRow2? getRow(int index) {
     return (index < rowCount) ? recentFileDataRow(myData[index], controller, index) : null;
   }
 
@@ -26,8 +26,8 @@ class RowSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-DataRow recentFileDataRow(SectorModel sector, CallSectorController controller, int index) {
-  return DataRow(
+DataRow2 recentFileDataRow(SectorModel sector, CallSectorController controller, int index) {
+  return DataRow2(
     onSelectChanged: (value) => createUpdateSectorDialog(sector).then((value) => controller.atualizarItens()),
     cells: [
       DataCell(Text(sector.id.toString())),

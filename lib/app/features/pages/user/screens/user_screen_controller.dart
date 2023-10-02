@@ -1,19 +1,17 @@
 import 'package:chamados/app/features/pages/user/screens/user_screen_prodvider.dart';
 import 'package:chamados/app/models/user_info_model.dart';
+import 'package:chamados/app/shared_components/custom_data_table/custom_paginated_data_table2.controller.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class UserScreenController extends GetxController with StateMixin<List<dynamic>> {
+class UserScreenController extends CustomPaginatedDataTable2Controller<UserInfoModel> with StateMixin<List<dynamic>> {
 
   final UserScreenProvider _userProvider = UserScreenProvider();
 
-  RxBool isLoading = true.obs;
   bool sort = true;
   List<UserInfoModel> filterData = [];
-  RxList<UserInfoModel> userList = <UserInfoModel>[].obs;
-  TextEditingController controller = TextEditingController();
 
   @override
   void onInit() {
@@ -24,7 +22,8 @@ class UserScreenController extends GetxController with StateMixin<List<dynamic>>
   void refreshUserList() {
     _userProvider.getUsers().then((response) {
       change(response, status: RxStatus.success());
-      userList.value = response.map((json) => UserInfoModel.fromMap(json)).toList();
+      data.value = response.map((json) => UserInfoModel.fromMap(json)).toList();
+      isLoading.value = false;
     }).catchError((error) {
       tratarErro(error);
       change(null, status: RxStatus.error(error.toString()));
@@ -35,9 +34,9 @@ class UserScreenController extends GetxController with StateMixin<List<dynamic>>
     sort = !sort;
     if (columnIndex == 2) {
       if (ascending) {
-        userList.sort((a, b) => a.email!.compareTo(b.email!));
+        data.sort((a, b) => a.email!.compareTo(b.email!));
       } else {
-        userList.sort((a, b) => b.email!.compareTo(a.email!));
+        data.sort((a, b) => b.email!.compareTo(a.email!));
       }
     }
   }

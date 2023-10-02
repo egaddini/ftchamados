@@ -3,18 +3,16 @@ part of call_user_dashboard;
 class RowSource extends DataTableSource {
   dynamic myData;
   int count;
-  BuildContext context;
 
 
   RowSource({
-    required this.context,
     required this.myData,
     required this.count,
   });
 
   @override
   DataRow? getRow(int index) {
-    return (index < rowCount) ? recentFileDataRow(myData![index], context) : null;
+    return (index < rowCount) ? recentFileDataRow(myData![index]) : null;
   }
 
   @override
@@ -27,9 +25,9 @@ class RowSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-DataRow recentFileDataRow(Call call, BuildContext context) {
+DataRow recentFileDataRow(Call call) {
   return DataRow(
-    onSelectChanged: (value)  => callRequesterDetailDialog(context, call),
+    onSelectChanged: (value)  => callRequesterDetailDialog(call),
     cells: [
       DataCell(Text(call.callType!.title!)),
       DataCell(Text(call.callType!.sector!.name)),

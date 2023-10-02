@@ -1,3 +1,6 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:chamados/app/config/routes/app_pages.dart';
+import 'package:chamados/app/shared_components/custom_card/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -5,8 +8,64 @@ import 'package:intl/intl.dart';
 class CallSolverStatisticsScreenController extends GetxController {
   
   final RxString selectedDate = 'diario'.obs, selectedGroup = 'geral'.obs;
+  RxInt current = 0.obs;
   final RxBool isDateFieldVisible = true.obs;
   TextEditingController dateController = TextEditingController();
+  final CarouselController carouselC = CarouselController();
+
+  final List<Widget> imgList = [
+    CustomFlexCard(
+      content: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Text('Chamados Abertos', style: Get.textTheme.bodyMedium,)
+          ),
+          Text('8', style: Get.textTheme.displayLarge,),
+        ],
+      ), 
+      function: () => Get.toNamed(AppRoutes.callStatus), 
+    ),
+    CustomFlexCard(
+      content: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Text('Chamados em Emergencia ', style: Get.textTheme.bodyMedium,)
+          ),
+          Text('3', style: Get.textTheme.displayLarge,),
+        ],
+      ), 
+      function: () => Get.toNamed(AppRoutes.callStatus), 
+    ),
+    CustomFlexCard(
+      content: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Text('Chamados Finalizados Hoje', style: Get.textTheme.bodyMedium,)
+          ),
+          Text('1', style: Get.textTheme.displayLarge,),
+        ],
+      ), 
+      function: () => Get.toNamed(AppRoutes.callStatus), 
+    ),                      
+    CustomFlexCard(
+      content: Column(
+        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(6.0),
+            child: Text('Movimentações realizadas', style: Get.textTheme.bodyMedium,)
+          ),
+          Text('12', style: Get.textTheme.displayLarge,),
+        ],
+      ), 
+      function: () => Get.toNamed(AppRoutes.callStatus), 
+    ),                      
+  ];
+
 
   RxMap<String, double> dataMapGeral = <String, double>{}.obs;
 
@@ -154,6 +213,10 @@ final gradientList = <List<Color>>[
         dateController.text = formattedDate; 
       }
     });
+  }
+
+  setCarousel(int index) {
+    current.value = index;
   } 
 }
     

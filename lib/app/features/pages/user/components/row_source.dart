@@ -4,11 +4,9 @@ part of user_dashboard;
 class RowSource extends DataTableSource {
   dynamic myData;
   int count;
-  BuildContext context;
   UserScreenController controller;
 
   RowSource({
-    required this.context,
     required this.myData,
     required this.count,
     required this.controller,

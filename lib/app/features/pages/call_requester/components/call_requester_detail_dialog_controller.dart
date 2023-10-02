@@ -3,6 +3,8 @@ import 'package:chamados/app/models/comment_model.dart';
 import 'package:chamados/app/models/user_info_model.dart';
 import 'package:chamados/app/repositories/call/call/call_repository.dart';
 import 'package:chamados/app/repositories/call/call/call_repository_impl.dart';
+import 'package:chamados/app/shared_components/custom_drop_down_menu_button/custom_dropdown_button.dart';
+import 'package:chamados/app/shared_components/custom_drop_down_menu_button/menu_item.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/utils/services/local_storage/local_storage.dart';
 import 'package:data_table_2/data_table_2.dart';
@@ -98,4 +100,15 @@ class CallRequesterDetailDialogController extends GetxController {
     );
   }
 
+  static Widget dropDownButton() {
+
+    MenuItem home = MenuItem(text: 'Editar', icon: Icons.home, function: () {print('object');});
+    MenuItem settings = MenuItem(text: 'Cancelar', icon: Icons.settings, function: () {});
+    MenuItem share = MenuItem(text: 'Finalizar', icon: Icons.share, function: () {});
+    MenuItem logout = MenuItem(text: 'Histórico', icon: Icons.logout, function: () {});
+
+    List<MenuItem> itens = [home, share, settings, logout];
+    
+    return CustomDropDownButton(itens: itens);
+  }
 }

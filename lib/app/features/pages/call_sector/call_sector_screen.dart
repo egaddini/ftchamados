@@ -5,6 +5,7 @@ import 'package:chamados/app/models/sector_model.dart';
 import 'package:chamados/app/shared_components/custom_data_table/custom_paginated_data_table2.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';
@@ -26,12 +27,12 @@ class CallSectorStatusScreen extends CustomPaginatedDataTable2<CallSectorControl
   }
   
   @override
-  List<DataColumn> getColumns() {
+  List<DataColumn2> getColumns() {
     return const [
-      DataColumn(label: Text("Id")),
-      DataColumn(label: Text("Sigla"),),    
-      DataColumn(label: Text("Nome"),),    
-      DataColumn(label: Text('',)),    
+      DataColumn2(label: Text("Id")),
+      DataColumn2(label: Text("Sigla"),),    
+      DataColumn2(label: Text("Nome"),),    
+      DataColumn2(label: Text('',)),    
     ];
   }
   
@@ -60,7 +61,7 @@ class CallSectorStatusScreen extends CustomPaginatedDataTable2<CallSectorControl
   }
   
   @override
-  String getTitle() => 'Setor';
+  String getTitle() => 'Setores';
 
 }
 

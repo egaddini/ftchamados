@@ -1,12 +1,23 @@
 part of call_user_dashboard;
 
-Future<void> callRequesterDetailDialog(BuildContext context, Call call) {
+Future<void> callRequesterDetailDialog(Call call) {
+    
+  MenuItem edit = MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () {print('object');});
+  MenuItem cancel = MenuItem(text: 'Cancelar', icon: Icons.cancel_presentation_rounded, function: () {});
+  MenuItem finish = MenuItem(text: 'Finalizar', icon: Icons.check_box_outlined, function: () {});
+  MenuItem historic = MenuItem(text: 'Histórico', icon: Icons.history_outlined, function: () {});
+  MenuItem share = MenuItem(text: 'Compartilhar', icon: Icons.share_outlined, function: () {});
+
+  List<MenuItem> itens = [edit, finish, cancel, share, historic];
+
   Get.put(CallRequesterDetailDialogController(call));
   return showDialog(
-    context: context,
-    builder: (_) => const AlertDialog(
-      title: null,
-      content: SizedBox(
+    context: Get.context!,
+    builder: (_) => AlertDialog(
+      title: AppBar(title: Text(call.callType!.title!), forceMaterialTransparency: true, actions: [
+        CustomDropDownButton(itens: itens), 
+      ]),
+      content: const SizedBox(
         width: 1200 ,
         child: CallRequesterDetailForm(),
       ),
@@ -21,8 +32,9 @@ class CallRequesterDetailForm extends GetView<CallRequesterDetailDialogControlle
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: const EdgeInsets.all(18),
+      padding: EdgeInsets.all(8),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Row(
             children: [
@@ -51,44 +63,30 @@ class CallRequesterDetailForm extends GetView<CallRequesterDetailDialogControlle
               CustomExpandedTextField(controller: controller.descSolicitC, labelText: 'Descrição do solicitante', maxLines: 8),
             ],
           ),          
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              FilledButton(
-                child: const Text('Histórico'),
-                onPressed: () => controller.callHistoric(),
-              ),
-              const SizedBox(width: 10),
-              FilledButton(
-                child: const Text('Encerrar'),
-                onPressed: () => controller.finalizarChamado(),
-              ),                                                
-            ],
-          ),
           addVerticalSpace(10),
-          TextFormField(controller: controller.comentarioC, maxLines: 1, focusNode: controller.comentar,  
+          TextFormField(controller: controller.comentarioC, maxLines: 1, focusNode: controller.comentar, 
             onFieldSubmitted: (value) {
               controller.addComentario(); 
               FocusScope.of(Get.context!).requestFocus(controller.comentar);
             }, 
             decoration: InputDecoration(
-              labelText: 'Adicione um comentário...',
+              hintText: 'Adicione um comentário...',
               suffixIcon: cInkWell(25, 30, Icons.send_outlined, null, Get.theme.primaryColor, null, 'Enviar', () => controller.addComentario(),),
+              enabledBorder: UnderlineInputBorder(borderSide: BorderSide(color: Get.theme.primaryColor)),
+              border: UnderlineInputBorder(borderSide: BorderSide(color: Get.theme.primaryColor)),
+              focusedBorder: UnderlineInputBorder(borderSide: BorderSide(color: Get.theme.primaryColor)),
             ),
           ),
-          SizedBox(
-            height: 160,
-            child: Obx(() => ListView.builder(
-              itemCount: controller.comments.length,
-              itemBuilder: ((context, index) {
-                return ListTile(
-                  title: Text('${controller.comments[index].user}  -  ${controller.comments[index].date}', style: Get.theme.textTheme.bodySmall),
-                  subtitle: Text(controller.comments[index].message),
-                );
-              }),
-            ),),
-          ),          
+          Obx(() => ListView.builder(
+            shrinkWrap: true,
+            itemCount: controller.comments.length,
+            itemBuilder: ((context, index) {
+              return ListTile(
+                title: Text('${controller.comments[index].user}  -  ${controller.comments[index].date}', style: Get.theme.textTheme.bodySmall),
+                subtitle: Text(controller.comments[index].message),
+              );
+            }),
+          ),),
         ],
       ),
     );

@@ -14,8 +14,8 @@ class CallSectorController extends CustomPaginatedDataTable2Controller<SectorMod
   @override
   void onInit() {
     _sectorRepository.getList().then((value) => {
-      data.value = value,
-      isLoading = false.obs
+      data = value.obs,
+      isLoading.value = false,
     });
     super.onInit();
   }

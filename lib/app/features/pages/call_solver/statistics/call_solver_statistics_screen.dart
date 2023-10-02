@@ -2,11 +2,12 @@ import 'package:chamados/app/config/routes/app_pages.dart';
 import 'package:chamados/app/features/pages/call_solver/statistics/call_solver_statistics_screen_controller.dart';
 import 'package:chamados/app/shared_components/custom_card/custom_card.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:pie_chart/pie_chart.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CallSolverStatisticsScreen extends GetView<CallSolverStatisticsScreenController> {
@@ -63,7 +64,49 @@ class CallSolverStatisticsScreen extends GetView<CallSolverStatisticsScreenContr
                   ),
                 ],
               ),),
-              addVerticalSpace(30),
+              addVerticalSpace(10),
+              Obx(() => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 121,
+                    width: 1050,
+                    child: Expanded(
+                      child: CarouselSlider(
+                        items: controller.imgList,
+                        carouselController: controller.carouselC,
+                        options: CarouselOptions(
+                            height: 120,
+                            autoPlay: true,
+                            enlargeCenterPage: true,
+                            enlargeFactor: 0.1,
+                            viewportFraction: 0.3,
+                            onPageChanged: (index, reason) {
+                              controller.setCarousel(index);
+                            }),
+                      ),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: controller.imgList.asMap().entries.map((entry) {
+                      return GestureDetector(
+                        onTap: () => controller.carouselC.animateToPage(entry.key),
+                        child: Container(
+                          width: 12.0,
+                          height: 12.0,
+                          margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 4.0),
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: (Theme.of(context).brightness == Brightness.dark ? Get.theme.primaryColorLight : Get.theme.primaryColor)
+                                  .withOpacity(controller.current.value == entry.key ? 0.9 : 0.4)
+                            ),
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ]
+              ),),
               Wrap(
                 children: [
                   Column(

@@ -5,6 +5,7 @@ import 'package:chamados/app/models/priority.dart';
 import 'package:chamados/app/shared_components/custom_data_table/custom_paginated_data_table2.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
@@ -12,7 +13,7 @@ import 'package:validatorless/validatorless.dart';
 
 import 'components/create_update_priority_controller.dart';
 
-part 'components/row_source.dart';
+part 'call_priority_row_source.dart';
 part 'components/create_update_priority_dialog.dart';
 
 class CallPriorityStatusScreen extends CustomPaginatedDataTable2<CallPriorityController>  {
@@ -23,12 +24,12 @@ class CallPriorityStatusScreen extends CustomPaginatedDataTable2<CallPriorityCon
   List<Widget> getActions() => [FilledButton(onPressed: () => createUpdatePriorityDialog(null).then((value) => controller.atualizarItens()), child: const Text('Novo Registro'),)];
   
   @override
-  List<DataColumn> getColumns() {
+  List<DataColumn2> getColumns() {
     return const [
-      DataColumn(label: Text("Id"),),
-      DataColumn(label: Text("Nome"),),    
-      DataColumn(label: Text("Peso"),),    
-      DataColumn(label: Text('',)),    
+      DataColumn2(label: Text("Id"),),
+      DataColumn2(label: Text("Nome"),),    
+      DataColumn2(label: Text("Peso"),),    
+      DataColumn2(label: Text('',)),    
     ];
   }
   

@@ -2,7 +2,6 @@ import 'package:chamados/app/models/priority.dart';
 import 'package:chamados/app/shared_components/custom_data_table/custom_paginated_data_table2.controller.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/priority/priority_repository.dart';
-import 'package:get/get.dart';
 
 class CallPriorityController extends CustomPaginatedDataTable2Controller<PriorityModel> {
   
@@ -15,7 +14,7 @@ class CallPriorityController extends CustomPaginatedDataTable2Controller<Priorit
   void onInit() async {
     repository.getList().then((value) => {
       data.value = value,
-      isLoading = false.obs,
+      isLoading.value = false,
     });
     super.onInit();
   }
