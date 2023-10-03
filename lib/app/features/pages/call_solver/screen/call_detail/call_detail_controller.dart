@@ -31,8 +31,6 @@ class CallDetailController extends GetxController {
 
   List<String> status = ['Aberto', 'Em Triagem', 'Em Andamento', 'Aguardando Informações', 'Aguardando Aprovação', 'Em Espera', 'Pendente', 'Resolvido com Falha', 'Cancelado', 'Finalizado'];
 
-  String selectedValue = 'Aberto';
-
   CallDetailController(this.call);
 
   late UserInfoModel logedUser;
@@ -63,8 +61,8 @@ class CallDetailController extends GetxController {
     comentarioC.text = '';
   }
 
-  setStatusValue(String value) {
-    statusC.value = value;
+  setStatusValue(String call) {
+    statusC.value = call;
   }
   
 }

@@ -6,6 +6,7 @@ import 'package:chamados/app/features/pages/call_priority/call_priority_screen.d
 import 'package:chamados/app/features/pages/call_requester/screen/call_requester_dashboard_bidings.dart';
 import 'package:chamados/app/features/pages/call_sector/call_sector_bidings.dart';
 import 'package:chamados/app/features/pages/call_sector/call_sector_screen.dart';
+import 'package:chamados/app/features/pages/call_solver/screen/call_solver_dashboard_screen.dart';
 import 'package:chamados/app/features/pages/call_solver/statistics/call_solver_statistics_screen.dart';
 import 'package:chamados/app/features/pages/call_solver/statistics/call_solver_statistics_screen_bindings.dart';
 import 'package:chamados/app/features/pages/call_status/call_status_bidings.dart';
@@ -18,6 +19,8 @@ import 'package:chamados/app/features/pages/singup/screen/singup_screen.dart';
 import 'package:chamados/app/features/pages/user/screens/user_screen.dart';
 import 'package:chamados/app/features/pages/user/screens/user_screen_bindings.dart';
 import 'package:get/get.dart';
+
+import '../../features/pages/call_solver/screen/call_solver_dashboard_bidings.dart';
 
 part 'app_routes.dart';
 
@@ -41,8 +44,8 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.call,
-      page: () => const CallDashboardScreen(),
-      //binding: DashboardBinding(),
+      page: () => const CallSolverDashboardScreen(),
+      binding: CallSolverDashboardBindings(),
     ),
     GetPage(
       name: AppRoutes.users,
