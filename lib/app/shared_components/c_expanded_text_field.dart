@@ -4,12 +4,14 @@ class CustomExpandedTextField extends StatelessWidget {
   final TextEditingController controller;
   final String? labelText;
   final int maxLines;
+  final bool readOnly;
 
   const CustomExpandedTextField({
     Key? key,
     required this.controller,
     required this.labelText,
     this.maxLines = 1,
+    this.readOnly = true,
   }) : super(key: key);
 
   @override
@@ -17,7 +19,7 @@ class CustomExpandedTextField extends StatelessWidget {
     return Expanded(
       child: TextField(
         controller: controller,
-        readOnly: true,
+        readOnly: readOnly,
         maxLines: maxLines,
         decoration: InputDecoration(
           labelText: labelText,

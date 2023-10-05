@@ -1,10 +1,12 @@
 library home_screen;
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:chamados/app/config/routes/app_pages.dart';
 import 'package:chamados/app/config/themes/theme_constants.dart';
 import 'package:chamados/app/features/pages/call/components/new_call/new_call_dialog.dart';
 import 'package:chamados/app/features/pages/call_settings/call_settings_screen.dart';
 import 'package:chamados/app/features/pages/user_settings/user_settings_dialog.dart';
+import 'package:chamados/app/shared_components/custom_card/custom_card.dart';
 import 'package:chamados/app/shared_components/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:chamados/app/repositories/call/category/call_category_repository.dart';
@@ -20,28 +22,26 @@ part 'drawer/menu_drawer.dart';
 part 'drawer/menu_drawer_controller.dart';
 part 'home_screen_controller.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends GetView<HomeScreenController> {
   
   HomeScreen({Key? key,}) : super(key: key);
   
-  final HomeScreenController _controller = Get.put(HomeScreenController());
-
   final TextEditingController _aheadController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => _controller.isLoading.value ? buildLoadingIndicator() : Scaffold(
+    return Obx(() => controller.isLoading.value ? buildLoadingIndicator() : Scaffold(
       appBar: AppBar(title: const Text('Apoio')),
-      endDrawer: _controller.drawer(),
-      body: Center(
-        child: SingleChildScrollView(
+      endDrawer: controller.drawer(),
+      body: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,              
+            mainAxisAlignment: MainAxisAlignment.start,              
             children: [
+              addVerticalSpace(100),
               const Text('Como podemos ajudar?', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 45,),),
               addVerticalSpace(40),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(40.0),
                 child: TypeAheadField<CallCategoryModel> (
                   textFieldConfiguration: TextFieldConfiguration(
                     controller: _aheadController,
@@ -52,20 +52,31 @@ class HomeScreen extends StatelessWidget {
                       suffixIcon: Icon(Icons.search_outlined), 
                     ),
                   ),
-                  suggestionsCallback: (pattern) async {
-                    return _controller.items;
-                  },
-                  itemBuilder: (context, CallCategoryModel call) {
-                    return ListTile(title: Text('${call.sector!.acronym} - ${call.title}'),);
-                  },
+                  suggestionsCallback: (pattern) => controller.itens,
+                  itemBuilder: (context, CallCategoryModel call) => ListTile(title: Text('${call.sector!.acronym} - ${call.title}'),),
                   onSuggestionSelected: (CallCategoryModel call) async => newCallDialog(call),
                 ),
               ),
-              const SizedBox(height: 600),
+              addVerticalSpace(100),
+              SizedBox(
+                child: Expanded(
+                  child: CarouselSlider(
+                    items: controller.imgList,
+                    carouselController: controller.carouselC,
+                    options: CarouselOptions(
+                      height: 300,
+                      autoPlay: true,
+                      enlargeCenterPage: true,
+                      viewportFraction: 0.2,
+                      enlargeFactor: 0.1,
+                      onPageChanged: (index, reason) => controller.setCarousel(index),
+                    ),
+                  ),
+                ),
+              ),
             ]
           ),
         ),
-      ),
     ));
   }
 }

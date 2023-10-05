@@ -12,6 +12,7 @@ import 'package:chamados/app/features/pages/call_solver/statistics/call_solver_s
 import 'package:chamados/app/features/pages/call_status/call_status_bidings.dart';
 import 'package:chamados/app/features/pages/call_status/call_status_screen.dart';
 import 'package:chamados/app/features/pages/call_requester/screen/call_requester_dashboard_screen.dart';
+import 'package:chamados/app/features/pages/home/home_screen_bindings.dart';
 import 'package:chamados/app/features/pages/login/login_screen.dart';
 import 'package:chamados/app/features/pages/login/login_screen_bindings.dart';
 import 'package:chamados/app/features/pages/home/home_screen.dart';
@@ -30,12 +31,11 @@ abstract class AppPages {
       name: AppRoutes.login,
       page: () => const LoginScreen(),
       binding: LoginScreenBindings(),
-      
     ),
     GetPage(
       name: AppRoutes.home,
       page: () => HomeScreen(),
-      //binding: DashboardBinding(),
+      binding: HomeScreenBindings(),
     ),
       GetPage(
       name: AppRoutes.singup,

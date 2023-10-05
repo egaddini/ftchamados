@@ -70,7 +70,6 @@ class CallSolverStatisticsScreen extends GetView<CallSolverStatisticsScreenContr
                 children: [
                   SizedBox(
                     height: 121,
-                    width: 1050,
                     child: Expanded(
                       child: CarouselSlider(
                         items: controller.imgList,

@@ -16,19 +16,15 @@ class CallRequesterDetailDialogController extends GetxController {
 
   final Call call;
 
-  bool isHovered = false;
-
-  late UserInfoModel logedUser;
-
-  late TextEditingController dataAberturaC;
-  late TextEditingController ultAtualizacaoC;
-  late TextEditingController responsavelC;
+  RxBool isEditable = false.obs;
   late RxString statusC;
-  late TextEditingController setorC;
-  late TextEditingController prioridadeC;
-  late TextEditingController tituloC;
+  late UserInfoModel logedUser;
   late TextEditingController descSolicitC;
+  late TextEditingController responsavelC;
+  late TextEditingController ultAtualizacaoC;
   late TextEditingController comentarioC = TextEditingController(text: '');
+
+  List<MenuItem> itens = [];
 
   final FocusNode comentar = FocusNode();
 
@@ -38,17 +34,23 @@ class CallRequesterDetailDialogController extends GetxController {
 
   @override
   void onInit() async {
-    dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(call.dataCriacao)));
+
+    MenuItem edit = MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () => setEditable());
+    MenuItem cancel = MenuItem(text: 'Cancelar', icon: Icons.cancel_presentation_rounded, function: () {});
+    MenuItem finish = MenuItem(text: 'Finalizar', icon: Icons.check_box_outlined, function: () {});
+    MenuItem historic = MenuItem(text: 'Histórico', icon: Icons.history_outlined, function: (() => callHistoric()));
+    MenuItem share = MenuItem(text: 'Compartilhar', icon: Icons.share_outlined, function: () {});
+    itens = [edit, finish, cancel, share, historic];
+
     ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(call.dataUltAtualizacao)));
     responsavelC = TextEditingController(text: call.responsavel == null ? 'Não definido' : call.responsavel!.email);
     statusC = call.status.obs;
-    setorC = TextEditingController(text: call.callType!.sector!.name);
-    prioridadeC = TextEditingController(text: call.callType!.priority!.name);
-    tituloC = TextEditingController(text: call.callType!.title);
     descSolicitC = TextEditingController(text: call.descricao);
     logedUser = (await LocalStorageServices().getUser())!;
     super.onInit();
   }
+
+  setEditable() => isEditable.value = !isEditable.value;
 
   void addComentario() {
     comments.insert(0, CommentModel(date: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.now()), message: comentarioC.text, user: logedUser.email!));
@@ -56,7 +58,7 @@ class CallRequesterDetailDialogController extends GetxController {
     comentarioC.text = '';
   }
 
-  void finalizarChamado() async {
+  void alterarStatusChamado() async {
     CallRepository repository = CallRepositoryImpl();
     await repository.setStatus(call.id, 10).then((value) {
         statusC.value = value.name;
@@ -92,23 +94,13 @@ class CallRequesterDetailDialogController extends GetxController {
             ],
             rows: List<DataRow>.generate(
                 call.historico.length,
-                (index) => DataRow(cells: [
-                      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(call.historico[index].dateTime!)))),
-                      DataCell(Text(call.historico[index].user!)),
-                      DataCell(Text(call.historico[index].message!)),
-                    ]))),
+                (index) => DataRow(
+                  cells: [
+                    DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(call.historico[index].dateTime!)))),
+                    DataCell(Text(call.historico[index].user!)),
+                    DataCell(Text(call.historico[index].message!)),
+                  ]))),
     );
   }
 
-  static Widget dropDownButton() {
-
-    MenuItem home = MenuItem(text: 'Editar', icon: Icons.home, function: () {print('object');});
-    MenuItem settings = MenuItem(text: 'Cancelar', icon: Icons.settings, function: () {});
-    MenuItem share = MenuItem(text: 'Finalizar', icon: Icons.share, function: () {});
-    MenuItem logout = MenuItem(text: 'Histórico', icon: Icons.logout, function: () {});
-
-    List<MenuItem> itens = [home, share, settings, logout];
-    
-    return CustomDropDownButton(itens: itens);
-  }
 }
