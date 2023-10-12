@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:chamados/app/models/error_dto.dart';
-import 'package:chamados/app/models/rest_exception.dart';
-import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:dio/dio.dart';
+
+import '../../core/utils/helper.dart';
+import '../data/models/error_dto.dart';
+import '../data/models/rest_exception.dart';
 
 abstract class BaseRepository<T> {
   final String basePath;
