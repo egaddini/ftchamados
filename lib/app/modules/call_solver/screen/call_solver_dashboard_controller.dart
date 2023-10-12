@@ -1,5 +1,3 @@
-
-
 import '../../../data/models/call.dart';
 import '../../../data/providers/local_storage/local_storage.dart';
 import '../../../widgets/custom_data_table/custom_paginated_data_table2.controller.dart';

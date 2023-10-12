@@ -6,7 +6,6 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
-
 import 'package:chamados/core/utils/helper.dart';
 
 import '../../../data/models/call.dart';

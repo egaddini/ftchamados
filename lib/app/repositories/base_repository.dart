@@ -22,7 +22,8 @@ abstract class BaseRepository<T> {
       message = result.statusMessage!;
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
     return message;
   }
@@ -38,11 +39,14 @@ abstract class BaseRepository<T> {
       List<dynamic> jsonList = response.data as List<dynamic>;
       results = jsonList.map((json) => entityFromMap(json)).toList();
       if (query != null) {
-        results = results.where((element) => shouldIncludeInList(element, query)).toList();
+        results = results
+            .where((element) => shouldIncludeInList(element, query))
+            .toList();
       }
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
     return results;
   }
@@ -57,7 +61,8 @@ abstract class BaseRepository<T> {
       message = result.statusMessage!;
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
     return message;
   }
@@ -73,7 +78,8 @@ abstract class BaseRepository<T> {
       message = result.statusMessage!;
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
     return message;
   }
@@ -87,7 +93,8 @@ abstract class BaseRepository<T> {
       return entityFromMap(response.data);
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
   }
 

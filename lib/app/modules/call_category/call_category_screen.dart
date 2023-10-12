@@ -21,8 +21,7 @@ part 'components/row_source.dart';
 part 'components/create_update_category_dialog.dart';
 
 class CallCategoryStatusScreen
-    extends CustomPaginatedDataTable2
-    <CallCategoryController> {
+    extends CustomPaginatedDataTable2<CallCategoryController> {
   const CallCategoryStatusScreen({super.key});
 
   @override
