@@ -1,9 +1,10 @@
 import 'dart:convert';
 
-import 'package:chamados/app/models/error_dto.dart';
-import 'package:chamados/app/models/rest_exception.dart';
-import 'package:chamados/app/utils/helpers/helper.dart';
 import 'package:dio/dio.dart';
+
+import '../../core/utils/helper.dart';
+import '../data/models/error_dto.dart';
+import '../data/models/rest_exception.dart';
 
 abstract class BaseRepository<T> {
   final String basePath;
@@ -21,7 +22,8 @@ abstract class BaseRepository<T> {
       message = result.statusMessage!;
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
     return message;
   }
@@ -37,11 +39,14 @@ abstract class BaseRepository<T> {
       List<dynamic> jsonList = response.data as List<dynamic>;
       results = jsonList.map((json) => entityFromMap(json)).toList();
       if (query != null) {
-        results = results.where((element) => shouldIncludeInList(element, query)).toList();
+        results = results
+            .where((element) => shouldIncludeInList(element, query))
+            .toList();
       }
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
     return results;
   }
@@ -56,7 +61,8 @@ abstract class BaseRepository<T> {
       message = result.statusMessage!;
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
     return message;
   }
@@ -72,7 +78,8 @@ abstract class BaseRepository<T> {
       message = result.statusMessage!;
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
     return message;
   }
@@ -86,7 +93,8 @@ abstract class BaseRepository<T> {
       return entityFromMap(response.data);
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
   }
 

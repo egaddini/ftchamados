@@ -1,12 +1,14 @@
 import 'dart:ui';
 
-import 'package:chamados/app/config/themes/theme_manager.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:get/get.dart';
 
-import 'app/config/routes/app_pages.dart';
-import 'app/config/themes/theme_constants.dart';
+import 'package:chamados/core/theme/theme_manager.dart';
+
+import 'core/languages/locales.g.dart';
+import 'routes/app_pages.dart';
 
 void main() {
   setUrlStrategy(PathUrlStrategy());
@@ -27,6 +29,7 @@ class MyApp extends StatelessWidget {
       getPages: AppPages.pages,
       debugShowCheckedModeBanner: false,
       scrollBehavior: CustomScrollBehaviour(),
+      translationsKeys: AppTranslation.translations,
     );
   }
 }
@@ -36,5 +39,5 @@ class CustomScrollBehaviour extends MaterialScrollBehavior {
   Set<PointerDeviceKind> get dragDevices => {
         PointerDeviceKind.touch,
         PointerDeviceKind.mouse,
-  };
+      };
 }
