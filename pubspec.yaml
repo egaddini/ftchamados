@@ -23,7 +23,7 @@ dependencies:
   flutter_web_plugins:
     sdk: flutter
   async: ^2.10.0
-  test_api: ^0.5.1
+  test_api: ^0.6.0
   js: ^0.6.5
   get: ^4.6.5
   shared_preferences: ^2.0.6
