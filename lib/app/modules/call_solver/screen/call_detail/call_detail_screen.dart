@@ -20,7 +20,6 @@ void callSolverDetailDialog(Call call) {
       text: 'Editar',
       icon: Icons.edit_outlined,
       function: () {
-        print('object');
       });
   MenuItem historic = MenuItem(
       text: 'Histórico', icon: Icons.history_outlined, function: () {});

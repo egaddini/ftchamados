@@ -97,7 +97,7 @@ class HomeScreen extends GetView<HomeScreenController> {
               ),
             )),
       onLoading: buildLoadingIndicator(),
-      onEmpty: Text('No data found'),
+      onEmpty: const Text('No data found'),
       onError: (error) => Text(error!),
     );
   }

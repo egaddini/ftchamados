@@ -77,7 +77,7 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: PaginatedDataTable2(
-                        actions: [],
+                        actions: const [],
                         sortColumnIndex: 0,
                         sortAscending: sort,
                         header: Padding(

@@ -56,5 +56,6 @@ class PriorityModel {
     return other.id == id && other.name == name && other.weight == weight;
   }
 
+  @override
   int get hashCode => id.hashCode ^ name.hashCode ^ weight.hashCode;
 }

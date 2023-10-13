@@ -48,7 +48,7 @@ class MenuDrawer extends StatelessWidget {
                     Colors.white,
                     null,
                     'Notificações',
-                    () => print('asdasd'),
+                    () => {},
                   ),
                 ),
               ],

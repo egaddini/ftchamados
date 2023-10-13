@@ -14,7 +14,6 @@ import '../../../data/models/user_model.dart';
 import '../../../widgets/c_password_field.dart';
 import '../../../widgets/c_text_form_field.dart';
 import '../../login/auth_repository.dart';
-import '../../login/auth_repository.dart';
 
 part '../components/singup_form.dart';
 

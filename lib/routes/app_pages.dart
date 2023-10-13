@@ -42,7 +42,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.call,
-      page: () => CallSolverDashboardScreen(),
+      page: () => const CallSolverDashboardScreen(),
       binding: CallSolverDashboardBindings(),
     ),
     GetPage(

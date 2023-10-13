@@ -6,10 +6,10 @@ void callStatusFlowDialog() {
       builder: (_) => AlertDialog(
             titlePadding: const EdgeInsets.all(8),
             title: AppBar(
-              title: Text('Status Flow'),
+              title: const Text('Status Flow'),
               forceMaterialTransparency: true,
             ),
-            content: SizedBox(
+            content: const SizedBox(
               width: 600,
               child: CallStatusFlow(),
             ),
@@ -111,7 +111,7 @@ class Start extends StatelessWidget {
       child: Center(
         child: Text(
           data.text,
-          style: Theme.of(context).textTheme.subtitle2,
+          style: Get.theme.textTheme.titleMedium,
         ),
       ),
     );
@@ -136,7 +136,7 @@ class Document extends StatelessWidget {
       child: Center(
         child: Text(
           data.text,
-          style: Theme.of(context).textTheme.subtitle2,
+          style: Get.theme.textTheme.titleMedium,
         ),
       ),
     );
@@ -161,7 +161,7 @@ class Process extends StatelessWidget {
       child: Center(
         child: Text(
           data.text,
-          style: Theme.of(context).textTheme.subtitle2,
+          style: Get.theme.textTheme.titleMedium,
         ),
       ),
     );
@@ -196,7 +196,7 @@ class Decision extends StatelessWidget {
           child: Center(
             child: Text(
               data.text,
-              style: Theme.of(context).textTheme.subtitle2,
+              style: Get.theme.textTheme.titleMedium,
             ),
           ),
         )
@@ -223,7 +223,7 @@ class End extends StatelessWidget {
       child: Center(
         child: Text(
           data.text,
-          style: Theme.of(context).textTheme.subtitle2,
+          style: Get.theme.textTheme.titleMedium,
         ),
       ),
     );
