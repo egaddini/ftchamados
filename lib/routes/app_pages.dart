@@ -1,3 +1,4 @@
+import 'package:chamados/app/modules/singup/singup_page.dart';
 import 'package:get/get.dart';
 
 import 'package:chamados/app/modules/singup/singup_bindings.dart';
@@ -20,7 +21,6 @@ import '../app/modules/home/home_screen.dart';
 import '../app/modules/home/home_screen_bindings.dart';
 import '../app/modules/login/login_screen.dart';
 import '../app/modules/login/login_screen_bindings.dart';
-import '../app/modules/singup/singup_screen.dart';
 import '../app/modules/user/screens/user_screen.dart';
 import '../app/modules/user/screens/user_screen_bindings.dart';
 
@@ -40,7 +40,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.singup,
-      page: () => const SingupScreen(),
+      page: () => const SingupPage(),
       binding: SingUpBinding(),
     ),
     GetPage(
