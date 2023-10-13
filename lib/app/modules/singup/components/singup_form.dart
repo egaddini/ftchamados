@@ -9,7 +9,7 @@ class SingupForm extends StatefulWidget {
 
 class _SingupFormState extends State<SingupForm> {
   bool isLoading = false;
-  AuthRepository authRepository = AuthRepositoryImpl();
+  AuthRepository authRepository = AuthRepository();
 
   MaskTextInputFormatter maskFormatter = MaskTextInputFormatter(
       mask: '(##) #####-####', filter: {"#": RegExp(r'[0-9]')});

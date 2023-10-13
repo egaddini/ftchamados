@@ -14,7 +14,7 @@ class UserInfoModel {
   String? token;
   bool? active;
   String? creationDT;
-  List<SectorModel> sectors;
+  List<SectorModel>? sectors;
 
   UserInfoModel({
     this.id,
@@ -26,7 +26,7 @@ class UserInfoModel {
     this.token,
     this.active,
     this.creationDT,
-    required this.sectors,
+    this.sectors,
   });
 
   UserInfoModel copyWith({

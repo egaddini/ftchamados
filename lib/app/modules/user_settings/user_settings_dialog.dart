@@ -31,7 +31,7 @@ class UsersSettingsForm extends StatelessWidget {
       children: [
         Wrap(
           children: [
-            CustomFlexCard(
+            CustomCard.customClickableCard(
               content: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -51,7 +51,7 @@ class UsersSettingsForm extends StatelessWidget {
               ),
               function: () => Get.toNamed(AppRoutes.users),
             ),
-            CustomFlexCard(
+            CustomCard.customClickableCard(
               content: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

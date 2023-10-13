@@ -134,7 +134,7 @@ class CallSolverStatisticsScreen
                 children: [
                   Column(
                     children: [
-                      CustomFlexCard(
+                      CustomCard.customClickableCard(
                         content: Column(
                           children: [
                             Padding(
@@ -151,7 +151,7 @@ class CallSolverStatisticsScreen
                         ),
                         function: () => Get.toNamed(AppRoutes.callStatus),
                       ),
-                      CustomFlexCard(
+                      CustomCard.customClickableCard(
                         content: Column(
                           children: [
                             Padding(
@@ -168,7 +168,7 @@ class CallSolverStatisticsScreen
                         ),
                         function: () => Get.toNamed(AppRoutes.callStatus),
                       ),
-                      CustomFlexCard(
+                      CustomCard.customClickableCard(
                         content: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -186,7 +186,7 @@ class CallSolverStatisticsScreen
                         ),
                         function: () => Get.toNamed(AppRoutes.callStatus),
                       ),
-                      CustomFlexCard(
+                      CustomCard.customClickableCard(
                         content: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -206,7 +206,7 @@ class CallSolverStatisticsScreen
                       ),
                     ],
                   ),
-                  CustomFlexCard(
+                  CustomCard.customClickableCard(
                     height: 500,
                     width: 400,
                     content: Column(
@@ -252,7 +252,7 @@ class CallSolverStatisticsScreen
                   ),
                   Column(
                     children: [
-                      CustomFlexCard(
+                      CustomCard.customClickableCard(
                         height: 200,
                         width: 350,
                         content: Column(
@@ -283,7 +283,7 @@ class CallSolverStatisticsScreen
                         ),
                         function: () => Get.toNamed(AppRoutes.callStatus),
                       ),
-                      CustomFlexCard(
+                      CustomCard.customClickableCard(
                         height: 280,
                         width: 350,
                         content: Column(

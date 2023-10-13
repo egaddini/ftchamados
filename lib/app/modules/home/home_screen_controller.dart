@@ -1,6 +1,7 @@
 part of home_screen;
 
-class HomeScreenController extends GetxController {
+class HomeScreenController extends GetxController
+    with StateMixin<CallCategoryModel> {
   RxBool isHovered = false.obs, isLoading = true.obs;
   RxList<CallCategoryModel> itens = <CallCategoryModel>[].obs;
   CallCategoryRepository callRepo = CallCategoryRepository();
@@ -22,6 +23,7 @@ class HomeScreenController extends GetxController {
           logedUser == null
               ? Get.offAndToNamed(AppRoutes.login)
               : isLoading.value = false,
+          change(null, status: RxStatus.success()),
         });
     super.onInit();
   }
@@ -31,7 +33,7 @@ class HomeScreenController extends GetxController {
   Widget drawer() => MenuDrawer(user: logedUser!);
 
   Widget buildCard(CallCategoryModel call) {
-    return CustomFlexCard(
+    return CustomCard.customClickableCard(
       height: 300,
       content: Padding(
         padding: const EdgeInsets.all(6.0),

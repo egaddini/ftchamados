@@ -37,7 +37,7 @@ class UserDetailsDialogController extends GetxController
       if (value != null) {
         logedUser = value;
         isAdmin.value = value.isAdmin();
-        selectedItens.value = user.sectors;
+        selectedItens.value = user.sectors!;
       } else {
         Get.offAndToNamed(AppRoutes.login);
         snackSucessRegister('Algo de errado aconteceu',

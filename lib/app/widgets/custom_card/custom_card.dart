@@ -1,22 +1,15 @@
 import 'package:flutter/material.dart';
 
+import 'package:get/get.dart';
+
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-class CustomFlexCard extends StatelessWidget {
-  final Function function;
-  final Widget content;
-  final double width, height;
-
-  const CustomFlexCard({
-    Key? key,
-    required this.function,
-    required this.content,
-    this.width = 300,
-    this.height = 100,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+class CustomCard {
+  static Widget customClickableCard(
+      {Function? function,
+      Widget? content,
+      double width = 300,
+      double height = 100}) {
     return Card(
       elevation: 4,
       child: InkWell(
@@ -25,24 +18,31 @@ class CustomFlexCard extends StatelessWidget {
           height: height,
           child: content,
         ),
-        onTap: () => function(),
+        onTap: () => function != null ? function() : null,
       ),
     );
   }
-}
 
-Widget customFlexCard(Widget content, Function function) {
-  return Flexible(
-    child: Card(
+  static Widget customCard(
+      {Function? function,
+      Widget? content,
+      required double? width,
+      double? height,
+      bool border = false}) {
+    return Card(
       elevation: 4,
-      child: InkWell(
+      child: Container(
+        decoration: !border
+            ? null
+            : BoxDecoration(
+                border: Border.all(color: Get.theme.primaryColor),
+                borderRadius: BorderRadius.circular(15)),
         child: SizedBox(
-          width: 300,
-          height: 100,
+          width: width,
+          height: height,
           child: content,
         ),
-        onTap: () => function(),
       ),
-    ),
-  );
+    );
+  }
 }

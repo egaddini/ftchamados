@@ -139,7 +139,7 @@ Widget buildLoadingIndicator() {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        CustomFlexCard(
+        CustomCard.customClickableCard(
           height: 120,
           width: 250,
           content: Column(

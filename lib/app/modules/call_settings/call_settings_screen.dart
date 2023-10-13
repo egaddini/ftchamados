@@ -31,7 +31,7 @@ class CallSettingsForm extends StatelessWidget {
       children: [
         Wrap(
           children: [
-            CustomFlexCard(
+            CustomCard.customClickableCard(
               content: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -51,7 +51,7 @@ class CallSettingsForm extends StatelessWidget {
               ),
               function: () => Get.toNamed(AppRoutes.callStatus),
             ),
-            CustomFlexCard(
+            CustomCard.customClickableCard(
               content: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -76,7 +76,7 @@ class CallSettingsForm extends StatelessWidget {
         Wrap(
           // mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomFlexCard(
+            CustomCard.customClickableCard(
               content: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -96,7 +96,7 @@ class CallSettingsForm extends StatelessWidget {
               ),
               function: () => Get.toNamed(AppRoutes.callPriority),
             ),
-            CustomFlexCard(
+            CustomCard.customClickableCard(
               content: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

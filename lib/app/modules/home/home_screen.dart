@@ -33,63 +33,72 @@ class HomeScreen extends GetView<HomeScreenController> {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() => controller.isLoading.value
-        ? buildLoadingIndicator()
-        : Scaffold(
-            appBar: AppBar(title: const Text('Apoio')),
-            endDrawer: controller.drawer(),
-            body: SingleChildScrollView(
-              child:
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                addVerticalSpace(100),
-                const Text(
-                  'Como podemos ajudar?',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 45,
-                  ),
-                ),
-                addVerticalSpace(40),
-                Padding(
-                  padding: const EdgeInsets.all(40.0),
-                  child: TypeAheadField<CallCategoryModel>(
-                    textFieldConfiguration: TextFieldConfiguration(
-                      controller: _aheadController,
-                      textInputAction: TextInputAction.search,
-                      textCapitalization: TextCapitalization.words,
-                      decoration: const InputDecoration(
-                        labelText: 'Digite um texto',
-                        suffixIcon: Icon(Icons.search_outlined),
+    return controller.obx(
+      (state) => Obx(() => controller.isLoading.value
+          ? buildLoadingIndicator()
+          : Scaffold(
+              appBar: AppBar(title: const Text('Apoio')),
+              endDrawer: controller.drawer(),
+              body: SingleChildScrollView(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      addVerticalSpace(100),
+                      const Text(
+                        'Como podemos ajudar?',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 45,
+                        ),
                       ),
-                    ),
-                    suggestionsCallback: (pattern) => controller.itens,
-                    itemBuilder: (context, CallCategoryModel call) => ListTile(
-                      title: Text('${call.sector!.acronym} - ${call.title}'),
-                    ),
-                    onSuggestionSelected: (CallCategoryModel call) async =>
-                        newCallDialog(call),
-                  ),
-                ),
-                addVerticalSpace(100),
-                SizedBox(
-                  child: Expanded(
-                    child: CarouselSlider(
-                      items: controller.imgList,
-                      carouselController: controller.carouselC,
-                      options: CarouselOptions(
-                        height: 300,
-                        autoPlay: true,
-                        enlargeCenterPage: true,
-                        viewportFraction: 0.2,
-                        enlargeFactor: 0.1,
-                        onPageChanged: (index, reason) =>
-                            controller.setCarousel(index),
+                      addVerticalSpace(40),
+                      Padding(
+                        padding: const EdgeInsets.all(40.0),
+                        child: TypeAheadField<CallCategoryModel>(
+                          textFieldConfiguration: TextFieldConfiguration(
+                            controller: _aheadController,
+                            textInputAction: TextInputAction.search,
+                            textCapitalization: TextCapitalization.words,
+                            decoration: const InputDecoration(
+                              labelText: 'Digite um texto',
+                              suffixIcon: Icon(Icons.search_outlined),
+                            ),
+                          ),
+                          suggestionsCallback: (pattern) => controller.itens,
+                          itemBuilder: (context, CallCategoryModel call) =>
+                              ListTile(
+                            title:
+                                Text('${call.sector!.acronym} - ${call.title}'),
+                          ),
+                          onSuggestionSelected:
+                              (CallCategoryModel call) async =>
+                                  newCallDialog(call),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ]),
-            ),
-          ));
+                      addVerticalSpace(100),
+                      SizedBox(
+                        child: Expanded(
+                          child: CarouselSlider(
+                            items: controller.imgList,
+                            carouselController: controller.carouselC,
+                            options: CarouselOptions(
+                              height: 300,
+                              autoPlay: true,
+                              enlargeCenterPage: true,
+                              viewportFraction: 0.2,
+                              enlargeFactor: 0.1,
+                              onPageChanged: (index, reason) =>
+                                  controller.setCarousel(index),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
+              ),
+            )),
+      onLoading: buildLoadingIndicator(),
+      onEmpty: Text('No data found'),
+      onError: (error) => Text(error!),
+    );
   }
 }

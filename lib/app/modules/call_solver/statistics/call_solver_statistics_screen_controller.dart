@@ -15,7 +15,7 @@ class CallSolverStatisticsScreenController extends GetxController {
   final CarouselController carouselC = CarouselController();
 
   final List<Widget> imgList = [
-    CustomFlexCard(
+    CustomCard.customClickableCard(
       content: Column(
         children: [
           Padding(
@@ -32,7 +32,7 @@ class CallSolverStatisticsScreenController extends GetxController {
       ),
       function: () => Get.toNamed(AppRoutes.callStatus),
     ),
-    CustomFlexCard(
+    CustomCard.customClickableCard(
       content: Column(
         children: [
           Padding(
@@ -49,7 +49,7 @@ class CallSolverStatisticsScreenController extends GetxController {
       ),
       function: () => Get.toNamed(AppRoutes.callStatus),
     ),
-    CustomFlexCard(
+    CustomCard.customClickableCard(
       content: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -67,7 +67,7 @@ class CallSolverStatisticsScreenController extends GetxController {
       ),
       function: () => Get.toNamed(AppRoutes.callStatus),
     ),
-    CustomFlexCard(
+    CustomCard.customClickableCard(
       content: Column(
         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
