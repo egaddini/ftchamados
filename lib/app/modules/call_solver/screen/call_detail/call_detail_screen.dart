@@ -16,11 +16,8 @@ import '../../../call/components/call_detail/call_detail_controller.dart';
 // AppBar(title: Text('Chamado - ${controller.siglaC.text} ${controller.tituloC.text}'),),
 
 void callSolverDetailDialog(Call call) {
-  MenuItem edit = MenuItem(
-      text: 'Editar',
-      icon: Icons.edit_outlined,
-      function: () {
-      });
+  MenuItem edit =
+      MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () {});
   MenuItem historic = MenuItem(
       text: 'Histórico', icon: Icons.history_outlined, function: () {});
   MenuItem share = MenuItem(

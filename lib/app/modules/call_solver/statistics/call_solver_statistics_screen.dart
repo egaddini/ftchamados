@@ -221,7 +221,8 @@ class CallSolverStatisticsScreen
                         Obx(
                           () => PieChart(
                             dataMap: controller.dataMapGeral,
-                            animationDuration: const Duration(milliseconds: 300),
+                            animationDuration:
+                                const Duration(milliseconds: 300),
                             chartLegendSpacing: 32,
                             chartRadius: 300,
                             colorList: controller.colorList,
