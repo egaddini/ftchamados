@@ -9,8 +9,6 @@ import '../../../routes/app_pages.dart';
 import '../../data/models/login_model.dart';
 import '../../data/services/app_config/service.dart';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 class LoginScreenController extends GetxController {
   RxBool isLoading = false.obs;
 
@@ -30,10 +28,12 @@ class LoginScreenController extends GetxController {
 
   void onClickContinuar() {
     if (formKey.currentState?.validate() ?? false) {
-      LoginModel loginModel = LoginModel(email: emailEC.text, password: passwordEC.text);
+      LoginModel loginModel =
+          LoginModel(email: emailEC.text, password: passwordEC.text);
       isLoading.value = true;
       authRepository.authenticate(loginModel).then((modelResponse) {
         config.changeUserData(modelResponse.toJson());
+        config.changeIsLogged(true);
         Get.offAndToNamed(AppRoutes.home);
       }).catchError((error) {
         isLoading.value = false;

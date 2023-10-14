@@ -50,8 +50,15 @@ class CallStatusScreen extends CustomPaginatedDataTable2<CallStatusController> {
       DataColumn2(label: Text("Nome"), size: ColumnSize.M),
       DataColumn2(label: Text("Descrição"), size: ColumnSize.M),
       DataColumn2(label: Text("Peso"), size: ColumnSize.M),
-      DataColumn2(label: Text("Notifica Usuário",),),
-      DataColumn2(label: Text('',)),
+      DataColumn2(
+        label: Text(
+          "Notifica Usuário",
+        ),
+      ),
+      DataColumn2(
+          label: Text(
+        '',
+      )),
     ];
   }
 

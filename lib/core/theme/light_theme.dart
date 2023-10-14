@@ -1,6 +1,6 @@
 part of theme_manager;
 
-ThemeData lightTheme =  FlexThemeData.light(
+ThemeData lightTheme = FlexThemeData.light(
   scheme: FlexScheme.bahamaBlue,
   appBarElevation: 1.5,
   subThemesData: const FlexSubThemesData(

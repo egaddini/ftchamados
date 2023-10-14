@@ -1,6 +1,7 @@
 part of home_screen;
 
-class HomeScreenController extends GetxController with StateMixin<CallCategoryModel> {
+class HomeScreenController extends GetxController
+    with StateMixin<CallCategoryModel> {
   RxBool isHovered = false.obs, isLoading = true.obs;
   RxList<CallCategoryModel> itens = <CallCategoryModel>[].obs;
   CallCategoryRepository callRepo = CallCategoryRepository();
@@ -13,72 +14,20 @@ class HomeScreenController extends GetxController with StateMixin<CallCategoryMo
   late AppConfigService _appConfigService;
 
   @override
-  void onInit() {
-
-  Widget drawer() => const MenuDrawer();
-
+  void onInit() async {
     _appConfigService = Get.find<AppConfigService>();
-
     logedUser = UserInfoModel.fromJson(_appConfigService.userData());
 
-    // LocalStorageServices().getUser().then((value) => {
-    //       logedUser = value,
-    //       callRepo.getList().then((value) => {
-    //             itens = value.obs,
-    //             imgList.addAll(
-    //                 value.map((element) => buildCard(element)).toList()),
-    //           }),
-    //       logedUser == null
-    //           ? Get.offAndToNamed(AppRoutes.login)
-    //           : isLoading.value = false,
-    //     });
-    isLoading.value = false;
+    await callRepo.getList().then((value) => {
+          itens = value.obs,
+          imgList.addAll(value
+              .map((element) => CarrouselCardWidget(call: element))
+              .toList()),
+        });
+
     change(null, status: RxStatus.success());
     super.onInit();
   }
 
   setCarousel(int index) => current.value = index;
-
-
-  Widget buildCard(CallCategoryModel call) {
-    return CustomCard.customClickableCard(
-      height: 300,
-      content: Padding(
-        padding: const EdgeInsets.all(6.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-                padding: const EdgeInsets.all(6.0),
-                child: Text(
-                  call.title!,
-                  style: Get.textTheme.headlineSmall,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
-                )),
-            Text(
-              'Setor: ${call.sector!.acronym} - ${call.sector!.name}',
-              style: Get.textTheme.bodyLarge,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-            Text(
-              'Prioridade: ${call.priority!.name}',
-              style: Get.textTheme.bodyLarge,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 1,
-            ),
-            Text(
-              'Descrição: ${call.description!}',
-              style: Get.textTheme.bodyLarge,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 7,
-            ),
-          ],
-        ),
-      ),
-      function: () => newCallDialog(call),
-    );
-  }
 }

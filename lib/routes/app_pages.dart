@@ -1,8 +1,9 @@
-import 'package:chamados/app/modules/drawer/menu_drawer_bindings.dart';
-import 'package:chamados/app/modules/singup/singup_page.dart';
 import 'package:get/get.dart';
 
+import 'package:chamados/app/data/middlewares/auth_middleware.dart';
+import 'package:chamados/app/modules/drawer/menu_drawer_bindings.dart';
 import 'package:chamados/app/modules/singup/singup_bindings.dart';
+import 'package:chamados/app/modules/singup/singup_page.dart';
 
 import '../app/modules/call_category/call_category_bidings.dart';
 import '../app/modules/call_category/call_category_screen.dart';
@@ -28,20 +29,23 @@ import '../app/modules/user/screens/user_screen_bindings.dart';
 part 'app_routes.dart';
 
 abstract class AppPages {
-
   static final List<GetPage> pages = [
     GetPage(
-      name: AppRoutes.login,
-      page: () => const LoginScreen(),
-      binding: LoginScreenBindings(),
-    ),
+        name: AppRoutes.login,
+        page: () => const LoginScreen(),
+        binding: LoginScreenBindings(),
+        participatesInRootNavigator: true,
+        preventDuplicates: true,
+        middlewares: [
+          EnsureNotAuthedMiddleware(),
+        ]),
     GetPage(
       name: AppRoutes.home,
       page: () => HomeScreen(),
       bindings: [
         HomeScreenBindings(),
         MenuDrawerBinding(),
-      ]
+      ],
     ),
     GetPage(
       name: AppRoutes.singup,
@@ -89,5 +93,4 @@ abstract class AppPages {
       binding: CallSolverStatisticsScreenBindings(),
     ),
   ];
-  
 }

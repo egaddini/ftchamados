@@ -1,7 +1,6 @@
 part of 'app_pages.dart';
 
 abstract class AppRoutes {
-
   static const home = '/';
   static const login = '/login';
   static const singup = '/singup';
@@ -16,5 +15,4 @@ abstract class AppRoutes {
   static const callPriority = '/call-priority';
   static const callGraphs = '/call-graphs';
   static const callSolverStatistics = '/call-solver-statistics';
-  
 }

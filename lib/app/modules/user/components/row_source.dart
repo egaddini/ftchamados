@@ -41,10 +41,8 @@ DataRow recentFileDataRow(UserInfoModel user, UserScreenController controller) {
       DataCell(
         Checkbox(
           value: user.active,
-          onChanged: (value) {
-          },
+          onChanged: (value) {},
         ),
-        
       ),
       DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm')
           .format(DateTime.parse(user.creationDT!))

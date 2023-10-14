@@ -31,6 +31,6 @@ class AppConfigService extends GetxService {
   }
 
   changeIsLogged(_) async => box.write(IS_LOGGED, _);
-  
+
   changeUserData(_) async => box.write(USER_DATA, _);
 }

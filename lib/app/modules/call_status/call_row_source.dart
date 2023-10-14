@@ -28,9 +28,11 @@ class RowSource extends DataTableSource {
   int get selectedRowCount => 0;
 }
 
-DataRow recentFileDataRow(CallStatusModel status, CallStatusController controller, int index) {
+DataRow recentFileDataRow(
+    CallStatusModel status, CallStatusController controller, int index) {
   return DataRow2(
-    onSelectChanged: (value) async => await createUpdateStatusDialog(status).then((value) => controller.data.refresh()),
+    onSelectChanged: (value) async => await createUpdateStatusDialog(status)
+        .then((value) => controller.data.refresh()),
     cells: [
       DataCell(Text(status.id.toString())),
       DataCell(Text(status.name)),
@@ -38,7 +40,7 @@ DataRow recentFileDataRow(CallStatusModel status, CallStatusController controlle
       DataCell(Text(status.weight.toString())),
       DataCell(
         Checkbox(
-          value: status.notify, 
+          value: status.notify,
           onChanged: (value) => controller.setValue(index),
         ),
       ),

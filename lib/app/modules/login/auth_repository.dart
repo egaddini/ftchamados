@@ -28,7 +28,8 @@ class AuthRepository {
       return UserInfoModel.fromMap(result.data);
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(
+          message: errorDTO.message, statusCode: errorDTO.status);
     }
   }
 
