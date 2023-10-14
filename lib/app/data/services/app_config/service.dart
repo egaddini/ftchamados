@@ -9,8 +9,11 @@ import '../../../../core/values/consts.dart';
 import '../../providers/api.dart';
 
 class AppConfigService extends GetxService {
+
   late AppConfigRepository repository;
   late GetStorage box;
+
+  instance() => Get.find<AppConfigService>();
 
   Future<AppConfigService> init() async {
     repository = AppConfigRepository(MyApi());

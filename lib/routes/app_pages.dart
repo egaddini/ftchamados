@@ -29,6 +29,7 @@ import '../app/modules/user/screens/user_screen_bindings.dart';
 part 'app_routes.dart';
 
 abstract class AppPages {
+
   static final List<GetPage> pages = [
     GetPage(
         name: AppRoutes.login,
@@ -93,4 +94,5 @@ abstract class AppPages {
       binding: CallSolverStatisticsScreenBindings(),
     ),
   ];
+  
 }

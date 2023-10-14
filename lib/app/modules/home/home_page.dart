@@ -51,7 +51,7 @@ class HomePage extends GetView<HomeController> {
                   itemBuilder: (context, CallCategoryModel call) => ListTile(
                     title: Text('${call.sector!.acronym} - ${call.title}'),
                   ),
-                  onSuggestionSelected: (CallCategoryModel call) async =>newCallDialog(call),
+                  onSuggestionSelected: (CallCategoryModel call) async => newCallDialog(call),
                 ),
               ),
               addVerticalSpace(100),

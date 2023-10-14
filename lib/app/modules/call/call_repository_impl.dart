@@ -9,12 +9,11 @@ import '../../data/models/call_dto.dart';
 import '../../data/models/call_status_model.dart';
 import '../../data/models/error_dto.dart';
 import '../../data/models/rest_exception.dart';
-import 'call_repository.dart';
 
-class CallRepositoryImpl implements CallRepository {
+class CallRepository {
+  
   final String _basePath = "http://localhost:9090/api/call/v1";
 
-  @override
   Future<String> register(CallDTO call) async {
     String message;
     final result = await Dio().post(
@@ -32,7 +31,6 @@ class CallRepositoryImpl implements CallRepository {
     return message;
   }
 
-  @override
   Future<List<Call>> getCallList({String? query}) async {
     List<Call> results = [];
 
@@ -57,7 +55,6 @@ class CallRepositoryImpl implements CallRepository {
     return results;
   }
 
-  @override
   Future<List<Call>> getCallListByEmail(String email) async {
     List<Call> results = [];
 
@@ -76,7 +73,6 @@ class CallRepositoryImpl implements CallRepository {
     return results;
   }
 
-  @override
   Future<CallStatusModel> setStatus(int callID, int statusID) async {
     final response = await Dio().get(
       '$_basePath/set-status/$callID',
