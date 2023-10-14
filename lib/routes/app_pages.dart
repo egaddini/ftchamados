@@ -1,3 +1,4 @@
+import 'package:chamados/app/modules/drawer/menu_drawer_bindings.dart';
 import 'package:chamados/app/modules/singup/singup_page.dart';
 import 'package:get/get.dart';
 
@@ -27,6 +28,7 @@ import '../app/modules/user/screens/user_screen_bindings.dart';
 part 'app_routes.dart';
 
 abstract class AppPages {
+
   static final List<GetPage> pages = [
     GetPage(
       name: AppRoutes.login,
@@ -36,7 +38,10 @@ abstract class AppPages {
     GetPage(
       name: AppRoutes.home,
       page: () => HomeScreen(),
-      binding: HomeScreenBindings(),
+      bindings: [
+        HomeScreenBindings(),
+        MenuDrawerBinding()
+      ]
     ),
     GetPage(
       name: AppRoutes.singup,
@@ -84,4 +89,5 @@ abstract class AppPages {
       binding: CallSolverStatisticsScreenBindings(),
     ),
   ];
+  
 }

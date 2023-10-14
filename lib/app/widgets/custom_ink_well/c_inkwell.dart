@@ -19,16 +19,15 @@ Widget cInkWell(
     () => InkWell(
       borderRadius: BorderRadius.circular(90),
       onHover: (value) {
-        if (hoverWidith != null)
-          dWidith.value = value ? hoverWidith : defaultWidith;
+        if (hoverWidith != null) dWidith.value = value ? hoverWidith : defaultWidith;
         if (hoverIcon != null) dIcon.value = value ? hoverIcon : defaultIcon;
-        if (hoverColor != null)
-          dColor.value = value ? hoverColor : defaultColor;
+        if (hoverColor != null) dColor.value = value ? hoverColor : defaultColor;
       },
       onTap: () => function(),
       child: Tooltip(
-          message: message,
-          child: Icon(dIcon.value, size: dWidith.value, color: dColor.value)),
+        message: message,
+        child: Icon(dIcon.value, size: dWidith.value, color: dColor.value)
+      ),
     ),
   );
 }

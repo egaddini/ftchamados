@@ -27,10 +27,10 @@ class AppConfigService extends GetxService {
 
   changeDarkMode(_) async {
     Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
-    Get.changeTheme(Get.isDarkMode ? ThemeData.light() : ThemeData.dark());
     await box.write(DARK_MODE, _);
   }
 
   changeIsLogged(_) async => box.write(IS_LOGGED, _);
+  
   changeUserData(_) async => box.write(USER_DATA, _);
 }

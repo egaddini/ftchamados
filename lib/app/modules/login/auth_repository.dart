@@ -19,21 +19,17 @@ class AuthRepository {
   final String AUTH_PATH = "/authenticate";
   final String REGISTER_PATH = "/register";
 
-  Future<void> authenticate(LoginModel login) async {
+  Future<UserInfoModel> authenticate(LoginModel login) async {
     final result = await Dio().post(
       BASE_PATH + AUTH_PATH,
       data: jsonEncode(login.toMap()),
       options: Options(headers: await getAuthHeader(false)),
     );
     if (result.statusCode == 200) {
-      LocalStorageServices localStorage = LocalStorageServices();
-      final UserInfoModel userInfo = UserInfoModel.fromMap(result.data);
-      await localStorage.saveUser(userInfo);
-      await localStorage.saveToken(userInfo.token.toString());
+      return UserInfoModel.fromMap(result.data);
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(
-          message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
     }
   }
 

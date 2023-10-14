@@ -1,7 +1,6 @@
 part of home_screen;
 
-class HomeScreenController extends GetxController
-    with StateMixin<CallCategoryModel> {
+class HomeScreenController extends GetxController with StateMixin<CallCategoryModel> {
   RxBool isHovered = false.obs, isLoading = true.obs;
   RxList<CallCategoryModel> itens = <CallCategoryModel>[].obs;
   CallCategoryRepository callRepo = CallCategoryRepository();
@@ -11,26 +10,35 @@ class HomeScreenController extends GetxController
 
   RxList<Widget> imgList = <Widget>[].obs;
 
+  late AppConfigService _appConfigService;
+
   @override
   void onInit() {
-    LocalStorageServices().getUser().then((value) => {
-          logedUser = value,
-          callRepo.getList().then((value) => {
-                itens = value.obs,
-                imgList.addAll(
-                    value.map((element) => buildCard(element)).toList()),
-              }),
-          logedUser == null
-              ? Get.offAndToNamed(AppRoutes.login)
-              : isLoading.value = false,
-          change(null, status: RxStatus.success()),
-        });
+
+  Widget drawer() => const MenuDrawer();
+
+    _appConfigService = Get.find<AppConfigService>();
+
+    logedUser = UserInfoModel.fromJson(_appConfigService.userData());
+
+    // LocalStorageServices().getUser().then((value) => {
+    //       logedUser = value,
+    //       callRepo.getList().then((value) => {
+    //             itens = value.obs,
+    //             imgList.addAll(
+    //                 value.map((element) => buildCard(element)).toList()),
+    //           }),
+    //       logedUser == null
+    //           ? Get.offAndToNamed(AppRoutes.login)
+    //           : isLoading.value = false,
+    //     });
+    isLoading.value = false;
+    change(null, status: RxStatus.success());
     super.onInit();
   }
 
   setCarousel(int index) => current.value = index;
 
-  Widget drawer() => MenuDrawer(user: logedUser!);
 
   Widget buildCard(CallCategoryModel call) {
     return CustomCard.customClickableCard(

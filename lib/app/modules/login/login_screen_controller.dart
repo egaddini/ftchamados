@@ -29,12 +29,11 @@ class LoginScreenController extends GetxController {
   }
 
   void onClickContinuar() {
-    var formValid = formKey.currentState?.validate() ?? false;
-    if (formValid) {
-      LoginModel loginModel =
-          LoginModel(email: emailEC.text, password: passwordEC.text);
+    if (formKey.currentState?.validate() ?? false) {
+      LoginModel loginModel = LoginModel(email: emailEC.text, password: passwordEC.text);
       isLoading.value = true;
-      authRepository.authenticate(loginModel).then((_) {
+      authRepository.authenticate(loginModel).then((modelResponse) {
+        config.changeUserData(modelResponse.toJson());
         Get.offAndToNamed(AppRoutes.home);
       }).catchError((error) {
         isLoading.value = false;

@@ -18,4 +18,5 @@ class SizeConfig {
 }
 
 percentW(x) => SizeConfig.wp(x);
+
 percentH(y) => SizeConfig.hp(y);

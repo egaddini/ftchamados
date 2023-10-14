@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 class Validators {
   Validators._();
 
-  static FormFieldValidator compare(
-      TextEditingController? valueEC, String message) {
+  static FormFieldValidator compare(TextEditingController? valueEC, String message) {
     return (value) {
       final valueCompare = valueEC?.text ?? '';
       if (value == null || (value != null && value != valueCompare)) {
@@ -14,8 +13,7 @@ class Validators {
     };
   }
 
-  static FormFieldValidator difere(
-      TextEditingController? valueEC, String message) {
+  static FormFieldValidator difere(TextEditingController? valueEC, String message) {
     return (value) {
       final valueCompare = valueEC?.text ?? '';
       if (value == null || (value != null && value == valueCompare)) {
