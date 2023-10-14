@@ -100,7 +100,7 @@ class MenuDrawer extends GetView<MenuDrawerController> {
                   ],
                 )
              ),
-            controller.changeThemeIcon(),
+            controller.setThemeWidget(),
             addVerticalSpace(10),
           ],
         ),

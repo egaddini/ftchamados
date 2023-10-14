@@ -11,11 +11,8 @@ import 'package:get/get.dart';
 import 'package:chamados/app/modules/call_category/call_category_repository.dart';
 import 'package:chamados/core/utils/helper.dart';
 
-import '../../../core/theme/theme_manager.dart';
-import '../../../routes/app_pages.dart';
 import '../../data/models/call_category_model.dart';
 import '../../data/models/user_info_model.dart';
-import '../../data/providers/local_storage/local_storage.dart';
 import '../../widgets/custom_card/custom_card.dart';
 import '../call/components/new_call/new_call_dialog.dart';
 

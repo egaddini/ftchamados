@@ -2,7 +2,6 @@
 import 'package:chamados/app/data/models/user_info_model.dart';
 import 'package:chamados/app/data/services/app_config/service.dart';
 import 'package:chamados/app/widgets/custom_ink_well/c_inkwell.dart';
-import 'package:chamados/core/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -44,16 +43,15 @@ class MenuDrawerController extends GetxController with StateMixin<UserInfoModel>
     },
   );
 
-  Widget changeThemeIcon() {
-    return InkWell(
-      borderRadius: BorderRadius.circular(90),
-      onHover: (value) {
-      },
-      onTap: () => _appConfigService.changeDarkMode(!_appConfigService.darkMode()),
-      child: Tooltip(
-        message: 'Alterar o Tema',
-        child: Icon(_appConfigService.darkMode() ? Icons.dark_mode_outlined : Icons.light_mode_outlined, size: 40, fill: 0.5,)
-      ),
-    );
-  }
+  Widget setThemeWidget() => InkWell(
+    borderRadius: BorderRadius.circular(90),
+    onHover: (value) {
+    },
+    onTap: () => _appConfigService.changeDarkMode(!_appConfigService.darkMode()),
+    child: Tooltip(
+      message: 'Alterar o Tema',
+      child: Icon(_appConfigService.darkMode() ? Icons.dark_mode_outlined : Icons.light_mode_outlined, size: 40, fill: 0.5,)
+    ),
+  );
+  
 }

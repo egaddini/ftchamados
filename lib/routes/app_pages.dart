@@ -40,7 +40,7 @@ abstract class AppPages {
       page: () => HomeScreen(),
       bindings: [
         HomeScreenBindings(),
-        MenuDrawerBinding()
+        MenuDrawerBinding(),
       ]
     ),
     GetPage(

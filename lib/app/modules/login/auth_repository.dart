@@ -10,7 +10,6 @@ import '../../data/models/login_model.dart';
 import '../../data/models/rest_exception.dart';
 import '../../data/models/user_info_model.dart';
 import '../../data/models/user_model.dart';
-import '../../data/providers/local_storage/local_storage.dart';
 
 // ignore_for_file: non_constant_identifier_names
 
