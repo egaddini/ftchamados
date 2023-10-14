@@ -19,8 +19,8 @@ import '../app/modules/call_solver/statistics/call_solver_statistics_screen.dart
 import '../app/modules/call_solver/statistics/call_solver_statistics_screen_bindings.dart';
 import '../app/modules/call_status/call_status_bidings.dart';
 import '../app/modules/call_status/call_status_screen.dart';
-import '../app/modules/home/home_screen.dart';
-import '../app/modules/home/home_screen_bindings.dart';
+import '../app/modules/home/home_page.dart';
+import '../app/modules/home/home_bindings.dart';
 import '../app/modules/login/login_screen.dart';
 import '../app/modules/login/login_screen_bindings.dart';
 import '../app/modules/user/screens/user_screen.dart';
@@ -41,9 +41,9 @@ abstract class AppPages {
         ]),
     GetPage(
       name: AppRoutes.home,
-      page: () => HomeScreen(),
+      page: () => const HomePage(),
       bindings: [
-        HomeScreenBindings(),
+        HomeBindings(),
         MenuDrawerBinding(),
       ],
     ),
