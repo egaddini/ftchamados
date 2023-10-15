@@ -1,15 +1,15 @@
 import 'package:dio/dio.dart';
 
-import 'package:chamados/app/data/providers/api_path.dart';
 import 'package:chamados/app/repositories/base_repository.dart';
 import 'package:chamados/core/utils/helper.dart';
 
+import '../../../core/values/api_path_constans.dart';
 import '../../data/models/error_dto.dart';
 import '../../data/models/priority.dart';
 import '../../data/models/rest_exception.dart';
 
 class PriorityRepository extends BaseRepository<PriorityModel> {
-  PriorityRepository() : super(ApiPath.priority);
+  PriorityRepository() : super(ApiPath.PRIORITY_PATH);
 
   Future<List<int>> getFreeWeights() async {
     final response = await Dio().get(

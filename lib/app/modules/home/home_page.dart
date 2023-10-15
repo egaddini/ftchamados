@@ -1,5 +1,6 @@
 library home_screen;
 
+import 'package:chamados/app/data/services/app_config/config.dart';
 import 'package:chamados/app/modules/call/call_repository_impl.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_controller.dart';
 import 'package:flutter/material.dart';

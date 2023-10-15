@@ -1,10 +1,10 @@
-import 'package:chamados/app/data/providers/api_path.dart';
 
+import '../../../core/values/api_path_constans.dart';
 import '../../data/models/sector_model.dart';
 import '../../repositories/base_repository.dart';
 
 class SectorRepository extends BaseRepository<SectorModel> {
-  SectorRepository() : super(ApiPath.sector);
+  SectorRepository() : super(ApiPath.SECTOR_PATH);
 
   @override
   SectorModel entityFromMap(Map<String, dynamic> map) {
