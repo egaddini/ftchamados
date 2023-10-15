@@ -1,32 +1,35 @@
-// ignore_for_file: non_constant_identifier_names
-
 import 'dart:convert';
 
 import 'package:chamados/app/data/services/app_config/config.dart';
 import 'package:get/get_connect/connect.dart';
 
 import '../../../core/utils/helper.dart';
-import '../../../core/values/api_path_constans.dart';
 import '../models/login_model.dart';
 
-class ChamadosApi extends GetConnect {
+class AuthApi extends GetConnect {
   
+  final String basePath = ConfigEnvironments.getEnvironments()['url']!;
+
+  final String authPath = "/authenticate";
+
+  final String registerPath = "/register";
+
   login(LoginModel x) async {
     final result = await post(
-      ConfigEnvironments.getEnvironments()['url']! + ApiPath.AUTH_PATH,
+      basePath + authPath,
       jsonEncode(x.toMap()),
       headers: getAuthHeader(),
     );
     return result;
   }
 
-  sigin(LoginModel x) async {
+  logout(LoginModel x) async {
     final result = await post(
-      ConfigEnvironments.getEnvironments()['url']! + ApiPath.REGISTER_PATH,
+      basePath + authPath,
       jsonEncode(x.toMap()),
       headers: getAuthHeader(),
     );
     return result;
   }
-    
+
 }

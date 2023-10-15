@@ -20,7 +20,7 @@ class CallCategoryRepository extends BaseRepository<CallCategoryModel> {
     final result = await Dio().post(
       basePath,
       data: jsonEncode(entity.toMap()),
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (result.statusCode == 200) {
       message = result.statusMessage!;

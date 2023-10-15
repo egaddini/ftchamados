@@ -8,7 +8,7 @@ import 'package:chamados/core/utils/helper.dart';
 import '../../../../data/models/call_category_model.dart';
 import '../../../../data/models/call_dto.dart';
 import '../../../../data/models/user_info_model.dart';
-import '../../call_repository_impl.dart';
+import '../../call_repository.dart';
 
 class NewCallController extends GetxController {
 

@@ -14,7 +14,7 @@ class CallStatusRepository extends BaseRepository<CallStatusModel> {
   Future<CallStatusModel> getByName(String name) async {
     final response = await Dio().get(
       '$basePath/name?name=$name',
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (response.statusCode == 200) {
       return entityFromMap(response.data);
@@ -28,7 +28,7 @@ class CallStatusRepository extends BaseRepository<CallStatusModel> {
   Future<List<int>> getFreeWeights() async {
     final response = await Dio().get(
       '$basePath/free-weights',
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (response.statusCode == 200) {
       return List<int>.from(response.data);

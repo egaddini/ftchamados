@@ -19,4 +19,8 @@ class ApiPath {
 
   static const PRIORITY_PATH = "$CALL_CATEGORY_PATH/priority";
 
+  static const AUTH_PATH = "/authenticate";
+
+  static const REGISTER_PATH = "/register";
+
 }

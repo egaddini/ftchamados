@@ -1,4 +1,4 @@
-import 'package:chamados/app/modules/call/call_repository_impl.dart';
+import 'package:chamados/app/modules/call/call_repository.dart';
 import 'package:get/get.dart';
 
 import 'call_requester_dashboard_controller.dart';

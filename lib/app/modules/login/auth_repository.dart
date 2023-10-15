@@ -22,7 +22,7 @@ class AuthRepository {
     final result = await Dio().post(
       BASE_PATH + AUTH_PATH,
       data: jsonEncode(login.toMap()),
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (result.statusCode == 200) {
       return UserInfoModel.fromMap(result.data);
@@ -38,7 +38,7 @@ class AuthRepository {
     final result = await Dio().post(
       BASE_PATH + REGISTER_PATH,
       data: jsonEncode(user.toMap()),
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (result.statusCode == 200) {
       message = result.statusMessage!;
@@ -55,7 +55,7 @@ class AuthRepository {
       final uri = Uri.http('localhost:9090', '/api/v1/authentication/logout');
       Dio().get(
         uri.toString(),
-        options: Options(headers: await getAuthHeader(true)),
+        options: Options(headers: getAuthHeader()),
       );
     } catch (e) {
       log("Erro na requisição", error: e);

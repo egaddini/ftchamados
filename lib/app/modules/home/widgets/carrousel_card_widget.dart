@@ -1,4 +1,4 @@
-import 'package:chamados/app/modules/call/call_repository_impl.dart';
+import 'package:chamados/app/modules/call/call_repository.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_controller.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_dialog.dart';
 import 'package:flutter/material.dart';

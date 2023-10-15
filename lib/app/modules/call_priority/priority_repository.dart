@@ -14,7 +14,7 @@ class PriorityRepository extends BaseRepository<PriorityModel> {
   Future<List<int>> getFreeWeights() async {
     final response = await Dio().get(
       '$basePath/free-weights',
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (response.statusCode == 200) {
       return List<int>.from(response.data);

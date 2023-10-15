@@ -19,8 +19,7 @@ import 'call_requester_dashboard_controller.dart';
 part 'call_requester_row_source.dart';
 part '../components/call_requester_detail_dialog.dart';
 
-class CallUserDashboardScreen
-    extends CustomPaginatedDataTable2<CallRequesterDashboardController> {
+class CallUserDashboardScreen extends CustomPaginatedDataTable2<CallRequesterDashboardController> {
   const CallUserDashboardScreen({super.key});
 
   @override

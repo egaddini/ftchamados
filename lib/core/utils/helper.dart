@@ -1,11 +1,13 @@
+import 'package:chamados/app/data/models/user_info_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:blinking_text/blinking_text.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
-import 'package:chamados/app/data/providers/local_storage/local_storage.dart';
 import 'package:chamados/app/widgets/custom_card/custom_card.dart';
+
+import '../../app/data/services/app_config/service.dart';
 
 Widget addVerticalSpace(double height) {
   return SizedBox(
@@ -94,20 +96,16 @@ Future<void> registerSucess(String titulo, String mensagem) {
           ));
 }
 
-Future<Map<String, String>> getAuthHeader(bool auth) async {
-  String? token = "";
-  if (auth) {
-    LocalStorageServices localStorage = LocalStorageServices();
-    token = await localStorage.getToken();
-    return {
+Map<String, String> getAuthHeader() {
+
+  final config = AppConfigService().to(); 
+
+  return (config.isLogged()) ? {
       'content-type': 'application/json;',
-      'authorization': 'Bearer $token'
-    };
-  } else {
-    return {
-      'content-type': 'application/json;',
-    };
-  }
+      'authorization': 'Bearer ${UserInfoModel.fromJson(config.userData()).token}'
+    } 
+    : {'content-type': 'application/json;'};
+  
 }
 
 void tratarErro(DioException e) {

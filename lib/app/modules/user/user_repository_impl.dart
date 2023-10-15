@@ -28,7 +28,7 @@ class UserRepositoryImpl implements UserRepository {
           Uri.http('localhost:9092', '/api/v1/user/email', {'email': email});
       final result = await Dio().get(
         uri.toString(),
-        options: Options(headers: await getAuthHeader(true)),
+        options: Options(headers: getAuthHeader()),
       );
       if (result.statusCode == 200) {
         user = UserModel.fromMap(result.data);
@@ -79,7 +79,7 @@ class UserRepositoryImpl implements UserRepository {
 
     final response = await Dio().get(
       _basePath,
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (response.statusCode == 200) {
       List<dynamic> jsonList = response.data as List<dynamic>;
@@ -103,7 +103,7 @@ class UserRepositoryImpl implements UserRepository {
     String message;
     final result = await Dio().get(
       '$_basePath$_ativaPath/$email',
-      options: Options(headers: await getAuthHeader(true)),
+      options: Options(headers: getAuthHeader()),
     );
     if (result.statusCode == 200) {
       message = result.statusMessage!;
@@ -120,7 +120,7 @@ class UserRepositoryImpl implements UserRepository {
     String message;
     final result = await Dio().delete(
       '$_basePath/$id',
-      options: Options(headers: await getAuthHeader(true)),
+      options: Options(headers: getAuthHeader()),
     );
     if (result.statusCode == 200) {
       message = result.statusMessage!;

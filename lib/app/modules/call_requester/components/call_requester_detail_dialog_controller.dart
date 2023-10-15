@@ -11,7 +11,7 @@ import '../../../data/models/comment_model.dart';
 import '../../../data/models/user_info_model.dart';
 import '../../../data/providers/local_storage/local_storage.dart';
 import '../../../widgets/custom_drop_down_menu_button/menu_item.dart';
-import '../../call/call_repository_impl.dart';
+import '../../call/call_repository.dart';
 
 class CallRequesterDetailDialogController extends GetxController {
   final Call call;

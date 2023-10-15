@@ -19,14 +19,13 @@ class CallRepository {
     final result = await Dio().post(
       _basePath,
       data: jsonEncode(call.toMap()),
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (result.statusCode == 200) {
       message = result.statusMessage!;
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(
-          message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
     }
     return message;
   }
@@ -36,7 +35,7 @@ class CallRepository {
 
     final response = await Dio().get(
       _basePath,
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (response.statusCode == 200) {
       List<dynamic> jsonList = response.data as List<dynamic>;
@@ -60,7 +59,7 @@ class CallRepository {
 
     final response = await Dio().get(
       '$_basePath/email/$email',
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (response.statusCode == 200) {
       List<dynamic> jsonList = response.data as List<dynamic>;
@@ -77,7 +76,7 @@ class CallRepository {
     final response = await Dio().get(
       '$_basePath/set-status/$callID',
       queryParameters: {'status': statusID.toString()},
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (response.statusCode == 200) {
       return CallStatusModel.fromMap(response.data);

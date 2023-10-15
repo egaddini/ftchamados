@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:chamados/core/utils/helper.dart';
 
 import '../../../data/models/call.dart';
-import '../call_repository_impl.dart';
+import '../call_repository.dart';
 import '../components/call_detail/call_detail_screen.dart';
 
 part '../components/row_source.dart';

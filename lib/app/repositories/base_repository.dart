@@ -16,7 +16,7 @@ abstract class BaseRepository<T> {
     final result = await Dio().post(
       basePath,
       data: jsonEncode(entityToMap(entity)),
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (result.statusCode == 200) {
       message = result.statusMessage!;
@@ -33,7 +33,7 @@ abstract class BaseRepository<T> {
 
     final response = await Dio().get(
       basePath,
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (response.statusCode == 200) {
       List<dynamic> jsonList = response.data as List<dynamic>;
@@ -55,7 +55,7 @@ abstract class BaseRepository<T> {
     String message;
     final result = await Dio().delete(
       '$basePath/$id',
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (result.statusCode == 200) {
       message = result.statusMessage!;
@@ -72,7 +72,7 @@ abstract class BaseRepository<T> {
     final result = await Dio().put(
       '$basePath/$id',
       data: jsonEncode(entityToMap(entity)),
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (result.statusCode == 200) {
       message = result.statusMessage!;
@@ -87,7 +87,7 @@ abstract class BaseRepository<T> {
   Future<T> getById(int id) async {
     final response = await Dio().get(
       '$basePath/$id',
-      options: Options(headers: await getAuthHeader(false)),
+      options: Options(headers: getAuthHeader()),
     );
     if (response.statusCode == 200) {
       return entityFromMap(response.data);

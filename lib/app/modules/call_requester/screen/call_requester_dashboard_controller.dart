@@ -4,7 +4,7 @@ import 'package:chamados/app/data/models/user_info_model.dart';
 import '../../../data/models/call.dart';
 import '../../../data/services/app_config/service.dart';
 import '../../../widgets/custom_data_table/custom_paginated_data_table2.controller.dart';
-import '../../call/call_repository_impl.dart';
+import '../../call/call_repository.dart';
 
 class CallRequesterDashboardController extends CustomPaginatedDataTable2Controller<Call> {
   
