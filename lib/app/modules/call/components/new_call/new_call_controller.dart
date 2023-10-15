@@ -1,9 +1,8 @@
-import 'package:chamados/app/data/services/app_config/service.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
+import 'package:chamados/app/data/services/app_config/service.dart';
 import 'package:chamados/core/utils/helper.dart';
 
 import '../../../../data/models/call_category_model.dart';
@@ -12,26 +11,22 @@ import '../../../../data/models/user_info_model.dart';
 import '../../call_repository_impl.dart';
 
 class NewCallController extends GetxController {
-  
-  final CallCategoryModel callCategory;
-
-  TextEditingController descreverProblemaC = TextEditingController(text: '');
-
-  TextEditingController? emailUsuarioC = TextEditingController();
-
-  final TextEditingController dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now()));
-
-  late CallRepository callRepo;
 
   late UserInfoModel logedUser;
+  TextEditingController descreverProblemaC = TextEditingController(text: '');
 
-  NewCallController({required this.callCategory});
+  final CallCategoryModel callCategory;
+  final CallRepository callRepo;
+
+  NewCallController({
+    required this.callCategory,
+    required this.callRepo,
+  });
 
 
   @override
   void onInit() {
     logedUser = UserInfoModel.fromJson(AppConfigService().instance().userData());
-    emailUsuarioC!.text = logedUser.email!;
     super.onInit();
   }
 

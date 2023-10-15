@@ -1,7 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 import 'package:chamados/core/utils/helper.dart';
+import 'package:intl/intl.dart';
 
 import 'new_call_controller.dart';
 
@@ -89,7 +89,7 @@ class NewCallForm extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       readOnly: true,
-                      controller: controller.dataAberturaC,
+                      controller: TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now())),
                       decoration: const InputDecoration(
                         labelText: 'Data de abertura da solicitação',
                       ),
@@ -99,7 +99,7 @@ class NewCallForm extends StatelessWidget {
                   Expanded(
                     child: TextField(
                       readOnly: true,
-                      controller: controller.emailUsuarioC,
+                      controller: TextEditingController(text:controller.logedUser.email),
                       decoration: const InputDecoration(
                         labelText: 'Usuário solicitante',
                       ),

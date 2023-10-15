@@ -1,5 +1,6 @@
 library home_screen;
 
+import 'package:chamados/app/modules/call/call_repository_impl.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_controller.dart';
 import 'package:flutter/material.dart';
 
@@ -52,7 +53,10 @@ class HomePage extends GetView<HomeController> {
                   itemBuilder: (context, CallCategoryModel call) => ListTile(
                     title: Text('${call.sector!.acronym} - ${call.title}'),
                   ),
-                  onSuggestionSelected: (CallCategoryModel call) async => Get.dialog(NewCallForm(controller: Get.put<NewCallController>(NewCallController(callCategory: call))),),
+                  onSuggestionSelected: (CallCategoryModel call) async => Get.dialog(
+                    NewCallForm(
+                      controller: Get.put<NewCallController>(NewCallController(callCategory: call, callRepo: Get.put(CallRepository())),)),
+                  ).then((value) => Get.delete<NewCallController>()),
                 ),
               ),
               addVerticalSpace(100),

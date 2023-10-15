@@ -1,3 +1,4 @@
+import 'package:chamados/app/modules/call/call_repository_impl.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_controller.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_dialog.dart';
 import 'package:flutter/material.dart';
@@ -52,7 +53,10 @@ class CarrouselCardWidget extends StatelessWidget {
           ],
         ),
       ),
-      function: () => Get.dialog(NewCallForm(controller: Get.put<NewCallController>(NewCallController(callCategory: call))),),
+      function: () => Get.dialog(
+        NewCallForm(
+          controller: Get.put<NewCallController>(NewCallController(callCategory: call, callRepo: Get.put(CallRepository())),)),
+        ).then((value) => Get.delete<NewCallController>()),
     );
   }
 }
