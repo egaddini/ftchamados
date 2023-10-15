@@ -58,8 +58,7 @@ class CallCategoryModel {
 
   String toJson() => json.encode(toMap());
 
-  factory CallCategoryModel.fromJson(String source) =>
-      CallCategoryModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory CallCategoryModel.fromJson(String source) => CallCategoryModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {

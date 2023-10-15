@@ -1,3 +1,5 @@
+import 'package:chamados/app/modules/call/components/new_call/new_call_controller.dart';
+import 'package:chamados/app/modules/call/components/new_call/new_call_dialog.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -5,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:chamados/app/data/models/call_category_model.dart';
 import 'package:chamados/app/widgets/custom_card/custom_card.dart';
 
-import '../../call/components/new_call/new_call_dialog.dart';
 
 class CarrouselCardWidget extends StatelessWidget {
   final CallCategoryModel call;
@@ -51,7 +52,7 @@ class CarrouselCardWidget extends StatelessWidget {
           ],
         ),
       ),
-      function: () => newCallDialog(call),
+      function: () => Get.dialog(NewCallForm(controller: Get.put<NewCallController>(NewCallController(callCategory: call))),),
     );
   }
 }

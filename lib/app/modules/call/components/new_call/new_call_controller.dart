@@ -1,3 +1,4 @@
+import 'package:chamados/app/data/services/app_config/service.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -8,48 +9,41 @@ import 'package:chamados/core/utils/helper.dart';
 import '../../../../data/models/call_category_model.dart';
 import '../../../../data/models/call_dto.dart';
 import '../../../../data/models/user_info_model.dart';
-import '../../../../data/providers/local_storage/local_storage.dart';
-import '../../call_repository.dart';
 import '../../call_repository_impl.dart';
 
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-
 class NewCallController extends GetxController {
-  CallCategoryModel callCategory;
-
-  RxBool isLoading = false.obs;
+  
+  final CallCategoryModel callCategory;
 
   TextEditingController descreverProblemaC = TextEditingController(text: '');
+
   TextEditingController? emailUsuarioC = TextEditingController();
-  final TextEditingController dataAberturaC = TextEditingController(
-      text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now()));
-  final CallRepository callRepo = CallRepositoryImpl();
 
-  late UserInfoModel? logedUser;
+  final TextEditingController dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.now()));
 
-  NewCallController({
-    required this.callCategory,
-  });
+  late CallRepository callRepo;
+
+  late UserInfoModel logedUser;
+
+  NewCallController({required this.callCategory});
+
 
   @override
-  void onInit() async {
-    logedUser = await LocalStorageServices().getUser();
-    emailUsuarioC!.text = logedUser!.email!;
+  void onInit() {
+    logedUser = UserInfoModel.fromJson(AppConfigService().instance().userData());
+    emailUsuarioC!.text = logedUser.email!;
     super.onInit();
   }
 
   void onClickNewCall() {
-    isLoading.value = true;
     CallDTO call = CallDTO(
-        solicitante: logedUser!.id!,
+        solicitante: logedUser.id!,
         callType: callCategory.id!,
         descricao: descreverProblemaC.text);
     callRepo.register(call).then((_) {
       Get.back();
-      snackSucessRegister(
-          'Registrado com sucesso', 'Chamado registrado com sucesso!');
+      snackSucessRegister('Registrado com sucesso', 'Chamado registrado com sucesso!');
     }).catchError((error) {
-      isLoading.value = false;
       tratarErro(error);
     });
   }

@@ -93,6 +93,7 @@ abstract class AppPages {
       page: () => const CallSolverStatisticsScreen(),
       binding: CallSolverStatisticsScreenBindings(),
     ),
+    
   ];
   
 }

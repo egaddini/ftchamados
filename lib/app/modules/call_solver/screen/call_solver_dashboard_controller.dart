@@ -1,13 +1,11 @@
 import '../../../data/models/call.dart';
 import '../../../data/providers/local_storage/local_storage.dart';
 import '../../../widgets/custom_data_table/custom_paginated_data_table2.controller.dart';
-import '../../call/call_repository.dart';
 import '../../call/call_repository_impl.dart';
 
-class CallSolverDashboardController
-    extends CustomPaginatedDataTable2Controller<Call> {
+class CallSolverDashboardController extends CustomPaginatedDataTable2Controller<Call> {
   bool sort = true;
-  final CallRepository _callRepo = CallRepositoryImpl();
+  late  CallRepository _callRepo;
 
   @override
   void onInit() {

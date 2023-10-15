@@ -8,7 +8,6 @@ import 'package:intl/intl.dart';
 import 'package:chamados/core/utils/helper.dart';
 
 import '../../../data/models/call.dart';
-import '../call_repository.dart';
 import '../call_repository_impl.dart';
 import '../components/call_detail/call_detail_screen.dart';
 
@@ -25,7 +24,7 @@ class _CallDashboardScreenState extends State<CallDashboardScreen> {
   bool sort = true;
   bool isLoading = true;
   List<Call> filterData = [], myData = [];
-  final CallRepository _callRepo = CallRepositoryImpl();
+  late CallRepository _callRepo;
 
   onsortColum(int columnIndex, bool ascending) {
     if (columnIndex == 0) {

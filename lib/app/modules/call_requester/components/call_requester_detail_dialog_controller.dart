@@ -11,7 +11,6 @@ import '../../../data/models/comment_model.dart';
 import '../../../data/models/user_info_model.dart';
 import '../../../data/providers/local_storage/local_storage.dart';
 import '../../../widgets/custom_drop_down_menu_button/menu_item.dart';
-import '../../call/call_repository.dart';
 import '../../call/call_repository_impl.dart';
 
 class CallRequesterDetailDialogController extends GetxController {
@@ -80,7 +79,7 @@ class CallRequesterDetailDialogController extends GetxController {
   }
 
   void alterarStatusChamado() async {
-    CallRepository repository = CallRepositoryImpl();
+    CallRepository repository = Get.find<CallRepository>();
     await repository.setStatus(call.id, 10).then((value) {
       statusC.value = value.name;
       statusC.refresh();
