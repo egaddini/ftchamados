@@ -7,12 +7,14 @@ Future<void> callRequesterDetailDialog(Call call) {
   return showDialog(
       context: Get.context!,
       builder: (_) => AlertDialog(
+        titlePadding: const EdgeInsets.only(right: 16),
             title: AppBar(
-                title: Text(call.callType!.title!),
-                forceMaterialTransparency: true,
-                actions: [
-                  CustomDropDownButton(itens: controller.itens),
-                ]),
+              title: Text(call.callType!.title!),
+              forceMaterialTransparency: true,
+              actions: [
+                CustomDropDownButton(itens: controller.itens),
+              ]
+            ),
             content: SizedBox(
               width: 1200,
               child: SingleChildScrollView(

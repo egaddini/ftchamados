@@ -17,11 +17,10 @@ class CallRequesterDashboardController extends CustomPaginatedDataTable2Controll
 
   @override
   void onInit() {
-    UserInfoModel.fromJson(AppConfigService().to().userData()).email;
-      callRepo.getCallListByEmail(UserInfoModel.fromJson(AppConfigService().to().userData()).email!).then((value) => {
-        data.value = value,
-        isLoading.value = false,
-      });
+    callRepo.getCallListByEmail(UserInfoModel.fromJson(AppConfigService().to().userData()).email!).then((value) => {
+      data.value = value,
+      isLoading.value = false,
+    });
     super.onInit();
   }
 }

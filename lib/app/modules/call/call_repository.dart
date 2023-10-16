@@ -66,8 +66,7 @@ class CallRepository {
       results = jsonList.map((json) => Call.fromMap(json)).toList();
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(response.data);
-      throw RestException(
-          message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
     }
     return results;
   }

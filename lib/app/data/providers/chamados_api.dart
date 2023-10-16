@@ -3,21 +3,29 @@
 import 'dart:convert';
 
 import 'package:chamados/app/data/services/app_config/config.dart';
-import 'package:get/get_connect/connect.dart';
+import 'package:chamados/routes/app_pages.dart';
+import 'package:get/get.dart';
 
 import '../../../core/utils/helper.dart';
 import '../../../core/values/api_path_constans.dart';
 import '../models/login_model.dart';
+import '../services/app_config/service.dart';
 
 class ChamadosApi extends GetConnect {
   
+  late AppConfigService config;
+
   login(LoginModel x) async {
-    final result = await post(
-      ConfigEnvironments.getEnvironments()['url']! + ApiPath.AUTH_PATH,
-      jsonEncode(x.toMap()),
+    return await post(
+      ConfigEnvironments.getEnvironments()['url']! + ApiPath.LOGIN_PATH,
+      x.toJson(),
       headers: getAuthHeader(),
-    );
-    return result;
+    ).then((value) => {
+      value.hasError ? null :
+        config.changeUserData(value),
+        config.changeIsLogged(true),
+        Get.offAndToNamed(AppRoutes.home),
+    });
   }
 
   sigin(LoginModel x) async {

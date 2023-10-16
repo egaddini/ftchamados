@@ -32,9 +32,10 @@ class NewCallController extends GetxController {
 
   void onClickNewCall() {
     CallDTO call = CallDTO(
-        solicitante: logedUser.id!,
-        callType: callCategory.id!,
-        descricao: descreverProblemaC.text);
+      solicitante: logedUser.id!,
+      callType: callCategory.id!,
+      descricao: descreverProblemaC.text
+    );
     callRepo.register(call).then((_) {
       Get.back();
       snackSucessRegister('Registrado com sucesso', 'Chamado registrado com sucesso!');

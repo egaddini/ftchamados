@@ -121,13 +121,10 @@ void tratarErro(DioException e) {
         snackSucessRegister('Conta Inativa', e.message!);
         break;
       default:
-        snackSucessRegister('Algum problema aconteceu',
-            'se o problema persistir entre em contato com o suporte \n${e.error}');
+        snackSucessRegister('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte \n${e.error}');
     }
   } else {
-    snackSucessRegister(
-      'Algum problema aconteceu',
-      'se o problema persistir entre em contato com o suporte',
+    snackSucessRegister('Algum problema aconteceu','se o problema persistir entre em contato com o suporte',
     );
   }
 }

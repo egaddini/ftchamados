@@ -3,24 +3,26 @@
 
 class ApiPath {
 
-  static const BASE_URL = "http://localhost:9090/api";
+  static const BASE_URL = 'http://localhost:9090/api';
 
-  static const USERS_PATH = "$BASE_URL/users";
+  static const USERS_PATH = '$BASE_URL/users';
 
-  static const USER_PATH = "$BASE_URL/v1/user";
+  static const USER_PATH = '$BASE_URL/v1/user';
 
-  static const CALL_PATH = "$BASE_URL/call/v1";
+  static const CALL_PATH = '$BASE_URL/call/v1';
 
-  static const STATUS_PATH = "$CALL_PATH/status";
+  static const STATUS_PATH = '$CALL_PATH/status';
 
-  static const CALL_CATEGORY_PATH = "$BASE_URL/call-type/v1";
+  static const CALL_CATEGORY_PATH = '$BASE_URL/call-type/v1';
 
-  static const SECTOR_PATH = "$CALL_CATEGORY_PATH/sector";
+  static const SECTOR_PATH = '$CALL_CATEGORY_PATH/sector';
 
-  static const PRIORITY_PATH = "$CALL_CATEGORY_PATH/priority";
+  static const PRIORITY_PATH = '$CALL_CATEGORY_PATH/priority';
 
-  static const AUTH_PATH = "/authenticate";
+  static const AUTH_PATH = '/auth/v1';
 
-  static const REGISTER_PATH = "/register";
+  static const LOGIN_PATH = '$AUTH_PATH/authenticate';
+
+  static const REGISTER_PATH = '/register';
 
 }

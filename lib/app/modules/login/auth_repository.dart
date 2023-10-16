@@ -14,7 +14,7 @@ import '../../data/models/user_model.dart';
 // ignore_for_file: non_constant_identifier_names
 
 class AuthRepository {
-  final String BASE_PATH = "http://localhost:9090/api/v1/auth";
+  final String BASE_PATH = "http://localhost:9090/api/auth/v1";
   final String AUTH_PATH = "/authenticate";
   final String REGISTER_PATH = "/register";
 
@@ -28,8 +28,7 @@ class AuthRepository {
       return UserInfoModel.fromMap(result.data);
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(
-          message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
     }
   }
 
