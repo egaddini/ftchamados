@@ -28,6 +28,7 @@ void main() async {
     darkTheme: darkTheme,
     initialRoute: AppRoutes.login,
     getPages: AppPages.pages,
+    locale: const Locale('pt', 'BR'),
     debugShowCheckedModeBanner: false,
     scrollBehavior: CustomScrollBehaviour(),
     translationsKeys: AppTranslation.translations,
@@ -37,7 +38,7 @@ void main() async {
 class CustomScrollBehaviour extends MaterialScrollBehavior {
   @override
   Set<PointerDeviceKind> get dragDevices => {
-        PointerDeviceKind.touch,
-        PointerDeviceKind.mouse,
-      };
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+  };
 }

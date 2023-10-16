@@ -35,7 +35,7 @@ class HomePage extends GetView<HomeController> {
             mainAxisAlignment: MainAxisAlignment.start, 
             children: [
               addVerticalSpace(100),
-              Text('Como podemos ajudar?', style: Get.theme.textTheme.displayLarge,),
+              Text('text_how_can_we_help'.tr, style: Get.theme.textTheme.displayLarge,),
               addVerticalSpace(40),
               Padding(
                 padding: const EdgeInsets.all(40.0),

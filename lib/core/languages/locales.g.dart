@@ -18,9 +18,12 @@ class LocaleKeys {
   static const buttons_sign_in_fb = 'buttons_sign_in_fb';
   static const buttons_sign_in_google = 'buttons_sign_in_google';
   static const buttons_sign_in_apple = 'buttons_sign_in_apple';
+  static const text_how_can_we_help = 'text_how_can_we_help';
+
 }
 
 class Locales {
+
   static const en_EN = {
     'buttons_login': 'Login',
     'buttons_sign_in': 'Sign-in',
@@ -28,13 +31,19 @@ class Locales {
     'buttons_sign_in_fb': 'Sign-in with Facebook',
     'buttons_sign_in_google': 'Sign-in with Google',
     'buttons_sign_in_apple': 'Sign-in with Apple',
+    'text_how_can_we_help': 'How Can We Help?',
+  
   };
+
   static const pt_BR = {
+
     'buttons_login': 'Entrar',
     'buttons_sign_in': 'Cadastrar-se',
     'buttons_logout': 'Sair',
     'buttons_sign_in_fb': 'Entrar com o Facebook',
     'buttons_sign_in_google': 'Entrar com o Google',
     'buttons_sign_in_apple': 'Entrar com a  Apple',
+    'text_how_can_we_help': 'Como podemos ajudar?',
+    
   };
 }
