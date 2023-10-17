@@ -16,7 +16,7 @@ class NewCallForm extends StatelessWidget {
     return AlertDialog(
       titlePadding: const EdgeInsets.all(8),
       title: AppBar(
-        title: const Text('asdfaSDf'),
+        title: Text(controller.callCategory.title!),
         forceMaterialTransparency: true,
       ),
       content: SizedBox(
