@@ -5,11 +5,13 @@ import 'package:dio/dio.dart';
 
 import 'package:chamados/core/utils/helper.dart';
 
+import '../../../core/values/api_path_constans.dart';
 import '../../data/models/error_dto.dart';
 import '../../data/models/login_model.dart';
 import '../../data/models/rest_exception.dart';
 import '../../data/models/user_info_model.dart';
 import '../../data/models/user_model.dart';
+import '../../data/services/app_config/config.dart';
 
 // ignore_for_file: non_constant_identifier_names
 
@@ -20,9 +22,8 @@ class AuthRepository {
 
   Future<UserInfoModel> authenticate(LoginModel login) async {
     final result = await Dio().post(
-      BASE_PATH + AUTH_PATH,
+      ConfigEnvironments.getEnvironments()['url']! + ApiPath.LOGIN_PATH,
       data: jsonEncode(login.toMap()),
-      options: Options(headers: getAuthHeader()),
     );
     if (result.statusCode == 200) {
       return UserInfoModel.fromMap(result.data);

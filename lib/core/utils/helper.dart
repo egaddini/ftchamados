@@ -1,3 +1,4 @@
+import 'package:chamados/app/data/models/rest_exception.dart';
 import 'package:chamados/app/data/models/user_info_model.dart';
 import 'package:flutter/material.dart';
 
@@ -108,8 +109,8 @@ Map<String, String> getAuthHeader() {
   
 }
 
-void tratarErro(DioException e) {
-  if (e.response != null && e.response!.data != null) {
+void tratarErro(DioException? e) {
+  if (e!.response != null && e.response!.data != null) {
     switch (e.response!.statusCode!) {
       case 409:
         snackSucessRegister('Já Registrado', e.message!);
@@ -128,6 +129,23 @@ void tratarErro(DioException e) {
     );
   }
 }
+void tratar(RestException e) async {
+  switch (e.statusCode) {
+    case 409:
+      snackSucessRegister('Já Registrado', e.message);
+      break;
+    case 403:
+      snackSucessRegister('Credenciais invalidas', e.message);
+      break;
+    case 401:
+      snackSucessRegister('Conta Inativa', e.message);
+      break;
+    default:
+      snackSucessRegister('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte \n${e.message}');
+    }
+  
+} 
+
 
 Widget buildLoadingIndicator() {
   return Center(

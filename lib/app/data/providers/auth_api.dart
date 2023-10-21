@@ -24,12 +24,17 @@ class AuthApi extends GetConnect {
   //   return result;
   // }
 
-  Future<Response<dynamic>> login(LoginModel x) async {
-    return await post(
+  void login(LoginModel x) async {
+    post(
       ConfigEnvironments.getEnvironments()['url']! + ApiPath.LOGIN_PATH,
       x.toJson(),
       headers: getAuthHeader(),
-    );
+    ).then((value) {
+        print(value);
+    }, onError: (err) {
+      print(err);
+    });
+
   }
 
 

@@ -1,25 +1,23 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 import 'package:chamados/core/theme/theme_manager.dart';
 
+import 'app/data/providers/rest_client.dart';
 import 'app/data/services/app_config/service.dart';
-import 'app/modules/login/auth_repository.dart';
 import 'core/languages/locales.g.dart';
 import 'routes/app_pages.dart';
 
 void main() async {
-  setUrlStrategy(const PathUrlStrategy());
 
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Get.putAsync(() => AppConfigService().init());
-  Get.put(AuthRepository());
+  Get.put(RestClient());
 
   runApp(GetMaterialApp(
     title: 'Chamados',

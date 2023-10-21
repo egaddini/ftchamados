@@ -30,7 +30,7 @@ class ChamadosApi extends GetConnect {
 
   sigin(LoginModel x) async {
     final result = await post(
-      ConfigEnvironments.getEnvironments()['url']! + ApiPath.REGISTER_PATH,
+      ConfigEnvironments.getEnvironments()['url']! + ApiPath.LOGIN_PATH,
       jsonEncode(x.toMap()),
       headers: getAuthHeader(),
     );

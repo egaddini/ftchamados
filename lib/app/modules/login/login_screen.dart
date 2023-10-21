@@ -60,7 +60,7 @@ class LoginScreen extends GetView<LoginScreenController> {
                         child: const Text(
                           'Continuar',
                         ),
-                        onPressed: () => controller.onClickContinuar(),
+                        onPressed: () => controller.login(),
                       ),
                     ],
                   ),

@@ -83,86 +83,27 @@ class CallSolverStatisticsScreen
                 ),
               ),
               addVerticalSpace(10),
-              Container(
-                child: CarouselSlider(
-                  disableGesture: false,                  
-                  items: [1,2,3,4,5].map((e) {
-                    return Container(
-                      width: Get.size.width,
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                      child: Card(
-                        child: Center(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: Text(
-                                  'Chamados em Emergencia ',
-                                  style: Get.textTheme.bodyLarge,
-                                )),
-                              Text(
-                                '3',
-                                style: Get.textTheme.displayLarge,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    );
-                  }).toList(),
-                  options: CarouselOptions(
-                    height: 200
-                  )
+              Column(mainAxisSize: MainAxisSize.min, children: [
+                SizedBox(
+                  height: 121,
+                  child: Expanded(
+                    child: CarouselSlider(
+                      items: controller.imgList,
+                      carouselController: controller.carouselC,
+                      options: CarouselOptions(
+                          height: 120,
+                          autoPlay: true,
+                          enlargeCenterPage: true,
+                          enlargeFactor: 0.1,
+                          viewportFraction: 0.3,
+                          onPageChanged: (index, reason) {
+                            controller.setCarousel(index);
+                          }),
+                    ),
+                  ),
                 ),
-              ),
-              // Obx(
-              //   () => Column(mainAxisSize: MainAxisSize.min, children: [
-              //     SizedBox(
-              //       height: 121,
-              //       child: Expanded(
-              //         child: CarouselSlider(
-              //           items: controller.imgList,
-              //           carouselController: controller.carouselC,
-              //           options: CarouselOptions(
-              //               height: 120,
-              //               autoPlay: true,
-              //               enlargeCenterPage: true,
-              //               enlargeFactor: 0.1,
-              //               viewportFraction: 0.3,
-              //               onPageChanged: (index, reason) {
-              //                 controller.setCarousel(index);
-              //               }),
-              //         ),
-              //       ),
-              //     ),
-              //     Row(
-              //       mainAxisAlignment: MainAxisAlignment.center,
-              //       children: controller.imgList.asMap().entries.map((entry) {
-              //         return GestureDetector(
-              //           onTap: () => controller.carouselC.animateToPage(entry.key),
-              //           child: Container(
-              //             width: 12.0,
-              //             height: 12.0,
-              //             margin: const EdgeInsets.symmetric(
-              //                 vertical: 8.0, horizontal: 4.0),
-              //             decoration: BoxDecoration(
-              //                 shape: BoxShape.circle,
-              //                 color: (Theme.of(context).brightness ==
-              //                             Brightness.dark
-              //                         ? Get.theme.primaryColorLight
-              //                         : Get.theme.primaryColor)
-              //                     .withOpacity(
-              //                         controller.current.value == entry.key
-              //                             ? 0.9
-              //                             : 0.4)),
-              //           ),
-              //         );
-              //       }).toList(),
-              //     ),
-              //   ]),
-              // ),
+              ]),
+            
               Wrap(
                 children: [
                   Column(

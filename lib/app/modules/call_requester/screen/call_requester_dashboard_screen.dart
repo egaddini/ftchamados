@@ -1,5 +1,6 @@
 library call_user_dashboard;
 
+import 'package:chamados/core/utils/masks.dart';
 import 'package:flutter/material.dart';
 
 import 'package:data_table_2/data_table_2.dart';

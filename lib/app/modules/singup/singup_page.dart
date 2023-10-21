@@ -19,8 +19,7 @@ class SingupPage extends GetView<SingUpController> {
 
   @override
   Widget build(BuildContext context) {
-    return controller.obx(
-      (state) => Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         mainAxisSize: MainAxisSize.min,
@@ -114,10 +113,6 @@ class SingupPage extends GetView<SingUpController> {
             ),
           ),
         ],
-      ),
-      onLoading: buildLoadingIndicator(),
-      onEmpty: const Text('No data found'),
-      onError: (error) => Text(error!),
-    );
+      );
   }
 }

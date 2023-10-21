@@ -23,6 +23,6 @@ class ApiPath {
 
   static const LOGIN_PATH = '$AUTH_PATH/authenticate';
 
-  static const REGISTER_PATH = '/register';
+  static const SINGUP_PATH = '$AUTH_PATH/register';
 
 }

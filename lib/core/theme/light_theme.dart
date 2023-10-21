@@ -1,7 +1,7 @@
 part of theme_manager;
 
 ThemeData lightTheme = FlexThemeData.light(
-  scheme: FlexScheme.bahamaBlue,
+  scheme: FlexScheme.deepOrangeM3,
   appBarElevation: 1.5,
   subThemesData: const FlexSubThemesData(
     appBarCenterTitle: true,
