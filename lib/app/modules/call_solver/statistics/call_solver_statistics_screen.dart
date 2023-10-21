@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:get/get.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import 'package:pie_chart/pie_chart.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 
 import 'package:chamados/core/utils/helper.dart';
