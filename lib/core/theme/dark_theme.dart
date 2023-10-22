@@ -1,7 +1,7 @@
 part of theme_manager;
 
 ThemeData darkTheme = FlexThemeData.dark(
-  scheme: FlexScheme.bahamaBlue,
+  scheme: FlexScheme.deepOrangeM3,
   subThemesData: const FlexSubThemesData(
     appBarCenterTitle: true,
     interactionEffects: false,

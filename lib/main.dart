@@ -23,6 +23,8 @@ void main() async {
     title: 'Chamados',
     theme: lightTheme,
     darkTheme: darkTheme,
+    themeMode: ThemeMode.light,
+    locale: const Locale('pt', 'BR'),
     initialRoute: AppRoutes.login,
     getPages: AppPages.pages,
     debugShowCheckedModeBanner: false,
