@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 
 import 'package:chamados/core/utils/helper.dart';
 
-import '../../../core/values/api_path_constans.dart';
 import '../../data/models/call_category_model.dart';
 import '../../data/models/call_category_register_model.dart';
 import '../../data/models/error_dto.dart';
@@ -13,7 +12,7 @@ import '../../data/services/app_config/config.dart';
 import '../../repositories/base_repository.dart';
 
 class CallCategoryRepository extends BaseRepository<CallCategoryModel> {
-  CallCategoryRepository() : super(ConfigEnvironments.getEnvironments()['url']! + '/call-type/v1');
+  CallCategoryRepository() : super('${ConfigEnvironments.getEnvironments()['url']!}/call-type/v1');
 
   Future<String> registerByRegisterModel(
       CallCategoryRegisterModel entity) async {
