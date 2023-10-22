@@ -30,16 +30,17 @@ class HomePage extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return controller.obx(
       (state) => Scaffold(
-        appBar: AppBar(title: const Text('Apoio')),
+        appBar: AppBar(title: const Text('')),
         endDrawer: const MenuDrawer(),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              addVerticalSpace(60),
-              Flexible(child: Text('text_how_can_we_help'.tr, style: Get.textTheme.displayLarge, softWrap: true, textAlign: TextAlign.center)),
-              addVerticalSpace(40),
+              Padding(
+                padding: const EdgeInsets.all(40.0),
+                child: Flexible(child: Text('text_how_can_we_help'.tr, style: Get.textTheme.displayLarge, softWrap: true, textAlign: TextAlign.center)),
+              ),
               Padding(
                 padding: const EdgeInsets.all(40.0),
                 child: TypeAheadField<CallCategoryModel>(

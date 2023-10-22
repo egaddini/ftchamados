@@ -14,6 +14,7 @@ import '../../../widgets/custom_drop_down_menu_button/menu_item.dart';
 import '../../call/call_repository.dart';
 
 class CallRequesterDetailDialogController extends GetxController {
+  
   final Call call;
 
   RxBool isEditable = false.obs;
@@ -53,8 +54,7 @@ class CallRequesterDetailDialogController extends GetxController {
     itens = [edit, finish, cancel, share, historic];
 
     ultAtualizacaoC = TextEditingController(
-        text: DateFormat('dd/MM/yyyy - HH:mm:ss')
-            .format(DateTime.parse(call.dataUltAtualizacao)));
+        text: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(call.dataUltAtualizacao)));
     responsavelC = TextEditingController(
         text: call.responsavel == null
             ? 'Não definido'

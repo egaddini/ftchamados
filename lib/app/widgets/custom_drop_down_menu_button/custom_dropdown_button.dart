@@ -18,7 +18,7 @@ class CustomDropDownButton extends StatelessWidget {
     return DropdownButtonHideUnderline(
       child: DropdownButton2(
         customButton: Icon(
-          Icons.more_vert,
+          Icons.more_horiz,
           color: Get.theme.primaryColor,
           size: 30,
         ),

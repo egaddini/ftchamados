@@ -55,12 +55,8 @@ class CallDetailController extends GetxController {
 
   @override
   void onInit() async {
-    dataAberturaC = TextEditingController(
-        text: DateFormat('dd/MM/yyyy - HH:mm')
-            .format(DateTime.parse(call.dataCriacao)));
-    ultAtualizacaoC = TextEditingController(
-        text: DateFormat('dd/MM/yyyy - HH:mm')
-            .format(DateTime.parse(call.dataUltAtualizacao)));
+    dataAberturaC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataCriacao)));
+    ultAtualizacaoC = TextEditingController(text: DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataUltAtualizacao)));
     solicitanteC = TextEditingController(text: call.solicitante!.email);
     statusC = call.status.obs;
     setorC = TextEditingController(text: call.callType!.sector!.name);
@@ -72,21 +68,13 @@ class CallDetailController extends GetxController {
     siglaC = TextEditingController(text: call.callType!.sector!.acronym);
     participantesC = TextEditingController(text: ':()');
     comentarioC = TextEditingController(text: '');
-    responsavelC = TextEditingController(
-        text: call.responsavel == null
-            ? 'Não atribuido'
-            : call.responsavel!.email);
+    responsavelC = TextEditingController(text: call.responsavel == null ? 'Não atribuido' : call.responsavel!.email);
     logedUser = (await LocalStorageServices().getUser())!;
     super.onInit();
   }
 
   void addComentario() {
-    comments.insert(
-        0,
-        CommentModel(
-            date: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.now()),
-            message: comentarioC.text,
-            user: logedUser.email!));
+    comments.insert(0, CommentModel(date: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.now()), message: comentarioC.text,user: logedUser.email!));
     comments.refresh();
     comentarioC.text = '';
   }

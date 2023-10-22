@@ -26,7 +26,7 @@ class RowSource extends DataTableSource {
 
 DataRow recentFileDataRow(Call call) {
   return DataRow(
-    onSelectChanged: (value) => callRequesterDetailDialog(call),
+    onSelectChanged: (value) => Get.dialog(CallRequesterDetailDialog(controller: Get.put(CallRequesterDetailDialogController(call)))),
     cells: [
       DataCell(Text(call.callType!.title!)),
       DataCell(Text(call.callType!.sector!.name)),
