@@ -21,12 +21,10 @@ void main() async {
 
   runApp(GetMaterialApp(
     title: 'Chamados',
-    themeMode: ThemeManager().themeMode,
     theme: lightTheme,
     darkTheme: darkTheme,
     initialRoute: AppRoutes.login,
     getPages: AppPages.pages,
-    locale: const Locale('pt', 'BR'),
     debugShowCheckedModeBanner: false,
     scrollBehavior: CustomScrollBehaviour(),
     translationsKeys: AppTranslation.translations,

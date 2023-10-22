@@ -1,12 +1,16 @@
-// DO NOT EDIT. This is code generated via package:get_cli/get_cli.dart
+library app_translation;
 
 // ignore_for_file: lines_longer_than_80_chars, constant_identifier_names
 // ignore: avoid_classes_with_only_static_members
 
+part 'en_en_locales.dart';
+part 'pt_br_locales.dart';
+
+
 class AppTranslation {
   static Map<String, Map<String, String>> translations = {
-    'en_EN': Locales.en_EN,
-    'pt_BR': Locales.pt_BR,
+    'en_EN': en_EN,
+    'pt_BR': pt_BR,
   };
 }
 
@@ -22,28 +26,3 @@ class LocaleKeys {
 
 }
 
-class Locales {
-
-  static const en_EN = {
-    'buttons_login': 'Login',
-    'buttons_sign_in': 'Sign-in',
-    'buttons_logout': 'Logout',
-    'buttons_sign_in_fb': 'Sign-in with Facebook',
-    'buttons_sign_in_google': 'Sign-in with Google',
-    'buttons_sign_in_apple': 'Sign-in with Apple',
-    'text_how_can_we_help': 'How Can We Help?',
-  
-  };
-
-  static const pt_BR = {
-
-    'buttons_login': 'Entrar',
-    'buttons_sign_in': 'Cadastrar-se',
-    'buttons_logout': 'Sair',
-    'buttons_sign_in_fb': 'Entrar com o Facebook',
-    'buttons_sign_in_google': 'Entrar com o Google',
-    'buttons_sign_in_apple': 'Entrar com a  Apple',
-    'text_how_can_we_help': 'Como podemos ajudar?',
-    
-  };
-}

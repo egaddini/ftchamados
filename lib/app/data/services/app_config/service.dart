@@ -1,3 +1,4 @@
+import 'package:chamados/core/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -25,6 +26,7 @@ class AppConfigService extends GetxService {
 
   changeDarkMode(_) async {
     Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
+    Get.changeTheme(Get.isDarkMode ? lightTheme : darkTheme);
     await box.write(DARK_MODE, _);
   }
 

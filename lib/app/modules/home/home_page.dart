@@ -38,7 +38,7 @@ class HomePage extends GetView<HomeController> {
             mainAxisSize: MainAxisSize.min,
             children: [
               addVerticalSpace(60),
-              Flexible(child: Text('text_how_can_we_help'.tr, style: Get.theme.textTheme.displayLarge, softWrap: true, textAlign: TextAlign.center)),
+              Flexible(child: Text('text_how_can_we_help'.tr, style: Get.textTheme.displayLarge, softWrap: true, textAlign: TextAlign.center)),
               addVerticalSpace(40),
               Padding(
                 padding: const EdgeInsets.all(40.0),

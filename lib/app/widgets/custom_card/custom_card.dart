@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 class CustomCard {
   static Widget customClickableCard(
       {Function? function,
+      Function? onLongPress,
       Widget? content,
       double width = 300,
       double height = 100}) {
@@ -19,6 +20,7 @@ class CustomCard {
           child: content,
         ),
         onTap: () => function != null ? function() : null,
+        onLongPress: () => onLongPress != null ? onLongPress() : null,
       ),
     );
   }

@@ -13,7 +13,7 @@ import '../../call/components/new_call/new_call_dialog.dart';
 
 ResponsiveGridCol gridCardWidget(CallCategoryModel call) {
   return ResponsiveGridCol(
-    xs: 4,
+    xs: 6,
     md: 3,
     child: Padding(
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 4.0),
@@ -57,9 +57,57 @@ ResponsiveGridCol gridCardWidget(CallCategoryModel call) {
         function: () => Get.dialog(
           NewCallForm(
             controller: Get.put<NewCallController>(NewCallController(callCategory: call, callRepo: Get.put(CallRepository())),)),
-          ).then((value) => Get.delete<NewCallController>()),
+          ).then((value) => Get.delete<NewCallController>()
+        ),
+        onLongPress: () => Get.dialog(
+          moreDetailsAboutCategodyDialog(call),
+        ),
       ),
     ),
+  );
+}
+
+AlertDialog moreDetailsAboutCategodyDialog(CallCategoryModel call) {
+  return AlertDialog(
+    titlePadding: const EdgeInsets.only(bottom: 2.0),
+    contentPadding: const EdgeInsets.only(top: 2, bottom: 20, right: 10, left: 10),
+    title: AppBar(
+      title: Text(call.title!),
+      forceMaterialTransparency: true,
+    ),
+    content: SizedBox(
+      width: 600,
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Setor: ${call.sector!.acronym} - ${call.sector!.name}',
+                  style: Get.textTheme.bodyLarge,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Text(
+                  'Prioridade: ${call.priority!.name}',
+                  style: Get.textTheme.bodyLarge,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Text(
+                  'Descrição: ${call.description!}',
+                  style: Get.textTheme.bodyLarge,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 10,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    )
   );
 }
 

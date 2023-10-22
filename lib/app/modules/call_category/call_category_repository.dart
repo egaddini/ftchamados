@@ -9,10 +9,11 @@ import '../../data/models/call_category_model.dart';
 import '../../data/models/call_category_register_model.dart';
 import '../../data/models/error_dto.dart';
 import '../../data/models/rest_exception.dart';
+import '../../data/services/app_config/config.dart';
 import '../../repositories/base_repository.dart';
 
 class CallCategoryRepository extends BaseRepository<CallCategoryModel> {
-  CallCategoryRepository() : super(ApiPath.CALL_CATEGORY_PATH);
+  CallCategoryRepository() : super(ConfigEnvironments.getEnvironments()['url']! + '/call-type/v1');
 
   Future<String> registerByRegisterModel(
       CallCategoryRegisterModel entity) async {
