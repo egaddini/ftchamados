@@ -48,7 +48,7 @@ class CarrouselCardWidget extends StatelessWidget {
               'Descrição: ${call.description!}',
               style: Get.textTheme.bodyLarge,
               overflow: TextOverflow.ellipsis,
-              maxLines: 7,
+              maxLines: 1,
             ),
           ],
         ),

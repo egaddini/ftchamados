@@ -2,6 +2,7 @@ library home_screen;
 
 import 'package:chamados/app/modules/call/call_repository.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_controller.dart';
+import 'package:chamados/app/modules/home/widgets/grid_card.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -13,6 +14,7 @@ import 'package:chamados/app/modules/call_category/call_category_repository.dart
 import 'package:chamados/app/modules/drawer/menu_drawer.dart';
 import 'package:chamados/app/modules/home/widgets/carrousel_card_widget.dart';
 import 'package:chamados/core/utils/helper.dart';
+import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../data/models/call_category_model.dart';
 import '../../data/models/user_info_model.dart';
@@ -32,10 +34,11 @@ class HomePage extends GetView<HomeController> {
         endDrawer: const MenuDrawer(),
         body: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start, 
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
             children: [
-              addVerticalSpace(100),
-              Text('text_how_can_we_help'.tr, style: Get.theme.textTheme.displayLarge,),
+              addVerticalSpace(60),
+              Flexible(child: Text('text_how_can_we_help'.tr, style: Get.theme.textTheme.displayLarge, softWrap: true, textAlign: TextAlign.center)),
               addVerticalSpace(40),
               Padding(
                 padding: const EdgeInsets.all(40.0),
@@ -59,15 +62,10 @@ class HomePage extends GetView<HomeController> {
                   ).then((value) => Get.delete<NewCallController>()),
                 ),
               ),
-              addVerticalSpace(100),
-              CarouselSlider(
-                items: controller.imgList,
-                carouselController: controller.carouselC,
-                options: CarouselOptions(
-                  autoPlay: true,
-                  height: 200,
-                  viewportFraction: 0.2,
-                  onPageChanged: (index, reason) => controller.setCarousel(index),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 36.0),
+                child: ResponsiveGridRow(
+                  children: controller.itens.take(12).map((element) => gridCardWidget(element)).toList(),
                 ),
               ),
             ]
