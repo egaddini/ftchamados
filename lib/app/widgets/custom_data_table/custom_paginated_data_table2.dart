@@ -34,7 +34,7 @@ abstract class CustomPaginatedDataTable2<
                   columnSpacing: 2,
                   showCheckboxColumn: false,
                   wrapInCard: false,
-                  columns: getColumns(),
+                  columns: getColumns().map((e) => DataColumn2(label: Text(e,))).toList(),
                   headingCheckboxTheme: Get.theme.checkboxTheme,
                 ),
         ));
@@ -48,5 +48,5 @@ abstract class CustomPaginatedDataTable2<
 
   DataTableSource getDataTableSource();
 
-  List<DataColumn> getColumns();
+  List<String> getColumns();
 }

@@ -2,7 +2,6 @@ library call_priority;
 
 import 'package:flutter/material.dart';
 
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';
@@ -32,23 +31,7 @@ class CallPriorityStatusScreen
       ];
 
   @override
-  List<DataColumn2> getColumns() {
-    return const [
-      DataColumn2(
-        label: Text("Id"),
-      ),
-      DataColumn2(
-        label: Text("Nome"),
-      ),
-      DataColumn2(
-        label: Text("Peso"),
-      ),
-      DataColumn2(
-          label: Text(
-        '',
-      )),
-    ];
-  }
+  List<String> getColumns() => ['Id', 'Nome', 'Peso', ''];
 
   @override
   DataTableSource getDataTableSource() {

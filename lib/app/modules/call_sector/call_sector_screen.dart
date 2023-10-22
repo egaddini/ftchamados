@@ -25,29 +25,14 @@ class CallSectorStatusScreen
   List<Widget> getActions() {
     return [
       FilledButton(
-        onPressed: () => createUpdateSectorDialog(null)
-            .then((value) => controller.atualizarItens()),
+        onPressed: () => createUpdateSectorDialog(null).then((value) => controller.atualizarItens()),
         child: const Text('Novo Registro'),
       )
     ];
   }
 
   @override
-  List<DataColumn2> getColumns() {
-    return const [
-      DataColumn2(label: Text("Id")),
-      DataColumn2(
-        label: Text("Sigla"),
-      ),
-      DataColumn2(
-        label: Text("Nome"),
-      ),
-      DataColumn2(
-          label: Text(
-        '',
-      )),
-    ];
-  }
+  List<String> getColumns() => ['Id', 'Sigla', 'Nome', ''];
 
   @override
   DataTableSource getDataTableSource() {

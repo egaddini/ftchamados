@@ -44,23 +44,7 @@ class CallStatusScreen extends CustomPaginatedDataTable2<CallStatusController> {
   }
 
   @override
-  List<DataColumn2> getColumns() {
-    return const [
-      DataColumn2(label: Text("Id"), size: ColumnSize.M),
-      DataColumn2(label: Text("Nome"), size: ColumnSize.M),
-      DataColumn2(label: Text("Descrição"), size: ColumnSize.M),
-      DataColumn2(label: Text("Peso"), size: ColumnSize.M),
-      DataColumn2(
-        label: Text(
-          "Notifica Usuário",
-        ),
-      ),
-      DataColumn2(
-          label: Text(
-        '',
-      )),
-    ];
-  }
+  List<String> getColumns() => ['Id', 'Nome', 'Descrição', 'Peso', 'Notifica Usuário', '',];
 
   @override
   Widget getHeaderFields() {

@@ -1,8 +1,6 @@
 library call_user_dashboard;
 
 import 'package:flutter/material.dart';
-
-import 'package:data_table_2/data_table_2.dart';
 import 'package:intl/intl.dart';
 
 import '../../../data/models/call.dart';
@@ -22,40 +20,7 @@ class CallSolverDashboardScreen
   }
 
   @override
-  List<DataColumn> getColumns() {
-    return const [
-      DataColumn2(
-        label: Text(
-          "Título",
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Setor",
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Prioridade",
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Status",
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Criado em",
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Ultima atualizacao",
-        ),
-      ),
-    ];
-  }
+  List<String> getColumns() => ['Título', 'Setor', 'Prioridade', 'Status', 'Criado em', 'Ultima atualizacao'];
 
   @override
   DataTableSource getDataTableSource() {

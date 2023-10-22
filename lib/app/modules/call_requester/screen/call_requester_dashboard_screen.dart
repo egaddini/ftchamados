@@ -1,7 +1,6 @@
 library call_user_dashboard;
 
-import 'package:chamados/app/modules/call_requester/components/call_requester_detail_dialog2.dart';
-import 'package:data_table_2/data_table_2.dart';
+import 'package:chamados/app/modules/call_requester/components/call_requester_detail_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -22,40 +21,7 @@ class CallUserDashboardScreen extends CustomPaginatedDataTable2<CallRequesterDas
   }
 
   @override
-  List<DataColumn> getColumns() {
-    return const [
-      DataColumn2(
-        label: Text(
-          "Título",
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Setor",
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Prioridade",
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Status",
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Criado em",
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Ultima atualizacao",
-        ),
-      ),
-    ];
-  }
+  List<String> getColumns() => ['Título', 'Setor', 'Prioridade', 'Status', 'Criado em', 'Última atualização'];
 
   @override
   DataTableSource getDataTableSource() {
@@ -83,4 +49,5 @@ class CallUserDashboardScreen extends CustomPaginatedDataTable2<CallRequesterDas
 
   @override
   String getTitle() => 'Meus Chamados';
+
 }

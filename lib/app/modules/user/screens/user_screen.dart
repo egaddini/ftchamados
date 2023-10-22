@@ -1,8 +1,6 @@
 library user_dashboard;
 
 import 'package:flutter/material.dart';
-
-import 'package:data_table_2/data_table_2.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
@@ -23,57 +21,7 @@ class UserScreen extends CustomPaginatedDataTable2<UserScreenController> {
   }
 
   @override
-  List<DataColumn2> getColumns() {
-    return [
-      DataColumn2(
-        label: Text(
-          "ID",
-          style: Get.theme.textTheme.titleSmall,
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Email",
-          style: Get.theme.textTheme.titleSmall,
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Nome",
-          style: Get.theme.textTheme.titleSmall,
-        ),
-        onSort: (columnIndex, ascending) =>
-            controller.onsortColum(columnIndex, ascending),
-      ),
-      DataColumn2(
-        label: Text(
-          "Sobrenome",
-          style: Get.theme.textTheme.titleSmall,
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Cargo",
-          style: Get.theme.textTheme.titleSmall,
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Habilitado",
-          style: Get.theme.textTheme.titleSmall,
-        ),
-      ),
-      DataColumn2(
-        label: Text(
-          "Data de Registro",
-          style: Get.theme.textTheme.titleSmall,
-        ),
-      ),
-      const DataColumn2(
-        label: Text(''),
-      ),
-    ];
-  }
+  List<String> getColumns() => ['ID', 'Email', 'Nome', 'Sobrenome', 'Cargo', 'Habilitado', 'Data de Registro', '',];
 
   @override
   DataTableSource getDataTableSource() {

@@ -1,13 +1,10 @@
 library call_category;
 
+import 'package:chamados/core/utils/helper.dart';
 import 'package:flutter/material.dart';
-
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';
-
-import 'package:chamados/core/utils/helper.dart';
 
 import '../../data/models/call_category_model.dart';
 import '../../data/models/priority.dart';
@@ -17,8 +14,8 @@ import '../../widgets/custom_ink_well/c_inkwell.dart';
 import 'call_category_controller.dart';
 import 'components/create_update_category_controller.dart';
 
-part 'components/row_source.dart';
 part 'components/create_update_category_dialog.dart';
+part 'components/row_source.dart';
 
 class CallCategoryStatusScreen
     extends CustomPaginatedDataTable2<CallCategoryController> {
@@ -36,17 +33,7 @@ class CallCategoryStatusScreen
   }
 
   @override
-  List<DataColumn2> getColumns() {
-    return const [
-      DataColumn2(label: Text("Id")),
-      DataColumn2(label: Text("Sigla")),
-      DataColumn2(label: Text("Nome")),
-      DataColumn2(label: Text("Titulo")),
-      DataColumn2(label: Text("Prioridade")),
-      DataColumn2(label: Text("Descrição")),
-      DataColumn2(label: Text('')),
-    ];
-  }
+  List<String> getColumns() => ['Id', 'Sigla', 'Nome', 'Titulo', 'Prioridade', 'Descrição', ''];
 
   @override
   DataTableSource getDataTableSource() {
