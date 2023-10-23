@@ -5,6 +5,6 @@ class Masks {
 
   static getPhoneFormater() => MaskTextInputFormatter(mask: '(##) #####-####', filter: {"#": RegExp(r'[0-9]')});
 
-  static dateTimeMask(mask) => DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(mask.dataUltAtualizacao));
+  static String dateTimeMask(mask) => DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.parse(mask));
 
 }

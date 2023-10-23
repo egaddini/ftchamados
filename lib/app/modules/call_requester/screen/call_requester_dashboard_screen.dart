@@ -1,13 +1,14 @@
 library call_user_dashboard;
 
-import 'package:chamados/app/modules/call_requester/components/call_requester_detail_dialog.dart';
+import 'package:chamados/app/modules/call_requester/detail_dialog/call_requester_detail_dialog.dart';
+import 'package:chamados/app/modules/call_requester/detail_dialog/call_requester_detail_dialog_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 
 import '../../../data/models/call.dart';
 import '../../../widgets/custom_data_table/custom_paginated_data_table2.dart';
-import '../components/call_requester_detail_dialog_controller.dart';
+import '../detail_dialog/call_requester_detail_dialog_controller.dart';
 import 'call_requester_dashboard_controller.dart';
 
 part 'call_requester_row_source.dart';

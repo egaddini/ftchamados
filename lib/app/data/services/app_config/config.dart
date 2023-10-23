@@ -13,7 +13,7 @@ class ConfigEnvironments {
   static final List<Map<String, String>> _availableEnvironments = [
     {
       'env': Environments.LOCAL.name,
-      'url': 'http://192.168.1.6:9090/api',
+      'url': 'http://localhost:9090/api',
     },
     {
       'env': Environments.DEV.name,

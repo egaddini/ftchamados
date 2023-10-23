@@ -26,18 +26,14 @@ class RowSource extends DataTableSource {
 
 DataRow recentFileDataRow(Call call) {
   return DataRow(
-    onSelectChanged: (value) => Get.dialog(CallRequesterDetailDialog(controller: Get.put(CallRequesterDetailDialogController(call)))),
+    onSelectChanged: (value) => Get.dialog(CallRequesterDetailDialog(controller: Get.put(CallRequesterDetailDialogController(call.id, CallRequesterDetailDialogRepository(Get.find()))))),
     cells: [
       DataCell(Text(call.callType!.title!)),
       DataCell(Text(call.callType!.sector!.name)),
       DataCell(Text(call.callType!.priority!.name)),
       DataCell(Text(call.status.toString())),
-      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm')
-          .format(DateTime.parse(call.dataCriacao))
-          .toString())),
-      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm')
-          .format(DateTime.parse(call.dataUltAtualizacao))
-          .toString())),
+      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataCriacao)).toString())),
+      DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(DateTime.parse(call.dataUltAtualizacao)).toString())),
       //DataCell(Text(DateFormat('dd/MM/yyyy - HH:mm').format(user.dataCriacao!).toString())),
     ],
   );

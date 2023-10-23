@@ -3,17 +3,17 @@
 
 class ApiPath {
 
-  static const BASE_URL = 'http://localhost:9090/api';
+  static const USERS_PATH = '/users';
 
-  static const USERS_PATH = '$BASE_URL/users';
+  static const USER_PATH = '/v1/user';
 
-  static const USER_PATH = '$BASE_URL/v1/user';
-
-  static const CALL_PATH = '$BASE_URL/call/v1';
-
+  static const CALL_PATH = '/call/v1';
+  
   static const STATUS_PATH = '$CALL_PATH/status';
 
-  static const CALL_CATEGORY_PATH = '$BASE_URL/call-type/v1';
+  static const SET_STATUS_PATH = '$CALL_PATH/set-status';
+
+  static const CALL_CATEGORY_PATH = '/call-type/v1';
 
   static const SECTOR_PATH = '$CALL_CATEGORY_PATH/sector';
 
