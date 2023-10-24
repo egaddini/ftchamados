@@ -4,26 +4,26 @@ import 'dart:convert';
 
 class HistoricModel {
   int? id;
-  String? dateTime;
+  String? ocurrenceDT;
   String? user;
   String? message;
 
   HistoricModel({
     this.id,
-    this.dateTime,
+    this.ocurrenceDT,
     this.user,
     this.message,
   });
 
   HistoricModel copyWith({
     int? id,
-    String? dateTime,
+    String? ocurrenceDT,
     String? user,
     String? message,
   }) {
     return HistoricModel(
       id: id ?? this.id,
-      dateTime: dateTime ?? this.dateTime,
+      ocurrenceDT: ocurrenceDT ?? this.ocurrenceDT,
       user: user ?? this.user,
       message: message ?? this.message,
     );
@@ -32,7 +32,7 @@ class HistoricModel {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
-      'dateTime': dateTime,
+      'ocurrenceDT': ocurrenceDT,
       'user': user,
       'message': message,
     };
@@ -41,7 +41,7 @@ class HistoricModel {
   factory HistoricModel.fromMap(Map<String, dynamic> map) {
     return HistoricModel(
       id: map['id'] != null ? map['id'] as int : null,
-      dateTime: map['dateTime'] != null ? map['dateTime'] as String : null,
+      ocurrenceDT: map['ocurrenceDT'] != null ? map['ocurrenceDT'] as String : null,
       user: map['user'] != null ? map['user'] as String : null,
       message: map['message'] != null ? map['message'] as String : null,
     );
@@ -54,7 +54,7 @@ class HistoricModel {
 
   @override
   String toString() {
-    return 'HistoricModel(id: $id, dateTime: $dateTime, user: $user, message: $message)';
+    return 'HistoricModel(id: $id, ocurrenceDT: $ocurrenceDT, user: $user, message: $message)';
   }
 
   @override
@@ -62,13 +62,13 @@ class HistoricModel {
     if (identical(this, other)) return true;
 
     return other.id == id &&
-        other.dateTime == dateTime &&
+        other.ocurrenceDT == ocurrenceDT &&
         other.user == user &&
         other.message == message;
   }
 
   @override
   int get hashCode {
-    return id.hashCode ^ dateTime.hashCode ^ user.hashCode ^ message.hashCode;
+    return id.hashCode ^ ocurrenceDT.hashCode ^ user.hashCode ^ message.hashCode;
   }
 }

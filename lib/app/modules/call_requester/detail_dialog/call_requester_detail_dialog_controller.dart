@@ -37,8 +37,8 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
 
   startItens() {
     MenuItem edit = MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () => {});
-    MenuItem cancel = MenuItem(text: 'Cancelar', icon: Icons.cancel_presentation_rounded, function: () {});
-    MenuItem finish = MenuItem(text: 'Finalizar', icon: Icons.check_box_outlined, function: () {});
+    MenuItem cancel = MenuItem(text: 'Cancelar', icon: Icons.cancel_presentation_rounded, function: () => alterarStatusChamado(9));
+    MenuItem finish = MenuItem(text: 'Finalizar', icon: Icons.check_box_outlined, function: () => alterarStatusChamado(10));
     MenuItem historic = MenuItem(text: 'Histórico', icon: Icons.history_outlined, function: (() => callHistoric()));
     MenuItem share = MenuItem(text: 'Compartilhar', icon: Icons.share_outlined, function: () {});
 
@@ -57,13 +57,13 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
   //   comentarioC.text = '';
   // }
 
-  void alterarStatusChamado() async {
-    repository.setStatus(callID, 10).then((value) {
+  alterarStatusChamado(int status) async {
+    repository.setStatus(callID, status).then((value) {
       statusC.value = value.name;
       statusC.refresh();
       snackSucessRegister('Registrado com sucesso', 'Chamado encerrado com sucesso!');
     }).catchError((error) {
-      tratarErro(error);
+      tratar(error);
     });
     // CallRepository repository = Get.find<CallRepository>();
     // await repository.setStatus(call.id, 10).then((value) {
@@ -97,7 +97,7 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
       rows: call.historico.map((e) => 
         DataRow(
           cells: [
-            DataCell(Text(e.dateTime == null ? '' : Masks.dateTimeMask(e.dateTime!))),
+            DataCell(Text(e.ocurrenceDT == null ? '' : Masks.dateTimeMask(e.ocurrenceDT!))),
             DataCell(Text(e.user!)),
             DataCell(Text(e.message!)),
           ],

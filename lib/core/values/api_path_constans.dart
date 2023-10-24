@@ -11,7 +11,7 @@ class ApiPath {
   
   static const STATUS_PATH = '$CALL_PATH/status';
 
-  static const SET_STATUS_PATH = '$CALL_PATH/set-status';
+  static const SET_STATUS_PATH = '$STATUS_PATH/change';
 
   static const CALL_CATEGORY_PATH = '/call-type/v1';
 
