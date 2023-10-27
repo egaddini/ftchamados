@@ -20,7 +20,12 @@ abstract class CustomPaginatedDataTable2<
               : PaginatedDataTable2(
                   headingTextStyle: const TextStyle(
                       fontWeight: FontWeight.w600, fontSize: 14),
-                  empty: const Text('Nenhum registro foi encontrado'),
+                  empty: const Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                     Text('Nenhum registro foi encontrado'),
+                    ],
+                  ),
                   onRowsPerPageChanged: (value) => (),
                   availableRowsPerPage: const [5, 10, 15],
                   header: Padding(
@@ -36,6 +41,7 @@ abstract class CustomPaginatedDataTable2<
                   wrapInCard: false,
                   columns: getColumns().map((e) => DataColumn2(label: Text(e,))).toList(),
                   headingCheckboxTheme: Get.theme.checkboxTheme,
+                  
                 ),
         ));
   }

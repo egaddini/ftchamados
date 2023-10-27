@@ -187,10 +187,6 @@ void snackSucessRegister(String title, String message) {
   );
 }
 
-Future<void> waitThreeSeconds() {
-  return Future.delayed(const Duration(seconds: 3));
-}
-
 Future<bool?> perguntaSimOuNao(String text) async {
   return showDialog(
       context: Get.context!,
