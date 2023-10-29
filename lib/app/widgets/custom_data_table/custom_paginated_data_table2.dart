@@ -7,8 +7,8 @@ import 'package:chamados/core/utils/helper.dart';
 
 import 'custom_paginated_data_table2.controller.dart';
 
-abstract class CustomPaginatedDataTable2<
-    T extends CustomPaginatedDataTable2Controller> extends GetView<T> {
+abstract class CustomPaginatedDataTable2<T extends CustomPaginatedDataTable2Controller> extends GetView<T> {
+  
   const CustomPaginatedDataTable2({super.key});
 
   @override

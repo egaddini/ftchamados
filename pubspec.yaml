@@ -3,7 +3,7 @@ version: 1.0.0+2
 publish_to: none
 description: A new Flutter project.
 environment: 
-  sdk: ^3.0.6
+  sdk: ^3.1.5
 dependencies: 
   async: ^2.10.0
   blinking_text: ^1.0.2
@@ -34,6 +34,7 @@ dependencies:
   flutter_web_plugins: 
     sdk: flutter
   responsive_grid: ^2.4.4
+  date_field: ^3.0.5
 dev_dependencies: 
   flutter_lints: ^2.0.0
   pubspec_dependency_sorter: ^1.0.4

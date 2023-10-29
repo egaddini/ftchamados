@@ -5,6 +5,6 @@ class MenuItem {
   final IconData icon;
   final Function function;
 
-  const MenuItem(
-      {required this.text, required this.icon, required this.function});
+  const MenuItem({required this.text, required this.icon, required this.function});
+  
 }

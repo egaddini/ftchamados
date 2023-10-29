@@ -2,6 +2,7 @@ library call_user_dashboard;
 
 import 'package:chamados/app/modules/call_requester/detail_dialog/call_requester_detail_dialog.dart';
 import 'package:chamados/app/modules/call_requester/detail_dialog/call_requester_detail_dialog_repository.dart';
+import 'package:chamados/app/widgets/custom_ink_well/c2_inkwell.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -36,9 +37,10 @@ class CallUserDashboardScreen extends CustomPaginatedDataTable2<CallRequesterDas
   Widget getHeaderFields() {
     return TextFormField(
       controller: controller.searchFieldDataC,
-      decoration: const InputDecoration(
+      decoration: InputDecoration(
         labelText: 'Buscar por Titulo',
-        suffixIcon: Icon(Icons.search_outlined),
+        prefixIcon: const Icon(Icons.search_outlined),
+        suffixIcon: CInkWell(defaultIcon: Icons.tune_outlined, function: controller.filter),
       ),
       onChanged: (value) {
         // setState(() {

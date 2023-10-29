@@ -1,3 +1,4 @@
+import 'package:chamados/app/widgets/custom_drop_down_menu_button/menu_item.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -82,4 +83,27 @@ class CallDetailController extends GetxController {
   setStatusValue(String value) {
     statusC.value = value;
   }
+
+
+  DropdownMenuItem toDropdownMenuItem(MenuItem item) {
+    return DropdownMenuItem<MenuItem>(
+      value: item,
+      child: Row(
+        children: [
+          Icon(item.icon, color: Colors.white, size: 22),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              item.text,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+      onTap: () {},
+    );
+  }
+  
 }

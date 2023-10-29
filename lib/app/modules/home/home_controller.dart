@@ -29,4 +29,22 @@ class HomeController extends GetxController with StateMixin<CallCategoryModel> {
   }
 
   setCarousel(int index) => current.value = index;
+
+  
+  DropdownMenuItem toDropdownMenuItem(MenuItem item) {
+    return DropdownMenuItem<MenuItem>(
+      value: item,
+      child: Row(
+        children: [
+          Icon(item.icon, color: Colors.white, size: 22),
+          const SizedBox(width: 10),
+          CustomExpandedTextField(
+            controller: TextEditingController(),
+            labelText: 'Ihul',
+          ),
+        ],
+      ),
+      onTap: () {},
+    );
+  }
 }

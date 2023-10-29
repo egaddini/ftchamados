@@ -16,7 +16,7 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
   late Call call;
 
   late RxString statusC;
-  List<MenuItem> itens = [];
+  List<DropdownMenuItem> itens = [];
 
   CallRequesterDetailDialogController(
     this.callID,
@@ -36,26 +36,14 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
   }
 
   startItens() {
-    MenuItem edit = MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () => {});
-    MenuItem cancel = MenuItem(text: 'Cancelar', icon: Icons.cancel_presentation_rounded, function: () => alterarStatusChamado(9));
-    MenuItem finish = MenuItem(text: 'Finalizar', icon: Icons.check_box_outlined, function: () => alterarStatusChamado(10));
-    MenuItem historic = MenuItem(text: 'Histórico', icon: Icons.history_outlined, function: (() => callHistoric()));
-    MenuItem share = MenuItem(text: 'Compartilhar', icon: Icons.share_outlined, function: () {});
-
-    itens = [edit, finish, cancel, share, historic];
+    itens = [
+      MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () => {}),
+      MenuItem(text: 'Cancelar', icon: Icons.cancel_presentation_rounded, function: () => alterarStatusChamado(9)),
+      MenuItem(text: 'Finalizar', icon: Icons.check_box_outlined, function: () => alterarStatusChamado(10)),
+      MenuItem(text: 'Histórico', icon: Icons.history_outlined, function: (() => callHistoric())),
+      MenuItem(text: 'Compartilhar', icon: Icons.share_outlined, function: () {})
+    ].map((x) => toDropdownMenuItem(x)).toList();
   }
-
-
-  // void addComentario() {
-  //   comments.insert(
-  //       0,
-  //       CommentModel(
-  //           date: DateFormat('dd/MM/yyyy - HH:mm:ss').format(DateTime.now()),
-  //           message: comentarioC.text,
-  //           user: logedUser.email!));
-  //   comments.refresh();
-  //   comentarioC.text = '';
-  // }
 
   alterarStatusChamado(int status) async {
     repository.setStatus(callID, status).then((value) {
@@ -65,21 +53,22 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
     }).catchError((error) {
       tratar(error);
     });
-    // CallRepository repository = Get.find<CallRepository>();
-    // await repository.setStatus(call.id, 10).then((value) {
-    //   statusC.value = value.name;
-    //   statusC.refresh();
-    //   snackSucessRegister('Registrado com sucesso', 'Chamado encerrado com sucesso!');
-    // }).catchError((error) {
-    //   tratarErro(error);
-    // });
   }
 
   callHistoric() {
     showDialog(
       context: Get.context!,
       builder: (_) => AlertDialog(
-        title: Center(child: Text('Histórico do chamado',style: Get.theme.textTheme.headlineMedium!)),
+        titlePadding: const EdgeInsets.only(top: 10),
+        title: AppBar(
+          title: const Text('Histórico do chamado'),
+          forceMaterialTransparency: true,
+          actions: const [
+            Padding(padding: EdgeInsets.symmetric(horizontal: 20.0),),
+          ]        
+        ),
+        
+        //Center(child: Text('Histórico do chamado',style: Get.theme.textTheme.headlineMedium!)),
         content: SizedBox(
           width: 1200,
           child: historicForm(),
@@ -105,5 +94,30 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
       ).toList(),
     );
   }
+
+  DropdownMenuItem toDropdownMenuItem(MenuItem item) {
+    return DropdownMenuItem<MenuItem>(
+      value: item,
+      child: Row(
+        children: [
+          Icon(item.icon, color: Colors.white, size: 22),
+          const SizedBox(width: 10),
+          Expanded(
+            child: Text(
+              item.text,
+              style: const TextStyle(
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
+      ),
+      onTap: () {},
+    );
+  }
+  
+
+
+
 
 }

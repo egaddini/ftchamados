@@ -17,8 +17,8 @@ class CallRequesterDetailDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return controller.obx(
       (state) =>  AlertDialog(
-        titlePadding: const EdgeInsets.all(0),
-        contentPadding: const EdgeInsets.only(right: 20, left: 20, bottom: 20, top: 10),
+        titlePadding: const EdgeInsets.only(top: 10),
+        // contentPadding: const EdgeInsets.only(right: 20, left: 20, bottom: 20, top: 10),
         title: AppBar(
           title: Text(controller.call.callType!.title!),
           forceMaterialTransparency: true,
@@ -119,7 +119,12 @@ class CallRequesterDetailDialog extends StatelessWidget {
         )
       ),
       onLoading: buildLoadingIndicator(),
-      onEmpty: const Text('No data found'),
+      onEmpty: const Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+         Text('No data found'),
+        ],
+      ),
       onError: (error) => Text(error!),
     );
   }

@@ -16,12 +16,9 @@ import '../../../call/components/call_detail/call_detail_controller.dart';
 // AppBar(title: Text('Chamado - ${controller.siglaC.text} ${controller.tituloC.text}'),),
 
 void callSolverDetailDialog(Call call) {
-  MenuItem edit =
-      MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () {});
-  MenuItem historic = MenuItem(
-      text: 'Histórico', icon: Icons.history_outlined, function: () {});
-  MenuItem share = MenuItem(
-      text: 'Compartilhar', icon: Icons.share_outlined, function: () {});
+  MenuItem edit = MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () {});
+  MenuItem historic = MenuItem(text: 'Histórico', icon: Icons.history_outlined, function: () {});
+  MenuItem share = MenuItem(text: 'Compartilhar', icon: Icons.share_outlined, function: () {});
 
   List<MenuItem> itens = [edit, share, historic];
 
@@ -34,7 +31,7 @@ void callSolverDetailDialog(Call call) {
                 title: Text(call.callType!.title!),
                 forceMaterialTransparency: true,
                 actions: [
-                  CustomDropDownButton(itens: itens),
+                  CustomDropDownButton(itens: itens.map((x) => controller.toDropdownMenuItem(x)).toList()),
                 ]),
             content: SizedBox(
               width: 1200,

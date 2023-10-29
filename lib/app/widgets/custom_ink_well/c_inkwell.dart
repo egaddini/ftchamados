@@ -10,7 +10,8 @@ Widget cInkWell(
     Color defaultColor,
     Color? hoverColor,
     String message,
-    Function function) {
+    Function function
+    ) {
   RxDouble dWidith = defaultWidith.obs;
   Rx<IconData> dIcon = defaultIcon.obs;
   Rx<Color> dColor = defaultColor.obs;

@@ -3,6 +3,9 @@ library home_screen;
 import 'package:chamados/app/modules/call/call_repository.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_controller.dart';
 import 'package:chamados/app/modules/home/widgets/grid_card.dart';
+import 'package:chamados/app/widgets/c_expanded_text_field.dart';
+import 'package:chamados/app/widgets/custom_drop_down_menu_button/custom_dropdown_button.dart';
+import 'package:chamados/app/widgets/custom_drop_down_menu_button/menu_item.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -48,9 +51,10 @@ class HomePage extends GetView<HomeController> {
                     controller: controller.aheadController,
                     textInputAction: TextInputAction.search,
                     textCapitalization: TextCapitalization.words,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Digite um texto',
-                      suffixIcon: Icon(Icons.search_outlined),
+                      prefixIcon: const Icon(Icons.search_outlined),
+                      suffixIcon: CustomDropDownButton(isFilter: true, icon: Icons.tune_outlined, itens: [MenuItem(text: 'Compartilhar',  icon: Icons.share_outlined, function: () {})].map((x) => controller.toDropdownMenuItem(x)).toList()),
                     ),
                   ),
                   suggestionsCallback: (pattern) => controller.itens,
