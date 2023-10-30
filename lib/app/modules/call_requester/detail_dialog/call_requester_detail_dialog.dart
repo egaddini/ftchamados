@@ -37,8 +37,7 @@ class CallRequesterDetailDialog extends StatelessWidget {
                 Row(
                   children: [
                     CustomExpandedTextField(
-                      controller: TextEditingController(
-                          text: controller.call.callType!.sector!.name),
+                      controller: TextEditingController(text: controller.call.callType!.sector!.name),
                       labelText: 'Setor',
                     ),
                     addHorizontalSpace(10),

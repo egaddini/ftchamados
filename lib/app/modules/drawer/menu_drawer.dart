@@ -9,6 +9,8 @@ import 'package:chamados/app/widgets/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/core/utils/helper.dart';
 import 'package:chamados/routes/app_pages.dart';
 
+import '../call_requester/screen/call_requester_dashboard_controller.dart';
+
 class MenuDrawer extends GetView<MenuDrawerController> {
   const MenuDrawer({super.key});
 
@@ -68,7 +70,7 @@ class MenuDrawer extends GetView<MenuDrawerController> {
                   title: const Text("Meus Chamados"),
                   leading:
                       const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
-                  onTap: () => Get.toNamed(AppRoutes.userCall),
+                  onTap: () => Get.toNamed(AppRoutes.userCall)!.then((value) => Get.delete<CallRequesterDashboardController>()),
                 ),
                 Visibility(
                   visible:

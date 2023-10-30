@@ -32,7 +32,7 @@ class CallRequesterDashboardController extends CustomPaginatedDataTable2Controll
     'Finalizado'
   ];
 
-List<String> selectedItems = [];
+RxList selectedItems = [].obs;
 
   final CallRepository callRepo;
   CallRequesterDashboardController({
@@ -60,14 +60,14 @@ List<String> selectedItems = [];
       context: Get.context!,
       builder: (_) => AlertDialog(
         titlePadding: const EdgeInsets.only(top: 10),
-        // contentPadding: const EdgeInsets.only(right: 20, left: 20, bottom: 20, top: 10),
+        contentPadding: const EdgeInsets.only(right: 20, left: 20, top: 10),
         title: AppBar(
           title: const Text('Busca Aprimorada'),
           forceMaterialTransparency: true,
         ),
         content: SizedBox(
           width: 300,
-          child: Column(
+          child: Obx(() => Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Row(
@@ -103,11 +103,14 @@ List<String> selectedItems = [];
                 child: DropdownButtonHideUnderline(
                   child: DropdownButtonFormField<String>(
                     isExpanded: true,
+                    decoration: InputDecoration(
+                      label: const Text('Status'),
+                    ),
                     hint: const Text('Select Items', style: TextStyle(fontSize: 14)),
                     items: status.map((item) {
                       return DropdownMenuItem(
                         value: item,
-                        enabled: false,
+                        enabled: true,
                         child: StatefulBuilder(
                           builder: (context, menuSetState) {
                             final isSelected = selectedItems.contains(item);
@@ -117,11 +120,10 @@ List<String> selectedItems = [];
                                 menuSetState(() {});
                               },
                               child: Container(
-                                height: double.infinity,
                                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                                 child: Row(
                                   children: [
-                                    if (isSelected)const Icon(Icons.check_box_outlined)
+                                    if (isSelected) const Icon(Icons.check_box_outlined)
                                     else const Icon(Icons.check_box_outline_blank),
                                     const SizedBox(width: 16),
                                     Expanded(
@@ -158,8 +160,13 @@ List<String> selectedItems = [];
                 ),
               ),
             ],
-          ),
+          )),
         ),
+        actionsPadding: const EdgeInsets.symmetric(vertical: 8),
+        actionsAlignment: MainAxisAlignment.center,
+        actions: [
+          FilledButton(onPressed: () {}, child: const Text('Filtrar'))
+        ],
       ),
     );
   }

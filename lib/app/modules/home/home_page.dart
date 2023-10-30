@@ -21,6 +21,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../data/models/call_category_model.dart';
 import '../../data/models/user_info_model.dart';
+import '../../widgets/custom_ink_well/c2_inkwell.dart';
 import '../call/components/new_call/new_call_dialog.dart';
 
 part 'home_controller.dart';
@@ -51,10 +52,10 @@ class HomePage extends GetView<HomeController> {
                     controller: controller.aheadController,
                     textInputAction: TextInputAction.search,
                     textCapitalization: TextCapitalization.words,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Digite um texto',
-                      prefixIcon: const Icon(Icons.search_outlined),
-                      suffixIcon: CustomDropDownButton(isFilter: true, icon: Icons.tune_outlined, itens: [MenuItem(text: 'Compartilhar',  icon: Icons.share_outlined, function: () {})].map((x) => controller.toDropdownMenuItem(x)).toList()),
+                      prefixIcon: Icon(Icons.search_outlined),
+                      suffixIcon: CInkWell(defaultIcon: Icons.tune_outlined)
                     ),
                   ),
                   suggestionsCallback: (pattern) => controller.itens,

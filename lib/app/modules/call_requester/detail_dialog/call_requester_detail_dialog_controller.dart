@@ -25,31 +25,39 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
 
   @override
   void onInit() {
-    startItens();
     repository.findById(callID).then((value) => {
       call = value,
       statusC = value.status.obs,
+      startItens(statusC.value),
       change(value, status: RxStatus.success()),
     });
-
     super.onInit();
   }
 
-  startItens() {
+  startItens(String status) {
     itens = [
       MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () => {}),
-      MenuItem(text: 'Cancelar', icon: Icons.cancel_presentation_rounded, function: () => alterarStatusChamado(9)),
-      MenuItem(text: 'Finalizar', icon: Icons.check_box_outlined, function: () => alterarStatusChamado(10)),
       MenuItem(text: 'Histórico', icon: Icons.history_outlined, function: (() => callHistoric())),
       MenuItem(text: 'Compartilhar', icon: Icons.share_outlined, function: () {})
     ].map((x) => toDropdownMenuItem(x)).toList();
+
+    if (['Finalizado', 'Cancelado'].firstWhereOrNull((x) => x == status) == null) {
+      itens.addAll(
+        [
+          MenuItem(text: 'Cancelar', icon: Icons.cancel_presentation_rounded, function: () => alterarStatusChamado(9)),
+          MenuItem(text: 'Finalizar', icon: Icons.check_box_outlined, function: () => alterarStatusChamado(10)),
+        ].map((x) => toDropdownMenuItem(x)).toList()
+      );
+    }
+
   }
 
   alterarStatusChamado(int status) async {
     repository.setStatus(callID, status).then((value) {
       statusC.value = value.name;
       statusC.refresh();
-      snackSucessRegister('Registrado com sucesso', 'Chamado encerrado com sucesso!');
+      Get.back(result: statusC.value);
+      snackSucessRegister('${value.description} com sucesso', 'Chamado ${value.description}. com sucesso!');
     }).catchError((error) {
       tratar(error);
     });
