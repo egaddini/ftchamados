@@ -35,20 +35,21 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
   }
 
   startItens(String status) {
-    itens = [
-      MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () => {}),
-      MenuItem(text: 'Histórico', icon: Icons.history_outlined, function: (() => callHistoric())),
-      MenuItem(text: 'Compartilhar', icon: Icons.share_outlined, function: () {})
-    ].map((x) => toDropdownMenuItem(x)).toList();
-
     if (['Finalizado', 'Cancelado'].firstWhereOrNull((x) => x == status) == null) {
       itens.addAll(
         [
+          MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () => {}),
           MenuItem(text: 'Cancelar', icon: Icons.cancel_presentation_rounded, function: () => alterarStatusChamado(9)),
           MenuItem(text: 'Finalizar', icon: Icons.check_box_outlined, function: () => alterarStatusChamado(10)),
         ].map((x) => toDropdownMenuItem(x)).toList()
       );
     }
+    itens.addAll(
+      [
+        MenuItem(text: 'Histórico', icon: Icons.history_outlined, function: (() => callHistoric())),
+        MenuItem(text: 'Compartilhar', icon: Icons.share_outlined, function: () {})
+      ].map((x) => toDropdownMenuItem(x)).toList()
+    );
 
   }
 
@@ -71,36 +72,32 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
         title: AppBar(
           title: const Text('Histórico do chamado'),
           forceMaterialTransparency: true,
-          actions: const [
-            Padding(padding: EdgeInsets.symmetric(horizontal: 20.0),),
-          ]        
+          actions: const [Padding(padding: EdgeInsets.symmetric(horizontal: 20.0))]        
         ),
-        
-        //Center(child: Text('Histórico do chamado',style: Get.theme.textTheme.headlineMedium!)),
         content: SizedBox(
-          width: 1200,
+          width: Get.width * 0.3,
+          height: Get.height * 0.6,
           child: historicForm(),
         ),
       )
     );
   }
 
-  DataTable2 historicForm() {
+  Widget historicForm() {
     return DataTable2(
-      columnSpacing: 12,
-      horizontalMargin: 12,
-      minWidth: 600,
-      columns: ['Data', 'Usuário', 'Ação'].map((x) => DataColumn2(label: Text(x, style: Get.theme.textTheme.titleMedium!)),).toList(),
-      rows: call.historico.map((e) => 
-        DataRow(
-          cells: [
-            DataCell(Text(e.ocurrenceDT == null ? '' : Masks.dateTimeMask(e.ocurrenceDT!))),
-            DataCell(Text(e.user!)),
-            DataCell(Text(e.message!)),
-          ],
-        ),
-      ).toList(),
-    );
+        columnSpacing: 12,
+        horizontalMargin: 12,
+        columns: ['Data', 'Usuário', 'Ação'].map((x) => DataColumn2(label: Text(x, style: Get.theme.textTheme.titleMedium!)),).toList(),
+        rows: call.historico.map(
+          (e) => DataRow2(
+            cells: [
+              DataCell(Text(e.ocurrenceDT == null ? '' : Masks.dateTimeMask(e.ocurrenceDT!))),
+              DataCell(Text(e.user!)),
+              DataCell(Text(e.message!)),
+            ],
+          ),
+        ).toList(),
+      );
   }
 
   DropdownMenuItem toDropdownMenuItem(MenuItem item) {
