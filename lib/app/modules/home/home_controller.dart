@@ -10,9 +10,26 @@ class HomeController extends GetxController with StateMixin<CallCategoryModel> {
   final CarouselController carouselC = CarouselController();
   RxList<Widget> imgList = <Widget>[].obs;
 
+  RxList selectedItems = [].obs;
+
+  late DateTime? selectedDate = DateTime.now();
+
   final TextEditingController aheadController = TextEditingController();
 
   late AppConfigService _appConfigService;
+
+  List<String> statos = [
+    'Aberto',
+    'Em Triagem',
+    'Em Andamento',
+    'Aguardando Informações',
+    'Aguardando Aprovação',
+    'Em Espera',
+    'Pendente',
+    'Resolvido com Falha',
+    'Cancelado',
+    'Finalizado'
+  ];
 
   @override
   void onInit() async {
@@ -31,20 +48,43 @@ class HomeController extends GetxController with StateMixin<CallCategoryModel> {
   setCarousel(int index) => current.value = index;
 
   
-  DropdownMenuItem toDropdownMenuItem(MenuItem item) {
-    return DropdownMenuItem<MenuItem>(
-      value: item,
-      child: Row(
-        children: [
-          Icon(item.icon, color: Colors.white, size: 22),
-          const SizedBox(width: 10),
-          CustomExpandedTextField(
-            controller: TextEditingController(),
-            labelText: 'Ihul',
-          ),
+  newCall(CallCategoryModel call) => 
+    Get.dialog( 
+      NewCallForm(
+        controller: Get.put<NewCallController>(NewCallController(callCategory: call, callRepo: Get.put(CallRepository())),)
+      ),
+    ).then((value) => Get.delete<NewCallController>());
+  
+  filter() {
+    return showDialog(
+      context: Get.context!,
+      builder: (_) => AlertDialog(
+        titlePadding: const EdgeInsets.only(top: 10),
+        contentPadding: const EdgeInsets.only(right: 20, left: 20, top: 10),
+        title: AppBar(
+          title: const Text('Busca Aprimorada'),
+          forceMaterialTransparency: true,
+        ),
+        content: const SizedBox(
+          width: 300,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 8.0),
+                child: CallSectorDropdownPage(),
+              ),
+            ],
+          )
+        ),
+        actionsPadding: const EdgeInsets.symmetric(vertical: 8),
+        actionsAlignment: MainAxisAlignment.center,
+        actions: [
+          FilledButton(onPressed: () {}, child: const Text('Filtrar'))
         ],
       ),
-      onTap: () {},
     );
   }
+
+
 }

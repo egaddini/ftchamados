@@ -3,9 +3,7 @@ library home_screen;
 import 'package:chamados/app/modules/call/call_repository.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_controller.dart';
 import 'package:chamados/app/modules/home/widgets/grid_card.dart';
-import 'package:chamados/app/widgets/c_expanded_text_field.dart';
-import 'package:chamados/app/widgets/custom_drop_down_menu_button/custom_dropdown_button.dart';
-import 'package:chamados/app/widgets/custom_drop_down_menu_button/menu_item.dart';
+import 'package:chamados/app/widgets/dropdown_entity_widget/sector/call_sector_dropdown_page.dart';
 import 'package:flutter/material.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -52,20 +50,17 @@ class HomePage extends GetView<HomeController> {
                     controller: controller.aheadController,
                     textInputAction: TextInputAction.search,
                     textCapitalization: TextCapitalization.words,
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       labelText: 'Digite um texto',
-                      prefixIcon: Icon(Icons.search_outlined),
-                      suffixIcon: CInkWell(defaultIcon: Icons.tune_outlined)
+                      prefixIcon: const Icon(Icons.search_outlined),
+                      suffixIcon: CInkWell(defaultIcon: Icons.tune_outlined, function: () => controller.filter(),)
                     ),
                   ),
                   suggestionsCallback: (pattern) => controller.itens,
                   itemBuilder: (context, CallCategoryModel call) => ListTile(
                     title: Text('${call.sector!.acronym} - ${call.title}'),
                   ),
-                  onSuggestionSelected: (CallCategoryModel call) async => Get.dialog(
-                    NewCallForm(
-                      controller: Get.put<NewCallController>(NewCallController(callCategory: call, callRepo: Get.put(CallRepository())),)),
-                  ).then((value) => Get.delete<NewCallController>()),
+                  onSuggestionSelected: (CallCategoryModel call) async => controller.newCall(call),
                 ),
               ),
               Padding(

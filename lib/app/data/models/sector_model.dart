@@ -56,4 +56,7 @@ class SectorModel {
 
   @override
   int get hashCode => id.hashCode ^ acronym.hashCode ^ name.hashCode;
+
+  static List<SectorModel> fromDynamic(List<dynamic> list) => list.map((json) => SectorModel.fromMap(json)).toList(); 
+
 }

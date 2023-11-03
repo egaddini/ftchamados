@@ -54,11 +54,12 @@ class CallRepository {
     return results;
   }
 
-  Future<List<Call>> getCallListByEmail(String email) async {
+  Future<List<Call>> getCallListByEmail(String email, bool isSolver) async {
     List<Call> results = [];
 
     final response = await Dio().get(
       '$_basePath/email/$email',
+      queryParameters: {'isSolver': isSolver},      
       options: Options(headers: getAuthHeader()),
     );
     if (response.statusCode == 200) {

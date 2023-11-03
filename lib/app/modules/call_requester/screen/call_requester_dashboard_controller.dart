@@ -41,7 +41,8 @@ RxList selectedItems = [].obs;
 
   @override
   void onInit() {
-    callRepo.getCallListByEmail(UserInfoModel.fromJson(AppConfigService().to().userData()).email!).then((value) => {
+    UserInfoModel user = UserInfoModel.fromJson(AppConfigService().to().userData());
+    callRepo.getCallListByEmail(user.email!, user.isSolver()).then((value) => {
       data.value = value,
       isLoading.value = false,
     });
