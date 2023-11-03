@@ -10,18 +10,14 @@ import 'package:chamados/app/widgets/dropdown_entity_widget/priority/call_priori
 import 'package:chamados/app/widgets/dropdown_entity_widget/sector/call_sector_dropdown_page.dart';
 import 'package:flutter/material.dart';
 
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 
-import 'package:chamados/app/data/services/app_config/service.dart';
-import 'package:chamados/app/modules/call_category/call_category_repository.dart';
 import 'package:chamados/app/modules/drawer/menu_drawer.dart';
 import 'package:chamados/core/utils/helper.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
 import '../../data/models/call_category_model.dart';
-import '../../data/models/user_info_model.dart';
 import '../../widgets/custom_ink_well/c2_inkwell.dart';
 import '../call/components/new_call/new_call_dialog.dart';
 
