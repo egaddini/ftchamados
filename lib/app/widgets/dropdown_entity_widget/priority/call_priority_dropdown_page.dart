@@ -1,21 +1,21 @@
-import 'package:chamados/app/data/models/sector_model.dart';
-import 'package:chamados/app/widgets/dropdown_entity_widget/sector/call_sector_dropdown_controller.dart';
+import 'package:chamados/app/data/models/priority.dart';
+import 'package:chamados/app/widgets/dropdown_entity_widget/priority/call_priority_dropdown_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CallSectorDropdownPage extends GetView<CallSectorDropdownController> {
+class CallPriorityDropdownPage extends GetView<CallPriorityDropdownController> {
   
-  final RxList<SectorModel> selectedItems;
+  final RxList<PriorityModel> selectedItems;
 
-  const CallSectorDropdownPage(this.selectedItems, {super.key});
+  const CallPriorityDropdownPage(this.selectedItems, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return controller.obx(
       (state) =>  DropdownButtonHideUnderline(
-        child: DropdownButtonFormField<SectorModel>(
+        child: DropdownButtonFormField<PriorityModel>(
           isExpanded: true,
-          decoration: const InputDecoration(label: Text('Categoria')),
+          decoration: const InputDecoration(label: Text('Prioridade')),
           hint: const Text('Select Items', style: TextStyle(fontSize: 14)),
           items: state!.map((item) {
             return DropdownMenuItem(
@@ -23,7 +23,7 @@ class CallSectorDropdownPage extends GetView<CallSectorDropdownController> {
               enabled: true,
               child: StatefulBuilder(
                 builder: (context, menuSetState) {
-                  final isSelected = controller.selectedItems.contains(item);
+                  final isSelected = selectedItems.contains(item);
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
@@ -31,7 +31,7 @@ class CallSectorDropdownPage extends GetView<CallSectorDropdownController> {
                         if (isSelected) const Icon(Icons.check_box_outlined)
                         else const Icon(Icons.check_box_outline_blank),
                         const SizedBox(width: 16),
-                        Expanded(child: Text('${item.acronym} - ${item.name}', style: const TextStyle(fontSize: 14))),
+                        Expanded(child: Text('${item.name} - ${item.weight}', style: const TextStyle(fontSize: 14))),
                       ],
                     ),
                   );
@@ -39,14 +39,14 @@ class CallSectorDropdownPage extends GetView<CallSectorDropdownController> {
               ),
             );
           }).toList(),
-          value: controller.selectedItems.isEmpty ? null : controller.selectedItems.last,
+          value: selectedItems.isEmpty ? null : selectedItems.last,
           selectedItemBuilder: (context) {
             return state.map(
               (item) {
                 return Container(
                   alignment: AlignmentDirectional.center,
                   child: Text(
-                    controller.selectedItems.map((x) => x.name).toList().join(', '),
+                    selectedItems.map((x) => x.name).toList().join(', '),
                     style: const TextStyle(
                       fontSize: 14,
                       overflow: TextOverflow.ellipsis,
@@ -58,8 +58,8 @@ class CallSectorDropdownPage extends GetView<CallSectorDropdownController> {
             ).toList();
           },
           onChanged: (value) {
-            final isSelected = controller.selectedItems.contains(value);
-            isSelected ? controller.selectedItems.remove(value) : controller.selectedItems.add(value!);
+            final isSelected = selectedItems.contains(value);
+            isSelected ? selectedItems.remove(value) : selectedItems.add(value!);
           },
         ),
       ),

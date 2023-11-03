@@ -5,31 +5,17 @@ class HomeController extends GetxController with StateMixin<CallCategoryModel> {
   RxList<CallCategoryModel> itens = <CallCategoryModel>[].obs;
   CallCategoryRepository callRepo = CallCategoryRepository();
   late UserInfoModel? logedUser;
-  
+  RxList<PriorityModel> selectedPrioritys = <PriorityModel>[].obs;
+  RxList<SectorModel> selectedSectors = <SectorModel>[].obs;
   RxInt current = 0.obs;
   final CarouselController carouselC = CarouselController();
   RxList<Widget> imgList = <Widget>[].obs;
-
-  RxList selectedItems = [].obs;
 
   late DateTime? selectedDate = DateTime.now();
 
   final TextEditingController aheadController = TextEditingController();
 
   late AppConfigService _appConfigService;
-
-  List<String> statos = [
-    'Aberto',
-    'Em Triagem',
-    'Em Andamento',
-    'Aguardando Informações',
-    'Aguardando Aprovação',
-    'Em Espera',
-    'Pendente',
-    'Resolvido com Falha',
-    'Cancelado',
-    'Finalizado'
-  ];
 
   @override
   void onInit() async {
@@ -65,22 +51,26 @@ class HomeController extends GetxController with StateMixin<CallCategoryModel> {
           title: const Text('Busca Aprimorada'),
           forceMaterialTransparency: true,
         ),
-        content: const SizedBox(
+        content: SizedBox(
           width: 300,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: CallSectorDropdownPage(),
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CallSectorDropdownPage(selectedSectors),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: CallPriorityDropdownPage(selectedPrioritys),
+                ),
+              ],
+            ),
           )
         ),
         actionsPadding: const EdgeInsets.symmetric(vertical: 8),
         actionsAlignment: MainAxisAlignment.center,
         actions: [
-          FilledButton(onPressed: () {}, child: const Text('Filtrar'))
+          FilledButton(child: const Text('Filtrar'), onPressed: () {print(selectedPrioritys);},)
         ],
       ),
     );

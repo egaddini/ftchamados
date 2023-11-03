@@ -1,3 +1,4 @@
+import 'package:chamados/app/widgets/dropdown_entity_widget/priority/call_priority_dropdown_binding.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/sector/call_sector_dropdown_binding.dart';
 import 'package:get/get.dart';
 
@@ -10,5 +11,6 @@ class HomeBindings extends Bindings {
     Get.lazyPut(() => HomeController());
 
     CallSectorDropdownBinding().dependencies();
+    CallPriorityDropdownBinding().dependencies();
   } 
 }

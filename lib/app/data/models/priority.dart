@@ -58,4 +58,7 @@ class PriorityModel {
 
   @override
   int get hashCode => id.hashCode ^ name.hashCode ^ weight.hashCode;
+
+  static List<PriorityModel> fromDynamic(List<dynamic> list) => list.map((json) => PriorityModel.fromMap(json)).toList(); 
+
 }

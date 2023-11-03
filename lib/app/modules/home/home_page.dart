@@ -1,8 +1,11 @@
 library home_screen;
 
+import 'package:chamados/app/data/models/priority.dart';
+import 'package:chamados/app/data/models/sector_model.dart';
 import 'package:chamados/app/modules/call/call_repository.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_controller.dart';
 import 'package:chamados/app/modules/home/widgets/grid_card.dart';
+import 'package:chamados/app/widgets/dropdown_entity_widget/priority/call_priority_dropdown_page.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/sector/call_sector_dropdown_page.dart';
 import 'package:flutter/material.dart';
 

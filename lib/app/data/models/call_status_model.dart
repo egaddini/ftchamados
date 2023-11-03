@@ -62,6 +62,7 @@ class CallStatusModel {
   String toString() {
     return 'CallStatusModel(id: $id, name: $name, description: $description, weight: $weight, notify: $notify)';
   }
+  
 
   @override
   bool operator ==(covariant CallStatusModel other) {

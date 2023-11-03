@@ -1,4 +1,3 @@
-import 'package:chamados/app/data/models/call_status_model.dart';
 import 'package:chamados/app/data/models/sector_model.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/sector/call_sector_dropdown_repository.dart';
 import 'package:get/get.dart';
@@ -9,16 +8,12 @@ class CallSectorDropdownController extends GetxController with StateMixin<List<S
 
   CallSectorDropdownController(this.repository);
 
-  RxList selectedItems = [].obs;
-
-  List<CallStatusModel> sectors = [];
+  RxList<SectorModel> selectedItems = <SectorModel>[].obs;
 
   @override
   void onInit() {
     repository.findAll().then((value) => change(value, status: RxStatus.success()));
     super.onInit();
   }
-
-
 
 }
