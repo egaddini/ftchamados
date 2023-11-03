@@ -3,16 +3,10 @@ part of home_screen;
 class HomeController extends GetxController with StateMixin<CallCategoryModel> {
 
   RxList<CallCategoryModel> itens = <CallCategoryModel>[].obs;
-  CallCategoryRepository callRepo = CallCategoryRepository();
-  late UserInfoModel? logedUser;
   RxList<PriorityModel> selectedPrioritys = <PriorityModel>[].obs;
   RxList<SectorModel> selectedSectors = <SectorModel>[].obs;
-  RxInt current = 0.obs;
-  final CarouselController carouselC = CarouselController();
 
   final TextEditingController aheadController = TextEditingController();
-
-  late AppConfigService _appConfigService;
 
   final HomeRepository repository;
 
@@ -20,8 +14,6 @@ class HomeController extends GetxController with StateMixin<CallCategoryModel> {
 
   @override
   void onInit() async {
-    _appConfigService = Get.find<AppConfigService>();
-    logedUser = UserInfoModel.fromJson(_appConfigService.userData());
     await findAll();
     change(null, status: RxStatus.success());
     super.onInit();
