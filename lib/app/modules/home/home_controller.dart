@@ -9,31 +9,31 @@ class HomeController extends GetxController with StateMixin<CallCategoryModel> {
   RxList<SectorModel> selectedSectors = <SectorModel>[].obs;
   RxInt current = 0.obs;
   final CarouselController carouselC = CarouselController();
-  RxList<Widget> imgList = <Widget>[].obs;
-
-  late DateTime? selectedDate = DateTime.now();
 
   final TextEditingController aheadController = TextEditingController();
 
   late AppConfigService _appConfigService;
 
+  final HomeRepository repository;
+
+  HomeController(this.repository);
+
   @override
   void onInit() async {
     _appConfigService = Get.find<AppConfigService>();
     logedUser = UserInfoModel.fromJson(_appConfigService.userData());
-
-    await callRepo.getList().then((value) => {
-      itens = value.obs,
-      imgList.addAll(value.map((element) => CarrouselCardWidget(call: element)).toList()),
-    });
-
+    await findAll();
     change(null, status: RxStatus.success());
     super.onInit();
   }
 
-  setCarousel(int index) => current.value = index;
+  findAll() async {
+    return await repository.findAll(selectedSectors.map((x) => x.id!).toList(), selectedPrioritys.map((x) => x.id!).toList()).then((value) => {
+      itens = value.obs,
+      itens.refresh(),
+    });
+  }
 
-  
   newCall(CallCategoryModel call) => 
     Get.dialog( 
       NewCallForm(
@@ -60,7 +60,7 @@ class HomeController extends GetxController with StateMixin<CallCategoryModel> {
               children: [
                 CallSectorDropdownPage(selectedSectors),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
                   child: CallPriorityDropdownPage(selectedPrioritys),
                 ),
               ],
@@ -70,11 +70,15 @@ class HomeController extends GetxController with StateMixin<CallCategoryModel> {
         actionsPadding: const EdgeInsets.symmetric(vertical: 8),
         actionsAlignment: MainAxisAlignment.center,
         actions: [
-          FilledButton(child: const Text('Filtrar'), onPressed: () {print(selectedPrioritys);},)
+          FilledButton(
+            child: const Text('Filtrar'), 
+            onPressed: () {
+              findAll();
+              Get.back();
+            } 
+          ),
         ],
       ),
     );
   }
-
-
 }

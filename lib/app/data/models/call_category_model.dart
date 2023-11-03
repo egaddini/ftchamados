@@ -65,6 +65,8 @@ class CallCategoryModel {
     return 'CallCategoryModel(id: $id, sector: $sector, title: $title, priority: $priority, description: $description)';
   }
 
+  static List<CallCategoryModel> fromDynamic(List<dynamic> list) => list.map((json) => CallCategoryModel.fromMap(json)).toList(); 
+
   @override
   bool operator ==(covariant CallCategoryModel other) {
     if (identical(this, other)) return true;

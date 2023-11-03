@@ -15,7 +15,7 @@ class CallSectorDropdownPage extends GetView<CallSectorDropdownController> {
       (state) =>  DropdownButtonHideUnderline(
         child: DropdownButtonFormField<SectorModel>(
           isExpanded: true,
-          decoration: const InputDecoration(label: Text('Categoria')),
+          decoration: const InputDecoration(label: Text('Setores')),
           hint: const Text('Select Items', style: TextStyle(fontSize: 14)),
           items: state!.map((item) {
             return DropdownMenuItem(
@@ -23,7 +23,7 @@ class CallSectorDropdownPage extends GetView<CallSectorDropdownController> {
               enabled: true,
               child: StatefulBuilder(
                 builder: (context, menuSetState) {
-                  final isSelected = controller.selectedItems.contains(item);
+                  final isSelected = selectedItems.contains(item);
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
@@ -39,14 +39,14 @@ class CallSectorDropdownPage extends GetView<CallSectorDropdownController> {
               ),
             );
           }).toList(),
-          value: controller.selectedItems.isEmpty ? null : controller.selectedItems.last,
+          value: selectedItems.isEmpty ? null : selectedItems.last,
           selectedItemBuilder: (context) {
             return state.map(
               (item) {
                 return Container(
                   alignment: AlignmentDirectional.center,
                   child: Text(
-                    controller.selectedItems.map((x) => x.name).toList().join(', '),
+                    selectedItems.map((x) => x.name).toList().join(', '),
                     style: const TextStyle(
                       fontSize: 14,
                       overflow: TextOverflow.ellipsis,
@@ -58,8 +58,8 @@ class CallSectorDropdownPage extends GetView<CallSectorDropdownController> {
             ).toList();
           },
           onChanged: (value) {
-            final isSelected = controller.selectedItems.contains(value);
-            isSelected ? controller.selectedItems.remove(value) : controller.selectedItems.add(value!);
+            final isSelected = selectedItems.contains(value);
+            isSelected ? selectedItems.remove(value) : selectedItems.add(value!);
           },
         ),
       ),

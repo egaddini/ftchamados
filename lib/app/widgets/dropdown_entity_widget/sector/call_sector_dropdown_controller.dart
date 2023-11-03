@@ -8,8 +8,6 @@ class CallSectorDropdownController extends GetxController with StateMixin<List<S
 
   CallSectorDropdownController(this.repository);
 
-  RxList<SectorModel> selectedItems = <SectorModel>[].obs;
-
   @override
   void onInit() {
     repository.findAll().then((value) => change(value, status: RxStatus.success()));

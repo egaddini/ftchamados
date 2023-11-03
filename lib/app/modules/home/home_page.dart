@@ -4,6 +4,7 @@ import 'package:chamados/app/data/models/priority.dart';
 import 'package:chamados/app/data/models/sector_model.dart';
 import 'package:chamados/app/modules/call/call_repository.dart';
 import 'package:chamados/app/modules/call/components/new_call/new_call_controller.dart';
+import 'package:chamados/app/modules/home/home_repository.dart';
 import 'package:chamados/app/modules/home/widgets/grid_card.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/priority/call_priority_dropdown_page.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/sector/call_sector_dropdown_page.dart';
@@ -16,7 +17,6 @@ import 'package:get/get.dart';
 import 'package:chamados/app/data/services/app_config/service.dart';
 import 'package:chamados/app/modules/call_category/call_category_repository.dart';
 import 'package:chamados/app/modules/drawer/menu_drawer.dart';
-import 'package:chamados/app/modules/home/widgets/carrousel_card_widget.dart';
 import 'package:chamados/core/utils/helper.dart';
 import 'package:responsive_grid/responsive_grid.dart';
 
@@ -69,7 +69,7 @@ class HomePage extends GetView<HomeController> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 36.0),
                 child: ResponsiveGridRow(
-                  children: controller.itens.take(12).map((element) => gridCardWidget(element)).toList(),
+                  children: controller.itens.take(12).map((x) => gridCardWidget(x)).toList()
                 ),
               ),
             ]

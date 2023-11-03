@@ -19,6 +19,7 @@ ResponsiveGridCol gridCardWidget(CallCategoryModel call) {
       padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 4.0),
       child: CustomCard.customClickableCard(
         height: 160,
+        width: Get.width * 0.3,
         content: Padding(
           padding: const EdgeInsets.all(6.0),
           child: Column(
@@ -76,7 +77,7 @@ AlertDialog moreDetailsAboutCategodyDialog(CallCategoryModel call) {
       forceMaterialTransparency: true,
     ),
     content: SizedBox(
-      width: 600,
+      width: Get.width * 0.3,
       child: SingleChildScrollView(
         child: Column(
           children: [
