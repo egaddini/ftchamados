@@ -33,19 +33,19 @@ class MenuDrawerController extends GetxController with StateMixin<UserInfoModel>
   }
 
   Widget setThemeWidget() => InkWell(
-        borderRadius: BorderRadius.circular(90),
-        onHover: (value) {},
-        onTap: () =>_appConfigService.changeDarkMode(!_appConfigService.darkMode()),
-        child: Tooltip(
-            message: 'Alterar o Tema',
-            child: Icon(
-              _appConfigService.darkMode()
-                  ? Icons.light_mode_outlined
-                  : Icons.dark_mode_outlined,
-              size: 40,
-              fill: 0.5,
-            )),
-      );
+    borderRadius: BorderRadius.circular(90),
+    onHover: (value) {},
+    onTap: () =>_appConfigService.changeDarkMode(!_appConfigService.darkMode()),
+    child: Tooltip(
+        message: 'Alterar o Tema',
+        child: Icon(
+          _appConfigService.darkMode()
+              ? Icons.light_mode_outlined
+              : Icons.dark_mode_outlined,
+          size: 40,
+          fill: 0.5,
+        )),
+  );
 
   toMeusChamados() => logedUser.isSolver() ? Get.toNamed(AppRoutes.callSolver)!.then((value) => Get.delete<CallSolverDashboardController>()) : Get.toNamed(AppRoutes.userCall)!.then((value) => Get.delete<CallRequesterDashboardController>());
 
