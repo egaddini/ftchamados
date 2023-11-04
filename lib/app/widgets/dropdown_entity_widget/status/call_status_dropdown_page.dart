@@ -31,7 +31,7 @@ class CallStatusDropdownPage extends GetView<CallStatusDropdownController> {
                         if (isSelected) const Icon(Icons.check_box_outlined)
                         else const Icon(Icons.check_box_outline_blank),
                         const SizedBox(width: 16),
-                        Expanded(child: Text('${item.name} - ${item.weight}', style: const TextStyle(fontSize: 14))),
+                        Expanded(child: Text('${item.weight} - ${item.name}', style: const TextStyle(fontSize: 14))),
                       ],
                     ),
                   );

@@ -31,7 +31,7 @@ class CallCategoryDropdownPage extends GetView<CallCategoryDropdownController> {
                         if (isSelected) const Icon(Icons.check_box_outlined)
                         else const Icon(Icons.check_box_outline_blank),
                         const SizedBox(width: 16),
-                        Expanded(child: Text('${item.title} - ${item.title}', style: const TextStyle(fontSize: 14))),
+                        Expanded(child: Text('${item.title}', style: const TextStyle(fontSize: 14, overflow: TextOverflow.ellipsis))),
                       ],
                     ),
                   );
