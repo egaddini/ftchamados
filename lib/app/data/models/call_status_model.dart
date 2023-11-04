@@ -63,6 +63,7 @@ class CallStatusModel {
     return 'CallStatusModel(id: $id, name: $name, description: $description, weight: $weight, notify: $notify)';
   }
   
+  static List<CallStatusModel> fromDynamic(List<dynamic> list) => list.map((json) => CallStatusModel.fromMap(json)).toList(); 
 
   @override
   bool operator ==(covariant CallStatusModel other) {

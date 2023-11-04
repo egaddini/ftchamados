@@ -1,21 +1,21 @@
-import 'package:chamados/app/data/models/priority.dart';
-import 'package:chamados/app/widgets/dropdown_entity_widget/priority/call_priority_dropdown_controller.dart';
+import 'package:chamados/app/data/models/call_status_model.dart';
+import 'package:chamados/app/widgets/dropdown_entity_widget/status/call_status_dropdown_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CallPriorityDropdownPage extends GetView<CallPriorityDropdownController> {
+class CallStatusDropdownPage extends GetView<CallStatusDropdownController> {
   
-  final RxList<PriorityModel> selectedItems;
+  final RxList<CallStatusModel> selectedItems;
 
-  const CallPriorityDropdownPage(this.selectedItems, {super.key});
+  const CallStatusDropdownPage(this.selectedItems, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return controller.obx(
       (state) =>  DropdownButtonHideUnderline(
-        child: DropdownButtonFormField<PriorityModel>(
+        child: DropdownButtonFormField<CallStatusModel>(
           isExpanded: true,
-          decoration: const InputDecoration(label: Text('Prioridades')),
+          decoration: const InputDecoration(label: Text('Status')),
           hint: const Text('Select Items', style: TextStyle(fontSize: 14)),
           items: state!.map((item) {
             return DropdownMenuItem(

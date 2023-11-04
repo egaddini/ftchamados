@@ -1,21 +1,21 @@
-import 'package:chamados/app/data/models/priority.dart';
-import 'package:chamados/app/widgets/dropdown_entity_widget/priority/call_priority_dropdown_controller.dart';
+import 'package:chamados/app/data/models/call_category_model.dart';
+import 'package:chamados/app/widgets/dropdown_entity_widget/category/call_category_dropdown_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CallPriorityDropdownPage extends GetView<CallPriorityDropdownController> {
+class CallCategoryDropdownPage extends GetView<CallCategoryDropdownController> {
   
-  final RxList<PriorityModel> selectedItems;
+  final RxList<CallCategoryModel> selectedItems;
 
-  const CallPriorityDropdownPage(this.selectedItems, {super.key});
+  const CallCategoryDropdownPage(this.selectedItems, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return controller.obx(
       (state) =>  DropdownButtonHideUnderline(
-        child: DropdownButtonFormField<PriorityModel>(
+        child: DropdownButtonFormField<CallCategoryModel>(
           isExpanded: true,
-          decoration: const InputDecoration(label: Text('Prioridades')),
+          decoration: const InputDecoration(label: Text('Categoria')),
           hint: const Text('Select Items', style: TextStyle(fontSize: 14)),
           items: state!.map((item) {
             return DropdownMenuItem(
@@ -31,7 +31,7 @@ class CallPriorityDropdownPage extends GetView<CallPriorityDropdownController> {
                         if (isSelected) const Icon(Icons.check_box_outlined)
                         else const Icon(Icons.check_box_outline_blank),
                         const SizedBox(width: 16),
-                        Expanded(child: Text('${item.name} - ${item.weight}', style: const TextStyle(fontSize: 14))),
+                        Expanded(child: Text('${item.title} - ${item.title}', style: const TextStyle(fontSize: 14))),
                       ],
                     ),
                   );
@@ -46,7 +46,7 @@ class CallPriorityDropdownPage extends GetView<CallPriorityDropdownController> {
                 return Container(
                   alignment: AlignmentDirectional.center,
                   child: Text(
-                    selectedItems.map((x) => x.name).toList().join(', '),
+                    selectedItems.map((x) => x.title).toList().join(', '),
                     style: const TextStyle(
                       fontSize: 14,
                       overflow: TextOverflow.ellipsis,

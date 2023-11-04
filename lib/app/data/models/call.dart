@@ -95,6 +95,8 @@ class Call {
     return 'Call(id: $id, dataCriacao: $dataCriacao, dataUltAtualizacao: $dataUltAtualizacao, status: $status, solicitante: $solicitante, solver: $responsavel, callType: $callType, descricao: $descricao, historico: $historico)';
   }
 
+  static List<Call> fromDynamic(List<dynamic> list) => list.map((json) => Call.fromMap(json)).toList(); 
+
   @override
   bool operator ==(covariant Call other) {
     if (identical(this, other)) return true;
