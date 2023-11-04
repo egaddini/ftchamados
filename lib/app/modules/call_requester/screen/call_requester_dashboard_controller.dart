@@ -104,8 +104,8 @@ RxList selectedItems = [].obs;
                 child: DropdownButtonHideUnderline(
                   child: DropdownButtonFormField<String>(
                     isExpanded: true,
-                    decoration: InputDecoration(
-                      label: const Text('Status'),
+                    decoration: const InputDecoration(
+                      label: Text('Status'),
                     ),
                     hint: const Text('Select Items', style: TextStyle(fontSize: 14)),
                     items: status.map((item) {
