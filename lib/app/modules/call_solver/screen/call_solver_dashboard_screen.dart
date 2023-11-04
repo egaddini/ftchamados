@@ -10,25 +10,17 @@ import 'call_solver_dashboard_controller.dart';
 
 part 'call_solver_row_source.dart';
 
-class CallSolverDashboardScreen
-    extends CustomPaginatedDataTable2<CallSolverDashboardController> {
+class CallSolverDashboardScreen extends CustomPaginatedDataTable2<CallSolverDashboardController> {
   const CallSolverDashboardScreen({super.key});
 
   @override
-  List<Widget> getActions() {
-    return [];
-  }
+  List<Widget> getActions() => [];
 
   @override
   List<String> getColumns() => ['Título', 'Setor', 'Prioridade', 'Status', 'Criado em', 'Ultima atualizacao'];
 
   @override
-  DataTableSource getDataTableSource() {
-    return RowSource(
-      myData: controller.data,
-      count: controller.data.length,
-    );
-  }
+  DataTableSource getDataTableSource() => RowSource(myData: controller.data, count: controller.data.length,);
 
   @override
   Widget getHeaderFields() {
@@ -48,4 +40,5 @@ class CallSolverDashboardScreen
 
   @override
   String getTitle() => 'Meus Chamados';
+  
 }

@@ -1,3 +1,4 @@
+import 'package:chamados/app/modules/call/screen/call_dashboard_screen.dart';
 import 'package:get/get.dart';
 
 import 'package:chamados/app/data/middlewares/auth_middleware.dart';
@@ -54,8 +55,13 @@ abstract class AppPages {
       binding: SingUpBinding(),
     ),
     GetPage(
-      name: AppRoutes.call,
+      name: AppRoutes.callSolver,
       page: () => const CallSolverDashboardScreen(),
+      binding: CallSolverDashboardBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.call,
+      page: () => const CallDashboardScreen(),
       binding: CallSolverDashboardBindings(),
     ),
     GetPage(

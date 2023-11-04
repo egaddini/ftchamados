@@ -9,8 +9,6 @@ import 'package:chamados/app/widgets/custom_ink_well/c_inkwell.dart';
 import 'package:chamados/core/utils/helper.dart';
 import 'package:chamados/routes/app_pages.dart';
 
-import '../call_requester/screen/call_requester_dashboard_controller.dart';
-
 class MenuDrawer extends GetView<MenuDrawerController> {
   const MenuDrawer({super.key});
 
@@ -68,9 +66,8 @@ class MenuDrawer extends GetView<MenuDrawerController> {
                 ),
                 ListTile(
                   title: const Text("Meus Chamados"),
-                  leading:
-                      const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
-                  onTap: () => Get.toNamed(AppRoutes.userCall)!.then((value) => Get.delete<CallRequesterDashboardController>()),
+                  leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
+                  onTap: () => controller.toMeusChamados(),
                 ),
                 Visibility(
                   visible:
@@ -82,16 +79,14 @@ class MenuDrawer extends GetView<MenuDrawerController> {
                       ListTile(
                         contentPadding: const EdgeInsets.only(left: 40),
                         title: const Text("Fila de Chamados"),
-                        leading: const Icon(
-                            IconData(0xf2ef, fontFamily: 'MaterialIcons')),
+                        leading: const Icon(IconData(0xf2ef, fontFamily: 'MaterialIcons')),
                         onTap: () => Get.toNamed(AppRoutes.call),
                       ),
                       ListTile(
                         contentPadding: const EdgeInsets.only(left: 40),
                         title: const Text("Estatísticas"),
                         leading: const Icon(Icons.poll_outlined),
-                        onTap: () =>
-                            Get.toNamed(AppRoutes.callSolverStatistics),
+                        onTap: () => Get.toNamed(AppRoutes.callSolverStatistics),
                       ),
                     ],
                   ),
