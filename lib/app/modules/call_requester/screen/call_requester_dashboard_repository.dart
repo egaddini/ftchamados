@@ -11,11 +11,11 @@ class CallRequesterDashboardRepository {
 
   CallRequesterDashboardRepository(this.restClient);
 
-  Future<List<Call>> findAll(String email) async {
+  Future<List<Call>> findAll(String requester, String solver, List<int> sectors, List<int> priorities, List<int> categories, List<int> status) async {
 
     final response = await restClient.get<List<Call>>(
       ConfigEnvironments.getEnvironments()['url']! + ApiPath.CALL_PATH,
-      query: {'requesterEmail' : email},
+      query: {'requester' : requester, 'solver': solver, 'sectors':sectors.map((e) => e.toString()), 'priorities':priorities.map((e) => e.toString()), 'categories':categories.map((e) => e.toString()), 'satatus':status.map((e) => e.toString())},
       decoder: (response) => Call.fromDynamic(response as List<dynamic>)
     );
 

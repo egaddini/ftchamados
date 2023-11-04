@@ -22,8 +22,7 @@ import '../../../widgets/dropdown_entity_widget/sector/call_sector_dropdown_page
 class CallRequesterDashboardController extends CustomPaginatedDataTable2Controller<Call> {
   
   bool sort = true;
-
-  // RxString statusC = 'Aberto'.obs;
+  late UserInfoModel user;
 
   late DateTime? selectedDate = DateTime.now();
 
@@ -54,12 +53,29 @@ class CallRequesterDashboardController extends CustomPaginatedDataTable2Controll
 
   @override
   void onInit() {
-    UserInfoModel user = UserInfoModel.fromJson(AppConfigService().to().userData());
-    repository.findAll(user.email!).then((value) => {
+    user = UserInfoModel.fromJson(AppConfigService().to().userData());
+    repository.findAll(user.email!, 
+    '', 
+    selectedSectors.map((x) => x.id!).toList(), 
+    selectedPrioritys.map((x) => x.id!).toList(), 
+    selectedCategorys.map((x) => x.id!).toList(), 
+    selectedStatus.map((x) => x.id!).toList()).then((value) => {
       data.value = value,
       isLoading.value = false,
     });
     super.onInit();
+  }
+
+  findAll() {
+    repository.findAll(user.email!, 
+      '', 
+      selectedSectors.map((x) => x.id!).toList(), 
+      selectedPrioritys.map((x) => x.id!).toList(), 
+      selectedCategorys.map((x) => x.id!).toList(), 
+      selectedStatus.map((x) => x.id!).toList()).then((value) => {
+        data.value = value,
+        isLoading.value = false,
+    });
   }
 
   DropdownMenuItem toDropdownMenuItem(Widget item) {
@@ -73,8 +89,6 @@ class CallRequesterDashboardController extends CustomPaginatedDataTable2Controll
     return showDialog(
       context: Get.context!,
       builder: (_) => AlertDialog(
-        titlePadding: const EdgeInsets.only(top: 10),
-        contentPadding: const EdgeInsets.only(right: 20, left: 20, top: 10),
         title: AppBar(
           title: const Text('Busca Aprimorada'),
           forceMaterialTransparency: true,
@@ -128,14 +142,19 @@ class CallRequesterDashboardController extends CustomPaginatedDataTable2Controll
                   padding: const EdgeInsets.only(top: 12.0),
                   child: CallStatusDropdownPage(selectedStatus),
                 ),
-              
             ],
           ),
         ),
         actionsPadding: const EdgeInsets.symmetric(vertical: 8),
         actionsAlignment: MainAxisAlignment.center,
         actions: [
-          FilledButton(onPressed: () {}, child: const Text('Filtrar'))
+          FilledButton(
+            child: const Text('Filtrar'), 
+            onPressed: () {
+              findAll();
+              Get.back();
+            }
+          ),
         ],
       ),
     );
