@@ -75,7 +75,7 @@ class CallDetailDialog extends StatelessWidget {
                     //     ),                        
                     //   ),
                     // ),
-                    UserDropdownPage(controller.selectedUsers),
+                    Expanded(child: UserDropdownPage(controller.selectedUsers)),
                   ],
                 ),
                 addVerticalSpace(10),

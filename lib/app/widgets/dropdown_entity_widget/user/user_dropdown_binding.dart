@@ -8,7 +8,7 @@ class UserDropdownBinding implements Bindings {
 @override
 void dependencies() {
 
-    Get.lazyPut<UserDropdownController>(() => UserDropdownController(UserDropdownRepository(Get.find())));
+    Get.lazyPut<UserDropdownController>(() => UserDropdownController(UserDropdownRepository(Get.find())), fenix: true);
 
   }
 }
