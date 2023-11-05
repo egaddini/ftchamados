@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chamados/app/data/models/call.dart';
+import 'package:chamados/app/data/models/user_dto.dart';
 import 'package:chamados/app/modules/call/dashboard/widget/detail_dialog/call_detail_dialog_repository.dart';
 import 'package:chamados/app/widgets/custom_drop_down_menu_button/menu_item.dart';
 import 'package:chamados/core/utils/helper.dart';
@@ -13,6 +14,7 @@ class CallDetailDialogController extends GetxController with StateMixin<Call> {
   final int callID;
   final CallDetailDialogRepository repository;
   late Call call;
+  RxList<UserDTO> selectedUsers = <UserDTO>[].obs;
 
   late RxString statusC;
   List<DropdownMenuItem> itens = [];
@@ -34,15 +36,6 @@ class CallDetailDialogController extends GetxController with StateMixin<Call> {
   }
 
   startItens(String status) {
-    if (['Finalizado', 'Cancelado'].firstWhereOrNull((x) => x == status) == null) {
-      itens.addAll(
-        [
-          MenuItem(text: 'Editar', icon: Icons.edit_outlined, function: () => {}),
-          MenuItem(text: 'Cancelar', icon: Icons.cancel_presentation_rounded, function: () => alterarStatusChamado(9)),
-          MenuItem(text: 'Finalizar', icon: Icons.check_box_outlined, function: () => alterarStatusChamado(10)),
-        ].map((x) => toDropdownMenuItem(x)).toList()
-      );
-    }
     itens.addAll(
       [
         MenuItem(text: 'Histórico', icon: Icons.history_outlined, function: (() => callHistoric())),
@@ -119,6 +112,8 @@ class CallDetailDialogController extends GetxController with StateMixin<Call> {
       onTap: () {},
     );
   }
+
+  atribuir() {}
   
 
 

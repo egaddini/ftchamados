@@ -75,6 +75,8 @@ class UserModel {
     return 'UserModel(firstname: $firstname, lastname: $lastname, phone: $phone, email: $email, password: $password, sectors: $sectors)';
   }
 
+  static List<UserModel> fromDynamic(List<dynamic> list) => list.map((json) => UserModel.fromMap(json)).toList(); 
+
   @override
   bool operator ==(covariant UserModel other) {
     if (identical(this, other)) return true;

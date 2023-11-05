@@ -1,5 +1,6 @@
 
 import 'package:chamados/app/modules/call/dashboard/widget/detail_dialog/call_detail_dialog_controller.dart';
+import 'package:chamados/app/widgets/dropdown_entity_widget/user/user_dropdown_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -66,17 +67,22 @@ class CallDetailDialog extends StatelessWidget {
                       labelText: 'Prioridade',
                     ),
                     addHorizontalSpace(10),
-                    CustomExpandedTextField(
-                      controller: TextEditingController(text: state!.responsavel == null ?  'Não designado...' : state.responsavel!.email),
-                      labelText: 'Solucionador',
-                    ),
+                    // Expanded(
+                    //   child: TextField(
+                    //     controller: TextEditingController(text: state!.responsavel == null ?  'Não designado...' : state.responsavel!.email),
+                    //     decoration: InputDecoration(
+                    //       suffixIcon: CInkWell(defaultIcon: Icons.person_add_alt_outlined, message: 'Atribuir a mim', function: controller.atribuir(),)
+                    //     ),                        
+                    //   ),
+                    // ),
+                    UserDropdownPage(controller.selectedUsers),
                   ],
                 ),
                 addVerticalSpace(10),
                 Row(
                   children: [
                     CustomExpandedTextField(
-                      controller: TextEditingController(text: state.descricao),
+                      controller: TextEditingController(text: state!.descricao),
                       labelText: 'Descrição do solicitante',
                       maxLines: 8,
                     ),

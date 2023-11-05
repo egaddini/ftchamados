@@ -52,4 +52,6 @@ class UserDTO {
 
   @override
   int get hashCode => id.hashCode ^ email.hashCode;
+
+  static List<UserDTO> fromDynamic(List<dynamic> list) => list.map((json) => UserDTO.fromMap(json)).toList(); 
 }

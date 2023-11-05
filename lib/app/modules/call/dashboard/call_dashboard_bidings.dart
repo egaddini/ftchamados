@@ -3,6 +3,7 @@ import 'package:chamados/app/widgets/dropdown_entity_widget/category/call_catego
 import 'package:chamados/app/widgets/dropdown_entity_widget/priority/call_priority_dropdown_binding.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/sector/call_sector_dropdown_binding.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/status/call_status_dropdown_binding.dart';
+import 'package:chamados/app/widgets/dropdown_entity_widget/user/user_dropdown_binding.dart';
 import 'package:get/get.dart';
 
 import 'call_dashboard_controller.dart';
@@ -17,6 +18,7 @@ class CallDashboardBinding extends Bindings {
     CallPriorityDropdownBinding().dependencies();
     CallCategoryDropdownBinding().dependencies();
     CallStatusDropdownBinding().dependencies();
+    UserDropdownBinding().dependencies();
   }
 
 }

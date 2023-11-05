@@ -7,6 +7,8 @@ class ApiPath {
 
   static const USER_PATH = '/v1/user';
 
+  static const USER_TINY_PATH = '$USER_PATH/tiny';
+
   static const CALL_PATH = '/call/v1';
   
   static const STATUS_PATH = '$CALL_PATH/status';
