@@ -55,10 +55,12 @@ class CallRequesterDetailDialog extends StatelessWidget {
                 addVerticalSpace(10),
                 Row(
                   children: [
-                    Obx(() => CustomExpandedTextField(
-                          controller: TextEditingController(text: controller.statusC.value),
-                          labelText: 'Status',
-                        )),
+                    Obx(
+                      () => CustomExpandedTextField(
+                        controller: TextEditingController(text: controller.statusC.value),
+                        labelText: 'Responsável',
+                      )
+                    ),
                     addHorizontalSpace(10),
                     CustomExpandedTextField(
                       controller: TextEditingController(text: controller.call.callType!.priority!.name),

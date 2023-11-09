@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class UserDropdownPage extends GetView<UserDropdownController> {
   
-  final RxList<UserDTO> selectedItems;
+  final Rx<UserDTO?> selectedItems;
 
   const UserDropdownPage(this.selectedItems, {super.key});
 
@@ -15,52 +15,23 @@ class UserDropdownPage extends GetView<UserDropdownController> {
       (state) =>  DropdownButtonHideUnderline(
         child: DropdownButtonFormField<UserDTO>(
           isExpanded: true,
-          decoration: const InputDecoration(label: Text('Status')),
-          hint: const Text('Select Items', style: TextStyle(fontSize: 14)),
+          decoration: const InputDecoration(label: Text('Responsável')),
           items: state!.map((item) {
             return DropdownMenuItem(
               value: item,
-              enabled: true,
               child: StatefulBuilder(
                 builder: (context, menuSetState) {
-                  final isSelected = selectedItems.contains(item);
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Row(
-                      children: [
-                        if (isSelected) const Icon(Icons.check_box_outlined)
-                        else const Icon(Icons.check_box_outline_blank),
-                        const SizedBox(width: 16),
-                        Expanded(child: Text(item.email, style: const TextStyle(fontSize: 14))),
-                      ],
-                    ),
+                  return Row(
+                    children: [
+                      Expanded(child: Text(item.email, style: const TextStyle(fontSize: 14))),
+                    ],
                   );
                 },
               ),
             );
           }).toList(),
-          value: selectedItems.isEmpty ? null : selectedItems.last,
-          selectedItemBuilder: (context) {
-            return state.map(
-              (item) {
-                return Container(
-                  alignment: AlignmentDirectional.center,
-                  child: Text(
-                    selectedItems.map((x) => x.email).toList().join(', '),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    maxLines: 1,
-                  ),
-                );
-              },
-            ).toList();
-          },
-          onChanged: (value) {
-            final isSelected = selectedItems.contains(value);
-            isSelected ? selectedItems.remove(value) : selectedItems.add(value!);
-          },
+          value: selectedItems.value,
+          onChanged: (value) => selectedItems.value = value,
         ),
       ),
       onLoading: const CircularProgressIndicator(),

@@ -14,7 +14,7 @@ class CallDetailDialogController extends GetxController with StateMixin<Call> {
   final int callID;
   final CallDetailDialogRepository repository;
   late Call call;
-  RxList<UserDTO> selectedUsers = <UserDTO>[].obs;
+  Rx<UserDTO?> selectedUsers = null.obs;
 
   late RxString statusC;
   List<DropdownMenuItem> itens = [];
