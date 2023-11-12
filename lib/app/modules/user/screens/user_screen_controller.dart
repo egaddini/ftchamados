@@ -9,9 +9,7 @@ import '../../../data/models/user_info_model.dart';
 import '../../../widgets/custom_data_table/custom_paginated_data_table2.controller.dart';
 import '../../../widgets/custom_ink_well/c_inkwell.dart';
 
-class UserScreenController
-    extends CustomPaginatedDataTable2Controller<UserInfoModel>
-    with StateMixin<List<dynamic>> {
+class UserScreenController extends CustomPaginatedDataTable2Controller<UserInfoModel> with StateMixin<List<dynamic>> {
   final UserScreenProvider _userProvider = UserScreenProvider();
 
   bool sort = true;
@@ -78,8 +76,7 @@ class UserScreenController
                       _userProvider.removeUser(user.id!).then((_) {
                         refreshUserList();
                         Get.back();
-                        snackSucessRegister('Usuário removido com sucesso!',
-                            'O usuário: ${user.email ?? "?"} foi removido.');
+                        snackSucessRegister('Usuário removido com sucesso!', 'O usuário: ${user.email ?? "?"} foi removido.');
                       }).catchError((error) {
                         Get.back();
                         tratarErro(error);

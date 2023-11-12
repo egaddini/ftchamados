@@ -63,8 +63,7 @@ class UserRepositoryImpl implements UserRepository {
         tokenReponse = token.token;
       } else {
         log("Erro ao autenticar usuário: código de status ${result.statusCode}");
-        throw Exception(
-            "Erro ao autenticar usuário: código de status ${result.statusCode}");
+        throw Exception("Erro ao autenticar usuário: código de status ${result.statusCode}");
       }
     } catch (e) {
       log("Erro na requisição", error: e);
@@ -126,8 +125,7 @@ class UserRepositoryImpl implements UserRepository {
       message = result.statusMessage!;
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(
-          message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
     }
     return message;
   }
