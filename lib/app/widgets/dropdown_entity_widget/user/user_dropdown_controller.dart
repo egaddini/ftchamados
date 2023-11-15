@@ -1,8 +1,7 @@
-import 'package:chamados/app/data/models/user_dto.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/user/user_dropdown_repository.dart';
 import 'package:get/get.dart';
 
-class UserDropdownController extends GetxController with StateMixin<List<UserDTO>> {
+class UserDropdownController extends GetxController with StateMixin<List<String>> {
 
   final UserDropdownRepository repository;
 
@@ -10,7 +9,7 @@ class UserDropdownController extends GetxController with StateMixin<List<UserDTO
 
   @override
   void onInit() {
-    repository.findAll().then((value) => change(value, status: RxStatus.success()));
+    repository.findAll().then((value) => change(value.map((x) => x.email).toList(), status: RxStatus.success()));
     super.onInit();
   }
 

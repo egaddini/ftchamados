@@ -98,15 +98,8 @@ Future<void> registerSucess(String titulo, String mensagem) {
 }
 
 Map<String, String> getAuthHeader() {
-
   final config = AppConfigService().to(); 
-
-  return (config.isLogged()) ? {
-      'content-type': 'application/json;',
-      'authorization': 'Bearer ${UserInfoModel.fromJson(config.userData()).token}'
-    } 
-    : {'content-type': 'application/json;'};
-  
+  return (config.isLogged()) ? {'authorization': 'Bearer ${UserInfoModel.fromJson(config.userData()).token}'} : {};
 }
 
 void tratarErro(DioException? e) {
@@ -181,6 +174,7 @@ void snackSucessRegister(String title, String message) {
     animationDuration: const Duration(seconds: 2),
     barBlur: 1,
     maxWidth: 1000,
+    borderWidth: 1000,
     padding: const EdgeInsets.all(6),
     icon: const Icon(Icons.info),
     margin: const EdgeInsets.all(8),

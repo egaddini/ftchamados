@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chamados/app/data/models/call.dart';
-import 'package:chamados/app/data/models/user_dto.dart';
 import 'package:chamados/app/modules/call/dashboard/widget/detail_dialog/call_detail_dialog_repository.dart';
 import 'package:chamados/app/widgets/custom_drop_down_menu_button/menu_item.dart';
 import 'package:chamados/core/utils/helper.dart';
@@ -14,7 +13,7 @@ class CallDetailDialogController extends GetxController with StateMixin<Call> {
   final int callID;
   final CallDetailDialogRepository repository;
   late Call call;
-  Rx<UserDTO?> selectedUsers = null.obs;
+  String selectedUser = '';
 
   late RxString statusC;
   List<DropdownMenuItem> itens = [];
@@ -114,6 +113,8 @@ class CallDetailDialogController extends GetxController with StateMixin<Call> {
   }
 
   atribuir() {}
+
+  setUser(String? x) => selectedUser = x ?? '';
   
 
 
