@@ -1,16 +1,31 @@
-import '../../data/models/user_info_model.dart';
-import '../../data/models/user_model.dart';
+import 'package:chamados/app/data/providers/rest_client.dart';
+import 'package:chamados/app/data/services/app_config/config.dart';
+import 'package:chamados/core/values/api_path_constans.dart';
 
-abstract class UserRepository {
-  //Future<UserModel> getUser(String id);
+class UserRepository {
 
-  Future<String> saveUser(UserModel user);
+  final RestClient restClient;
 
-  Future<UserModel> findByEmail(String email);
+  UserRepository(this.restClient);
 
-  Future<String> delete(int id);
+  Future<List<dynamic>> getUsers() async {
+    final response = await restClient.get(ConfigEnvironments.getEnvironments()['url']! + ApiPath.USER_PATH);
+    return response.status.hasError? Future.error(response.statusText!) : response.body;
+  }
 
-  Future<List<UserInfoModel>> getuserList({String? query});
+  Future<dynamic> removeUser(int id) async {
+    final response = await restClient.delete('${ConfigEnvironments.getEnvironments()['url']! + ApiPath.USER_PATH}/$id');
+    return response.status.hasError ? Future.error(response.statusText!) : response.body;
+  }
 
-  Future<String> ativaUsuario(String email);
+    Future<List<dynamic>> getSectors() async {
+    final response = await restClient.get(ApiPath.SECTOR_PATH);
+    return response.status.hasError ? Future.error(response.statusText!) : response.body;
+  }
+
+  Future<dynamic> putUser(int id, dynamic body) async {
+    final response = await restClient.put('${ApiPath.USER_PATH}/$id', body);
+    return response.status.hasError ? Future.error(response.statusText!) : response.body;
+  }
+
 }

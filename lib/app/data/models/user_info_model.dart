@@ -137,4 +137,8 @@ class UserInfoModel {
   bool isSolver() {
     return 'SOLVER' == role;
   }
+
+  bool isUser() {
+    return 'USER' == role;
+  }
 }

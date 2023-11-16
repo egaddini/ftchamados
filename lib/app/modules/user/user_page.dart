@@ -1,19 +1,19 @@
-library user_dashboard;
+library user_page;
 
+import 'package:chamados/app/data/models/user_info_model.dart';
+import 'package:chamados/app/modules/user/user_controller.dart';
+import 'package:chamados/app/widgets/custom_data_table/custom_paginated_data_table2.dart';
+import 'package:chamados/app/widgets/custom_ink_well/c2_inkwell.dart';
+import 'package:chamados/core/utils/masks.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 
-import '../../../data/models/user_info_model.dart';
-import '../../../widgets/custom_data_table/custom_paginated_data_table2.dart';
-import '../../../widgets/custom_ink_well/c_inkwell.dart';
-import '../components/user_details_dialog.dart';
-import 'user_screen_controller.dart';
+import 'widgets/user_details_dialog.dart';
 
-part '../components/row_source.dart';
+part 'widgets/row_source.dart';
 
-class UserScreen extends CustomPaginatedDataTable2<UserScreenController> {
-  const UserScreen({super.key});
+class UserPage extends CustomPaginatedDataTable2<UserController> {
+  const UserPage({super.key});
 
   @override
   List<Widget> getActions() {

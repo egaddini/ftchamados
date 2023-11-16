@@ -1,5 +1,7 @@
 import 'package:chamados/app/modules/call/dashboard/call_dashboard_bidings.dart';
 import 'package:chamados/app/modules/call/dashboard/call_dashboard_screen.dart';
+import 'package:chamados/app/modules/user/user_binding.dart';
+import 'package:chamados/app/modules/user/user_page.dart';
 import 'package:get/get.dart';
 
 import 'package:chamados/app/data/middlewares/auth_middleware.dart';
@@ -25,8 +27,6 @@ import '../app/modules/home/home_page.dart';
 import '../app/modules/home/home_bindings.dart';
 import '../app/modules/login/login_screen.dart';
 import '../app/modules/login/login_screen_bindings.dart';
-import '../app/modules/user/screens/user_screen.dart';
-import '../app/modules/user/screens/user_screen_bindings.dart';
 
 part 'app_routes.dart';
 
@@ -67,8 +67,8 @@ abstract class AppPages {
     ),
     GetPage(
       name: AppRoutes.users,
-      page: () => const UserScreen(),
-      binding: UserScreenBindings(),
+      page: () => const UserPage(),
+      binding: UserBinding(),
     ),
     GetPage(
       name: AppRoutes.callCategory,
@@ -100,7 +100,6 @@ abstract class AppPages {
       page: () => const CallSolverStatisticsScreen(),
       binding: CallSolverStatisticsScreenBindings(),
     ),
-    
   ];
   
 }
