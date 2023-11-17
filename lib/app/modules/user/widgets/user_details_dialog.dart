@@ -1,7 +1,6 @@
 import 'package:chamados/app/modules/user/user_repository.dart';
 import 'package:flutter/material.dart';
 
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:get/get.dart';
 import 'package:validatorless/validatorless.dart';
@@ -9,7 +8,6 @@ import 'package:validatorless/validatorless.dart';
 import 'package:chamados/core/utils/helper.dart';
 import 'package:chamados/core/utils/validators/validators.dart';
 
-import '../../../data/models/sector_model.dart';
 import '../../../data/models/user_info_model.dart';
 import '../../../widgets/c_password_field.dart';
 import '../../../widgets/c_text_form_field.dart';
@@ -133,7 +131,7 @@ class EditUserPageBody extends GetView<UserDetailsDialogController> {
                   visible: controller.isAdmin.value,
                   child: CheckBoxField(email: controller.emailEC.text, isActive: controller.user.active!)
                 ),
-                TextButton(child: const Text('Setores', style: TextStyle(fontSize: 20)), onPressed: () {},)
+                TextButton(child: const Text('Setores', style: TextStyle(fontSize: 16)), onPressed: () async => await controller.sectoresDialog())
               ],
             ),
             addVerticalSpace(10),
@@ -274,93 +272,4 @@ class _CheckBoxFieldState extends State<CheckBoxField> {
       ],
     );
   }
-}
-
-Widget dropDownButton(List<SectorModel> items, List<SectorModel> selectedItems) {
-
-  final TextEditingController textEditingController = TextEditingController();
-
-  return Obx(
-    () => 
-    DropdownButtonFormField2<SectorModel>(
-      decoration: const InputDecoration(
-        labelText: 'Setores',
-      ),
-      isExpanded: true,
-      items: items.map((item) {
-        return DropdownMenuItem(
-          value: item,
-          enabled: false,
-          child: StatefulBuilder(
-            builder: (context, menuSetState) {
-              final isSelected = selectedItems.contains(item);
-              return InkWell(
-                onTap: () {
-                  isSelected
-                      ? selectedItems.remove(item)
-                      : selectedItems.add(item);
-                  menuSetState(() {});
-                },
-                child: SizedBox(
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        value: isSelected,
-                        onChanged: null,
-                      ),
-                      const SizedBox(width: 16),
-                      Expanded(
-                        child: Text(item.name),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            },
-          ),
-        );
-      }).toList(),
-      value: selectedItems.isEmpty ? null : selectedItems.last,
-      onChanged: (value) {},
-      selectedItemBuilder: (context) {
-        return items.map(
-          (item) {
-            return Text(
-              selectedItems.map((element) => element.name).join(', '),
-              maxLines: 1,
-            );
-          },
-        ).toList();
-      },
-      dropdownSearchData: DropdownSearchData(
-        searchController: textEditingController,
-        searchInnerWidgetHeight: 50,
-        searchInnerWidget: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: SizedBox(
-            height: 50,
-            child: TextFormField(
-              expands: true,
-              maxLines: null,
-              controller: textEditingController,
-              decoration: const InputDecoration(
-                isDense: true,
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 8,
-                ),
-                hintText: 'Busque por um setor...',
-              ),
-            ),
-          ),
-        ),
-        searchMatchFn: (item, searchValue) =>
-            item.value.toString().contains(searchValue),
-      ),
-      onMenuStateChange: (isOpen) {
-        if (!isOpen) {
-          textEditingController.clear();
-        }
-      })
-    );
 }
