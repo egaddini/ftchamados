@@ -53,7 +53,7 @@ class CallRequesterDashboardController extends CustomPaginatedDataTable2Controll
 
   @override
   void onInit() {
-    user = UserInfoModel.fromJson(AppConfigService().to().userData());
+    user = AppConfigService().to().userData();
     repository.findAll(user.email!, 
     '', 
     selectedSectors.map((x) => x.id!).toList(), 

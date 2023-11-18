@@ -75,7 +75,21 @@ class CallDetailDialog extends StatelessWidget {
                     //     ),                        
                     //   ),
                     // ),
-                    Expanded(child: UserDropdownPage((x) => controller.setUser(x))),
+                    Expanded(
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          label: InkWell(
+                            child: Text('Atribuir a mim'),
+                            onTap: () => print('object'),
+                          )
+                        ),
+                      )
+                    ),
+                    CustomExpandedTextField(
+                      controller: TextEditingController(text: controller.call.callType!.priority!.name),
+                      labelText: 'Responsável',
+                    ),
+                    // Expanded(child: UserDropdownPage((x) => controller.setUser(x))),
                   ],
                 ),
                 addVerticalSpace(10),

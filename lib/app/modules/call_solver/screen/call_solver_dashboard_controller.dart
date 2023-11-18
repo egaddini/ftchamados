@@ -49,16 +49,18 @@ class CallSolverDashboardController extends CustomPaginatedDataTable2Controller<
 
   @override
   void onInit() {
-    user = UserInfoModel.fromJson(AppConfigService().to().userData());
-    repository.findAll(user.email!, 
-    '', 
-    selectedSectors.map((x) => x.id!).toList(), 
-    selectedPrioritys.map((x) => x.id!).toList(), 
-    selectedCategorys.map((x) => x.id!).toList(), 
-    selectedStatus.map((x) => x.id!).toList()).then((value) => {
-      data.value = value,
-      isLoading.value = false,
-    });
+    user = AppConfigService().to().userData();
+    repository.findAll(
+      user.email!, 
+      '', 
+      selectedSectors.map((x) => x.id!).toList(), 
+      selectedPrioritys.map((x) => x.id!).toList(), 
+      selectedCategorys.map((x) => x.id!).toList(), 
+      selectedStatus.map((x) => x.id!).toList()).then((value) => {
+        data.value = value,
+        isLoading.value = false,
+      }
+    );
     super.onInit();
   }
 
@@ -116,22 +118,18 @@ class CallSolverDashboardController extends CustomPaginatedDataTable2Controller<
                   ),
                 ],
               ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: CallSectorDropdownPage(selectedSectors),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: CallPriorityDropdownPage(selectedPrioritys),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: CallCategoryDropdownPage(selectedCategorys),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: CallStatusDropdownPage(selectedStatus),
-                ),
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: CallPriorityDropdownPage(selectedPrioritys),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: CallCategoryDropdownPage(selectedCategorys),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 12.0),
+                child: CallStatusDropdownPage(selectedStatus),
+              ),
             ],
           ),
         ),

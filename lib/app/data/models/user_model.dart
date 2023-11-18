@@ -57,18 +57,13 @@ class UserModel {
       phone: map['phone'] as int,
       email: map['email'] as String,
       password: map['password'] as String,
-      sectors: map['sectors'] != null
-          ? (map['sectors'] as List<dynamic>)
-              .map((json) => SectorModel.fromJson(json))
-              .toList()
-          : [],
+      sectors: map['sectors'] != null ? (map['sectors'] as List<dynamic>).map((json) => SectorModel.fromJson(json)).toList(): [],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory UserModel.fromJson(String source) =>
-      UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserModel.fromJson(String source) => UserModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {

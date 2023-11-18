@@ -70,8 +70,7 @@ class MenuDrawer extends GetView<MenuDrawerController> {
                   onTap: () => controller.toMeusChamados(),
                 ),
                 Visibility(
-                  visible:
-                      controller.isSolver.value || controller.isAdmin.value,
+                  visible:controller.isSolver.value || controller.isAdmin.value,
                   child: ExpansionTile(
                     title: const Text('Painel do Solucionador'),
                     leading: const Icon(Icons.supervisor_account_outlined),

@@ -29,7 +29,7 @@ class LoginScreenController extends GetxController {
   login() async {
     isLoading.value = true;
     await loginRepository.login(LoginModel(email: emailEC.text, password: passwordEC.text)).then((value) {
-      config.changeUserData(value.toJson());
+      config.changeUserData(value);
       config.changeIsLogged(true);
       Get.offAndToNamed(AppRoutes.home);
     }).catchError((error) {

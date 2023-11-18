@@ -1,3 +1,4 @@
+import 'package:chamados/app/data/models/user_info_model.dart';
 import 'package:chamados/core/theme/theme_manager.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,7 @@ class AppConfigService extends GetxService {
 
   darkMode() => box.read(DARK_MODE);
   isLogged() => box.read(IS_LOGGED);
-  userData() => box.read(USER_DATA);
+  userData() => UserInfoModel.fromMap(box.read(USER_DATA)) ;
 
   changeDarkMode(_) async {
     Get.changeThemeMode(Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
@@ -32,5 +33,5 @@ class AppConfigService extends GetxService {
 
   changeIsLogged(_) async => box.write(IS_LOGGED, _);
 
-  changeUserData(_) async => box.write(USER_DATA, _);
+  changeUserData(UserInfoModel _) async => box.write(USER_DATA, _.toMap());
 }

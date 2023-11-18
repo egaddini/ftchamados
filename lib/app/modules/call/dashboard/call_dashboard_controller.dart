@@ -4,7 +4,6 @@ import 'package:chamados/app/data/models/call_status_model.dart';
 import 'package:chamados/app/data/models/user_info_model.dart';
 import 'package:chamados/app/modules/call/dashboard/call_dashboard_repository.dart';
 import 'package:chamados/app/widgets/custom_drop_down_menu_button/menu_item.dart';
-import 'package:chamados/app/widgets/dropdown_entity_widget/category/call_category_dropdown_page.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/status/call_status_dropdown_page.dart';
 import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +12,9 @@ import 'package:intl/intl.dart';
 
 import '../../../data/models/call.dart';
 import '../../../data/models/priority.dart';
-import '../../../data/models/sector_model.dart';
 import '../../../data/services/app_config/service.dart';
 import '../../../widgets/custom_data_table/custom_paginated_data_table2.controller.dart';
 import '../../../widgets/dropdown_entity_widget/priority/call_priority_dropdown_page.dart';
-import '../../../widgets/dropdown_entity_widget/sector/call_sector_dropdown_page.dart';
 
 class CallDashboardController extends CustomPaginatedDataTable2Controller<Call> {
   
@@ -27,12 +24,10 @@ class CallDashboardController extends CustomPaginatedDataTable2Controller<Call> 
   late DateTime? selectedDate = DateTime.now();
 
   RxList<PriorityModel> selectedPrioritys = <PriorityModel>[].obs;
-  RxList<SectorModel> selectedSectors = <SectorModel>[].obs;
   RxList<CallCategoryModel> selectedCategorys = <CallCategoryModel>[].obs;
   RxList<CallStatusModel> selectedStatus = <CallStatusModel>[].obs;
 
   RxList selectedItems = [].obs;
-
 
   final CallDashboardRepository repository;
 
@@ -40,30 +35,24 @@ class CallDashboardController extends CustomPaginatedDataTable2Controller<Call> 
 
   @override
   void onInit() {
-    user = UserInfoModel.fromJson(AppConfigService().to().userData());
-    repository.findAll(
-    '', 
-    '', 
-    selectedSectors.map((x) => x.id!).toList(), 
-    selectedPrioritys.map((x) => x.id!).toList(), 
-    selectedCategorys.map((x) => x.id!).toList(), 
-    selectedStatus.map((x) => x.id!).toList()).then((value) => {
-      data.value = value,
-      isLoading.value = false,
-    });
+    user = AppConfigService().to().userData();
+    findAll();
     super.onInit();
   }
 
   findAll() {
-    repository.findAll(user.email!, 
+    if (user.sectors.isNotEmpty) {
+      repository.findAll(
       '', 
-      selectedSectors.map((x) => x.id!).toList(), 
+      '', 
+      user.sectors.obs.map((x) => x.id!).toList(), 
       selectedPrioritys.map((x) => x.id!).toList(), 
       selectedCategorys.map((x) => x.id!).toList(), 
       selectedStatus.map((x) => x.id!).toList()).then((value) => {
         data.value = value,
         isLoading.value = false,
-    });
+      });
+    }
   }
 
   DropdownMenuItem toDropdownMenuItem(Widget item) {
@@ -116,15 +105,7 @@ class CallDashboardController extends CustomPaginatedDataTable2Controller<Call> 
               ),
                 Padding(
                   padding: const EdgeInsets.only(top: 12.0),
-                  child: CallSectorDropdownPage(selectedSectors),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
                   child: CallPriorityDropdownPage(selectedPrioritys),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 12.0),
-                  child: CallCategoryDropdownPage(selectedCategorys),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 12.0),

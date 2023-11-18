@@ -22,7 +22,7 @@ class UserRepository {
 
 
   Future<dynamic> putUser(int id, dynamic body) async {
-    final response = await restClient.put('${ApiPath.USER_PATH}/$id', body);
+    final response = await restClient.put('${ConfigEnvironments.getEnvironments()['url']! +ApiPath.USER_PATH}/$id', body);
     return response.status.hasError ? Future.error(response.statusText!) : response.body;
   }
 

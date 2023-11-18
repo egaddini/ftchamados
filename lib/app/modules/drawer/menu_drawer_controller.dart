@@ -22,7 +22,7 @@ class MenuDrawerController extends GetxController with StateMixin<UserInfoModel>
   void onInit() {
     _appConfigService = Get.find<AppConfigService>();
 
-    logedUser = UserInfoModel.fromJson(_appConfigService.userData());
+    logedUser = _appConfigService.userData();
 
     isAdmin.value = logedUser.isAdmin();
     isSolver.value = logedUser.isSolver();

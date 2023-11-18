@@ -99,7 +99,7 @@ Future<void> registerSucess(String titulo, String mensagem) {
 
 Map<String, String> getAuthHeader() {
   final config = AppConfigService().to(); 
-  return (config.isLogged()) ? {'authorization': 'Bearer ${UserInfoModel.fromJson(config.userData()).token}'} : {};
+  return (config.isLogged()) ? {'authorization': 'Bearer ${config.userData().token}'} : {};
 }
 
 void tratarErro(DioException? e) {

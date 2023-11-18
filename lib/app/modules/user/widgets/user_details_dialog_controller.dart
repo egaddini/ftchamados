@@ -24,13 +24,13 @@ class UserDetailsDialogController extends GetxController
 
   RxBool isAdmin = true.obs;
   final RxList<SectorModel> sectors = <SectorModel>[].obs,
-      selectedItens = <SectorModel>[].obs;
+  selectedItens = <SectorModel>[].obs;
 
   UserDetailsDialogController(this.user, this._repository);
 
   @override
   void onInit() {
-    logedUser = UserInfoModel.fromJson(AppConfigService().to().userData());
+    logedUser = AppConfigService().to().userData();
     isAdmin.value = logedUser.isAdmin();
 
     selectedItens.value = user.sectors!;
@@ -51,22 +51,22 @@ class UserDetailsDialogController extends GetxController
       var dataValid = generalKey.currentState?.validate() ?? false;
       if (dataValid) {
         UserModel userChanged = UserModel(
-            firstname: firstNameEC.text,
-            lastname: lastNameEC.text,
-            phone: user.phone!,
-            email: emailEC.text,
-            password: passwordEC.text,
-            sectors: selectedItens);
-        _repository
-            .putUser(user.id!, userChanged.toJson())
-            .then(
-              (value) => snackSucessRegister('Conta atualizada!',
-                  'Atualização dos dados solicitados realizada'),
-            )
-            .catchError((error) {
-          Get.back();
-          tratarErro(error);
-        });
+          firstname: firstNameEC.text,
+          lastname: lastNameEC.text,
+          phone: user.phone!,
+          email: emailEC.text,
+          password: passwordEC.text,
+          sectors: selectedItens
+        );
+        _repository.putUser(user.id!, userChanged.toJson()).then(
+          (value) {
+            Get.back();
+            snackSucessRegister('Conta atualizada!', 'Atualização dos dados solicitados realizada');
+          }).catchError((error) {
+            Get.back();
+            tratar(error);
+          }
+        );
       }
     }
   }

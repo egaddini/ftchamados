@@ -265,10 +265,7 @@ class _CheckBoxFieldState extends State<CheckBoxField> {
             // });
           },
         ),
-        const Text(
-          'Usuário Habilitado',
-          style: TextStyle(fontSize: 16),
-        )
+        const Text('Usuário Habilitado', style: TextStyle(fontSize: 16))
       ],
     );
   }

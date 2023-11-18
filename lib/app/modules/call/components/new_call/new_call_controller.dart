@@ -26,7 +26,7 @@ class NewCallController extends GetxController {
 
   @override
   void onInit() {
-    logedUser = UserInfoModel.fromJson(AppConfigService().to().userData());
+    logedUser = AppConfigService().to().userData();
     super.onInit();
   }
 

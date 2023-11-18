@@ -14,7 +14,7 @@ class UserInfoModel {
   String? token;
   bool? active;
   String? creationDT;
-  List<SectorModel>? sectors;
+  List<SectorModel> sectors;
 
   UserInfoModel({
     this.id,
@@ -26,7 +26,7 @@ class UserInfoModel {
     this.token,
     this.active,
     this.creationDT,
-    this.sectors,
+    required this.sectors,
   });
 
   UserInfoModel copyWith({
@@ -66,7 +66,7 @@ class UserInfoModel {
       'token': token,
       'active': active,
       'creationDT': creationDT,
-      'sectors': sectors,
+      'sectors':  sectors.map((e) => e.toMap()).toList(),
     };
   }
 
@@ -80,20 +80,14 @@ class UserInfoModel {
       role: map['role'] != null ? map['role'] as String : null,
       token: map['token'] != null ? map['token'] as String : null,
       active: map['active'] != null ? map['active'] as bool : null,
-      creationDT:
-          map['creationDT'] != null ? map['creationDT'] as String : null,
-      sectors: map['sectors'] != null
-          ? (map['sectors'] as List<dynamic>)
-              .map((json) => SectorModel.fromMap(json))
-              .toList()
-          : [],
+      creationDT:map['creationDT'] != null ? map['creationDT'] as String : null,
+      sectors: map['sectors'] != null ? (map['sectors'] as List<dynamic>).map((json) => SectorModel.fromMap(json)).toList() : [],
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory UserInfoModel.fromJson(String source) =>
-      UserInfoModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory UserInfoModel.fromJson(String source) => UserInfoModel.fromMap(json.decode(source) as Map<String, dynamic>);
 
   @override
   String toString() {

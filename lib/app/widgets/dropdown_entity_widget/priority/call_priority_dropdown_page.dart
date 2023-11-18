@@ -12,8 +12,8 @@ class CallPriorityDropdownPage extends GetView<CallPriorityDropdownController> {
   @override
   Widget build(BuildContext context) {
     return controller.obx(
-      (state) =>  DropdownButtonHideUnderline(
-        child: DropdownButtonFormField<PriorityModel>(
+      (state) => DropdownButtonHideUnderline(
+        child: Obx(() => DropdownButtonFormField<PriorityModel>(
           isExpanded: true,
           decoration: const InputDecoration(label: Text('Prioridades')),
           hint: const Text('Select Items', style: TextStyle(fontSize: 14)),
@@ -23,13 +23,17 @@ class CallPriorityDropdownPage extends GetView<CallPriorityDropdownController> {
               enabled: true,
               child: StatefulBuilder(
                 builder: (context, menuSetState) {
-                  final isSelected = selectedItems.contains(item);
                   return Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: Row(
                       children: [
-                        if (isSelected) const Icon(Icons.check_box_outlined)
-                        else const Icon(Icons.check_box_outline_blank),
+                        Obx(() => 
+                        Checkbox(
+                          value: selectedItems.contains(item), 
+                          onChanged: (value) {
+                            selectedItems.contains(item) ? selectedItems.remove(item) : selectedItems.add(item);
+                          } 
+                        )),
                         const SizedBox(width: 16),
                         Expanded(child: Text('${item.weight} - ${item.name}', style: const TextStyle(fontSize: 14))),
                       ],
@@ -57,11 +61,8 @@ class CallPriorityDropdownPage extends GetView<CallPriorityDropdownController> {
               },
             ).toList();
           },
-          onChanged: (value) {
-            final isSelected = selectedItems.contains(value);
-            isSelected ? selectedItems.remove(value) : selectedItems.add(value!);
-          },
-        ),
+          onChanged: (value) => selectedItems.contains(value) ? selectedItems.remove(value) : selectedItems.add(value!),
+        )),
       ),
       onLoading: const CircularProgressIndicator(),
     );
