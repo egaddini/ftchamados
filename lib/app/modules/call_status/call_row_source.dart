@@ -1,4 +1,4 @@
-part of call_status;
+part of 'call_status_screen.dart';
 
 class RowSource extends DataTableSource {
   dynamic data;

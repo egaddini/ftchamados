@@ -3,7 +3,8 @@ version: 1.0.0+2
 publish_to: none
 description: A new Flutter project.
 environment: 
-  sdk: ^3.1.5
+  sdk: ^3.2.0
+  flutter: ^3.16.0
 dependencies: 
   async: ^2.10.0
   blinking_text: ^1.0.2
@@ -19,7 +20,7 @@ dependencies:
   get: ^4.6.5
   get_storage: ^2.1.1
   graphite: ^1.1.2
-  http: ^0.13.5
+  http: ^1.1.0
   intl: ^0.18.1
   js: ^0.6.5
   mask_text_input_formatter: ^2.4.0
@@ -36,7 +37,7 @@ dependencies:
   responsive_grid: ^2.4.4
   date_field: ^3.0.5
 dev_dependencies: 
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   pubspec_dependency_sorter: ^1.0.4
   flutter_test: 
     sdk: flutter

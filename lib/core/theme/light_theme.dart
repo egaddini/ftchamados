@@ -1,4 +1,4 @@
-part of theme_manager;
+part of 'theme_manager.dart';
 
 ThemeData lightTheme = FlexThemeData.light(
   scheme: FlexScheme.deepOrangeM3,

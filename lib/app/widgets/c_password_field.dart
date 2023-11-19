@@ -6,11 +6,11 @@ class PasswordField extends StatefulWidget {
   final List<FormFieldValidator<String>> validator;
 
   const PasswordField({
-    Key? key,
+    super.key,
     required this.labelText,
     required this.controller,
     required this.validator,
-  }) : super(key: key);
+  });
 
   @override
   PasswordFieldState createState() => PasswordFieldState();

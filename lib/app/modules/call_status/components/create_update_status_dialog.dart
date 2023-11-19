@@ -1,4 +1,4 @@
-part of call_status;
+part of '../call_status_screen.dart';
 
 Future<bool> createUpdateStatusDialog(CallStatusModel? status) {
   return showDialog(

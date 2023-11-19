@@ -1,4 +1,4 @@
-part of home_screen;
+part of 'home_page.dart';
 
 class HomeController extends GetxController with StateMixin<CallCategoryModel> {
 

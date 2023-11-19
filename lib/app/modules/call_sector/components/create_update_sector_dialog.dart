@@ -1,4 +1,4 @@
-part of call_sector;
+part of '../call_sector_screen.dart';
 
 Future<bool> createUpdateSectorDialog(SectorModel? sector) {
   return showDialog(

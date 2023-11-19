@@ -1,6 +1,6 @@
 
 import 'package:chamados/app/modules/call/dashboard/widget/detail_dialog/call_detail_dialog_controller.dart';
-import 'package:chamados/app/widgets/dropdown_entity_widget/user/user_dropdown_page.dart';
+import 'package:chamados/app/widgets/custom_ink_well/c2_inkwell.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -35,6 +35,7 @@ class CallDetailDialog extends StatelessWidget {
           width: 1200,
           child: SingleChildScrollView(
             child: Column(
+              mainAxisSize: MainAxisSize.min,  
               children: [
                 Row(
                   children: [
@@ -67,29 +68,19 @@ class CallDetailDialog extends StatelessWidget {
                       labelText: 'Prioridade',
                     ),
                     addHorizontalSpace(10),
-                    // Expanded(
-                    //   child: TextField(
-                    //     controller: TextEditingController(text: state!.responsavel == null ?  'Não designado...' : state.responsavel!.email),
-                    //     decoration: InputDecoration(
-                    //       suffixIcon: CInkWell(defaultIcon: Icons.person_add_alt_outlined, message: 'Atribuir a mim', function: controller.atribuir(),)
-                    //     ),                        
-                    //   ),
-                    // ),
                     Expanded(
-                      child: TextFormField(
+                      child: Obx(() => TextFormField(
+                        controller: TextEditingController(text: controller.solver.isEmpty ?  'Não designado...' : controller.solver.value),
+                        readOnly: true,
                         decoration: InputDecoration(
-                          label: InkWell(
-                            child: Text('Atribuir a mim'),
-                            onTap: () => print('object'),
-                          )
+                          label: const Text('Responsável'),
+                          hintText: 'Ainda não foi atribuido',
+                          suffixIcon: controller.solver.value.isEmpty ?
+                            CInkWell(defaultIcon: Icons.person_add_alt, message: 'Atribuir a mim', defaultColor: Get.theme.primaryColor, function: () =>  controller.setSolver()) :
+                            CInkWell(defaultIcon: Icons.person_remove_outlined, message: 'Remover atribuição', defaultColor: Get.theme.primaryColor, function: () => controller.setSolver())
                         ),
-                      )
-                    ),
-                    CustomExpandedTextField(
-                      controller: TextEditingController(text: controller.call.callType!.priority!.name),
-                      labelText: 'Responsável',
-                    ),
-                    // Expanded(child: UserDropdownPage((x) => controller.setUser(x))),
+                      ),
+                    )),
                   ],
                 ),
                 addVerticalSpace(10),
@@ -102,37 +93,6 @@ class CallDetailDialog extends StatelessWidget {
                     ),
                   ],
                 ),
-                // addVerticalSpace(10),
-                // TextFormField(
-                //   controller: controller.comentarioC,
-                //   maxLines: 1,
-                //   focusNode: controller.comentar,
-                //   onFieldSubmitted: (value) {
-                //     controller.addComentario();
-                //     FocusScope.of(Get.context!).requestFocus(controller.comentar);
-                //   },
-                //   decoration: InputDecoration(
-                //     hintText: 'Adicione um comentário...',
-                //     suffixIcon: cInkWell(25, 30, Icons.send_outlined, null, Get.theme.primaryColor, null, 'Enviar', () => controller.addComentario(),),
-                //     enabledBorder: UnderlineInputBorder(borderSide:BorderSide(color: Get.theme.primaryColor)),
-                //     border: UnderlineInputBorder(borderSide:BorderSide(color: Get.theme.primaryColor)),
-                //     focusedBorder: UnderlineInputBorder(borderSide:BorderSide(color: Get.theme.primaryColor)),
-                //   ),
-                // ),
-                // Obx(
-                //   () => ListView.builder(
-                //     shrinkWrap: true,
-                //     itemCount: controller.comments.length,
-                //     itemBuilder: ((context, index) {
-                //       return ListTile(
-                //         title: Text(
-                //             '${controller.comments[index].user}  -  ${controller.comments[index].date}',
-                //             style: Get.theme.textTheme.bodySmall),
-                //         subtitle: Text(controller.comments[index].message),
-                //       );
-                //     }),
-                //   ),
-                // ),
               ],
             ),
           ),

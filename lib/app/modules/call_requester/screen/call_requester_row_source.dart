@@ -1,4 +1,4 @@
-part of call_user_dashboard;
+part of 'call_requester_dashboard_screen.dart';
 
 class RowSource extends DataTableSource {
   dynamic myData;

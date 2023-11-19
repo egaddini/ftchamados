@@ -1,4 +1,4 @@
-part of call_status;
+part of '../call_status_screen.dart';
 
 void callStatusFlowDialog() {
   showDialog(
@@ -51,7 +51,7 @@ Map<String, FlowStep> data = {
 };
 
 class CallStatusFlow extends StatefulWidget {
-  const CallStatusFlow({Key? key}) : super(key: key);
+  const CallStatusFlow({super.key});
   @override
   CallStatusFlowState createState() => CallStatusFlowState();
 }

@@ -6,7 +6,6 @@ import 'package:chamados/app/data/models/user_info_model.dart';
 import 'package:chamados/app/modules/call_solver/screen/call_solver_dashboard_repository.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/category/call_category_dropdown_page.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/priority/call_priority_dropdown_page.dart';
-import 'package:chamados/app/widgets/dropdown_entity_widget/sector/call_sector_dropdown_page.dart';
 import 'package:chamados/app/widgets/dropdown_entity_widget/status/call_status_dropdown_page.dart';
 import 'package:date_field/date_field.dart';
 import 'package:flutter/material.dart';

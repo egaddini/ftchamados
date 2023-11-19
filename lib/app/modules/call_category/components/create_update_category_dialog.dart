@@ -1,4 +1,4 @@
-part of call_category;
+part of '../call_category_screen.dart';
 
 Future<bool> createUpdateCategoryDialog(CallCategoryModel? category) {
   return showDialog(

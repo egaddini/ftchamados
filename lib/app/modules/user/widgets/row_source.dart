@@ -1,4 +1,4 @@
-part of user_page;
+part of '../user_page.dart';
 
 class RowSource extends DataTableSource {
   dynamic myData;

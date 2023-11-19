@@ -10,11 +10,11 @@ class CustomDropDownButton extends StatelessWidget {
   final bool isFilter;
 
   const CustomDropDownButton({
-    Key? key,
+    super.key,
     required this.itens,
     this.icon,
     this.isFilter = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

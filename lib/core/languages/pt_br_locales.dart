@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-part of app_translation;
+part of 'locales.g.dart';
 
 const pt_BR = {
 

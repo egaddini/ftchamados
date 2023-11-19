@@ -7,9 +7,9 @@ class RatingStarWidget extends GetView {
   final Icon starBorder = const Icon(Icons.star_border_outlined, size: 50, color: Colors.yellowAccent), star = const Icon(Icons.star_outlined, size: 50, color: Colors.yellowAccent);
 
   const RatingStarWidget({
-    Key? key,
+    super.key,
     required this.value,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

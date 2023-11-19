@@ -1,5 +1,4 @@
 import 'package:chamados/app/data/models/rest_exception.dart';
-import 'package:chamados/app/data/models/user_info_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:blinking_text/blinking_text.dart';

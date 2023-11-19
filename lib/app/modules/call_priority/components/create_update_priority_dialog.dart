@@ -1,4 +1,4 @@
-part of call_priority;
+part of '../call_priority_screen.dart';
 
 Future<bool> createUpdatePriorityDialog(PriorityModel? priority) {
   return showDialog(

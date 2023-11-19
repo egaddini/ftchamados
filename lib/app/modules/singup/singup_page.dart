@@ -15,7 +15,7 @@ import '../../widgets/c_text_form_field.dart';
 import '../../widgets/custom_card/custom_card.dart';
 
 class SingupPage extends GetView<SingUpController> {
-  const SingupPage({Key? key}) : super(key: key);
+  const SingupPage({super.key});
 
   @override
   Widget build(BuildContext context) {

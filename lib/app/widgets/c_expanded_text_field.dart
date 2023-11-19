@@ -7,12 +7,12 @@ class CustomExpandedTextField extends StatelessWidget {
   final bool readOnly;
 
   const CustomExpandedTextField({
-    Key? key,
+    super.key,
     required this.controller,
     required this.labelText,
     this.maxLines = 1,
     this.readOnly = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

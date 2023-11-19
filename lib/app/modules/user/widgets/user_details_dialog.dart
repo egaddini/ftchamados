@@ -195,8 +195,8 @@ class AvatarField extends StatelessWidget {
 
   const AvatarField({
     required this.text,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

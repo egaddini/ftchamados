@@ -1,4 +1,4 @@
-part of call_sector;
+part of 'call_sector_screen.dart';
 
 class RowSource extends DataTableSource {
   dynamic myData;

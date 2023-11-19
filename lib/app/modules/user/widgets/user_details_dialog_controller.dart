@@ -33,7 +33,7 @@ class UserDetailsDialogController extends GetxController
     logedUser = AppConfigService().to().userData();
     isAdmin.value = logedUser.isAdmin();
 
-    selectedItens.value = user.sectors!;
+    selectedItens.value = user.sectors;
     _repository.findSectors().then((value) => sectors.value = value);
 
     idEC = TextEditingController(text: user.id.toString());
