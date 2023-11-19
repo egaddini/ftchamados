@@ -50,8 +50,8 @@ class CallSolverDashboardController extends CustomPaginatedDataTable2Controller<
   void onInit() {
     user = AppConfigService().to().userData();
     repository.findAll(
-      user.email!, 
       '', 
+      user.email!, 
       selectedSectors.map((x) => x.id!).toList(), 
       selectedPrioritys.map((x) => x.id!).toList(), 
       selectedCategorys.map((x) => x.id!).toList(), 

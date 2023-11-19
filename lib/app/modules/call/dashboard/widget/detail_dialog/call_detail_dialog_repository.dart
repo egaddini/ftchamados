@@ -48,4 +48,18 @@ class CallDetailDialogRepository {
     return response.body!;
   }
 
+  Future<String> assignSolver(int? solverID, int callID) async {
+    final response = await api.get(
+      '$BASE_PATH${ApiPath.ASSIGN_SOLVER_PATH}/$callID?solverID=${solverID ?? ''}',
+      headers: getAuthHeader(),
+    );
+    if (response.hasError) {
+      throw RestException(
+        message: response.statusText ?? 'Erro',
+        statusCode: response.statusCode ?? 0,
+      );
+    }
+    return response.body!['message'];
+  }
+
 }

@@ -52,6 +52,9 @@ class CallDashboardController extends CustomPaginatedDataTable2Controller<Call> 
         data.value = value,
         isLoading.value = false,
       });
+    } else {
+      data.value = [];
+      isLoading.value = false;
     }
   }
 

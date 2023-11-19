@@ -121,7 +121,7 @@ void tratarErro(DioException? e) {
     );
   }
 }
-void tratar(RestException e) async {
+tratar(RestException e) async {
   switch (e.statusCode) {
     case 409:
       snackSucessRegister('Já Registrado', e.message);
@@ -135,7 +135,7 @@ void tratar(RestException e) async {
     default:
       snackSucessRegister('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte \n${e.message}');
     }
-  
+    return null;
 } 
 
 

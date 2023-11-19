@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:chamados/app/data/models/call.dart';
+import 'package:chamados/app/data/models/rest_exception.dart';
 import 'package:chamados/app/data/models/user_info_model.dart';
 import 'package:chamados/app/data/services/app_config/service.dart';
 import 'package:chamados/app/modules/call/dashboard/widget/detail_dialog/call_detail_dialog_repository.dart';
@@ -117,7 +118,15 @@ class CallDetailDialogController extends GetxController with StateMixin<Call> {
     );
   }
 
-  setSolver() => solver.value = solver.value.isEmpty ? logedUser.email! : ''; 
+  setSolver() async {
+    await repository.assignSolver(solver.value.isEmpty ? logedUser.id! : null, callID).then(
+      (value) {
+        snackSucessRegister('Atribuido com sucesso', 'Chamado $callID. com sucesso!');
+        solver.value = solver.value.isEmpty ? logedUser.email! : ''; 
+      }
+    ).onError<RestException>((error, stackTrace) => tratar(error)); 
+  } 
+    
 
   // setUser(String? x) => selectedUser = x ?? '';
   

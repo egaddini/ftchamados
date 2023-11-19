@@ -29,4 +29,7 @@ class ApiPath {
 
   static const SINGUP_PATH = '$AUTH_PATH/register';
 
+  static const SOLVER_PATH = '$CALL_PATH/solver';
+
+  static const ASSIGN_SOLVER_PATH = '$SOLVER_PATH/assign';
 }

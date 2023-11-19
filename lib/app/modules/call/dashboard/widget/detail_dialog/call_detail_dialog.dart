@@ -76,8 +76,8 @@ class CallDetailDialog extends StatelessWidget {
                           label: const Text('Responsável'),
                           hintText: 'Ainda não foi atribuido',
                           suffixIcon: controller.solver.value.isEmpty ?
-                            CInkWell(defaultIcon: Icons.person_add_alt, message: 'Atribuir a mim', defaultColor: Get.theme.primaryColor, function: () =>  controller.setSolver()) :
-                            CInkWell(defaultIcon: Icons.person_remove_outlined, message: 'Remover atribuição', defaultColor: Get.theme.primaryColor, function: () => controller.setSolver())
+                            CInkWell(defaultIcon: Icons.person_add_alt, message: 'Atribuir a mim', defaultColor: Get.theme.primaryColor, function: () async => await controller.setSolver()) :
+                            CInkWell(defaultIcon: Icons.person_remove_outlined, message: 'Remover atribuição', defaultColor: Get.theme.primaryColor, function: () async => await controller.setSolver())
                         ),
                       ),
                     )),
