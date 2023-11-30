@@ -16,6 +16,10 @@ class AdminPage extends GetView<AdminController> {
         appBar: AppBar(
           title: const Text('Menu do Administrador'), 
           actions: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: CInkWell(defaultIcon: Icons.message_outlined, message: 'Chat', function: () => Get.offAllNamed(AppRoutes.chat)),
+            ),
             CInkWell(defaultIcon: Icons.account_circle_outlined, message: 'Minha Conta', function: () => Get.offAllNamed(AppRoutes.login)),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10.0),

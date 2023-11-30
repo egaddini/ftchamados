@@ -105,35 +105,35 @@ void tratarErro(DioException? e) {
   if (e!.response != null && e.response!.data != null) {
     switch (e.response!.statusCode!) {
       case 409:
-        snackSucessRegister('Já Registrado', e.message!);
+        snackErrorRegister('Já Registrado', e.message!);
         break;
       case 403:
-        snackSucessRegister('Credenciais invalidas', e.message!);
+        snackErrorRegister('Credenciais invalidas', e.message!);
         break;
       case 401:
-        snackSucessRegister('Conta Inativa', e.message!);
+        snackErrorRegister('Conta Inativa', e.message!);
         break;
       default:
-        snackSucessRegister('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte \n${e.error}');
+        snackErrorRegister('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte \n${e.error}');
     }
   } else {
-    snackSucessRegister('Algum problema aconteceu','se o problema persistir entre em contato com o suporte',
+    snackErrorRegister('Algum problema aconteceu','se o problema persistir entre em contato com o suporte',
     );
   }
 }
 tratar(RestException e) async {
   switch (e.statusCode) {
     case 409:
-      snackSucessRegister('Já Registrado', e.message);
+      snackErrorRegister('Já Registrado', e.message);
       break;
     case 403:
-      snackSucessRegister('Credenciais invalidas', e.message);
+      snackErrorRegister('Credenciais invalidas', e.message);
       break;
     case 401:
-      snackSucessRegister('Conta Inativa', e.message);
+      snackErrorRegister('Conta Inativa', e.message);
       break;
     default:
-      snackSucessRegister('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte \n${e.message}');
+      snackErrorRegister('Algum problema aconteceu', 'se o problema persistir entre em contato com o suporte \n${e.message}');
     }
     return null;
 } 
@@ -172,11 +172,33 @@ void snackSucessRegister(String title, String message) {
     onTap: (snack) => moreDetailsDialog(title, message),
     animationDuration: const Duration(seconds: 2),
     barBlur: 1,
-    maxWidth: 1000,
-    borderWidth: 1000,
-    padding: const EdgeInsets.all(6),
+    maxWidth: Get.width * 0.95,
+    borderWidth: Get.width * 0.8,
+    padding: const EdgeInsets.all(2),
     icon: const Icon(Icons.info),
-    margin: const EdgeInsets.all(8),
+    margin: const EdgeInsets.all(15),
+    borderRadius: 10,
+    snackPosition: SnackPosition.BOTTOM,
+    backgroundColor: Colors.green[200],
+  );
+}
+
+void snackErrorRegister(String title, String message) {
+  Get.snackbar(
+    title,
+    message,
+    isDismissible: true,
+    onTap: (snack) => moreDetailsDialog(title, message),
+    animationDuration: const Duration(seconds: 2),
+    barBlur: 1,
+    maxWidth: Get.width * 0.95,
+    borderWidth: Get.width * 0.8,
+    padding: const EdgeInsets.all(2),
+    icon: const Icon(Icons.info),
+    margin: const EdgeInsets.all(15),
+    borderRadius: 10,
+    snackPosition: SnackPosition.BOTTOM,
+    backgroundColor: Colors.red[200],
   );
 }
 
