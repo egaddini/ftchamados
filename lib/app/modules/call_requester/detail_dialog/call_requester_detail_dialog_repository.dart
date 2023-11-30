@@ -8,7 +8,6 @@ import 'package:chamados/core/utils/helper.dart';
 import 'package:chamados/core/values/api_path_constans.dart';
 
 import '../../../data/models/call.dart';
-import '../../../data/services/app_config/config.dart';
 
 class CallRequesterDetailDialogRepository {
 
@@ -16,11 +15,9 @@ class CallRequesterDetailDialogRepository {
 
   CallRequesterDetailDialogRepository(this.api);
 
-  final BASE_PATH = ConfigEnvironments.getEnvironments()['url']!;
-
   Future<CallStatusModel> setStatus(int callID, int statusID) async {
     final response = await api.get(
-      '$BASE_PATH${ApiPath.SET_STATUS_PATH}/$callID',
+      '${ApiPath.SET_STATUS_PATH}/$callID',
       headers: getAuthHeader(),
       query: {'status': statusID.toString()},
       decoder: (body) => CallStatusModel.fromMap(body),
@@ -36,7 +33,7 @@ class CallRequesterDetailDialogRepository {
 
   Future<Call> findById(int callID) async {
     final response = await api.get(
-      '$BASE_PATH${ApiPath.CALL_PATH}/$callID',
+      '${ApiPath.CALL_PATH}/$callID',
       headers: getAuthHeader(),
       decoder: (body) => Call.fromMap(body),
     );
@@ -51,7 +48,7 @@ class CallRequesterDetailDialogRepository {
 
   Future<String> rate(RatingModel rating) async {
     final response = await api.post(
-      '$BASE_PATH${ApiPath.RATING_PATH}',
+      ApiPath.RATING_PATH,
       rating.toJson(),
       headers: getAuthHeader(),
     );

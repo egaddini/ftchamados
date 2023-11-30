@@ -31,7 +31,7 @@ class LoginScreenController extends GetxController {
     await loginRepository.login(LoginModel(email: emailEC.text, password: passwordEC.text)).then((value) {
       config.changeUserData(value);
       config.changeIsLogged(true);
-      Get.offAndToNamed(AppRoutes.home);
+      value.isAdmin() ?  Get.offAndToNamed(AppRoutes.adminDashboard) :  Get.offAndToNamed(AppRoutes.home);
     }).catchError((error) {
       isLoading.value = false;
       tratar(error);

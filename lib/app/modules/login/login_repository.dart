@@ -5,7 +5,6 @@ import 'package:chamados/app/data/models/user_info_model.dart';
 import 'package:chamados/app/data/providers/rest_client.dart';
 
 import '../../../core/values/api_path_constans.dart';
-import '../../data/services/app_config/config.dart';
 
 class LoginRepository {
 
@@ -15,11 +14,8 @@ class LoginRepository {
 
   Future<UserInfoModel> login(LoginModel x) async {
 
-    final response = await restClient.post(
-      ConfigEnvironments.getEnvironments()['url']! + ApiPath.LOGIN_PATH,
-      x.toJson(),
-      decoder: (body) => UserInfoModel.fromMap(body),
-    );
+    final response = await restClient.post(ApiPath.LOGIN_PATH, x.toJson(), decoder: (body) => UserInfoModel.fromMap(body));
+    
     if (response.hasError) {
       throw RestException(
         message: response.statusText ?? 'Erro',

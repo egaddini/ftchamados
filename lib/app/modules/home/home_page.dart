@@ -51,8 +51,8 @@ class HomePage extends GetView<HomeController> {
                     textCapitalization: TextCapitalization.words,
                     decoration: InputDecoration(
                       labelText: 'Digite um texto',
-                      prefixIcon: const Icon(Icons.search_outlined),
-                      suffixIcon: CInkWell(defaultIcon: Icons.tune_outlined, function: () => controller.filter(),)
+                      prefixIcon: Icon(Icons.search_outlined, color: Get.theme.primaryColor),
+                      suffixIcon: CInkWell(defaultIcon: Icons.tune_outlined, function: () => controller.filter(), defaultColor: Get.theme.primaryColor)
                     ),
                   ),
                   suggestionsCallback: (pattern) => controller.itens,
@@ -64,9 +64,7 @@ class HomePage extends GetView<HomeController> {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 36.0),
-                child: ResponsiveGridRow(
-                  children: controller.itens.take(12).map((x) => gridCardWidget(x)).toList()
-                ),
+                child: ResponsiveGridRow(children: controller.itens.take(12).map((x) => gridCardWidget(x)).toList()),
               ),
             ]
           ),

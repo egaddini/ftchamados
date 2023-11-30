@@ -25,100 +25,98 @@ class CallSettingsForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Wrap(
-          children: [
-            CustomCard.customClickableCard(
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.account_tree_outlined,
-                      size: 30,
-                      color: Get.theme.colorScheme.primary,
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Wrap(
+            children: [
+              CustomCard.customClickableCard(
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.account_tree_outlined,
+                        size: 30,
+                        color: Get.theme.colorScheme.primary,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Status',
-                    style: Get.textTheme.titleLarge,
-                  ),
-                ],
-              ),
-              function: () => Get.toNamed(AppRoutes.callStatus),
-            ),
-            CustomCard.customClickableCard(
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.cases_outlined,
-                      size: 30,
-                      color: Get.theme.colorScheme.primary,
+                    Text(
+                      'Status',
+                      style: Get.textTheme.titleLarge,
                     ),
-                  ),
-                  Text(
-                    'Setor',
-                    style: Get.textTheme.titleLarge,
-                  ),
-                ],
+                  ],
+                ),
+                function: () => Get.toNamed(AppRoutes.callStatus),
               ),
-              function: () => Get.toNamed(AppRoutes.callSector),
-            ),
-          ],
-        ),
-        Wrap(
-          // mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CustomCard.customClickableCard(
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.low_priority_rounded,
-                      size: 30,
-                      color: Get.theme.colorScheme.primary,
+              CustomCard.customClickableCard(
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.cases_outlined,
+                        size: 30,
+                        color: Get.theme.colorScheme.primary,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Prioridade',
-                    style: Get.textTheme.titleLarge,
-                  ),
-                ],
+                    Text('Setor', style: Get.textTheme.titleLarge),
+                  ],
+                ),
+                function: () => Get.toNamed(AppRoutes.callSector),
               ),
-              function: () => Get.toNamed(AppRoutes.callPriority),
-            ),
-            CustomCard.customClickableCard(
-              content: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Icon(
-                      Icons.auto_stories_outlined,
-                      size: 30,
-                      color: Get.theme.colorScheme.primary,
+            ],
+          ),
+          Wrap(
+            children: [
+              CustomCard.customClickableCard(
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.low_priority_rounded,
+                        size: 30,
+                        color: Get.theme.colorScheme.primary,
+                      ),
                     ),
-                  ),
-                  Text(
-                    'Categoria',
-                    style: Get.textTheme.titleLarge,
-                  ),
-                ],
+                    Text(
+                      'Prioridade',
+                      style: Get.textTheme.titleLarge,
+                    ),
+                  ],
+                ),
+                function: () => Get.toNamed(AppRoutes.callPriority),
               ),
-              function: () => Get.toNamed(AppRoutes.callCategory),
-            ),
-          ],
-        ),
-      ],
+              CustomCard.customClickableCard(
+                content: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Icon(
+                        Icons.auto_stories_outlined,
+                        size: 30,
+                        color: Get.theme.colorScheme.primary,
+                      ),
+                    ),
+                    Text(
+                      'Categoria',
+                      style: Get.textTheme.titleLarge,
+                    ),
+                  ],
+                ),
+                function: () => Get.toNamed(AppRoutes.callCategory),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

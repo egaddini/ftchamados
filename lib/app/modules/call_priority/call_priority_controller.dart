@@ -4,8 +4,7 @@ import 'package:chamados/core/utils/helper.dart';
 import '../../data/models/priority.dart';
 import '../../widgets/custom_data_table/custom_paginated_data_table2.controller.dart';
 
-class CallPriorityController
-    extends CustomPaginatedDataTable2Controller<PriorityModel> {
+class CallPriorityController extends CustomPaginatedDataTable2Controller<PriorityModel> {
   bool sort = true;
   final PriorityRepository repository;
 
@@ -22,14 +21,12 @@ class CallPriorityController
 
   void deleteItem(int index) async {
     PriorityModel priority = data[index];
-    bool? deleta =
-        await perguntaSimOuNao('Deseja remover a prioridade: ${priority.name}');
+    bool? deleta = await perguntaSimOuNao('Deseja remover a prioridade: ${priority.name}');
     if (deleta != null && deleta) {
       repository.delete(priority.id!).then((_) {
         data.removeAt(index);
         data.refresh();
-        snackSucessRegister('Registrado com sucesso',
-            'Prioridade ${priority.name} Deletado com sucesso!');
+        snackSucessRegister('Registrado com sucesso', 'Prioridade ${priority.name} Deletado com sucesso!');
       }).catchError((error) {
         tratarErro(error);
       });

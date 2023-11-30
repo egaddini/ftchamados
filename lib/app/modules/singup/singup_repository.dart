@@ -3,7 +3,6 @@ import 'package:chamados/app/data/providers/rest_client.dart';
 
 import '../../../core/values/api_path_constans.dart';
 import '../../data/models/rest_exception.dart';
-import '../../data/services/app_config/config.dart';
 
 class SingUpRepository {
 
@@ -14,7 +13,7 @@ class SingUpRepository {
   Future<String> singup(UserModel user) async {
 
     final response = await restClient.post(
-      ConfigEnvironments.getEnvironments()['url']! + ApiPath.SINGUP_PATH,
+      ApiPath.SINGUP_PATH,
       user.toJson(),
     );
 

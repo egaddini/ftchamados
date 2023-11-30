@@ -62,7 +62,7 @@ class MenuDrawer extends GetView<MenuDrawerController> {
                 ListTile(
                   leading: const Icon(Icons.message_outlined),
                   title: const Text("Chat"),
-                  onTap: () => Get.toNamed(AppRoutes.callCategory),
+                  onTap: () => Get.toNamed(AppRoutes.chat),
                 ),
                 ListTile(
                   title: const Text("Meus Chamados"),

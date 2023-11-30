@@ -15,11 +15,10 @@ class CallDetailDialogRepository {
 
   CallDetailDialogRepository(this.api);
 
-  final BASE_PATH = ConfigEnvironments.getEnvironments()['url']!;
 
   Future<CallStatusModel> setStatus(int callID, int statusID) async {
     final response = await api.get(
-      '$BASE_PATH${ApiPath.SET_STATUS_PATH}/$callID',
+      '${ApiPath.SET_STATUS_PATH}/$callID',
       headers: getAuthHeader(),
       query: {'status': statusID.toString()},
       decoder: (body) => CallStatusModel.fromMap(body),
@@ -35,7 +34,7 @@ class CallDetailDialogRepository {
 
    Future<Call> findById(int callID) async {
     final response = await api.get(
-      '$BASE_PATH${ApiPath.CALL_PATH}/$callID',
+      '${ApiPath.CALL_PATH}/$callID',
       headers: getAuthHeader(),
       decoder: (body) => Call.fromMap(body),
     );
@@ -50,7 +49,7 @@ class CallDetailDialogRepository {
 
   Future<String> assignSolver(int? solverID, int callID) async {
     final response = await api.get(
-      '$BASE_PATH${ApiPath.ASSIGN_SOLVER_PATH}/$callID?solverID=${solverID ?? ''}',
+      '${ApiPath.ASSIGN_SOLVER_PATH}/$callID?solverID=${solverID ?? ''}',
       headers: getAuthHeader(),
     );
     if (response.hasError) {

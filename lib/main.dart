@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:chamados/app/data/services/app_config/config.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -17,7 +18,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await Get.putAsync(() => AppConfigService().init());
-  Get.put(RestClient());
+  RestClient rest = Get.put(RestClient());
+  rest.baseUrl = ConfigEnvironments.getEnvironments()['url']!;
 
   runApp(GetMaterialApp(
     title: 'Chamados',

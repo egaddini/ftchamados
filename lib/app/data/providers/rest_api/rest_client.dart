@@ -9,8 +9,7 @@ class RestClient<T> {
   RestClient({required this.baseUrl, required this.headers});
 
   Future<T> get(String endpoint) async {
-    var response =
-        await http.get(Uri.parse('$baseUrl/$endpoint'), headers: headers);
+    var response = await http.get(Uri.parse('$baseUrl/$endpoint'), headers: headers);
 
     if (response.statusCode == 200) {
       return _parseResponse(response.body);

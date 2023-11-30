@@ -133,20 +133,20 @@ void callSolverDetailDialog(Call call) {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Expanded(
-                              child: TextFormField(
-                                  controller: controller.responsavelC,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Solucionador Responsável',
-                                  ),
-                                  readOnly: true)),
+                            child: TextFormField(
+                              controller: controller.responsavelC,
+                              decoration: const InputDecoration(labelText: 'Responsável'),
+                              readOnly: true
+                            ),
+                          ),
                           addHorizontalSpace(10),
                           Expanded(
-                              child: TextFormField(
-                                  controller: controller.participantesC,
-                                  decoration: const InputDecoration(
-                                    labelText: 'Participantes',
-                                  ),
-                                  readOnly: true)),
+                            child: TextFormField(
+                              controller: controller.participantesC,
+                              decoration: const InputDecoration(labelText: 'Participantes'), 
+                              readOnly: true
+                            ),
+                          ),
                         ],
                       ),
                       addVerticalSpace(10),

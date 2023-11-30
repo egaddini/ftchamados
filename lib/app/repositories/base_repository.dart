@@ -7,6 +7,7 @@ import '../data/models/error_dto.dart';
 import '../data/models/rest_exception.dart';
 
 abstract class BaseRepository<T> {
+
   final String basePath;
 
   BaseRepository(this.basePath);
@@ -22,8 +23,7 @@ abstract class BaseRepository<T> {
       message = result.statusMessage!;
     } else {
       final ErrorDTO errorDTO = ErrorDTO.fromMap(result.data);
-      throw RestException(
-          message: errorDTO.message, statusCode: errorDTO.status);
+      throw RestException(message: errorDTO.message, statusCode: errorDTO.status);
     }
     return message;
   }

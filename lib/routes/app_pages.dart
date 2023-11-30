@@ -1,5 +1,9 @@
+import 'package:chamados/app/modules/admin/admin_binding.dart';
+import 'package:chamados/app/modules/admin/admin_page.dart';
 import 'package:chamados/app/modules/call/dashboard/call_dashboard_bidings.dart';
 import 'package:chamados/app/modules/call/dashboard/call_dashboard_screen.dart';
+import 'package:chamados/app/modules/chat/chat_binding.dart';
+import 'package:chamados/app/modules/chat/chat_page.dart';
 import 'package:chamados/app/modules/user/user_binding.dart';
 import 'package:chamados/app/modules/user/user_page.dart';
 import 'package:get/get.dart';
@@ -99,6 +103,16 @@ abstract class AppPages {
       name: AppRoutes.callSolverStatistics,
       page: () => const CallSolverStatisticsScreen(),
       binding: CallSolverStatisticsScreenBindings(),
+    ),
+    GetPage(
+      name: AppRoutes.chat,
+      page: () => const ChatPage(),
+      binding: ChatBinding(),
+    ),
+    GetPage(
+      name: AppRoutes.adminDashboard,
+      page: () => AdminPage(),
+      binding: AdminBinding(),
     ),
   ];
   

@@ -144,14 +144,15 @@ class CallRequesterDetailDialogController extends GetxController with StateMixin
         actions: [
           SizedBox(
             width: double.infinity,
-            child: TextButton(child: const Text('Enviar'), onPressed: () => repository.rate(RatingModel(callID: callID, satisfaction: satisfacao.value, solveTime: tempo.value, feedback: feedback))),
+            child: TextButton(
+              child: const Text('Enviar'), 
+              onPressed: () => repository.rate(RatingModel(callID: callID, satisfaction: satisfacao.value, solveTime: tempo.value, feedback: feedback)).then((value) => Get.back(closeOverlays: true)) ),
           )
         ],
       )
     ).then((value) => {
       Get.back,
       snackSucessRegister('Obrigado por avaliar', 'Agradecemos sinceramente pelo seu feedback, pois é por meio dele que conseguimos aprimorar nossos serviços. Sua contribuição é valiosa para nós. Obrigado!'),
-
     });
   }
 

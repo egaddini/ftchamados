@@ -9,7 +9,7 @@ class CustomCard {
       {Function? function,
       Function? onLongPress,
       Widget? content,
-      double width = 300,
+      double width = 250,
       double height = 100}) {
     return Card(
       elevation: 4,

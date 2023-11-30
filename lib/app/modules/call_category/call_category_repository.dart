@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:chamados/core/values/api_path_constans.dart';
 import 'package:dio/dio.dart';
 
 import 'package:chamados/core/utils/helper.dart';
@@ -12,10 +13,10 @@ import '../../data/services/app_config/config.dart';
 import '../../repositories/base_repository.dart';
 
 class CallCategoryRepository extends BaseRepository<CallCategoryModel> {
-  CallCategoryRepository() : super('${ConfigEnvironments.getEnvironments()['url']!}/call-type/v1');
 
-  Future<String> registerByRegisterModel(
-      CallCategoryRegisterModel entity) async {
+  CallCategoryRepository() : super(ConfigEnvironments.getEnvironments()['url']! + ApiPath.CALL_CATEGORY_PATH);
+
+  Future<String> registerByRegisterModel(CallCategoryRegisterModel entity) async {
     String message;
     final result = await Dio().post(
       basePath,

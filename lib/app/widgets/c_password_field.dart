@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class PasswordField extends StatefulWidget {
   final String labelText;
@@ -32,11 +33,7 @@ class PasswordFieldState extends State<PasswordField> {
               _obscureText = !_obscureText;
             });
           },
-          icon: Icon(
-            _obscureText
-                ? Icons.visibility_outlined
-                : Icons.visibility_off_outlined,
-          ),
+          icon: Icon(_obscureText ? Icons.visibility_outlined : Icons.visibility_off_outlined, color: Get.theme.primaryColor),
         ),
       ),
       validator: (value) {

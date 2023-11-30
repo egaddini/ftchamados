@@ -16,4 +16,6 @@ abstract class AppRoutes {
   static const callGraphs = '/call-graphs';
   static const callSolver = '/call-solver';
   static const callSolverStatistics = '/call-solver-statistics';
+  static const chat = '/chat';
+  static const adminDashboard = '/admin-dashboard';
 }
