@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:chamados/app/data/models/user_notification.dart';
+
 import 'sector_model.dart';
 
 // ignore_for_file: public_member_api_docs, sort_constructors_first
@@ -15,6 +17,8 @@ class UserInfoModel {
   bool? active;
   String? creationDT;
   List<SectorModel> sectors;
+  List<UserNotification> notifications;
+  int? unread;
 
   UserInfoModel({
     this.id,
@@ -27,6 +31,8 @@ class UserInfoModel {
     this.active,
     this.creationDT,
     required this.sectors,
+    required this.notifications,
+    this.unread,
   });
 
   UserInfoModel copyWith({
@@ -40,6 +46,8 @@ class UserInfoModel {
     bool? active,
     String? creationDT,
     List<SectorModel>? sectors,
+    List<UserNotification>? notifications,
+    int? unread,
   }) {
     return UserInfoModel(
       id: id ?? this.id,
@@ -52,6 +60,8 @@ class UserInfoModel {
       active: active ?? this.active,
       creationDT: creationDT ?? this.creationDT,
       sectors: sectors ?? this.sectors,
+      notifications: notifications ?? this.notifications,
+      unread: unread ?? this.unread,
     );
   }
 
@@ -67,6 +77,8 @@ class UserInfoModel {
       'active': active,
       'creationDT': creationDT,
       'sectors':  sectors.map((e) => e.toMap()).toList(),
+      'notifications': notifications.map((e) => e.toMap()).toList(),
+      'unread': unread,
     };
   }
 
@@ -82,6 +94,8 @@ class UserInfoModel {
       active: map['active'] != null ? map['active'] as bool : null,
       creationDT:map['creationDT'] != null ? map['creationDT'] as String : null,
       sectors: map['sectors'] != null ? (map['sectors'] as List<dynamic>).map((json) => SectorModel.fromMap(json)).toList() : [],
+      notifications: map['notifications'] != null ? (map['notifications'] as List<dynamic>).map((json) => UserNotification.fromMap(json)).toList() : [],
+      unread: map['unread'] != null ? map['unread'] as int : null,
     );
   }
 
@@ -91,7 +105,7 @@ class UserInfoModel {
 
   @override
   String toString() {
-    return 'UserInfoModel(id: $id, email: $email, firstName: $firstName, lastName: $lastName, phone: $phone, role: $role, token: $token, active: $active, creationDT: $creationDT, sectors: $sectors)';
+    return 'UserInfoModel(id: $id, email: $email, firstName: $firstName, lastName: $lastName, phone: $phone, role: $role, token: $token, active: $active, creationDT: $creationDT, sectors: $sectors, notifications: $notifications, unread: $unread)';
   }
 
   @override
@@ -107,7 +121,9 @@ class UserInfoModel {
         other.token == token &&
         other.active == active &&
         other.creationDT == creationDT &&
-        other.sectors == sectors;
+        other.sectors == sectors &&
+        other.notifications == notifications &&
+        other.unread == unread;
   }
 
   @override
@@ -121,7 +137,9 @@ class UserInfoModel {
         token.hashCode ^
         active.hashCode ^
         creationDT.hashCode ^
-        sectors.hashCode;
+        sectors.hashCode ^
+        unread.hashCode ^
+        notifications.hashCode;
   }
 
   bool isAdmin() {

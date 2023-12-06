@@ -20,6 +20,7 @@ import 'package:responsive_grid/responsive_grid.dart';
 import '../../data/models/call_category_model.dart';
 import '../../widgets/custom_ink_well/c2_inkwell.dart';
 import '../call/components/new_call/new_call_dialog.dart';
+import '../drawer/menu_drawer_controller.dart';
 
 part 'home_controller.dart';
 
@@ -33,6 +34,7 @@ class HomePage extends GetView<HomeController> {
       (state) => Scaffold(
         appBar: AppBar(title: const Text('')),
         endDrawer: const MenuDrawer(),
+        onEndDrawerChanged: (value) => controller.onOpenDrawer(value),
         body: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,

@@ -32,4 +32,9 @@ class ApiPath {
   static const SOLVER_PATH = '$CALL_PATH/solver';
 
   static const ASSIGN_SOLVER_PATH = '$SOLVER_PATH/assign';
+
+  static const NOTIFICATIONS_PATH = '$USER_PATH/notifications';
+
+  static const READ_NOTIFICATIONS_PATH = '$NOTIFICATIONS_PATH/read';
+  
 }

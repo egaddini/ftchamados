@@ -197,7 +197,7 @@ void snackErrorRegister(String title, String message) {
     icon: const Icon(Icons.info),
     margin: const EdgeInsets.all(15),
     borderRadius: 10,
-    snackPosition: SnackPosition.BOTTOM,
+    snackPosition: SnackPosition.TOP,
     backgroundColor: Colors.red[200],
   );
 }

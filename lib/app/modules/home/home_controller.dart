@@ -73,4 +73,7 @@ class HomeController extends GetxController with StateMixin<CallCategoryModel> {
       ),
     );
   }
+
+  void onOpenDrawer(bool value) => Get.find<MenuDrawerController>().findNewNotifications();
+
 }

@@ -12,59 +12,62 @@ class CallSectorDropdownPage extends GetView<CallSectorDropdownController> {
   @override
   Widget build(BuildContext context) {
     return controller.obx(
-      (state) =>  DropdownButtonHideUnderline(
-        child: DropdownButtonFormField<SectorModel>(
-          isExpanded: true,
-          decoration: const InputDecoration(label: Text('Setores')),
-          hint: const Text('Select Items', style: TextStyle(fontSize: 14)),
-          items: state!.map((item) {
-            return DropdownMenuItem(
-              value: item,
-              enabled: true,
-              child: StatefulBuilder(
-                builder: (context, menuSetState) {
-                  final isSelected = selectedItems.contains(item);
-                  return Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Row(
-                      children: [
-                        if (isSelected) const Icon(Icons.check_box_outlined)
-                        else const Icon(Icons.check_box_outline_blank),
-                        const SizedBox(width: 16),
-                        Expanded(child: Text('${item.acronym} - ${item.name}', style: const TextStyle(fontSize: 14))),
-                      ],
+      (state) => DropdownButtonHideUnderline(
+        child: Obx(
+          () =>  DropdownButtonFormField<SectorModel>(
+            isExpanded: true,
+            decoration: const InputDecoration(label: Text('Setores')),
+            hint: const Text('Select Items', style: TextStyle(fontSize: 14)),
+            items: state!.map((item) {
+              return DropdownMenuItem(
+                value: item,
+                enabled: true,
+                child: StatefulBuilder(
+                  builder: (context, menuSetState) {
+                    return Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                      child: Row(
+                        children: [
+                          Obx(
+                            () => Checkbox(
+                              value: selectedItems.contains(item), 
+                              onChanged: (value) {
+                                selectedItems.contains(item) ? selectedItems.remove(item) : selectedItems.add(item);
+                              } 
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(child: Text('${item.acronym} - ${item.name}', style: const TextStyle(fontSize: 14))),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              );
+            }).toList(),
+            value: selectedItems.isEmpty ? null : selectedItems.last,
+            selectedItemBuilder: (context) {
+              return state.map(
+                (item) {
+                  return Obx(() => Container(
+                    alignment: AlignmentDirectional.center,
+                    child: Text(
+                      selectedItems.map((x) => x.name).toList().join(', '),
+                      style: const TextStyle(
+                        fontSize: 14,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      maxLines: 1,
                     ),
-                  );
+                  ));
                 },
-              ),
-            );
-          }).toList(),
-          value: selectedItems.isEmpty ? null : selectedItems.last,
-          selectedItemBuilder: (context) {
-            return state.map(
-              (item) {
-                return Container(
-                  alignment: AlignmentDirectional.center,
-                  child: Text(
-                    selectedItems.map((x) => x.name).toList().join(', '),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    maxLines: 1,
-                  ),
-                );
-              },
-            ).toList();
-          },
-          onChanged: (value) {
-            final isSelected = selectedItems.contains(value);
-            isSelected ? selectedItems.remove(value) : selectedItems.add(value!);
-          },
+              ).toList();
+            },
+            onChanged: (value) => selectedItems.contains(value) ? selectedItems.remove(value) : selectedItems.add(value!),
+          ),
         ),
       ),
       onLoading: const CircularProgressIndicator(),
     );
-
   }
 }
